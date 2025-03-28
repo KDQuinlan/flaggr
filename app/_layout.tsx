@@ -2,13 +2,15 @@ import { Stack } from "expo-router";
 
 export default function RootLayout() {
   return (
-    <Stack>
+    <Stack
+    screenOptions={{
+      headerTitleAlign: 'center',
+    }}
+    >
       <Stack.Screen 
         name="index" 
         options={{
           title: 'Flaggr',
-          // headerStyle: { backgroundColor: '#4CAF50' },
-          // headerTintColor: '#fff',
           headerShown: true,
         }} 
       />
@@ -16,8 +18,6 @@ export default function RootLayout() {
         name="games" 
         options={{
           title: 'Games',
-          // headerStyle: { backgroundColor: '#4CAF50' },
-          // headerTintColor: '#fff',
           headerShown: true
         }}  
       />
