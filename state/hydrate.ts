@@ -6,17 +6,14 @@ import { defaultProgressionStructure } from './secureStoreStructure';
 // TODO - Implement versioning
 
 export const hydrateStore = async () => {
-  const { setIsInitialised } = stateStore.getState();
-  const existing = await SecureStore.getItemAsync(STORAGE_KEY);
+  const { setIsInitialised, setProgression } = stateStore.getState();
+  const userProgression = await SecureStore.getItemAsync(STORAGE_KEY);
 
-  if (existing) {
-    console.log("State exists: hydrating!")
+  if (userProgression) {
+    setProgression(JSON.parse(userProgression));
     setIsInitialised();
-    console.log("State initialised")
   } else {
-    console.log("State does not exist - creating")
     await SecureStore.setItemAsync(STORAGE_KEY, JSON.stringify(defaultProgressionStructure));
-    console.log("State created!")
     setIsInitialised();
   }
 };
