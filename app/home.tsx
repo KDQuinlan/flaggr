@@ -1,5 +1,6 @@
 import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
+import en from '@/locales/en';
 import {
   SafeAreaView,
   ScrollView,
@@ -17,10 +18,18 @@ const HomeScreen = () => {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Flaggr</Text>
+          <Text style={styles.title}>{en.home.title}</Text>
         </View>
-        <GameSelect title="Standard" description="One flag, four choices" />
-        <GameSelect title="Rapid" description="Quick-fire flag questions" />
+        <GameSelect
+          title={en.games.standard.name}
+          description={en.games.standard.description}
+          progressBar
+        />
+        <GameSelect
+          title={en.games.rapid.name}
+          description={en.games.rapid.description}
+          progressBar
+        />
       </ScrollView>
     </SafeAreaView>
   );

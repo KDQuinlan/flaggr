@@ -18,3 +18,11 @@ const shuffled = difficulty2Countries.sort(() => Math.random() - 0.5);
 
 // 3. Get the first 10
 const random10 = shuffled.slice(0, 10);
+
+        {/* <Text style={styles.title} numberOfLines={2} adjustsFontSizeToFit>
+          {title}
+        </Text>
+        <Text style={styles.description} numberOfLines={3}>
+          {description}
+        </Text>
+        <ProgressBar progress={0.5} color="blue" style={styles.progressBar} /> */}
