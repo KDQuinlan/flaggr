@@ -1,7 +1,7 @@
-import { colors } from "@/components/colors";
-import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import { View } from "react-native";
+import { colors } from '@/components/colors';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { View } from 'react-native';
 
 export default function RootLayout() {
   return (
@@ -9,22 +9,22 @@ export default function RootLayout() {
       <StatusBar style="dark" backgroundColor={colors.offWhite} />
       <Stack
         screenOptions={{
-          headerTitleAlign: "center",
+          headerTitleAlign: 'center',
         }}
       >
-        <Stack.Screen 
-          name="index" 
+        <Stack.Screen
+          name="index"
           options={{
-            title: "Flaggr",
+            title: 'Flaggr',
             headerShown: false,
-          }} 
+          }}
         />
-        <Stack.Screen 
-          name="games" 
+        <Stack.Screen
+          name="games"
           options={{
-            title: "Games",
+            title: 'Games',
             headerShown: true,
-          }}  
+          }}
         />
       </Stack>
     </View>

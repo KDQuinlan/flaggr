@@ -1,0 +1,20 @@
+import countries from "../assets/data/countries.json";
+
+// Optional: define a type for clarity
+type Country = {
+  countryCode: string;
+  countryName: string;
+  continent: string;
+  difficulty: number;
+};
+
+// 1. Filter countries with difficulty 2
+const difficulty2Countries = countries.filter(
+  (c: Country) => c.difficulty === 2
+);
+
+// 2. Shuffle them randomly
+const shuffled = difficulty2Countries.sort(() => Math.random() - 0.5);
+
+// 3. Get the first 10
+const random10 = shuffled.slice(0, 10);

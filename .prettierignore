@@ -1,0 +1,18 @@
+# Ignore the .expo directory
+.expo/
+
+# Ignore the .idea directory
+.idea/
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore Expo environment file
+expo-env.d.ts
+
+# Ignore package-lock.json and package.json
+package-lock.json
+package.json
+
+# Ignore the README.md file
+README.md

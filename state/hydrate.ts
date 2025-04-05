@@ -13,7 +13,10 @@ export const hydrateStore = async () => {
     setProgression(JSON.parse(userProgression));
     setIsInitialised();
   } else {
-    await SecureStore.setItemAsync(STORAGE_KEY, JSON.stringify(defaultProgressionStructure));
+    await SecureStore.setItemAsync(
+      STORAGE_KEY,
+      JSON.stringify(defaultProgressionStructure)
+    );
     setIsInitialised();
   }
 };

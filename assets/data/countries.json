@@ -1,1 +1,1478 @@
-[{"countryCode":"AF","countryName":"Afghanistan","continent":"Asia","difficulty":4},{"countryCode":"AL","countryName":"Albania","continent":"Europe","difficulty":3},{"countryCode":"DZ","countryName":"Algeria","continent":"Africa","difficulty":3},{"countryCode":"AS","countryName":"American Samoa","continent":"Oceania","difficulty":4},{"countryCode":"AD","countryName":"Andorra","continent":"Europe","difficulty":3},{"countryCode":"AO","countryName":"Angola","continent":"Africa","difficulty":3},{"countryCode":"AI","countryName":"Anguilla","continent":"North America","difficulty":5},{"countryCode":"AG","countryName":"Antigua and Barbuda","continent":"North America","difficulty":4},{"countryCode":"AR","countryName":"Argentina","continent":"South America","difficulty":2},{"countryCode":"AM","countryName":"Armenia","continent":"Asia","difficulty":3},{"countryCode":"AW","countryName":"Aruba","continent":"North America","difficulty":4},{"countryCode":"AU","countryName":"Australia","continent":"Oceania","difficulty":2},{"countryCode":"AT","countryName":"Austria","continent":"Europe","difficulty":2},{"countryCode":"AZ","countryName":"Azerbaijan","continent":"Asia","difficulty":3},{"countryCode":"BS","countryName":"Bahamas","continent":"North America","difficulty":3},{"countryCode":"BH","countryName":"Bahrain","continent":"Asia","difficulty":3},{"countryCode":"BD","countryName":"Bangladesh","continent":"Asia","difficulty":2},{"countryCode":"BB","countryName":"Barbados","continent":"North America","difficulty":4},{"countryCode":"BY","countryName":"Belarus","continent":"Europe","difficulty":3},{"countryCode":"BE","countryName":"Belgium","continent":"Europe","difficulty":2},{"countryCode":"BZ","countryName":"Belize","continent":"North America","difficulty":4},{"countryCode":"BJ","countryName":"Benin","continent":"Africa","difficulty":4},{"countryCode":"BT","countryName":"Bhutan","continent":"Asia","difficulty":4},{"countryCode":"BO","countryName":"Bolivia","continent":"South America","difficulty":3},{"countryCode":"BA","countryName":"Bosnia and Herzegovina","continent":"Europe","difficulty":3},{"countryCode":"BW","countryName":"Botswana","continent":"Africa","difficulty":4},{"countryCode":"BR","countryName":"Brazil","continent":"South America","difficulty":3},{"countryCode":"BN","countryName":"Brunei","continent":"Asia","difficulty":4},{"countryCode":"BG","countryName":"Bulgaria","continent":"Europe","difficulty":3},{"countryCode":"BF","countryName":"Burkina Faso","continent":"Africa","difficulty":4},{"countryCode":"BI","countryName":"Burundi","continent":"Africa","difficulty":4},{"countryCode":"KH","countryName":"Cambodia","continent":"Asia","difficulty":3},{"countryCode":"CM","countryName":"Cameroon","continent":"Africa","difficulty":4},{"countryCode":"CA","countryName":"Canada","continent":"North America","difficulty":1},{"countryCode":"CV","countryName":"Cape Verde","continent":"Africa","difficulty":4},{"countryCode":"KY","countryName":"Cayman Islands","continent":"North America","difficulty":5},{"countryCode":"CF","countryName":"Central African Republic","continent":"Africa","difficulty":5},{"countryCode":"TD","countryName":"Chad","continent":"Africa","difficulty":4},{"countryCode":"CL","countryName":"Chile","continent":"South America","difficulty":2},{"countryCode":"CN","countryName":"China","continent":"Asia","difficulty":1},{"countryCode":"CO","countryName":"Colombia","continent":"South America","difficulty":2},{"countryCode":"KM","countryName":"Comoros","continent":"Africa","difficulty":5},{"countryCode":"CG","countryName":"Congo","continent":"Africa","difficulty":4},{"countryCode":"CD","countryName":"Democratic Republic of the Congo","continent":"Africa","difficulty":4},{"countryCode":"CK","countryName":"Cook Islands","continent":"Oceania","difficulty":5},{"countryCode":"CR","countryName":"Costa Rica","continent":"North America","difficulty":3},{"countryCode":"CI","countryName":"CÃ´te d'Ivoire","continent":"Africa","difficulty":3},{"countryCode":"HR","countryName":"Croatia","continent":"Europe","difficulty":3},{"countryCode":"CU","countryName":"Cuba","continent":"North America","difficulty":2},{"countryCode":"CY","countryName":"Cyprus","continent":"Asia","difficulty":3},{"countryCode":"CZ","countryName":"Czech Republic","continent":"Europe","difficulty":2},{"countryCode":"DK","countryName":"Denmark","continent":"Europe","difficulty":2},{"countryCode":"DJ","countryName":"Djibouti","continent":"Africa","difficulty":4},{"countryCode":"DM","countryName":"Dominica","continent":"North America","difficulty":4},{"countryCode":"DO","countryName":"Dominican Republic","continent":"North America","difficulty":3},{"countryCode":"EC","countryName":"Ecuador","continent":"South America","difficulty":2},{"countryCode":"EG","countryName":"Egypt","continent":"Africa","difficulty":3},{"countryCode":"SV","countryName":"El Salvador","continent":"North America","difficulty":3},{"countryCode":"GQ","countryName":"Equatorial Guinea","continent":"Africa","difficulty":5},{"countryCode":"ER","countryName":"Eritrea","continent":"Africa","difficulty":4},{"countryCode":"EE","countryName":"Estonia","continent":"Europe","difficulty":3},{"countryCode":"ET","countryName":"Ethiopia","continent":"Africa","difficulty":3},{"countryCode":"FO","countryName":"Faroe Islands","continent":"Europe","difficulty":5},{"countryCode":"FJ","countryName":"Fiji","continent":"Oceania","difficulty":4},{"countryCode":"FI","countryName":"Finland","continent":"Europe","difficulty":2},{"countryCode":"FR","countryName":"France","continent":"Europe","difficulty":2},{"countryCode":"GA","countryName":"Gabon","continent":"Africa","difficulty":4},{"countryCode":"GB","countryName":"United Kingdom","continent":"Europe","difficulty":1},{"countryCode":"GD","countryName":"Grenada","continent":"North America","difficulty":5},{"countryCode":"GE","countryName":"Georgia","continent":"Asia","difficulty":4},{"countryCode":"GH","countryName":"Ghana","continent":"Africa","difficulty":3},{"countryCode":"GR","countryName":"Greece","continent":"Europe","difficulty":2},{"countryCode":"GT","countryName":"Guatemala","continent":"North America","difficulty":3},{"countryCode":"GN","countryName":"Guinea","continent":"Africa","difficulty":4},{"countryCode":"GW","countryName":"Guinea-Bissau","continent":"Africa","difficulty":5},{"countryCode":"GY","countryName":"Guyana","continent":"South America","difficulty":3},{"countryCode":"HT","countryName":"Haiti","continent":"North America","difficulty":3},{"countryCode":"HN","countryName":"Honduras","continent":"North America","difficulty":3},{"countryCode":"HK","countryName":"Hong Kong","continent":"Asia","difficulty":3},{"countryCode":"HU","countryName":"Hungary","continent":"Europe","difficulty":3},{"countryCode":"IS","countryName":"Iceland","continent":"Europe","difficulty":2},{"countryCode":"IN","countryName":"India","continent":"Asia","difficulty":2},{"countryCode":"ID","countryName":"Indonesia","continent":"Asia","difficulty":2},{"countryCode":"IR","countryName":"Iran","continent":"Asia","difficulty":3},{"countryCode":"IQ","countryName":"Iraq","continent":"Asia","difficulty":3},{"countryCode":"IE","countryName":"Ireland","continent":"Europe","difficulty":2},{"countryCode":"IL","countryName":"Israel","continent":"Asia","difficulty":3},{"countryCode":"IT","countryName":"Italy","continent":"Europe","difficulty":2},{"countryCode":"JM","countryName":"Jamaica","continent":"North America","difficulty":3},{"countryCode":"JP","countryName":"Japan","continent":"Asia","difficulty":2},{"countryCode":"JO","countryName":"Jordan","continent":"Asia","difficulty":3},{"countryCode":"KZ","countryName":"Kazakhstan","continent":"Asia","difficulty":3},{"countryCode":"KE","countryName":"Kenya","continent":"Africa","difficulty":3},{"countryCode":"KI","countryName":"Kiribati","continent":"Oceania","difficulty":5},{"countryCode":"KW","countryName":"Kuwait","continent":"Asia","difficulty":3},{"countryCode":"KG","countryName":"Kyrgyzstan","continent":"Asia","difficulty":4},{"countryCode":"LA","countryName":"Laos","continent":"Asia","difficulty":4},{"countryCode":"LV","countryName":"Latvia","continent":"Europe","difficulty":3},{"countryCode":"LB","countryName":"Lebanon","continent":"Asia","difficulty":3},{"countryCode":"LS","countryName":"Lesotho","continent":"Africa","difficulty":4},{"countryCode":"LR","countryName":"Liberia","continent":"Africa","difficulty":4},{"countryCode":"LY","countryName":"Libya","continent":"Africa","difficulty":3},{"countryCode":"LI","countryName":"Liechtenstein","continent":"Europe","difficulty":4},{"countryCode":"LT","countryName":"Lithuania","continent":"Europe","difficulty":3},{"countryCode":"LU","countryName":"Luxembourg","continent":"Europe","difficulty":3},{"countryCode":"MO","countryName":"Macau","continent":"Asia","difficulty":4},{"countryCode":"MK","countryName":"North Macedonia","continent":"Europe","difficulty":4},{"countryCode":"MG","countryName":"Madagascar","continent":"Africa","difficulty":3},{"countryCode":"MW","countryName":"Malawi","continent":"Africa","difficulty":4},{"countryCode":"MY","countryName":"Malaysia","continent":"Asia","difficulty":3},{"countryCode":"MV","countryName":"Maldives","continent":"Asia","difficulty":4},{"countryCode":"ML","countryName":"Mali","continent":"Africa","difficulty":4},{"countryCode":"MT","countryName":"Malta","continent":"Europe","difficulty":3},{"countryCode":"MH","countryName":"Marshall Islands","continent":"Oceania","difficulty":5},{"countryCode":"MQ","countryName":"Martinique","continent":"North America","difficulty":5},{"countryCode":"MR","countryName":"Mauritania","continent":"Africa","difficulty":4},{"countryCode":"MU","countryName":"Mauritius","continent":"Africa","difficulty":4},{"countryCode":"YT","countryName":"Mayotte","continent":"Africa","difficulty":5},{"countryCode":"MX","countryName":"Mexico","continent":"North America","difficulty":2},{"countryCode":"FM","countryName":"Micronesia","continent":"Oceania","difficulty":5},{"countryCode":"MD","countryName":"Moldova","continent":"Europe","difficulty":4},{"countryCode":"MC","countryName":"Monaco","continent":"Europe","difficulty":5},{"countryCode":"MN","countryName":"Mongolia","continent":"Asia","difficulty":4},{"countryCode":"ME","countryName":"Montenegro","continent":"Europe","difficulty":4},{"countryCode":"MA","countryName":"Morocco","continent":"Africa","difficulty":3},{"countryCode":"MZ","countryName":"Mozambique","continent":"Africa","difficulty":4},{"countryCode":"MM","countryName":"Myanmar","continent":"Asia","difficulty":4},{"countryCode":"NA","countryName":"Namibia","continent":"Africa","difficulty":4},{"countryCode":"NR","countryName":"Nauru","continent":"Oceania","difficulty":5},{"countryCode":"NP","countryName":"Nepal","continent":"Asia","difficulty":3},{"countryCode":"NL","countryName":"Netherlands","continent":"Europe","difficulty":2},{"countryCode":"NC","countryName":"New Caledonia","continent":"Oceania","difficulty":5},{"countryCode":"NZ","countryName":"New Zealand","continent":"Oceania","difficulty":2},{"countryCode":"NI","countryName":"Nicaragua","continent":"North America","difficulty":3},{"countryCode":"NE","countryName":"Niger","continent":"Africa","difficulty":4},{"countryCode":"NG","countryName":"Nigeria","continent":"Africa","difficulty":2},{"countryCode":"NO","countryName":"Norway","continent":"Europe","difficulty":2},{"countryCode":"OM","countryName":"Oman","continent":"Asia","difficulty":3},{"countryCode":"PK","countryName":"Pakistan","continent":"Asia","difficulty":2},{"countryCode":"PW","countryName":"Palau","continent":"Oceania","difficulty":5},{"countryCode":"PS","countryName":"Palestine","continent":"Asia","difficulty":3},{"countryCode":"PA","countryName":"Panama","continent":"North America","difficulty":2},{"countryCode":"PG","countryName":"Papua New Guinea","continent":"Oceania","difficulty":4},{"countryCode":"PY","countryName":"Paraguay","continent":"South America","difficulty":3},{"countryCode":"PE","countryName":"Peru","continent":"South America","difficulty":2},{"countryCode":"PH","countryName":"Philippines","continent":"Asia","difficulty":2},{"countryCode":"PL","countryName":"Poland","continent":"Europe","difficulty":2},{"countryCode":"PT","countryName":"Portugal","continent":"Europe","difficulty":2},{"countryCode":"PR","countryName":"Puerto Rico","continent":"North America","difficulty":3},{"countryCode":"QA","countryName":"Qatar","continent":"Asia","difficulty":3},{"countryCode":"RE","countryName":"RÃ©union","continent":"Africa","difficulty":5},{"countryCode":"RO","countryName":"Romania","continent":"Europe","difficulty":3},{"countryCode":"RU","countryName":"Russia","continent":"Europe","difficulty":2},{"countryCode":"RW","countryName":"Rwanda","continent":"Africa","difficulty":4},{"countryCode":"KN","countryName":"Saint Kitts and Nevis","continent":"North America","difficulty":4},{"countryCode":"LC","countryName":"Saint Lucia","continent":"North America","difficulty":4},{"countryCode":"VC","countryName":"Saint Vincent and the Grenadines","continent":"North America","difficulty":4},{"countryCode":"WS","countryName":"Samoa","continent":"Oceania","difficulty":5},{"countryCode":"SM","countryName":"San Marino","continent":"Europe","difficulty":5},{"countryCode":"ST","countryName":"Sao Tome and Principe","continent":"Africa","difficulty":5},{"countryCode":"SA","countryName":"Saudi Arabia","continent":"Asia","difficulty":3},{"countryCode":"SN","countryName":"Senegal","continent":"Africa","difficulty":3},{"countryCode":"RS","countryName":"Serbia","continent":"Europe","difficulty":3},{"countryCode":"SC","countryName":"Seychelles","continent":"Africa","difficulty":4},{"countryCode":"SL","countryName":"Sierra Leone","continent":"Africa","difficulty":4},{"countryCode":"SG","countryName":"Singapore","continent":"Asia","difficulty":2},{"countryCode":"SK","countryName":"Slovakia","continent":"Europe","difficulty":3},{"countryCode":"SI","countryName":"Slovenia","continent":"Europe","difficulty":3},{"countryCode":"SB","countryName":"Solomon Islands","continent":"Oceania","difficulty":5},{"countryCode":"SO","countryName":"Somalia","continent":"Africa","difficulty":3},{"countryCode":"ZA","countryName":"South Africa","continent":"Africa","difficulty":2},{"countryCode":"KR","countryName":"South Korea","continent":"Asia","difficulty":2},{"countryCode":"SS","countryName":"South Sudan","continent":"Africa","difficulty":4},{"countryCode":"ES","countryName":"Spain","continent":"Europe","difficulty":2},{"countryCode":"LK","countryName":"Sri Lanka","continent":"Asia","difficulty":3},{"countryCode":"SD","countryName":"Sudan","continent":"Africa","difficulty":3},{"countryCode":"SR","countryName":"Suriname","continent":"South America","difficulty":4},{"countryCode":"SE","countryName":"Sweden","continent":"Europe","difficulty":2},{"countryCode":"CH","countryName":"Switzerland","continent":"Europe","difficulty":2},{"countryCode":"SY","countryName":"Syria","continent":"Asia","difficulty":3},{"countryCode":"TW","countryName":"Taiwan","continent":"Asia","difficulty":3},{"countryCode":"TJ","countryName":"Tajikistan","continent":"Asia","difficulty":4},{"countryCode":"TZ","countryName":"Tanzania","continent":"Africa","difficulty":3},{"countryCode":"TH","countryName":"Thailand","continent":"Asia","difficulty":2},{"countryCode":"TL","countryName":"Timor-Leste","continent":"Asia","difficulty":5},{"countryCode":"TG","countryName":"Togo","continent":"Africa","difficulty":4},{"countryCode":"TO","countryName":"Tonga","continent":"Oceania","difficulty":5},{"countryCode":"TT","countryName":"Trinidad and Tobago","continent":"North America","difficulty":4},{"countryCode":"TN","countryName":"Tunisia","continent":"Africa","difficulty":3},{"countryCode":"TR","countryName":"Turkey","continent":"Asia","difficulty":2},{"countryCode":"TM","countryName":"Turkmenistan","continent":"Asia","difficulty":4},{"countryCode":"TV","countryName":"Tuvalu","continent":"Oceania","difficulty":5},{"countryCode":"UG","countryName":"Uganda","continent":"Africa","difficulty":3},{"countryCode":"UA","countryName":"Ukraine","continent":"Europe","difficulty":2},{"countryCode":"AE","countryName":"United Arab Emirates","continent":"Asia","difficulty":2},{"countryCode":"GB","countryName":"United Kingdom","continent":"Europe","difficulty":1},{"countryCode":"US","countryName":"United States","continent":"North America","difficulty":1},{"countryCode":"UY","countryName":"Uruguay","continent":"South America","difficulty":3},{"countryCode":"UZ","countryName":"Uzbekistan","continent":"Asia","difficulty":4},{"countryCode":"VU","countryName":"Vanuatu","continent":"Oceania","difficulty":5},{"countryCode":"VA","countryName":"Vatican City","continent":"Europe","difficulty":4},{"countryCode":"VE","countryName":"Venezuela","continent":"South America","difficulty":3},{"countryCode":"VN","countryName":"Vietnam","continent":"Asia","difficulty":2},{"countryCode":"EH","countryName":"Western Sahara","continent":"Africa","difficulty":5},{"countryCode":"YE","countryName":"Yemen","continent":"Asia","difficulty":4},{"countryCode":"ZM","countryName":"Zambia","continent":"Africa","difficulty":3},{"countryCode":"ZW","countryName":"Zimbabwe","continent":"Africa","difficulty":3},{"countryCode":"AX","countryName":"Åland Islands","continent":"Europe","difficulty":3},{"countryCode":"BM","countryName":"Bermuda","continent":"North America","difficulty":2},{"countryCode":"BQ","countryName":"Bonaire, Sint Eustatius, and Saba","continent":"North America","difficulty":3},{"countryCode":"BV","countryName":"Bouvet Island","continent":"Antarctica","difficulty":4},{"countryCode":"IO","countryName":"British Indian Ocean Territory","continent":"Asia","difficulty":3},{"countryCode":"CX","countryName":"Christmas Island","continent":"Asia","difficulty":3},{"countryCode":"CC","countryName":"Cocos (Keeling) Islands","continent":"Asia","difficulty":3},{"countryCode":"CW","countryName":"Curaçao","continent":"North America","difficulty":2},{"countryCode":"SZ","countryName":"Eswatini","continent":"Africa","difficulty":2},{"countryCode":"FK","countryName":"Falkland Islands","continent":"South America","difficulty":3},{"countryCode":"GF","countryName":"French Guiana","continent":"South America","difficulty":2},{"countryCode":"PF","countryName":"French Polynesia","continent":"Oceania","difficulty":3},{"countryCode":"TF","countryName":"French Southern Territories","continent":"Antarctica","difficulty":4},{"countryCode":"GM","countryName":"Gambia","continent":"Africa","difficulty":2},{"countryCode":"GI","countryName":"Gibraltar","continent":"Europe","difficulty":2},{"countryCode":"GL","countryName":"Greenland","continent":"North America","difficulty":3},{"countryCode":"GP","countryName":"Guadeloupe","continent":"North America","difficulty":2},{"countryCode":"GU","countryName":"Guam","continent":"Oceania","difficulty":3},{"countryCode":"GG","countryName":"Guernsey","continent":"Europe","difficulty":4},{"countryCode":"HM","countryName":"Heard Island and McDonald Islands","continent":"Antarctica","difficulty":4},{"countryCode":"IM","countryName":"Isle of Man","continent":"Europe","difficulty":3},{"countryCode":"JE","countryName":"Jersey","continent":"Europe","difficulty":3},{"countryCode":"KP","countryName":"North Korea","continent":"Asia","difficulty":2},{"countryCode":"MS","countryName":"Montserrat","continent":"North America","difficulty":5},{"countryCode":"NU","countryName":"Niue","continent":"Oceania","difficulty":5},{"countryCode":"NF","countryName":"Norfolk Island","continent":"Oceania","difficulty":5},{"countryCode":"MP","countryName":"Northern Mariana Islands","continent":"Oceania","difficulty":5},{"countryCode":"PN","countryName":"Pitcairn Islands","continent":"Oceania","difficulty":4},{"countryCode":"BL","countryName":"Saint Barthélemy","continent":"North America","difficulty":4},{"countryCode":"MF","countryName":"Saint Martin","continent":"North America","difficulty":4},{"countryCode":"PM","countryName":"Saint Pierre and Miquelon","continent":"North America","difficulty":4},{"countryCode":"SX","countryName":"Sint Maarten","continent":"North America","difficulty":4},{"countryCode":"GS","countryName":"South Georgia and the South Sandwich Islands","continent":"Antarctica","difficulty":4},{"countryCode":"SJ","countryName":"Svalbard and Jan Mayen","continent":"Europe","difficulty":3},{"countryCode":"TK","countryName":"Tokelau","continent":"Oceania","difficulty":4},{"countryCode":"TC","countryName":"Turks and Caicos Islands","continent":"North America","difficulty":5},{"countryCode":"VG","countryName":"British Virgin Islands","continent":"North America","difficulty":4},{"countryCode":"VI","countryName":"U.S. Virgin Islands","continent":"North America","difficulty":4},{"countryCode":"WF","countryName":"Wallis and Futuna","continent":"Oceania","difficulty":5}]
+[
+  {
+    "countryCode": "AF",
+    "countryName": "Afghanistan",
+    "continent": "Asia",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "AL",
+    "countryName": "Albania",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "DZ",
+    "countryName": "Algeria",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "AS",
+    "countryName": "American Samoa",
+    "continent": "Oceania",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "AD",
+    "countryName": "Andorra",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "AO",
+    "countryName": "Angola",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "AI",
+    "countryName": "Anguilla",
+    "continent": "North America",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "AG",
+    "countryName": "Antigua and Barbuda",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "AR",
+    "countryName": "Argentina",
+    "continent": "South America",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "AM",
+    "countryName": "Armenia",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "AW",
+    "countryName": "Aruba",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "AU",
+    "countryName": "Australia",
+    "continent": "Oceania",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "AT",
+    "countryName": "Austria",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "AZ",
+    "countryName": "Azerbaijan",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "BS",
+    "countryName": "Bahamas",
+    "continent": "North America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "BH",
+    "countryName": "Bahrain",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "BD",
+    "countryName": "Bangladesh",
+    "continent": "Asia",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "BB",
+    "countryName": "Barbados",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "BY",
+    "countryName": "Belarus",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "BE",
+    "countryName": "Belgium",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "BZ",
+    "countryName": "Belize",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "BJ",
+    "countryName": "Benin",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "BT",
+    "countryName": "Bhutan",
+    "continent": "Asia",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "BO",
+    "countryName": "Bolivia",
+    "continent": "South America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "BA",
+    "countryName": "Bosnia and Herzegovina",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "BW",
+    "countryName": "Botswana",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "BR",
+    "countryName": "Brazil",
+    "continent": "South America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "BN",
+    "countryName": "Brunei",
+    "continent": "Asia",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "BG",
+    "countryName": "Bulgaria",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "BF",
+    "countryName": "Burkina Faso",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "BI",
+    "countryName": "Burundi",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "KH",
+    "countryName": "Cambodia",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "CM",
+    "countryName": "Cameroon",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "CA",
+    "countryName": "Canada",
+    "continent": "North America",
+    "difficulty": 1
+  },
+  {
+    "countryCode": "CV",
+    "countryName": "Cape Verde",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "KY",
+    "countryName": "Cayman Islands",
+    "continent": "North America",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "CF",
+    "countryName": "Central African Republic",
+    "continent": "Africa",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "TD",
+    "countryName": "Chad",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "CL",
+    "countryName": "Chile",
+    "continent": "South America",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "CN",
+    "countryName": "China",
+    "continent": "Asia",
+    "difficulty": 1
+  },
+  {
+    "countryCode": "CO",
+    "countryName": "Colombia",
+    "continent": "South America",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "KM",
+    "countryName": "Comoros",
+    "continent": "Africa",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "CG",
+    "countryName": "Congo",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "CD",
+    "countryName": "Democratic Republic of the Congo",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "CK",
+    "countryName": "Cook Islands",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "CR",
+    "countryName": "Costa Rica",
+    "continent": "North America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "CI",
+    "countryName": "CÃ´te d'Ivoire",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "HR",
+    "countryName": "Croatia",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "CU",
+    "countryName": "Cuba",
+    "continent": "North America",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "CY",
+    "countryName": "Cyprus",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "CZ",
+    "countryName": "Czech Republic",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "DK",
+    "countryName": "Denmark",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "DJ",
+    "countryName": "Djibouti",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "DM",
+    "countryName": "Dominica",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "DO",
+    "countryName": "Dominican Republic",
+    "continent": "North America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "EC",
+    "countryName": "Ecuador",
+    "continent": "South America",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "EG",
+    "countryName": "Egypt",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "SV",
+    "countryName": "El Salvador",
+    "continent": "North America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "GQ",
+    "countryName": "Equatorial Guinea",
+    "continent": "Africa",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "ER",
+    "countryName": "Eritrea",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "EE",
+    "countryName": "Estonia",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "ET",
+    "countryName": "Ethiopia",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "FO",
+    "countryName": "Faroe Islands",
+    "continent": "Europe",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "FJ",
+    "countryName": "Fiji",
+    "continent": "Oceania",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "FI",
+    "countryName": "Finland",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "FR",
+    "countryName": "France",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "GA",
+    "countryName": "Gabon",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "GB",
+    "countryName": "United Kingdom",
+    "continent": "Europe",
+    "difficulty": 1
+  },
+  {
+    "countryCode": "GD",
+    "countryName": "Grenada",
+    "continent": "North America",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "GE",
+    "countryName": "Georgia",
+    "continent": "Asia",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "GH",
+    "countryName": "Ghana",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "GR",
+    "countryName": "Greece",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "GT",
+    "countryName": "Guatemala",
+    "continent": "North America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "GN",
+    "countryName": "Guinea",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "GW",
+    "countryName": "Guinea-Bissau",
+    "continent": "Africa",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "GY",
+    "countryName": "Guyana",
+    "continent": "South America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "HT",
+    "countryName": "Haiti",
+    "continent": "North America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "HN",
+    "countryName": "Honduras",
+    "continent": "North America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "HK",
+    "countryName": "Hong Kong",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "HU",
+    "countryName": "Hungary",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "IS",
+    "countryName": "Iceland",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "IN",
+    "countryName": "India",
+    "continent": "Asia",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "ID",
+    "countryName": "Indonesia",
+    "continent": "Asia",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "IR",
+    "countryName": "Iran",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "IQ",
+    "countryName": "Iraq",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "IE",
+    "countryName": "Ireland",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "IL",
+    "countryName": "Israel",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "IT",
+    "countryName": "Italy",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "JM",
+    "countryName": "Jamaica",
+    "continent": "North America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "JP",
+    "countryName": "Japan",
+    "continent": "Asia",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "JO",
+    "countryName": "Jordan",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "KZ",
+    "countryName": "Kazakhstan",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "KE",
+    "countryName": "Kenya",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "KI",
+    "countryName": "Kiribati",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "KW",
+    "countryName": "Kuwait",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "KG",
+    "countryName": "Kyrgyzstan",
+    "continent": "Asia",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "LA",
+    "countryName": "Laos",
+    "continent": "Asia",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "LV",
+    "countryName": "Latvia",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "LB",
+    "countryName": "Lebanon",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "LS",
+    "countryName": "Lesotho",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "LR",
+    "countryName": "Liberia",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "LY",
+    "countryName": "Libya",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "LI",
+    "countryName": "Liechtenstein",
+    "continent": "Europe",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "LT",
+    "countryName": "Lithuania",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "LU",
+    "countryName": "Luxembourg",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "MO",
+    "countryName": "Macau",
+    "continent": "Asia",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "MK",
+    "countryName": "North Macedonia",
+    "continent": "Europe",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "MG",
+    "countryName": "Madagascar",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "MW",
+    "countryName": "Malawi",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "MY",
+    "countryName": "Malaysia",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "MV",
+    "countryName": "Maldives",
+    "continent": "Asia",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "ML",
+    "countryName": "Mali",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "MT",
+    "countryName": "Malta",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "MH",
+    "countryName": "Marshall Islands",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "MQ",
+    "countryName": "Martinique",
+    "continent": "North America",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "MR",
+    "countryName": "Mauritania",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "MU",
+    "countryName": "Mauritius",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "YT",
+    "countryName": "Mayotte",
+    "continent": "Africa",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "MX",
+    "countryName": "Mexico",
+    "continent": "North America",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "FM",
+    "countryName": "Micronesia",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "MD",
+    "countryName": "Moldova",
+    "continent": "Europe",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "MC",
+    "countryName": "Monaco",
+    "continent": "Europe",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "MN",
+    "countryName": "Mongolia",
+    "continent": "Asia",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "ME",
+    "countryName": "Montenegro",
+    "continent": "Europe",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "MA",
+    "countryName": "Morocco",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "MZ",
+    "countryName": "Mozambique",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "MM",
+    "countryName": "Myanmar",
+    "continent": "Asia",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "NA",
+    "countryName": "Namibia",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "NR",
+    "countryName": "Nauru",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "NP",
+    "countryName": "Nepal",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "NL",
+    "countryName": "Netherlands",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "NC",
+    "countryName": "New Caledonia",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "NZ",
+    "countryName": "New Zealand",
+    "continent": "Oceania",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "NI",
+    "countryName": "Nicaragua",
+    "continent": "North America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "NE",
+    "countryName": "Niger",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "NG",
+    "countryName": "Nigeria",
+    "continent": "Africa",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "NO",
+    "countryName": "Norway",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "OM",
+    "countryName": "Oman",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "PK",
+    "countryName": "Pakistan",
+    "continent": "Asia",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "PW",
+    "countryName": "Palau",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "PS",
+    "countryName": "Palestine",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "PA",
+    "countryName": "Panama",
+    "continent": "North America",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "PG",
+    "countryName": "Papua New Guinea",
+    "continent": "Oceania",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "PY",
+    "countryName": "Paraguay",
+    "continent": "South America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "PE",
+    "countryName": "Peru",
+    "continent": "South America",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "PH",
+    "countryName": "Philippines",
+    "continent": "Asia",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "PL",
+    "countryName": "Poland",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "PT",
+    "countryName": "Portugal",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "PR",
+    "countryName": "Puerto Rico",
+    "continent": "North America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "QA",
+    "countryName": "Qatar",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "RE",
+    "countryName": "RÃ©union",
+    "continent": "Africa",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "RO",
+    "countryName": "Romania",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "RU",
+    "countryName": "Russia",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "RW",
+    "countryName": "Rwanda",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "KN",
+    "countryName": "Saint Kitts and Nevis",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "LC",
+    "countryName": "Saint Lucia",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "VC",
+    "countryName": "Saint Vincent and the Grenadines",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "WS",
+    "countryName": "Samoa",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "SM",
+    "countryName": "San Marino",
+    "continent": "Europe",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "ST",
+    "countryName": "Sao Tome and Principe",
+    "continent": "Africa",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "SA",
+    "countryName": "Saudi Arabia",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "SN",
+    "countryName": "Senegal",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "RS",
+    "countryName": "Serbia",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "SC",
+    "countryName": "Seychelles",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "SL",
+    "countryName": "Sierra Leone",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "SG",
+    "countryName": "Singapore",
+    "continent": "Asia",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "SK",
+    "countryName": "Slovakia",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "SI",
+    "countryName": "Slovenia",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "SB",
+    "countryName": "Solomon Islands",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "SO",
+    "countryName": "Somalia",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "ZA",
+    "countryName": "South Africa",
+    "continent": "Africa",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "KR",
+    "countryName": "South Korea",
+    "continent": "Asia",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "SS",
+    "countryName": "South Sudan",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "ES",
+    "countryName": "Spain",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "LK",
+    "countryName": "Sri Lanka",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "SD",
+    "countryName": "Sudan",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "SR",
+    "countryName": "Suriname",
+    "continent": "South America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "SE",
+    "countryName": "Sweden",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "CH",
+    "countryName": "Switzerland",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "SY",
+    "countryName": "Syria",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "TW",
+    "countryName": "Taiwan",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "TJ",
+    "countryName": "Tajikistan",
+    "continent": "Asia",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "TZ",
+    "countryName": "Tanzania",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "TH",
+    "countryName": "Thailand",
+    "continent": "Asia",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "TL",
+    "countryName": "Timor-Leste",
+    "continent": "Asia",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "TG",
+    "countryName": "Togo",
+    "continent": "Africa",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "TO",
+    "countryName": "Tonga",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "TT",
+    "countryName": "Trinidad and Tobago",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "TN",
+    "countryName": "Tunisia",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "TR",
+    "countryName": "Turkey",
+    "continent": "Asia",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "TM",
+    "countryName": "Turkmenistan",
+    "continent": "Asia",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "TV",
+    "countryName": "Tuvalu",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "UG",
+    "countryName": "Uganda",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "UA",
+    "countryName": "Ukraine",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "AE",
+    "countryName": "United Arab Emirates",
+    "continent": "Asia",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "GB",
+    "countryName": "United Kingdom",
+    "continent": "Europe",
+    "difficulty": 1
+  },
+  {
+    "countryCode": "US",
+    "countryName": "United States",
+    "continent": "North America",
+    "difficulty": 1
+  },
+  {
+    "countryCode": "UY",
+    "countryName": "Uruguay",
+    "continent": "South America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "UZ",
+    "countryName": "Uzbekistan",
+    "continent": "Asia",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "VU",
+    "countryName": "Vanuatu",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "VA",
+    "countryName": "Vatican City",
+    "continent": "Europe",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "VE",
+    "countryName": "Venezuela",
+    "continent": "South America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "VN",
+    "countryName": "Vietnam",
+    "continent": "Asia",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "EH",
+    "countryName": "Western Sahara",
+    "continent": "Africa",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "YE",
+    "countryName": "Yemen",
+    "continent": "Asia",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "ZM",
+    "countryName": "Zambia",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "ZW",
+    "countryName": "Zimbabwe",
+    "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "AX",
+    "countryName": "Åland Islands",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "BM",
+    "countryName": "Bermuda",
+    "continent": "North America",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "BQ",
+    "countryName": "Bonaire, Sint Eustatius, and Saba",
+    "continent": "North America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "BV",
+    "countryName": "Bouvet Island",
+    "continent": "Antarctica",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "IO",
+    "countryName": "British Indian Ocean Territory",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "CX",
+    "countryName": "Christmas Island",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "CC",
+    "countryName": "Cocos (Keeling) Islands",
+    "continent": "Asia",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "CW",
+    "countryName": "Curaçao",
+    "continent": "North America",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "SZ",
+    "countryName": "Eswatini",
+    "continent": "Africa",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "FK",
+    "countryName": "Falkland Islands",
+    "continent": "South America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "GF",
+    "countryName": "French Guiana",
+    "continent": "South America",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "PF",
+    "countryName": "French Polynesia",
+    "continent": "Oceania",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "TF",
+    "countryName": "French Southern Territories",
+    "continent": "Antarctica",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "GM",
+    "countryName": "Gambia",
+    "continent": "Africa",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "GI",
+    "countryName": "Gibraltar",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "GL",
+    "countryName": "Greenland",
+    "continent": "North America",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "GP",
+    "countryName": "Guadeloupe",
+    "continent": "North America",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "GU",
+    "countryName": "Guam",
+    "continent": "Oceania",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "GG",
+    "countryName": "Guernsey",
+    "continent": "Europe",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "HM",
+    "countryName": "Heard Island and McDonald Islands",
+    "continent": "Antarctica",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "IM",
+    "countryName": "Isle of Man",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "JE",
+    "countryName": "Jersey",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "KP",
+    "countryName": "North Korea",
+    "continent": "Asia",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "MS",
+    "countryName": "Montserrat",
+    "continent": "North America",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "NU",
+    "countryName": "Niue",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "NF",
+    "countryName": "Norfolk Island",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "MP",
+    "countryName": "Northern Mariana Islands",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "PN",
+    "countryName": "Pitcairn Islands",
+    "continent": "Oceania",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "BL",
+    "countryName": "Saint Barthélemy",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "MF",
+    "countryName": "Saint Martin",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "PM",
+    "countryName": "Saint Pierre and Miquelon",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "SX",
+    "countryName": "Sint Maarten",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "GS",
+    "countryName": "South Georgia and the South Sandwich Islands",
+    "continent": "Antarctica",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "SJ",
+    "countryName": "Svalbard and Jan Mayen",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "TK",
+    "countryName": "Tokelau",
+    "continent": "Oceania",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "TC",
+    "countryName": "Turks and Caicos Islands",
+    "continent": "North America",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "VG",
+    "countryName": "British Virgin Islands",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "VI",
+    "countryName": "U.S. Virgin Islands",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "WF",
+    "countryName": "Wallis and Futuna",
+    "continent": "Oceania",
+    "difficulty": 5
+  }
+]
