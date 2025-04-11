@@ -11,10 +11,10 @@ import { gameSelectStyles as styles } from './gameSelect.styles';
 
 type GameSelectProps = {
   title: string;
-  description: string;
+  description?: string;
   icon?: string;
   score?: string;
-  progressBar?: boolean;
+  progressBar?: number;
   onPress?: (event: GestureResponderEvent) => void;
 };
 
@@ -50,8 +50,12 @@ const GameSelect: React.FC<GameSelectProps> = ({
           </View>
           {score && <Text style={styles.score}>{`${score}%`}</Text>}
         </View>
-        {progressBar && (
-          <ProgressBar progress={0.5} color="blue" style={styles.progressBar} />
+        {progressBar !== null && progressBar !== undefined && (
+          <ProgressBar
+            progress={progressBar}
+            color="blue"
+            style={styles.progressBar}
+          />
         )}
       </View>
     </TouchableOpacity>

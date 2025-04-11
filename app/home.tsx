@@ -1,6 +1,7 @@
 import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
 import en from '@/locales/en';
+import { router } from 'expo-router';
 import {
   SafeAreaView,
   ScrollView,
@@ -23,12 +24,24 @@ const HomeScreen = () => {
         <GameSelect
           title={en.games.standard.name}
           description={en.games.standard.description}
-          progressBar
+          // progressBar
+          onPress={() =>
+            router.push({
+              pathname: '/difficulty',
+              params: { name: en.games.standard.name.toLowerCase() },
+            })
+          }
         />
         <GameSelect
           title={en.games.rapid.name}
           description={en.games.rapid.description}
-          progressBar
+          // progressBar
+          onPress={() =>
+            router.push({
+              pathname: '/difficulty',
+              params: { name: en.games.rapid.name.toLowerCase() },
+            })
+          }
         />
       </ScrollView>
     </SafeAreaView>

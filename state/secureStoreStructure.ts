@@ -1,43 +1,63 @@
-type LevelData = {
+export type LevelData = {
+  name: string;
   isCompleted: boolean;
-  userScore: number | null;
+  isInProgress: boolean;
+  isLocked: boolean;
+  userScore: number;
   advancementRequirement: string;
 };
 
-type GameProgression = Record<string, LevelData>;
+export type GameProgression = Record<string, LevelData>;
 
-export type DefaultProgressionStructure = {
+export type GameMode = 'standard';
+
+export type ProgressionStructure = {
   games: {
-    standard: GameProgression;
+    [key in GameMode]: GameProgression;
   };
 };
 
-export const defaultProgressionStructure: DefaultProgressionStructure = {
+export const defaultProgressionStructure: ProgressionStructure = {
   games: {
     standard: {
       levelOne: {
+        name: 'Level 1',
         isCompleted: false,
-        userScore: null,
+        isInProgress: false,
+        isLocked: false,
+        userScore: 0,
         advancementRequirement: '80%',
       },
       levelTwo: {
+        name: 'Level 2',
         isCompleted: false,
-        userScore: null,
+        isInProgress: false,
+        isLocked: true,
+        userScore: 0,
         advancementRequirement: '80%',
       },
       levelThree: {
+        name: 'Level 3',
         isCompleted: false,
-        userScore: null,
+        isInProgress: false,
+        isLocked: true,
+        userScore: 0,
         advancementRequirement: '80%',
       },
       levelFour: {
+        name: 'Level 4',
         isCompleted: false,
-        userScore: null,
+        isInProgress: false,
+        isLocked: true,
+        userScore: 0,
         advancementRequirement: '80%',
       },
       levelFive: {
+        name: 'Level 5',
         isCompleted: false,
-        userScore: null,
+        isInProgress: false,
+        isLocked: true,
+        userScore: 0,
         advancementRequirement: '80%',
       },
     },
