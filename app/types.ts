@@ -1,7 +1,12 @@
-import { GameMode } from '@/state/secureStoreStructure';
+import { GameRouting, Levels } from '@/state/secureStoreStructure';
 
-export type RouterParamList = {
+type RouterParamList = {
   difficulty: {
-    name: GameMode;
+    name: GameRouting;
+  };
+  multipleChoice: {
+    name: Levels;
   };
 };
+
+export default RouterParamList;

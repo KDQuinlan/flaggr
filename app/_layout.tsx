@@ -10,19 +10,26 @@ export default function RootLayout() {
       <Stack
         screenOptions={{
           headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: colors.offWhite,
+          },
         }}
       >
         <Stack.Screen
           name="index"
           options={{
-            title: 'Flaggr',
             headerShown: false,
           }}
         />
         <Stack.Screen
-          name="games"
+          name="difficulty"
           options={{
-            title: 'Games',
+            headerShown: true,
+          }}
+        />
+        <Stack.Screen
+          name="multipleChoice"
+          options={{
             headerShown: true,
           }}
         />

@@ -1,5 +1,5 @@
 export type LevelData = {
-  name: string;
+  name: Levels;
   isCompleted: boolean;
   isInProgress: boolean;
   isLocked: boolean;
@@ -8,8 +8,9 @@ export type LevelData = {
 };
 
 export type GameProgression = Record<string, LevelData>;
-
 export type GameMode = 'standard';
+export type GameRouting = 'Standard';
+export type Levels = 'Level 1' | 'Level 2' | 'Level 3' | 'Level 4' | 'Level 5';
 
 export type ProgressionStructure = {
   games: {

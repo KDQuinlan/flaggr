@@ -8,6 +8,10 @@ import {
 } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 import { gameSelectStyles as styles } from './gameSelect.styles';
+import en from '@/locales/en';
+import { colors } from '../colors';
+
+// TODO - Update progressBar param to be react component
 
 type GameSelectProps = {
   title: string;
@@ -26,11 +30,17 @@ const GameSelect: React.FC<GameSelectProps> = ({
   progressBar,
   onPress,
 }) => {
+  const isLocked = description === en.games.states.locked;
+
   return (
     <TouchableOpacity
-      style={styles.gameModeContainer}
+      style={{
+        ...styles.gameModeContainer,
+        backgroundColor: isLocked ? colors.offWhite : colors.white,
+      }}
       onPress={onPress}
       activeOpacity={0.8}
+      disabled={isLocked}
     >
       <Ionicons
         name="checkmark-circle"

@@ -1,7 +1,8 @@
 import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
 import en from '@/locales/en';
-import { router } from 'expo-router';
+import { NavigationProps } from '@/types/navigation';
+import { useNavigation } from 'expo-router';
 import {
   SafeAreaView,
   ScrollView,
@@ -12,6 +13,7 @@ import {
 } from 'react-native';
 
 const HomeScreen = () => {
+  const navigation = useNavigation<NavigationProps>();
   return (
     <SafeAreaView style={styles.rootContainer}>
       <ScrollView
@@ -24,23 +26,15 @@ const HomeScreen = () => {
         <GameSelect
           title={en.games.standard.name}
           description={en.games.standard.description}
-          // progressBar
           onPress={() =>
-            router.push({
-              pathname: '/difficulty',
-              params: { name: en.games.standard.name.toLowerCase() },
-            })
+            navigation.navigate('difficulty', { name: en.games.standard.name })
           }
         />
         <GameSelect
           title={en.games.rapid.name}
           description={en.games.rapid.description}
-          // progressBar
           onPress={() =>
-            router.push({
-              pathname: '/difficulty',
-              params: { name: en.games.rapid.name.toLowerCase() },
-            })
+            navigation.navigate('difficulty', { name: en.games.rapid.name })
           }
         />
       </ScrollView>

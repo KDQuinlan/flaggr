@@ -5,7 +5,6 @@ import { colors } from '../colors';
 
 export const gameSelectStyles = StyleSheet.create({
   gameModeContainer: {
-    backgroundColor: colors.white,
     marginHorizontal: 20,
     marginTop: 25,
     borderRadius: 10,
