@@ -6,6 +6,12 @@
     "difficulty": 4
   },
   {
+    "countryCode": "AX",
+    "countryName": "Åland Islands",
+    "continent": "Europe",
+    "difficulty": 4
+  },
+  {
     "countryCode": "AL",
     "countryName": "Albania",
     "continent": "Europe",
@@ -21,19 +27,19 @@
     "countryCode": "AS",
     "countryName": "American Samoa",
     "continent": "Oceania",
-    "difficulty": 4
+    "difficulty": 5
   },
   {
     "countryCode": "AD",
     "countryName": "Andorra",
     "continent": "Europe",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "AO",
     "countryName": "Angola",
     "continent": "Africa",
-    "difficulty": 3
+    "difficulty": 4
   },
   {
     "countryCode": "AI",
@@ -42,16 +48,22 @@
     "difficulty": 5
   },
   {
+    "countryCode": "AQ",
+    "countryName": "Antarctica",
+    "continent": "Antarctica",
+    "difficulty": 2
+  },
+  {
     "countryCode": "AG",
     "countryName": "Antigua and Barbuda",
     "continent": "North America",
-    "difficulty": 4
+    "difficulty": 5
   },
   {
     "countryCode": "AR",
     "countryName": "Argentina",
     "continent": "South America",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "AM",
@@ -63,7 +75,7 @@
     "countryCode": "AW",
     "countryName": "Aruba",
     "continent": "North America",
-    "difficulty": 4
+    "difficulty": 5
   },
   {
     "countryCode": "AU",
@@ -75,25 +87,25 @@
     "countryCode": "AT",
     "countryName": "Austria",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "AZ",
     "countryName": "Azerbaijan",
     "continent": "Asia",
-    "difficulty": 3
+    "difficulty": 4
   },
   {
     "countryCode": "BS",
     "countryName": "Bahamas",
     "continent": "North America",
-    "difficulty": 3
+    "difficulty": 4
   },
   {
     "countryCode": "BH",
     "countryName": "Bahrain",
     "continent": "Asia",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "BD",
@@ -105,25 +117,25 @@
     "countryCode": "BB",
     "countryName": "Barbados",
     "continent": "North America",
-    "difficulty": 4
+    "difficulty": 2
   },
   {
     "countryCode": "BY",
     "countryName": "Belarus",
     "continent": "Europe",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "BE",
     "countryName": "Belgium",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "BZ",
     "countryName": "Belize",
     "continent": "North America",
-    "difficulty": 4
+    "difficulty": 5
   },
   {
     "countryCode": "BJ",
@@ -132,34 +144,58 @@
     "difficulty": 4
   },
   {
+    "countryCode": "BM",
+    "countryName": "Bermuda",
+    "continent": "North America",
+    "difficulty": 5
+  },
+  {
     "countryCode": "BT",
     "countryName": "Bhutan",
     "continent": "Asia",
-    "difficulty": 4
+    "difficulty": 2
   },
   {
     "countryCode": "BO",
     "countryName": "Bolivia",
     "continent": "South America",
-    "difficulty": 3
+    "difficulty": 4
+  },
+  {
+    "countryCode": "BQ",
+    "countryName": "Bonaire, Sint Eustatius and Saba",
+    "continent": "North America",
+    "difficulty": 5
   },
   {
     "countryCode": "BA",
     "countryName": "Bosnia and Herzegovina",
     "continent": "Europe",
-    "difficulty": 3
+    "difficulty": 4
   },
   {
     "countryCode": "BW",
     "countryName": "Botswana",
     "continent": "Africa",
-    "difficulty": 4
+    "difficulty": 5
+  },
+  {
+    "countryCode": "BV",
+    "countryName": "Bouvet Island",
+    "continent": "Antarctica",
+    "difficulty": 5
   },
   {
     "countryCode": "BR",
     "countryName": "Brazil",
     "continent": "South America",
-    "difficulty": 3
+    "difficulty": 1
+  },
+  {
+    "countryCode": "IO",
+    "countryName": "British Indian Ocean Territory",
+    "continent": "Asia",
+    "difficulty": 5
   },
   {
     "countryCode": "BN",
@@ -171,13 +207,13 @@
     "countryCode": "BG",
     "countryName": "Bulgaria",
     "continent": "Europe",
-    "difficulty": 3
+    "difficulty": 1
   },
   {
     "countryCode": "BF",
     "countryName": "Burkina Faso",
     "continent": "Africa",
-    "difficulty": 4
+    "difficulty": 3
   },
   {
     "countryCode": "BI",
@@ -186,28 +222,28 @@
     "difficulty": 4
   },
   {
+    "countryCode": "CV",
+    "countryName": "Cabo Verde",
+    "continent": "Africa",
+    "difficulty": 5
+  },
+  {
     "countryCode": "KH",
     "countryName": "Cambodia",
     "continent": "Asia",
-    "difficulty": 3
+    "difficulty": 4
   },
   {
     "countryCode": "CM",
     "countryName": "Cameroon",
     "continent": "Africa",
-    "difficulty": 4
+    "difficulty": 3
   },
   {
     "countryCode": "CA",
     "countryName": "Canada",
     "continent": "North America",
     "difficulty": 1
-  },
-  {
-    "countryCode": "CV",
-    "countryName": "Cape Verde",
-    "continent": "Africa",
-    "difficulty": 4
   },
   {
     "countryCode": "KY",
@@ -219,7 +255,7 @@
     "countryCode": "CF",
     "countryName": "Central African Republic",
     "continent": "Africa",
-    "difficulty": 5
+    "difficulty": 4
   },
   {
     "countryCode": "TD",
@@ -240,6 +276,18 @@
     "difficulty": 1
   },
   {
+    "countryCode": "CX",
+    "countryName": "Christmas Island",
+    "continent": "Asia",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "CC",
+    "countryName": "Cocos (Keeling) Islands",
+    "continent": "Asia",
+    "difficulty": 5
+  },
+  {
     "countryCode": "CO",
     "countryName": "Colombia",
     "continent": "South America",
@@ -252,14 +300,14 @@
     "difficulty": 5
   },
   {
-    "countryCode": "CG",
-    "countryName": "Congo",
+    "countryCode": "CD",
+    "countryName": "Democratic Republic of the Congo",
     "continent": "Africa",
     "difficulty": 4
   },
   {
-    "countryCode": "CD",
-    "countryName": "Democratic Republic of the Congo",
+    "countryCode": "CG",
+    "countryName": "Republic of the Congo",
     "continent": "Africa",
     "difficulty": 4
   },
@@ -273,19 +321,19 @@
     "countryCode": "CR",
     "countryName": "Costa Rica",
     "continent": "North America",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "CI",
-    "countryName": "CÃ´te d'Ivoire",
+    "countryName": "Côte d'Ivoire",
     "continent": "Africa",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "HR",
     "countryName": "Croatia",
     "continent": "Europe",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "CU",
@@ -294,10 +342,16 @@
     "difficulty": 2
   },
   {
+    "countryCode": "CW",
+    "countryName": "Curaçao",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
     "countryCode": "CY",
     "countryName": "Cyprus",
     "continent": "Asia",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "CZ",
@@ -309,25 +363,25 @@
     "countryCode": "DK",
     "countryName": "Denmark",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "DJ",
     "countryName": "Djibouti",
     "continent": "Africa",
-    "difficulty": 4
+    "difficulty": 5
   },
   {
     "countryCode": "DM",
     "countryName": "Dominica",
     "continent": "North America",
-    "difficulty": 4
+    "difficulty": 5
   },
   {
     "countryCode": "DO",
     "countryName": "Dominican Republic",
     "continent": "North America",
-    "difficulty": 3
+    "difficulty": 4
   },
   {
     "countryCode": "EC",
@@ -339,7 +393,7 @@
     "countryCode": "EG",
     "countryName": "Egypt",
     "continent": "Africa",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "SV",
@@ -351,31 +405,43 @@
     "countryCode": "GQ",
     "countryName": "Equatorial Guinea",
     "continent": "Africa",
-    "difficulty": 5
+    "difficulty": 1
   },
   {
     "countryCode": "ER",
     "countryName": "Eritrea",
     "continent": "Africa",
-    "difficulty": 4
+    "difficulty": 5
   },
   {
     "countryCode": "EE",
     "countryName": "Estonia",
     "continent": "Europe",
-    "difficulty": 3
+    "difficulty": 2
+  },
+  {
+    "countryCode": "SZ",
+    "countryName": "Eswatini",
+    "continent": "Africa",
+    "difficulty": 4
   },
   {
     "countryCode": "ET",
     "countryName": "Ethiopia",
     "continent": "Africa",
-    "difficulty": 3
+    "difficulty": 4
+  },
+  {
+    "countryCode": "FK",
+    "countryName": "Falkland Islands",
+    "continent": "South America",
+    "difficulty": 5
   },
   {
     "countryCode": "FO",
     "countryName": "Faroe Islands",
     "continent": "Europe",
-    "difficulty": 5
+    "difficulty": 4
   },
   {
     "countryCode": "FJ",
@@ -387,13 +453,31 @@
     "countryCode": "FI",
     "countryName": "Finland",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "FR",
     "countryName": "France",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
+  },
+  {
+    "countryCode": "GF",
+    "countryName": "French Guiana",
+    "continent": "South America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "PF",
+    "countryName": "French Polynesia",
+    "continent": "Oceania",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "TF",
+    "countryName": "French Southern and Antarctic Lands",
+    "continent": "Antarctica",
+    "difficulty": 5
   },
   {
     "countryCode": "GA",
@@ -402,22 +486,22 @@
     "difficulty": 4
   },
   {
-    "countryCode": "GB",
-    "countryName": "United Kingdom",
-    "continent": "Europe",
-    "difficulty": 1
-  },
-  {
-    "countryCode": "GD",
-    "countryName": "Grenada",
-    "continent": "North America",
-    "difficulty": 5
+    "countryCode": "GM",
+    "countryName": "Gambia",
+    "continent": "Africa",
+    "difficulty": 4
   },
   {
     "countryCode": "GE",
     "countryName": "Georgia",
     "continent": "Asia",
-    "difficulty": 4
+    "difficulty": 3
+  },
+  {
+    "countryCode": "DE",
+    "countryName": "Germany",
+    "continent": "Europe",
+    "difficulty": 1
   },
   {
     "countryCode": "GH",
@@ -426,40 +510,82 @@
     "difficulty": 3
   },
   {
+    "countryCode": "GI",
+    "countryName": "Gibraltar",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
     "countryCode": "GR",
     "countryName": "Greece",
     "continent": "Europe",
+    "difficulty": 1
+  },
+  {
+    "countryCode": "GL",
+    "countryName": "Greenland",
+    "continent": "North America",
     "difficulty": 2
+  },
+  {
+    "countryCode": "GD",
+    "countryName": "Grenada",
+    "continent": "North America",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "GP",
+    "countryName": "Guadeloupe",
+    "continent": "North America",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "GU",
+    "countryName": "Guam",
+    "continent": "Oceania",
+    "difficulty": 5
   },
   {
     "countryCode": "GT",
     "countryName": "Guatemala",
     "continent": "North America",
-    "difficulty": 3
+    "difficulty": 4
+  },
+  {
+    "countryCode": "GG",
+    "countryName": "Guernsey",
+    "continent": "Europe",
+    "difficulty": 4
   },
   {
     "countryCode": "GN",
     "countryName": "Guinea",
     "continent": "Africa",
-    "difficulty": 4
+    "difficulty": 3
   },
   {
     "countryCode": "GW",
     "countryName": "Guinea-Bissau",
     "continent": "Africa",
-    "difficulty": 5
+    "difficulty": 3
   },
   {
     "countryCode": "GY",
     "countryName": "Guyana",
     "continent": "South America",
-    "difficulty": 3
+    "difficulty": 4
   },
   {
     "countryCode": "HT",
     "countryName": "Haiti",
     "continent": "North America",
-    "difficulty": 3
+    "difficulty": 4
+  },
+  {
+    "countryCode": "HM",
+    "countryName": "Heard Island and McDonald Islands",
+    "continent": "Antarctica",
+    "difficulty": 5
   },
   {
     "countryCode": "HN",
@@ -477,19 +603,19 @@
     "countryCode": "HU",
     "countryName": "Hungary",
     "continent": "Europe",
-    "difficulty": 3
+    "difficulty": 1
   },
   {
     "countryCode": "IS",
     "countryName": "Iceland",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "IN",
     "countryName": "India",
     "continent": "Asia",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "ID",
@@ -501,7 +627,7 @@
     "countryCode": "IR",
     "countryName": "Iran",
     "continent": "Asia",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "IQ",
@@ -511,7 +637,13 @@
   },
   {
     "countryCode": "IE",
-    "countryName": "Ireland",
+    "countryName": "Republic of Ireland",
+    "continent": "Europe",
+    "difficulty": 1
+  },
+  {
+    "countryCode": "IM",
+    "countryName": "Isle of Man",
     "continent": "Europe",
     "difficulty": 2
   },
@@ -519,25 +651,31 @@
     "countryCode": "IL",
     "countryName": "Israel",
     "continent": "Asia",
-    "difficulty": 3
+    "difficulty": 1
   },
   {
     "countryCode": "IT",
     "countryName": "Italy",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "JM",
     "countryName": "Jamaica",
     "continent": "North America",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "JP",
     "countryName": "Japan",
     "continent": "Asia",
-    "difficulty": 2
+    "difficulty": 1
+  },
+  {
+    "countryCode": "JE",
+    "countryName": "Jersey",
+    "continent": "Europe",
+    "difficulty": 3
   },
   {
     "countryCode": "JO",
@@ -564,6 +702,18 @@
     "difficulty": 5
   },
   {
+    "countryCode": "KP",
+    "countryName": "North Korea",
+    "continent": "Asia",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "KR",
+    "countryName": "South Korea",
+    "continent": "Asia",
+    "difficulty": 1
+  },
+  {
     "countryCode": "KW",
     "countryName": "Kuwait",
     "continent": "Asia",
@@ -573,25 +723,25 @@
     "countryCode": "KG",
     "countryName": "Kyrgyzstan",
     "continent": "Asia",
-    "difficulty": 4
+    "difficulty": 3
   },
   {
     "countryCode": "LA",
     "countryName": "Laos",
     "continent": "Asia",
-    "difficulty": 4
+    "difficulty": 3
   },
   {
     "countryCode": "LV",
     "countryName": "Latvia",
     "continent": "Europe",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "LB",
     "countryName": "Lebanon",
     "continent": "Asia",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "LS",
@@ -615,7 +765,7 @@
     "countryCode": "LI",
     "countryName": "Liechtenstein",
     "continent": "Europe",
-    "difficulty": 4
+    "difficulty": 3
   },
   {
     "countryCode": "LT",
@@ -627,25 +777,19 @@
     "countryCode": "LU",
     "countryName": "Luxembourg",
     "continent": "Europe",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "MO",
     "countryName": "Macau",
     "continent": "Asia",
-    "difficulty": 4
-  },
-  {
-    "countryCode": "MK",
-    "countryName": "North Macedonia",
-    "continent": "Europe",
-    "difficulty": 4
+    "difficulty": 5
   },
   {
     "countryCode": "MG",
     "countryName": "Madagascar",
     "continent": "Africa",
-    "difficulty": 3
+    "difficulty": 4
   },
   {
     "countryCode": "MW",
@@ -681,7 +825,7 @@
     "countryCode": "MH",
     "countryName": "Marshall Islands",
     "continent": "Oceania",
-    "difficulty": 5
+    "difficulty": 4
   },
   {
     "countryCode": "MQ",
@@ -711,61 +855,67 @@
     "countryCode": "MX",
     "countryName": "Mexico",
     "continent": "North America",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "FM",
-    "countryName": "Micronesia",
+    "countryName": "Federated States of Micronesia",
     "continent": "Oceania",
-    "difficulty": 5
+    "difficulty": 3
   },
   {
     "countryCode": "MD",
     "countryName": "Moldova",
     "continent": "Europe",
-    "difficulty": 4
+    "difficulty": 2
   },
   {
     "countryCode": "MC",
     "countryName": "Monaco",
     "continent": "Europe",
-    "difficulty": 5
+    "difficulty": 2
   },
   {
     "countryCode": "MN",
     "countryName": "Mongolia",
     "continent": "Asia",
-    "difficulty": 4
+    "difficulty": 3
   },
   {
     "countryCode": "ME",
     "countryName": "Montenegro",
     "continent": "Europe",
-    "difficulty": 4
+    "difficulty": 3
+  },
+  {
+    "countryCode": "MS",
+    "countryName": "Montserrat",
+    "continent": "North America",
+    "difficulty": 5
   },
   {
     "countryCode": "MA",
     "countryName": "Morocco",
     "continent": "Africa",
-    "difficulty": 3
+    "difficulty": 1
   },
   {
     "countryCode": "MZ",
     "countryName": "Mozambique",
     "continent": "Africa",
-    "difficulty": 4
+    "difficulty": 5
   },
   {
     "countryCode": "MM",
     "countryName": "Myanmar",
     "continent": "Asia",
-    "difficulty": 4
+    "difficulty": 5
   },
   {
     "countryCode": "NA",
     "countryName": "Namibia",
     "continent": "Africa",
-    "difficulty": 4
+    "difficulty": 5
   },
   {
     "countryCode": "NR",
@@ -783,7 +933,7 @@
     "countryCode": "NL",
     "countryName": "Netherlands",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "NC",
@@ -795,7 +945,7 @@
     "countryCode": "NZ",
     "countryName": "New Zealand",
     "continent": "Oceania",
-    "difficulty": 2
+    "difficulty": 3
   },
   {
     "countryCode": "NI",
@@ -807,19 +957,43 @@
     "countryCode": "NE",
     "countryName": "Niger",
     "continent": "Africa",
-    "difficulty": 4
+    "difficulty": 3
   },
   {
     "countryCode": "NG",
     "countryName": "Nigeria",
     "continent": "Africa",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "NU",
+    "countryName": "Niue",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "NF",
+    "countryName": "Norfolk Island",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "MK",
+    "countryName": "North Macedonia",
+    "continent": "Europe",
     "difficulty": 2
+  },
+  {
+    "countryCode": "MP",
+    "countryName": "Northern Mariana Islands",
+    "continent": "Oceania",
+    "difficulty": 5
   },
   {
     "countryCode": "NO",
     "countryName": "Norway",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "OM",
@@ -831,7 +1005,7 @@
     "countryCode": "PK",
     "countryName": "Pakistan",
     "continent": "Asia",
-    "difficulty": 2
+    "difficulty": 3
   },
   {
     "countryCode": "PW",
@@ -843,13 +1017,13 @@
     "countryCode": "PS",
     "countryName": "Palestine",
     "continent": "Asia",
-    "difficulty": 3
+    "difficulty": 1
   },
   {
     "countryCode": "PA",
     "countryName": "Panama",
     "continent": "North America",
-    "difficulty": 2
+    "difficulty": 4
   },
   {
     "countryCode": "PG",
@@ -876,16 +1050,22 @@
     "difficulty": 2
   },
   {
+    "countryCode": "PN",
+    "countryName": "Pitcairn Islands",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
     "countryCode": "PL",
     "countryName": "Poland",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "PT",
     "countryName": "Portugal",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "PR",
@@ -897,11 +1077,11 @@
     "countryCode": "QA",
     "countryName": "Qatar",
     "continent": "Asia",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "RE",
-    "countryName": "RÃ©union",
+    "countryName": "Réunion",
     "continent": "Africa",
     "difficulty": 5
   },
@@ -909,13 +1089,13 @@
     "countryCode": "RO",
     "countryName": "Romania",
     "continent": "Europe",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "RU",
     "countryName": "Russia",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "RW",
@@ -924,40 +1104,64 @@
     "difficulty": 4
   },
   {
+    "countryCode": "BL",
+    "countryName": "Saint Barthélemy",
+    "continent": "North America",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "SH",
+    "countryName": "Saint Helena",
+    "continent": "Africa",
+    "difficulty": 5
+  },
+  {
     "countryCode": "KN",
     "countryName": "Saint Kitts and Nevis",
     "continent": "North America",
-    "difficulty": 4
+    "difficulty": 5
   },
   {
     "countryCode": "LC",
     "countryName": "Saint Lucia",
     "continent": "North America",
-    "difficulty": 4
+    "difficulty": 5
+  },
+  {
+    "countryCode": "MF",
+    "countryName": "Saint Martin",
+    "continent": "North America",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "PM",
+    "countryName": "Saint Pierre and Miquelon",
+    "continent": "North America",
+    "difficulty": 5
   },
   {
     "countryCode": "VC",
     "countryName": "Saint Vincent and the Grenadines",
     "continent": "North America",
-    "difficulty": 4
+    "difficulty": 5
   },
   {
     "countryCode": "WS",
     "countryName": "Samoa",
     "continent": "Oceania",
-    "difficulty": 5
+    "difficulty": 4
   },
   {
     "countryCode": "SM",
     "countryName": "San Marino",
     "continent": "Europe",
-    "difficulty": 5
+    "difficulty": 4
   },
   {
     "countryCode": "ST",
-    "countryName": "Sao Tome and Principe",
+    "countryName": "São Tomé and Príncipe",
     "continent": "Africa",
-    "difficulty": 5
+    "difficulty": 4
   },
   {
     "countryCode": "SA",
@@ -969,7 +1173,7 @@
     "countryCode": "SN",
     "countryName": "Senegal",
     "continent": "Africa",
-    "difficulty": 3
+    "difficulty": 4
   },
   {
     "countryCode": "RS",
@@ -981,19 +1185,25 @@
     "countryCode": "SC",
     "countryName": "Seychelles",
     "continent": "Africa",
-    "difficulty": 4
+    "difficulty": 3
   },
   {
     "countryCode": "SL",
     "countryName": "Sierra Leone",
     "continent": "Africa",
-    "difficulty": 4
+    "difficulty": 3
   },
   {
     "countryCode": "SG",
     "countryName": "Singapore",
     "continent": "Asia",
     "difficulty": 2
+  },
+  {
+    "countryCode": "SX",
+    "countryName": "Sint Maarten",
+    "continent": "North America",
+    "difficulty": 5
   },
   {
     "countryCode": "SK",
@@ -1011,7 +1221,7 @@
     "countryCode": "SB",
     "countryName": "Solomon Islands",
     "continent": "Oceania",
-    "difficulty": 5
+    "difficulty": 4
   },
   {
     "countryCode": "SO",
@@ -1023,13 +1233,13 @@
     "countryCode": "ZA",
     "countryName": "South Africa",
     "continent": "Africa",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
-    "countryCode": "KR",
-    "countryName": "South Korea",
-    "continent": "Asia",
-    "difficulty": 2
+    "countryCode": "GS",
+    "countryName": "South Georgia and the South Sandwich Islands",
+    "continent": "Antarctica",
+    "difficulty": 5
   },
   {
     "countryCode": "SS",
@@ -1041,7 +1251,7 @@
     "countryCode": "ES",
     "countryName": "Spain",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "LK",
@@ -1059,19 +1269,19 @@
     "countryCode": "SR",
     "countryName": "Suriname",
     "continent": "South America",
-    "difficulty": 4
+    "difficulty": 3
   },
   {
     "countryCode": "SE",
     "countryName": "Sweden",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "CH",
     "countryName": "Switzerland",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "SY",
@@ -1095,25 +1305,31 @@
     "countryCode": "TZ",
     "countryName": "Tanzania",
     "continent": "Africa",
-    "difficulty": 3
+    "difficulty": 4
   },
   {
     "countryCode": "TH",
     "countryName": "Thailand",
     "continent": "Asia",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "TL",
     "countryName": "Timor-Leste",
     "continent": "Asia",
-    "difficulty": 5
+    "difficulty": 4
   },
   {
     "countryCode": "TG",
     "countryName": "Togo",
     "continent": "Africa",
     "difficulty": 4
+  },
+  {
+    "countryCode": "TK",
+    "countryName": "Tokelau",
+    "continent": "Oceania",
+    "difficulty": 5
   },
   {
     "countryCode": "TO",
@@ -1131,19 +1347,25 @@
     "countryCode": "TN",
     "countryName": "Tunisia",
     "continent": "Africa",
-    "difficulty": 3
+    "difficulty": 4
   },
   {
     "countryCode": "TR",
     "countryName": "Turkey",
     "continent": "Asia",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "TM",
     "countryName": "Turkmenistan",
     "continent": "Asia",
     "difficulty": 4
+  },
+  {
+    "countryCode": "TC",
+    "countryName": "Turks and Caicos Islands",
+    "continent": "North America",
+    "difficulty": 5
   },
   {
     "countryCode": "TV",
@@ -1161,13 +1383,13 @@
     "countryCode": "UA",
     "countryName": "Ukraine",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "AE",
     "countryName": "United Arab Emirates",
     "continent": "Asia",
-    "difficulty": 2
+    "difficulty": 3
   },
   {
     "countryCode": "GB",
@@ -1176,22 +1398,34 @@
     "difficulty": 1
   },
   {
+    "countryCode": "UM",
+    "countryName": "United States Minor Outlying Islands",
+    "continent": "Oceania",
+    "difficulty": 1
+  },
+  {
     "countryCode": "US",
-    "countryName": "United States",
+    "countryName": "United States of America",
     "continent": "North America",
     "difficulty": 1
+  },
+  {
+    "countryCode": "VI",
+    "countryName": "United States Virgin Islands",
+    "continent": "North America",
+    "difficulty": 4
   },
   {
     "countryCode": "UY",
     "countryName": "Uruguay",
     "continent": "South America",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "UZ",
     "countryName": "Uzbekistan",
     "continent": "Asia",
-    "difficulty": 4
+    "difficulty": 3
   },
   {
     "countryCode": "VU",
@@ -1203,13 +1437,13 @@
     "countryCode": "VA",
     "countryName": "Vatican City",
     "continent": "Europe",
-    "difficulty": 4
+    "difficulty": 2
   },
   {
     "countryCode": "VE",
     "countryName": "Venezuela",
     "continent": "South America",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "VN",
@@ -1218,16 +1452,34 @@
     "difficulty": 2
   },
   {
+    "countryCode": "VG",
+    "countryName": "British Virgin Islands",
+    "continent": "North America",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "VI",
+    "countryName": "United States Virgin Islands",
+    "continent": "North America",
+    "difficulty": 4
+  },
+  {
+    "countryCode": "WF",
+    "countryName": "Wallis and Futuna",
+    "continent": "Oceania",
+    "difficulty": 5
+  },
+  {
     "countryCode": "EH",
     "countryName": "Western Sahara",
     "continent": "Africa",
-    "difficulty": 5
+    "difficulty": 3
   },
   {
     "countryCode": "YE",
     "countryName": "Yemen",
     "continent": "Asia",
-    "difficulty": 4
+    "difficulty": 2
   },
   {
     "countryCode": "ZM",
@@ -1240,239 +1492,5 @@
     "countryName": "Zimbabwe",
     "continent": "Africa",
     "difficulty": 3
-  },
-  {
-    "countryCode": "AX",
-    "countryName": "Åland Islands",
-    "continent": "Europe",
-    "difficulty": 3
-  },
-  {
-    "countryCode": "BM",
-    "countryName": "Bermuda",
-    "continent": "North America",
-    "difficulty": 2
-  },
-  {
-    "countryCode": "BQ",
-    "countryName": "Bonaire, Sint Eustatius, and Saba",
-    "continent": "North America",
-    "difficulty": 3
-  },
-  {
-    "countryCode": "BV",
-    "countryName": "Bouvet Island",
-    "continent": "Antarctica",
-    "difficulty": 4
-  },
-  {
-    "countryCode": "IO",
-    "countryName": "British Indian Ocean Territory",
-    "continent": "Asia",
-    "difficulty": 3
-  },
-  {
-    "countryCode": "CX",
-    "countryName": "Christmas Island",
-    "continent": "Asia",
-    "difficulty": 3
-  },
-  {
-    "countryCode": "CC",
-    "countryName": "Cocos (Keeling) Islands",
-    "continent": "Asia",
-    "difficulty": 3
-  },
-  {
-    "countryCode": "CW",
-    "countryName": "Curaçao",
-    "continent": "North America",
-    "difficulty": 2
-  },
-  {
-    "countryCode": "SZ",
-    "countryName": "Eswatini",
-    "continent": "Africa",
-    "difficulty": 2
-  },
-  {
-    "countryCode": "FK",
-    "countryName": "Falkland Islands",
-    "continent": "South America",
-    "difficulty": 3
-  },
-  {
-    "countryCode": "GF",
-    "countryName": "French Guiana",
-    "continent": "South America",
-    "difficulty": 2
-  },
-  {
-    "countryCode": "PF",
-    "countryName": "French Polynesia",
-    "continent": "Oceania",
-    "difficulty": 3
-  },
-  {
-    "countryCode": "TF",
-    "countryName": "French Southern Territories",
-    "continent": "Antarctica",
-    "difficulty": 4
-  },
-  {
-    "countryCode": "GM",
-    "countryName": "Gambia",
-    "continent": "Africa",
-    "difficulty": 2
-  },
-  {
-    "countryCode": "GI",
-    "countryName": "Gibraltar",
-    "continent": "Europe",
-    "difficulty": 2
-  },
-  {
-    "countryCode": "GL",
-    "countryName": "Greenland",
-    "continent": "North America",
-    "difficulty": 3
-  },
-  {
-    "countryCode": "GP",
-    "countryName": "Guadeloupe",
-    "continent": "North America",
-    "difficulty": 2
-  },
-  {
-    "countryCode": "GU",
-    "countryName": "Guam",
-    "continent": "Oceania",
-    "difficulty": 3
-  },
-  {
-    "countryCode": "GG",
-    "countryName": "Guernsey",
-    "continent": "Europe",
-    "difficulty": 4
-  },
-  {
-    "countryCode": "HM",
-    "countryName": "Heard Island and McDonald Islands",
-    "continent": "Antarctica",
-    "difficulty": 4
-  },
-  {
-    "countryCode": "IM",
-    "countryName": "Isle of Man",
-    "continent": "Europe",
-    "difficulty": 3
-  },
-  {
-    "countryCode": "JE",
-    "countryName": "Jersey",
-    "continent": "Europe",
-    "difficulty": 3
-  },
-  {
-    "countryCode": "KP",
-    "countryName": "North Korea",
-    "continent": "Asia",
-    "difficulty": 2
-  },
-  {
-    "countryCode": "MS",
-    "countryName": "Montserrat",
-    "continent": "North America",
-    "difficulty": 5
-  },
-  {
-    "countryCode": "NU",
-    "countryName": "Niue",
-    "continent": "Oceania",
-    "difficulty": 5
-  },
-  {
-    "countryCode": "NF",
-    "countryName": "Norfolk Island",
-    "continent": "Oceania",
-    "difficulty": 5
-  },
-  {
-    "countryCode": "MP",
-    "countryName": "Northern Mariana Islands",
-    "continent": "Oceania",
-    "difficulty": 5
-  },
-  {
-    "countryCode": "PN",
-    "countryName": "Pitcairn Islands",
-    "continent": "Oceania",
-    "difficulty": 4
-  },
-  {
-    "countryCode": "BL",
-    "countryName": "Saint Barthélemy",
-    "continent": "North America",
-    "difficulty": 4
-  },
-  {
-    "countryCode": "MF",
-    "countryName": "Saint Martin",
-    "continent": "North America",
-    "difficulty": 4
-  },
-  {
-    "countryCode": "PM",
-    "countryName": "Saint Pierre and Miquelon",
-    "continent": "North America",
-    "difficulty": 4
-  },
-  {
-    "countryCode": "SX",
-    "countryName": "Sint Maarten",
-    "continent": "North America",
-    "difficulty": 4
-  },
-  {
-    "countryCode": "GS",
-    "countryName": "South Georgia and the South Sandwich Islands",
-    "continent": "Antarctica",
-    "difficulty": 4
-  },
-  {
-    "countryCode": "SJ",
-    "countryName": "Svalbard and Jan Mayen",
-    "continent": "Europe",
-    "difficulty": 3
-  },
-  {
-    "countryCode": "TK",
-    "countryName": "Tokelau",
-    "continent": "Oceania",
-    "difficulty": 4
-  },
-  {
-    "countryCode": "TC",
-    "countryName": "Turks and Caicos Islands",
-    "continent": "North America",
-    "difficulty": 5
-  },
-  {
-    "countryCode": "VG",
-    "countryName": "British Virgin Islands",
-    "continent": "North America",
-    "difficulty": 4
-  },
-  {
-    "countryCode": "VI",
-    "countryName": "U.S. Virgin Islands",
-    "continent": "North America",
-    "difficulty": 4
-  },
-  {
-    "countryCode": "WF",
-    "countryName": "Wallis and Futuna",
-    "continent": "Oceania",
-    "difficulty": 5
   }
 ]

@@ -6,6 +6,7 @@ type RouterParamList = {
   };
   multipleChoice: {
     name: Levels;
+    difficulty: number;
   };
 };
 

@@ -7,12 +7,15 @@ import stateStore from '@/state/store';
 import getCompletionDescription from '@/util/getCompletionDescription/getCompletionDescription';
 import { useEffect } from 'react';
 import NAME_MAP from '@/constants/nameMap';
-import { NavigationProps } from '@/types/navigation';
+import { NavigationProps, RootStackParamList } from '@/types/navigation';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import generateMultipleChoice from '@/util/generateMultipleChoice/generateMultipleChoice';
 
 const Difficulty = () => {
   const navigation = useNavigation<NavigationProps>();
   const userProgression = stateStore((state) => state.userProgress);
-  const { name } = useLocalSearchParams<RouterParamList['difficulty']>();
+  const route = useRoute<RouteProp<RootStackParamList, 'difficulty'>>();
+  const { name } = route.params;
   const progression = userProgression.games[NAME_MAP[name]];
 
   useEffect(() => {
@@ -36,6 +39,11 @@ const Difficulty = () => {
                 onPress={() =>
                   navigation.navigate('multipleChoice', {
                     name: levelData.name,
+                    difficulty: levelData.id,
+                    questions: generateMultipleChoice(
+                      levelData.id,
+                      levelData.length
+                    ),
                   })
                 }
               />
