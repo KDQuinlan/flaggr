@@ -1,6 +1,7 @@
 import { MAXIMUM_DIFFICULTY, MINIMUM_DIFFICULTY } from '@/constants/common';
 import countries from '../../assets/data/countries.json';
 import { type Country } from '../generateMultipleChoice/generateMultipleChoice';
+import shuffleArray from '../shuffleArray/shuffleArray';
 
 const generateMultipleChoiceAnswers = (
   correctAnswer: string,
@@ -32,7 +33,7 @@ const generateMultipleChoiceAnswers = (
 
   associatedAnswers.push(correctAnswer);
 
-  return associatedAnswers.sort(() => Math.random() - 0.5);
+  return shuffleArray(associatedAnswers);
 };
 
 export default generateMultipleChoiceAnswers;

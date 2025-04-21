@@ -1,4 +1,5 @@
 import countries from '../../assets/data/countries.json';
+import shuffleArray from '../shuffleArray/shuffleArray';
 
 export type Country = {
   countryCode: string;
@@ -15,7 +16,7 @@ const generateMultipleChoice = (
     (c: Country) => c.difficulty === difficulty
   );
 
-  const shuffled = countriesByDifficultyInput.sort(() => Math.random() - 0.5);
+  const shuffled = shuffleArray(countriesByDifficultyInput);
 
   return shuffled.slice(0, numberOfQuestions);
 };

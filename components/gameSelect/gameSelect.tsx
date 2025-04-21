@@ -1,24 +1,26 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   GestureResponderEvent,
+  Image,
 } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 import { gameSelectStyles as styles } from './gameSelect.styles';
 import en from '@/locales/en';
 import { colors } from '../colors';
+import StandardIcon from '@/assets/images/gamemode-standard.svg';
 
 // TODO - Update progressBar param to be react component
 
 type GameSelectProps = {
   title: string;
   description?: string;
-  icon?: string;
+  icon?: ReactElement;
   score?: string;
-  progressBar?: number;
+  progress?: number;
   onPress?: (event: GestureResponderEvent) => void;
 };
 
@@ -27,7 +29,7 @@ const GameSelect: React.FC<GameSelectProps> = ({
   description,
   icon,
   score,
-  progressBar,
+  progress,
   onPress,
 }) => {
   const isLocked = description === en.games.states.locked;
@@ -48,6 +50,10 @@ const GameSelect: React.FC<GameSelectProps> = ({
         color="green"
         style={styles.gameIcon}
       />
+      {/* <Image
+        style={{ height: 32, width: 32, marginRight: 15 }}
+        source={require('@/assets/images/gamemodeStandard/gamemode-standard.png')}
+      /> */}
       <View style={styles.textContainer}>
         <View style={styles.gameDetailsContainer}>
           <View>
@@ -60,9 +66,9 @@ const GameSelect: React.FC<GameSelectProps> = ({
           </View>
           {score && <Text style={styles.score}>{`${score}%`}</Text>}
         </View>
-        {progressBar !== null && progressBar !== undefined && (
+        {progress !== null && progress !== undefined && (
           <ProgressBar
-            progress={progressBar}
+            progress={progress}
             color="blue"
             style={styles.progressBar}
           />

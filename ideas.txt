@@ -26,3 +26,8 @@ const random10 = shuffled.slice(0, 10);
           {description}
         </Text>
         <ProgressBar progress={0.5} color="blue" style={styles.progressBar} /> */}
+
+
+TODO:
+
+Determine if declarations.d.ts and metro.config.js are required, and if SVGs will be used

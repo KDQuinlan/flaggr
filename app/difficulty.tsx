@@ -35,7 +35,7 @@ const Difficulty = () => {
               <GameSelect
                 title={levelData.name}
                 description={getCompletionDescription(levelData)}
-                progressBar={levelData.userScore}
+                progress={levelData.userScore}
                 onPress={() =>
                   navigation.navigate('multipleChoice', {
                     name: levelData.name,
