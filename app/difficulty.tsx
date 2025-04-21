@@ -1,6 +1,5 @@
-import { useLocalSearchParams, useNavigation } from 'expo-router';
+import { useNavigation } from 'expo-router';
 import { View, StyleSheet, SafeAreaView, FlatList } from 'react-native';
-import RouterParamList from './types';
 import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
 import stateStore from '@/state/store';

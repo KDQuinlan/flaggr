@@ -5,13 +5,11 @@ import {
   Text,
   TouchableOpacity,
   GestureResponderEvent,
-  Image,
 } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 import { gameSelectStyles as styles } from './gameSelect.styles';
 import en from '@/locales/en';
 import { colors } from '../colors';
-import StandardIcon from '@/assets/images/gamemode-standard.svg';
 
 // TODO - Update progressBar param to be react component
 
