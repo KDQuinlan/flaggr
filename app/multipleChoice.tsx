@@ -96,28 +96,6 @@ const MultipleChoice = () => {
                       ? 'green'
                       : 'red',
               }}
-              // onPress={() => {
-              //   setIsButtonDisabled(true);
-              //   setUserAnswer(item);
-              //   item === correctAnswer
-              //     ? setCorrectTotal(correctTotal + 1)
-              //     : setIncorrectTotal(incorrectTotal + 1);
-              //   setTimeout(() => {
-              //     console.log(correctTotal, incorrectTotal);
-              //     setUserAnswer(null);
-              //     isFinalQuestion
-              //       ? navigation.navigate('summary', {
-              //           difficulty: name,
-              //           gameResult: {
-              //             correct: correctTotal,
-              //             incorrect: incorrectTotal,
-              //           },
-              //         })
-              //       : setQuestionNumberIndex(questionNumberIndex + 1);
-              //     setAnswers(null);
-              //     setIsButtonDisabled(false);
-              //   }, 500);
-              // }}
               onPress={() => {
                 setIsButtonDisabled(true);
                 setUserAnswer(item);
