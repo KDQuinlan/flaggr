@@ -96,6 +96,28 @@ const MultipleChoice = () => {
                       ? 'green'
                       : 'red',
               }}
+              // onPress={() => {
+              //   setIsButtonDisabled(true);
+              //   setUserAnswer(item);
+              //   item === correctAnswer
+              //     ? setCorrectTotal(correctTotal + 1)
+              //     : setIncorrectTotal(incorrectTotal + 1);
+              //   setTimeout(() => {
+              //     console.log(correctTotal, incorrectTotal);
+              //     setUserAnswer(null);
+              //     isFinalQuestion
+              //       ? navigation.navigate('summary', {
+              //           difficulty: name,
+              //           gameResult: {
+              //             correct: correctTotal,
+              //             incorrect: incorrectTotal,
+              //           },
+              //         })
+              //       : setQuestionNumberIndex(questionNumberIndex + 1);
+              //     setAnswers(null);
+              //     setIsButtonDisabled(false);
+              //   }, 500);
+              // }}
               onPress={() => {
                 setIsButtonDisabled(true);
                 setUserAnswer(item);
@@ -108,6 +130,8 @@ const MultipleChoice = () => {
                   ? incorrectTotal
                   : incorrectTotal + 1;
 
+                console.log(newCorrectTotal, newIncorrectTotal);
+
                 setCorrectTotal(newCorrectTotal);
                 setIncorrectTotal(newIncorrectTotal);
 
@@ -115,11 +139,12 @@ const MultipleChoice = () => {
                   setUserAnswer(null);
 
                   if (isFinalQuestion) {
+                    setIsButtonDisabled(true);
                     navigation.navigate('summary', {
                       difficulty: name,
                       gameResult: {
-                        correct: correctTotal,
-                        incorrect: incorrectTotal,
+                        correct: newCorrectTotal,
+                        incorrect: newIncorrectTotal,
                       },
                     });
                   } else {
