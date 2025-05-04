@@ -19,6 +19,7 @@ export default function RootLayout() {
           name="index"
           options={{
             headerShown: false,
+            gestureEnabled: false,
           }}
         />
         <Stack.Screen
@@ -31,6 +32,14 @@ export default function RootLayout() {
           name="multipleChoice"
           options={{
             headerShown: true,
+          }}
+        />
+        <Stack.Screen
+          name="summary"
+          options={{
+            headerShown: true,
+            gestureEnabled: false,
+            headerBackVisible: false,
           }}
         />
       </Stack>

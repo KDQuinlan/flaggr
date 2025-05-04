@@ -1,5 +1,6 @@
 import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
+import useScreenInformation from '@/hooks/useScreenInformation';
 import en from '@/locales/en';
 import { NavigationProps } from '@/types/navigation';
 import { useNavigation } from 'expo-router';
@@ -12,8 +13,16 @@ import {
   StatusBar,
 } from 'react-native';
 
+// TODO - make mastery gamemode to go through specific continents/regions?
+
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  useScreenInformation({
+    screenTitle: 'Index',
+    gameMode: null,
+    difficulty: null,
+  });
+
   return (
     <SafeAreaView style={styles.rootContainer}>
       <ScrollView

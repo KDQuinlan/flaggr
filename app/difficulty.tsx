@@ -5,10 +5,11 @@ import GameSelect from '@/components/gameSelect/gameSelect';
 import stateStore from '@/state/store';
 import getCompletionDescription from '@/util/getCompletionDescription/getCompletionDescription';
 import { useEffect } from 'react';
-import NAME_MAP from '@/constants/nameMap';
+import { NAME_MAP } from '@/constants/mappers';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import generateMultipleChoice from '@/util/generateMultipleChoice/generateMultipleChoice';
+import useScreenSetup from '@/hooks/useScreenInformation';
 
 const Difficulty = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -16,6 +17,12 @@ const Difficulty = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'difficulty'>>();
   const { name } = route.params;
   const progression = userProgression.games[NAME_MAP[name]];
+
+  useScreenSetup({
+    screenTitle: 'Difficulty',
+    gameMode: NAME_MAP[name],
+    difficulty: null,
+  });
 
   useEffect(() => {
     navigation.setOptions({ title: name });
@@ -38,7 +45,7 @@ const Difficulty = () => {
                 onPress={() =>
                   navigation.navigate('multipleChoice', {
                     name: levelData.name,
-                    difficulty: levelData.id,
+                    difficultyId: levelData.id,
                     questions: generateMultipleChoice(
                       levelData.id,
                       levelData.length

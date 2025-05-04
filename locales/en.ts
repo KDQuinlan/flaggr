@@ -19,6 +19,6 @@ const en = {
       description: 'Quick-fire flag questions',
     },
   },
-};
+} as const;
 
 export default en;

@@ -14,6 +14,8 @@ import {
 import { ProgressBar } from 'react-native-paper';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/generateMultipleChoiceAnswers';
+import formatTime from '@/util/formatTime/formatTime';
+import useScreenInformation from '@/hooks/useScreenInformation';
 
 // On navigate to summary screen, remove last item in navigation stack
 // TODO - Add animation fading
@@ -21,10 +23,21 @@ import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/
 const MultipleChoice = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'multipleChoice'>>();
-  const { name, difficulty, questions } = route.params;
+  const { name, difficultyId, questions } = route.params;
+
+  useScreenInformation({
+    screenTitle: 'Multiple Choice',
+    gameMode: 'standard',
+    difficulty: name,
+  });
+
   const [questionNumberIndex, setQuestionNumberIndex] = useState<number>(0);
   const [userAnswer, setUserAnswer] = useState<string | null>(null);
   const [answers, setAnswers] = useState<string[] | null>(null);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
+  const [correctTotal, setCorrectTotal] = useState<number>(0);
+  const [incorrectTotal, setIncorrectTotal] = useState<number>(0);
+  const [timeElapsedInSeconds, setTimeElapsedInSeconds] = useState<number>(0);
 
   const answerLetters = ['A.', 'B.', 'C.', 'D.'];
   const correctAnswer = questions[questionNumberIndex].countryName;
@@ -34,12 +47,22 @@ const MultipleChoice = () => {
 
   !answers &&
     setAnswers(
-      generateMultipleChoiceAnswers(correctAnswer, difficulty, continent)
+      generateMultipleChoiceAnswers(correctAnswer, difficultyId, continent)
     );
 
   useEffect(() => {
-    navigation.setOptions({ title: name });
-  }, [navigation]);
+    navigation.setOptions({
+      title: name,
+      headerRight: () => <Text>{formatTime(timeElapsedInSeconds)}</Text>,
+    });
+  }, [navigation, timeElapsedInSeconds]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTimeElapsedInSeconds(timeElapsedInSeconds + 1);
+    }, 1000);
+  }, [timeElapsedInSeconds]);
+
   return (
     <SafeAreaView style={styles.rootContainer}>
       <ProgressBar
@@ -62,6 +85,7 @@ const MultipleChoice = () => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
             <TouchableOpacity
+              disabled={isButtonDisabled}
               activeOpacity={0.8}
               style={{
                 ...styles.answerBox,
@@ -73,13 +97,37 @@ const MultipleChoice = () => {
                       : 'red',
               }}
               onPress={() => {
+                setIsButtonDisabled(true);
                 setUserAnswer(item);
+
+                const isCorrect = item === correctAnswer;
+                const newCorrectTotal = isCorrect
+                  ? correctTotal + 1
+                  : correctTotal;
+                const newIncorrectTotal = isCorrect
+                  ? incorrectTotal
+                  : incorrectTotal + 1;
+
+                setCorrectTotal(newCorrectTotal);
+                setIncorrectTotal(newIncorrectTotal);
+
                 setTimeout(() => {
                   setUserAnswer(null);
-                  isFinalQuestion
-                    ? console.log('Navigate to summary screen')
-                    : setQuestionNumberIndex(questionNumberIndex + 1);
+
+                  if (isFinalQuestion) {
+                    navigation.navigate('summary', {
+                      difficulty: name,
+                      gameResult: {
+                        correct: correctTotal,
+                        incorrect: incorrectTotal,
+                      },
+                    });
+                  } else {
+                    setQuestionNumberIndex((prev) => prev + 1);
+                  }
+
                   setAnswers(null);
+                  setIsButtonDisabled(false);
                 }, 500);
               }}
             >
