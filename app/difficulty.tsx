@@ -2,14 +2,14 @@ import { useNavigation } from 'expo-router';
 import { View, StyleSheet, SafeAreaView, FlatList } from 'react-native';
 import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
-import stateStore from '@/state/store';
+import stateStore, { type ScreenInformation } from '@/state/store';
 import getCompletionDescription from '@/util/getCompletionDescription/getCompletionDescription';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { NAME_MAP } from '@/constants/mappers';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import generateMultipleChoice from '@/util/generateMultipleChoice/generateMultipleChoice';
-import useScreenSetup from '@/hooks/useScreenInformation';
+import useScreenInformation from '@/hooks/useScreenInformation';
 
 const Difficulty = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -18,11 +18,16 @@ const Difficulty = () => {
   const { name } = route.params;
   const progression = userProgression.games[NAME_MAP[name]];
 
-  useScreenSetup({
-    screenTitle: 'Difficulty',
-    gameMode: NAME_MAP[name],
-    difficulty: null,
-  });
+  const screenInformation: ScreenInformation = useMemo(
+    () => ({
+      screenTitle: 'Difficulty',
+      gameMode: NAME_MAP[name],
+      difficulty: null,
+    }),
+    []
+  );
+
+  useScreenInformation(screenInformation);
 
   useEffect(() => {
     navigation.setOptions({ title: name });
@@ -45,6 +50,7 @@ const Difficulty = () => {
                 onPress={() =>
                   navigation.navigate('multipleChoice', {
                     name: levelData.name,
+                    gameMode: NAME_MAP[name],
                     difficultyId: levelData.id,
                     questions: generateMultipleChoice(
                       levelData.id,

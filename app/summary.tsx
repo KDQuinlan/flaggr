@@ -1,28 +1,43 @@
-// TODO - make level icon transition from grey to coloured, and make it larger for a split second
 import { useNavigation } from 'expo-router';
 import { View, StyleSheet, SafeAreaView, Text } from 'react-native';
 import { colors } from '@/components/colors';
-import stateStore from '@/state/store';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import useScreenInformation from '@/hooks/useScreenInformation';
+import stateStore, { ScreenInformation } from '@/state/store';
+import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
 
 const Summary = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'summary'>>();
-  const screenInformation = stateStore((state) => state.screenInformation);
   const { difficulty, gameResult } = route.params;
   const { correct, incorrect } = gameResult;
 
-  useScreenInformation({ ...screenInformation, screenTitle: 'Summary' });
+  const resultPercentage =
+    (correct / (correct + incorrect)) * TO_PERCENTAGE_MULTIPLIER;
 
-  console.log(screenInformation);
+  const currentScreenInformation = stateStore(
+    (state) => state.screenInformation
+  );
+
+  const screenInformation: ScreenInformation = useMemo(
+    () => ({
+      screenTitle: 'Summary',
+      gameMode: currentScreenInformation.gameMode,
+      difficulty,
+    }),
+    [difficulty, currentScreenInformation.gameMode]
+  );
+
+  useScreenInformation(screenInformation);
 
   useEffect(() => {
-    navigation.setOptions({ title: `Summary - ${difficulty}` });
-  }, [navigation]);
+    navigation.setOptions({
+      title: `Summary - ${difficulty}`,
+    });
+  }, [navigation, difficulty]);
 
   const SummaryInfoRow = ({
     title,

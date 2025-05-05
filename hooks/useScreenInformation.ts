@@ -1,6 +1,5 @@
-// hooks/useScreenSetup.ts
 import { useFocusEffect } from '@react-navigation/native';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import stateStore, { type ScreenInformation } from '@/state/store';
 
 const useScreenInformation = (screenInformation: ScreenInformation) => {
@@ -8,10 +7,14 @@ const useScreenInformation = (screenInformation: ScreenInformation) => {
     (state) => state.setScreenInformation
   );
 
+  useEffect(() => {
+    setScreenInformation(screenInformation);
+  }, [screenInformation, setScreenInformation]);
+
   useFocusEffect(
     useCallback(() => {
       setScreenInformation(screenInformation);
-    }, [])
+    }, [screenInformation, setScreenInformation])
   );
 };
 

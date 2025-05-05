@@ -1,7 +1,7 @@
 import { colors } from '@/components/colors';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { useNavigation } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -15,6 +15,7 @@ import { ProgressBar } from 'react-native-paper';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/generateMultipleChoiceAnswers';
 import formatTime from '@/util/formatTime/formatTime';
+import stateStore, { type ScreenInformation } from '@/state/store';
 import useScreenInformation from '@/hooks/useScreenInformation';
 
 // On navigate to summary screen, remove last item in navigation stack
@@ -25,11 +26,16 @@ const MultipleChoice = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'multipleChoice'>>();
   const { name, difficultyId, questions } = route.params;
 
-  useScreenInformation({
-    screenTitle: 'Multiple Choice',
-    gameMode: 'standard',
-    difficulty: name,
-  });
+  const screenInformation: ScreenInformation = useMemo(
+    () => ({
+      screenTitle: 'Multiple Choice',
+      gameMode: 'standard',
+      difficulty: name,
+    }),
+    []
+  );
+
+  useScreenInformation(screenInformation);
 
   const [questionNumberIndex, setQuestionNumberIndex] = useState<number>(0);
   const [userAnswer, setUserAnswer] = useState<string | null>(null);
@@ -107,8 +113,6 @@ const MultipleChoice = () => {
                 const newIncorrectTotal = isCorrect
                   ? incorrectTotal
                   : incorrectTotal + 1;
-
-                console.log(newCorrectTotal, newIncorrectTotal);
 
                 setCorrectTotal(newCorrectTotal);
                 setIncorrectTotal(newIncorrectTotal);

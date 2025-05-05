@@ -1,4 +1,4 @@
-import { type Levels } from '@/state/secureStoreStructure';
+import { GameMode, type Levels } from '@/state/secureStoreStructure';
 import { type Country } from '@/util/generateMultipleChoice/generateMultipleChoice';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
@@ -21,7 +21,12 @@ export type GameResult = {
 export type RootStackParamList = {
   index: undefined;
   difficulty: { name: GameModeScreenNames };
-  multipleChoice: { name: Levels; difficultyId: number; questions: Country[] };
+  multipleChoice: {
+    name: Levels;
+    gameMode: GameMode;
+    difficultyId: number;
+    questions: Country[];
+  };
   summary: { difficulty: Levels; gameResult: GameResult };
 };
 
