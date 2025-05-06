@@ -39,7 +39,7 @@ export default function RootLayout() {
           options={{
             headerShown: true,
             gestureEnabled: false,
-            // headerBackVisible: false,
+            headerBackVisible: false,
           }}
         />
       </Stack>

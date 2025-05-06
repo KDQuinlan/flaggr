@@ -8,7 +8,7 @@ export type LevelData = {
   isInProgress: boolean;
   isLocked: boolean;
   userScore: number;
-  advancementRequirement: string;
+  advancementRequirement: number;
   length: number;
 };
 
@@ -30,7 +30,7 @@ export const defaultProgressionStructure: ProgressionStructure = {
         isInProgress: false,
         isLocked: false,
         userScore: 0,
-        advancementRequirement: '80%',
+        advancementRequirement: 80,
         length: 10,
       },
       levelTwo: {
@@ -40,7 +40,7 @@ export const defaultProgressionStructure: ProgressionStructure = {
         isInProgress: false,
         isLocked: true,
         userScore: 0,
-        advancementRequirement: '80%',
+        advancementRequirement: 80,
         length: 10,
       },
       levelThree: {
@@ -50,7 +50,7 @@ export const defaultProgressionStructure: ProgressionStructure = {
         isInProgress: false,
         isLocked: true,
         userScore: 0,
-        advancementRequirement: '80%',
+        advancementRequirement: 80,
         length: 10,
       },
       levelFour: {
@@ -60,7 +60,7 @@ export const defaultProgressionStructure: ProgressionStructure = {
         isInProgress: false,
         isLocked: true,
         userScore: 0,
-        advancementRequirement: '80%',
+        advancementRequirement: 80,
         length: 10,
       },
       levelFive: {
@@ -70,7 +70,7 @@ export const defaultProgressionStructure: ProgressionStructure = {
         isInProgress: false,
         isLocked: true,
         userScore: 0,
-        advancementRequirement: '80%',
+        advancementRequirement: 80,
         length: 10,
       },
     },

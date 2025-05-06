@@ -2,7 +2,7 @@ import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
 import useScreenInformation from '@/hooks/useScreenInformation';
 import en from '@/locales/en';
-import stateStore, { type ScreenInformation } from '@/state/store';
+import { type ScreenInformation } from '@/state/store';
 import { NavigationProps } from '@/types/navigation';
 import { useNavigation } from 'expo-router';
 import { useMemo } from 'react';
@@ -19,9 +19,6 @@ import {
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
-  const currentScreenInformation = stateStore(
-    (state) => state.screenInformation
-  );
   const screenInformation: ScreenInformation = useMemo(
     () => ({
       screenTitle: 'Index',
@@ -32,8 +29,6 @@ const HomeScreen = () => {
   );
 
   useScreenInformation(screenInformation);
-
-  console.log(currentScreenInformation);
 
   return (
     <SafeAreaView style={styles.rootContainer}>
