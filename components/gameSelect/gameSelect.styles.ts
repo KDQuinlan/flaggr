@@ -49,9 +49,9 @@ export const gameSelectStyles = StyleSheet.create({
   },
   score: {
     justifyContent: 'center',
-    alignSelf: 'center',
+    alignSelf: 'flex-end',
     color: colors.offBlack,
     fontWeight: 'bold',
-    fontSize: 24,
+    fontSize: 20,
   },
 });

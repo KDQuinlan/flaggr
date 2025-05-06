@@ -10,6 +10,7 @@ import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import generateMultipleChoice from '@/util/generateMultipleChoice/generateMultipleChoice';
 import useScreenInformation from '@/hooks/useScreenInformation';
+import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
 
 const Difficulty = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -46,7 +47,8 @@ const Difficulty = () => {
               <GameSelect
                 title={levelData.name}
                 description={getCompletionDescription(levelData)}
-                progress={levelData.userScore}
+                progress={levelData.userScore / TO_PERCENTAGE_MULTIPLIER}
+                score={levelData.userScore}
                 onPress={() =>
                   navigation.navigate('multipleChoice', {
                     name: levelData.name,

@@ -31,3 +31,29 @@ const random10 = shuffled.slice(0, 10);
 TODO:
 
 Determine if declarations.d.ts and metro.config.js are required, and if SVGs will be used
+
+      // const updatedProgression: ProgressionStructure = {
+      //   ...userProgression,
+      //   games: {
+      //     ...userProgression.games,
+      //     [screenInformation.gameMode!]: {
+      //       ...userProgression.games[screenInformation.gameMode!],
+      //       [LEVEL_MAP[difficulty]]: {
+      //         ...userProgression.games[screenInformation.gameMode!][
+      //           LEVEL_MAP[difficulty]
+      //         ],
+      //         isCompleted: true,
+      //         userScore: Math.max(progression.userScore, resultPercentage),
+      //       },
+      //       ...(userNextLevel &&
+      //         isAdvancementRequirementMet && {
+      //           [userNextLevel]: {
+      //             ...userProgression.games[screenInformation.gameMode!][
+      //               userNextLevel
+      //             ],
+      //             isLocked: false,
+      //           },
+      //         }),
+      //     },
+      //   },
+      // };

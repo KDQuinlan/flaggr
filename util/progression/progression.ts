@@ -1,6 +1,8 @@
 import { MAXIMUM_DIFFICULTY } from '@/constants/common';
 import { GameMode, ProgressionStructure } from '@/state/secureStoreStructure';
 
+// TODO - update from string
+
 const getNextLevelKey = (
   gameMode: GameMode,
   currentLevelId: number,

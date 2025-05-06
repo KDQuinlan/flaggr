@@ -17,7 +17,7 @@ type GameSelectProps = {
   title: string;
   description?: string;
   icon?: ReactElement;
-  score?: string;
+  score?: number;
   progress?: number;
   onPress?: (event: GestureResponderEvent) => void;
 };
@@ -62,7 +62,7 @@ const GameSelect: React.FC<GameSelectProps> = ({
               {description}
             </Text>
           </View>
-          {score && <Text style={styles.score}>{`${score}%`}</Text>}
+          {!!score && <Text style={styles.score}>{`${score}%`}</Text>}
         </View>
         {progress !== null && progress !== undefined && (
           <ProgressBar
