@@ -1,11 +1,11 @@
 export type GameMode = 'standard';
 export type Levels = 'Level 1' | 'Level 2' | 'Level 3' | 'Level 4' | 'Level 5';
-// export type LevelKeys =
-//   | 'levelOne'
-//   | 'levelTwo'
-//   | 'levelThree'
-//   | 'levelFour'
-//   | 'levelFive';
+export type LevelKeys =
+  | 'levelOne'
+  | 'levelTwo'
+  | 'levelThree'
+  | 'levelFour'
+  | 'levelFive';
 
 export type LevelData = {
   id: number;
@@ -18,7 +18,7 @@ export type LevelData = {
   length: number;
 };
 
-export type GameProgression = Record<string, LevelData>;
+export type GameProgression = Record<LevelKeys, LevelData>;
 
 export type ProgressionStructure = {
   games: {

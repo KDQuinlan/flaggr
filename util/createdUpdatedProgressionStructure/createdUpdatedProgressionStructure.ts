@@ -11,7 +11,7 @@ const createUpdatedProgressionStructure = (
   difficulty: Levels,
   isAdvancementRequirementMet: boolean,
   resultPercentage: number,
-  nextDifficulty: string | null
+  nextDifficulty: Levels | null
 ): ProgressionStructure => {
   const difficultyKey = LEVEL_MAP[difficulty];
   const nextDifficultyKey = nextDifficulty ? LEVEL_MAP[nextDifficulty] : null;
@@ -28,10 +28,10 @@ const createUpdatedProgressionStructure = (
           isCompleted: true,
           userScore: Math.max(currentLevel.userScore, resultPercentage),
         },
-        ...(nextDifficulty &&
+        ...(nextDifficultyKey &&
           isAdvancementRequirementMet && {
-            [nextDifficulty]: {
-              ...existingProgression.games[gameMode][nextDifficulty],
+            [nextDifficultyKey]: {
+              ...existingProgression.games[gameMode][nextDifficultyKey],
               isLocked: false,
             },
           }),

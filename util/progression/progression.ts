@@ -1,5 +1,9 @@
 import { MAXIMUM_DIFFICULTY } from '@/constants/common';
-import { GameMode, ProgressionStructure } from '@/state/secureStoreStructure';
+import {
+  GameMode,
+  Levels,
+  ProgressionStructure,
+} from '@/state/secureStoreStructure';
 
 // TODO - update from string
 
@@ -7,14 +11,15 @@ const getNextLevelKey = (
   gameMode: GameMode,
   currentLevelId: number,
   progression: ProgressionStructure
-): string | null => {
+): Levels | null => {
   if (currentLevelId === MAXIMUM_DIFFICULTY) return null;
 
   const gameProgression = progression.games[gameMode];
-  const nextLevelEntry = Object.entries(gameProgression).find(
-    ([_, levelData]) => levelData.id === currentLevelId + 1
+  const nextLevel = Object.values(gameProgression).find(
+    (levelData) => levelData.id === currentLevelId + 1
   );
-  return nextLevelEntry ? nextLevelEntry[0] : null;
+
+  return nextLevel ? nextLevel.name : null;
 };
 
 export default getNextLevelKey;

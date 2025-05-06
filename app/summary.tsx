@@ -14,11 +14,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import useScreenInformation from '@/hooks/useScreenInformation';
 import stateStore, { ScreenInformation } from '@/state/store';
 import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
-import {
-  LEVEL_MAP,
-  REVERSE_LEVEL_MAP,
-  REVERSE_NAME_MAP,
-} from '@/constants/mappers';
+import { LEVEL_MAP, REVERSE_NAME_MAP } from '@/constants/mappers';
 import getNextLevelKey from '@/util/progression/progression';
 import { ProgressionStructure } from '@/state/secureStoreStructure';
 import persistProgression from '@/util/persistProgression/persistProgression';
@@ -75,7 +71,9 @@ const Summary = () => {
   useEffect(() => {
     const hasUserUnlockedNextLevel =
       userNextLevel &&
-      userProgression.games[screenInformation.gameMode!][userNextLevel]
+      userProgression.games[screenInformation.gameMode!][
+        LEVEL_MAP[userNextLevel]
+      ]
         ? true
         : false;
 
@@ -137,7 +135,7 @@ const Summary = () => {
         {!hasUserUnlockedNextLevel &&
           userNextLevel &&
           isAdvancementRequirementMet && (
-            <Text>You've unlocked {REVERSE_LEVEL_MAP[userNextLevel]}</Text>
+            <Text>You've unlocked {LEVEL_MAP[userNextLevel]}</Text>
           )}
         <TouchableOpacity
           style={styles.buttonContainer}
