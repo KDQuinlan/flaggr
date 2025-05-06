@@ -15,7 +15,7 @@ import { ProgressBar } from 'react-native-paper';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/generateMultipleChoiceAnswers';
 import formatTime from '@/util/formatTime/formatTime';
-import stateStore, { type ScreenInformation } from '@/state/store';
+import { type ScreenInformation } from '@/state/store';
 import useScreenInformation from '@/hooks/useScreenInformation';
 
 // On navigate to summary screen, remove last item in navigation stack

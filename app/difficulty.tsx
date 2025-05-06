@@ -24,7 +24,7 @@ const Difficulty = () => {
       gameMode: NAME_MAP[name],
       difficulty: null,
     }),
-    []
+    [name]
   );
 
   useScreenInformation(screenInformation);

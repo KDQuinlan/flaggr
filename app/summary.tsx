@@ -1,4 +1,5 @@
 import { useNavigation } from 'expo-router';
+import * as SecureStore from 'expo-secure-store';
 import {
   View,
   StyleSheet,
@@ -13,14 +14,19 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import useScreenInformation from '@/hooks/useScreenInformation';
 import stateStore, { ScreenInformation } from '@/state/store';
-import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
-import { LEVEL_MAP, REVERSE_NAME_MAP } from '@/constants/mappers';
+import { STORAGE_KEY, TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
+import {
+  LEVEL_MAP,
+  REVERSE_LEVEL_MAP,
+  REVERSE_NAME_MAP,
+} from '@/constants/mappers';
 import getNextLevelKey from '@/util/progression/progression';
 
 const Summary = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'summary'>>();
   const userProgression = stateStore((state) => state.userProgress);
+  const setProgression = stateStore((state) => state.setProgression);
   const { difficulty, gameResult } = route.params;
   const { correct, incorrect } = gameResult;
 
@@ -50,6 +56,80 @@ const Summary = () => {
     progression.id,
     userProgression
   );
+
+  const isAdvancementRequirementMet =
+    resultPercentage >= progression.advancementRequirement ? true : false;
+
+  const isAlreadyCompleted = progression.isCompleted ? true : false;
+
+  useEffect(() => {
+    if (isAdvancementRequirementMet && !isAlreadyCompleted) {
+      const fetchSecureStore = async () => {
+        try {
+          const value = await SecureStore.getItemAsync(STORAGE_KEY);
+          console.log('Fetched from SecureStore:', value);
+        } catch (error) {
+          console.error('Error fetching from SecureStore:', error);
+        }
+      };
+      fetchSecureStore();
+    }
+  }, [isAdvancementRequirementMet, isAlreadyCompleted]);
+
+  useEffect(() => {
+    if (isAdvancementRequirementMet && !isAlreadyCompleted) {
+      const updatedProgression = {
+        ...userProgression,
+        games: {
+          ...userProgression.games,
+          [screenInformation.gameMode!]: {
+            ...userProgression.games[screenInformation.gameMode!],
+            [LEVEL_MAP[difficulty]]: {
+              ...userProgression.games[screenInformation.gameMode!][
+                LEVEL_MAP[difficulty]
+              ],
+              isCompleted: true,
+            },
+            ...(userNextLevel && {
+              [userNextLevel]: {
+                ...userProgression.games[screenInformation.gameMode!][
+                  userNextLevel
+                ],
+                isLocked: false,
+              },
+            }),
+          },
+        },
+      };
+
+      setProgression(updatedProgression);
+
+      console.log(
+        'Updated progression:',
+        updatedProgression.games.standard[userNextLevel!]?.isLocked
+      );
+
+      const persistProgression = async () => {
+        try {
+          await SecureStore.setItemAsync(
+            STORAGE_KEY,
+            JSON.stringify(updatedProgression)
+          );
+          console.log('Persisted to SecureStore:', updatedProgression);
+        } catch (error) {
+          console.error('Error persisting to SecureStore:', error);
+        }
+      };
+      persistProgression();
+    }
+  }, [
+    isAdvancementRequirementMet,
+    isAlreadyCompleted,
+    userNextLevel,
+    userProgression,
+    screenInformation.gameMode,
+    setProgression,
+  ]);
 
   const handleContinue = () => {
     navigation.reset({
@@ -93,6 +173,9 @@ const Summary = () => {
         <SummaryInfoRow title="Score" value={`${resultPercentage}%`} />
         <SummaryInfoRow title="Correct" value={correct} />
         <SummaryInfoRow title="Incorrect" value={incorrect} />
+        {userNextLevel && isAdvancementRequirementMet && (
+          <Text>You've unlocked {REVERSE_LEVEL_MAP[userNextLevel]}</Text>
+        )}
         <TouchableOpacity
           style={styles.buttonContainer}
           activeOpacity={0.8}
@@ -117,6 +200,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingVertical: 20,
     paddingHorizontal: 10,
+    marginTop: 20,
   },
   summaryInfoContainer: {
     width: '50%',
