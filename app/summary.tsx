@@ -7,60 +7,44 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { colors } from '@/components/colors';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect } from 'react';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import useScreenInformation from '@/hooks/useScreenInformation';
-import stateStore, { ScreenInformation } from '@/state/store';
+import stateStore from '@/state/store';
 import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
-import { LEVEL_MAP, REVERSE_NAME_MAP } from '@/constants/mappers';
+import { LEVEL_MAP } from '@/constants/mappers';
 import getNextLevelKey from '@/util/progression/progression';
 import { ProgressionStructure } from '@/state/secureStoreStructure';
 import persistProgression from '@/util/persistProgression/persistProgression';
 import createUpdatedProgressionStructure from '@/util/createdUpdatedProgressionStructure/createdUpdatedProgressionStructure';
+import { resetToDifficultyScreen } from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 
 const Summary = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'summary'>>();
   const userProgression = stateStore((state) => state.userProgress);
   const setProgression = stateStore((state) => state.setProgression);
-  const [isProgressionUpdated, setIsProgressionUpdated] =
-    useState<boolean>(false);
-  const [hasUserUnlockedNextLevel, setHasUserUnlockedNextLevel] =
-    useState<boolean>(false);
-  const { difficulty, gameResult } = route.params;
+  const { difficulty, gameMode, gameResult } = route.params;
   const { correct, incorrect } = gameResult;
-
-  const currentScreenInformation = stateStore(
-    (state) => state.screenInformation
-  );
-
-  const screenInformation: ScreenInformation = useMemo(
-    () => ({
-      screenTitle: 'Summary',
-      gameMode: currentScreenInformation.gameMode,
-      difficulty,
-    }),
-    [difficulty, currentScreenInformation.gameMode]
-  );
-
-  useScreenInformation(screenInformation);
 
   const resultPercentage =
     (correct / (correct + incorrect)) * TO_PERCENTAGE_MULTIPLIER;
 
-  const progression =
-    userProgression.games[screenInformation.gameMode!][LEVEL_MAP[difficulty]];
+  const progression = userProgression.games[gameMode][LEVEL_MAP[difficulty]];
 
   const userNextLevel = getNextLevelKey(
-    currentScreenInformation.gameMode!,
+    gameMode,
     progression.id,
     userProgression
   );
 
   const isAdvancementRequirementMet =
     resultPercentage >= progression.advancementRequirement;
+
+  const isNextLevelAlreadyUnlocked =
+    userNextLevel &&
+    !userProgression.games[gameMode][LEVEL_MAP[userNextLevel]].isLocked;
 
   useEffect(() => {
     navigation.setOptions({
@@ -69,44 +53,28 @@ const Summary = () => {
   }, [navigation, difficulty]);
 
   useEffect(() => {
-    const hasUserUnlockedNextLevel =
-      userNextLevel &&
-      userProgression.games[screenInformation.gameMode!][
-        LEVEL_MAP[userNextLevel]
-      ]
-        ? true
-        : false;
+    const updatedProgression: ProgressionStructure =
+      createUpdatedProgressionStructure(
+        userProgression,
+        gameMode,
+        difficulty,
+        isAdvancementRequirementMet,
+        resultPercentage,
+        userNextLevel
+      );
 
-    setHasUserUnlockedNextLevel(hasUserUnlockedNextLevel);
-
-    if (!isProgressionUpdated) {
-      const updatedProgression: ProgressionStructure =
-        createUpdatedProgressionStructure(
-          userProgression,
-          screenInformation.gameMode!,
-          difficulty,
-          isAdvancementRequirementMet,
-          resultPercentage,
-          userNextLevel
-        );
-
-      setProgression(updatedProgression);
-      persistProgression(updatedProgression);
-      setIsProgressionUpdated(true);
-    }
-  }, [userProgression, screenInformation.gameMode, difficulty]);
+    setProgression(updatedProgression);
+    persistProgression(updatedProgression);
+  }, [
+    gameMode,
+    difficulty,
+    resultPercentage,
+    userNextLevel,
+    isAdvancementRequirementMet,
+  ]);
 
   const handleContinue = () => {
-    navigation.reset({
-      index: 1,
-      routes: [
-        { name: 'index' },
-        {
-          name: 'difficulty',
-          params: { name: REVERSE_NAME_MAP[screenInformation.gameMode!] },
-        },
-      ],
-    });
+    resetToDifficultyScreen(navigation, gameMode);
   };
 
   const SummaryInfoRow = ({
@@ -132,11 +100,9 @@ const Summary = () => {
         <SummaryInfoRow title="Score" value={`${resultPercentage}%`} />
         <SummaryInfoRow title="Correct" value={correct} />
         <SummaryInfoRow title="Incorrect" value={incorrect} />
-        {!hasUserUnlockedNextLevel &&
-          userNextLevel &&
-          isAdvancementRequirementMet && (
-            <Text>You've unlocked {LEVEL_MAP[userNextLevel]}</Text>
-          )}
+        {isNextLevelAlreadyUnlocked && isAdvancementRequirementMet && (
+          <Text>You've unlocked {LEVEL_MAP[userNextLevel]}</Text>
+        )}
         <TouchableOpacity
           style={styles.buttonContainer}
           activeOpacity={0.8}
@@ -155,7 +121,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.offWhite,
   },
   summaryContainer: {
-    // flex: 1,
     backgroundColor: colors.white,
     alignItems: 'center',
     marginHorizontal: 20,

@@ -1,11 +1,8 @@
 import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
-import useScreenInformation from '@/hooks/useScreenInformation';
 import en from '@/locales/en';
-import { type ScreenInformation } from '@/state/store';
 import { NavigationProps } from '@/types/navigation';
 import { useNavigation } from 'expo-router';
-import { useMemo } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -19,16 +16,6 @@ import {
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
-  const screenInformation: ScreenInformation = useMemo(
-    () => ({
-      screenTitle: 'Index',
-      gameMode: null,
-      difficulty: null,
-    }),
-    []
-  );
-
-  useScreenInformation(screenInformation);
 
   return (
     <SafeAreaView style={styles.rootContainer}>

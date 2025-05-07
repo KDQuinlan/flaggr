@@ -1,7 +1,7 @@
 import { colors } from '@/components/colors';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { useNavigation } from 'expo-router';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -15,27 +15,13 @@ import { ProgressBar } from 'react-native-paper';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/generateMultipleChoiceAnswers';
 import formatTime from '@/util/formatTime/formatTime';
-import { type ScreenInformation } from '@/state/store';
-import useScreenInformation from '@/hooks/useScreenInformation';
 
-// On navigate to summary screen, remove last item in navigation stack
 // TODO - Add animation fading
 
 const MultipleChoice = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'multipleChoice'>>();
-  const { name, difficultyId, questions } = route.params;
-
-  const screenInformation: ScreenInformation = useMemo(
-    () => ({
-      screenTitle: 'Multiple Choice',
-      gameMode: 'standard',
-      difficulty: name,
-    }),
-    []
-  );
-
-  useScreenInformation(screenInformation);
+  const { difficulty, gameMode, difficultyId, questions } = route.params;
 
   const [questionNumberIndex, setQuestionNumberIndex] = useState<number>(0);
   const [userAnswer, setUserAnswer] = useState<string | null>(null);
@@ -58,7 +44,7 @@ const MultipleChoice = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: name,
+      title: difficulty,
       headerRight: () => <Text>{formatTime(timeElapsedInSeconds)}</Text>,
     });
   }, [navigation, timeElapsedInSeconds]);
@@ -123,7 +109,8 @@ const MultipleChoice = () => {
                   if (isFinalQuestion) {
                     setIsButtonDisabled(true);
                     navigation.navigate('summary', {
-                      difficulty: name,
+                      difficulty: difficulty,
+                      gameMode: gameMode,
                       gameResult: {
                         correct: newCorrectTotal,
                         incorrect: newIncorrectTotal,

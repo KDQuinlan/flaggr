@@ -2,14 +2,13 @@ import { useNavigation } from 'expo-router';
 import { View, StyleSheet, SafeAreaView, FlatList } from 'react-native';
 import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
-import stateStore, { type ScreenInformation } from '@/state/store';
+import stateStore from '@/state/store';
 import getCompletionDescription from '@/util/getCompletionDescription/getCompletionDescription';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { NAME_MAP } from '@/constants/mappers';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import generateMultipleChoice from '@/util/generateMultipleChoice/generateMultipleChoice';
-import useScreenInformation from '@/hooks/useScreenInformation';
 import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
 
 const Difficulty = () => {
@@ -18,17 +17,6 @@ const Difficulty = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'difficulty'>>();
   const { name } = route.params;
   const progression = userProgression.games[NAME_MAP[name]];
-
-  const screenInformation: ScreenInformation = useMemo(
-    () => ({
-      screenTitle: 'Difficulty',
-      gameMode: NAME_MAP[name],
-      difficulty: null,
-    }),
-    [name]
-  );
-
-  useScreenInformation(screenInformation);
 
   useEffect(() => {
     navigation.setOptions({ title: name });
@@ -51,7 +39,7 @@ const Difficulty = () => {
                 score={levelData.userScore}
                 onPress={() =>
                   navigation.navigate('multipleChoice', {
-                    name: levelData.name,
+                    difficulty: levelData.name,
                     gameMode: NAME_MAP[name],
                     difficultyId: levelData.id,
                     questions: generateMultipleChoice(

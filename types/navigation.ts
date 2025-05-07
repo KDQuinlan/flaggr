@@ -22,12 +22,12 @@ export type RootStackParamList = {
   index: undefined;
   difficulty: { name: GameModeScreenNames };
   multipleChoice: {
-    name: Levels;
+    difficulty: Levels;
     gameMode: GameMode;
     difficultyId: number;
     questions: Country[];
   };
-  summary: { difficulty: Levels; gameResult: GameResult };
+  summary: { difficulty: Levels; gameMode: GameMode; gameResult: GameResult };
 };
 
 export type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
