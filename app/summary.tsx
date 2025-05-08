@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { colors } from '@/components/colors';
-import { useEffect } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -19,6 +19,7 @@ import { ProgressionStructure } from '@/state/secureStoreStructure';
 import persistProgression from '@/util/persistProgression/persistProgression';
 import createUpdatedProgressionStructure from '@/util/createdUpdatedProgressionStructure/createdUpdatedProgressionStructure';
 import { resetToDifficultyScreen } from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
+import formatTime from '@/util/formatTime/formatTime';
 
 const Summary = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -26,25 +27,45 @@ const Summary = () => {
   const userProgression = stateStore((state) => state.userProgress);
   const setProgression = stateStore((state) => state.setProgression);
   const { difficulty, gameMode, gameResult } = route.params;
-  const { correct, incorrect } = gameResult;
+  const { correct, incorrect, highestStreak, timeTaken } = gameResult;
 
-  const resultPercentage =
-    (correct / (correct + incorrect)) * TO_PERCENTAGE_MULTIPLIER;
+  const resultPercentage = useMemo(
+    () =>
+      correct + incorrect > 0
+        ? (correct / (correct + incorrect)) * TO_PERCENTAGE_MULTIPLIER
+        : 0,
+    [correct, incorrect]
+  );
 
   const progression = userProgression.games[gameMode][LEVEL_MAP[difficulty]];
-
+  const initialProgressionRef = useRef(userProgression);
+  const isAdvancementRequirementMet =
+    resultPercentage >= progression.advancementRequirement;
   const userNextLevel = getNextLevelKey(
     gameMode,
     progression.id,
     userProgression
   );
 
-  const isAdvancementRequirementMet =
-    resultPercentage >= progression.advancementRequirement;
+  const initialIsNextLevelLocked = useMemo(
+    () =>
+      userNextLevel
+        ? initialProgressionRef.current.games[gameMode][
+            LEVEL_MAP[userNextLevel]
+          ].isLocked
+        : false,
+    [gameMode, difficulty, userNextLevel]
+  );
 
-  const isNextLevelAlreadyUnlocked =
-    userNextLevel &&
-    !userProgression.games[gameMode][LEVEL_MAP[userNextLevel]].isLocked;
+  const isNewHighScore = useMemo(
+    () =>
+      initialProgressionRef.current.games[gameMode][LEVEL_MAP[difficulty]]
+        .isCompleted &&
+      resultPercentage >
+        initialProgressionRef.current.games[gameMode][LEVEL_MAP[difficulty]]
+          .userScore,
+    [gameMode, difficulty, resultPercentage]
+  );
 
   useEffect(() => {
     navigation.setOptions({
@@ -71,6 +92,7 @@ const Summary = () => {
     resultPercentage,
     userNextLevel,
     isAdvancementRequirementMet,
+    setProgression,
   ]);
 
   const handleContinue = () => {
@@ -97,16 +119,27 @@ const Summary = () => {
         <Ionicons name="checkmark-circle" size={60} color="green" />
         <Text style={styles.subTitle}>Summary</Text>
 
-        <SummaryInfoRow title="Score" value={`${resultPercentage}%`} />
+        <SummaryInfoRow
+          title="Score"
+          value={`${resultPercentage.toFixed(1)}%`}
+        />
         <SummaryInfoRow title="Correct" value={correct} />
         <SummaryInfoRow title="Incorrect" value={incorrect} />
-        {isNextLevelAlreadyUnlocked && isAdvancementRequirementMet && (
-          <Text>You've unlocked {LEVEL_MAP[userNextLevel]}</Text>
-        )}
+        <SummaryInfoRow title="Highest streak" value={highestStreak} />
+        <SummaryInfoRow
+          title="Time taken"
+          value={formatTime(timeTaken, true)}
+        />
+        {initialIsNextLevelLocked &&
+          isAdvancementRequirementMet &&
+          userNextLevel && <Text>You've unlocked {userNextLevel}</Text>}
+        {isNewHighScore && <Text>New high score - {resultPercentage}%</Text>}
         <TouchableOpacity
           style={styles.buttonContainer}
           activeOpacity={0.8}
           onPress={handleContinue}
+          accessibilityLabel="Continue to difficulty selection"
+          accessibilityRole="button"
         >
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>

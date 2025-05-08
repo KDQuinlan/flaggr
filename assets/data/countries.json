@@ -48,12 +48,6 @@
     "difficulty": 5
   },
   {
-    "countryCode": "AQ",
-    "countryName": "Antarctica",
-    "continent": "Antarctica",
-    "difficulty": 2
-  },
-  {
     "countryCode": "AG",
     "countryName": "Antigua and Barbuda",
     "continent": "North America",
@@ -177,12 +171,6 @@
     "countryCode": "BW",
     "countryName": "Botswana",
     "continent": "Africa",
-    "difficulty": 5
-  },
-  {
-    "countryCode": "BV",
-    "countryName": "Bouvet Island",
-    "continent": "Antarctica",
     "difficulty": 5
   },
   {
@@ -405,7 +393,7 @@
     "countryCode": "GQ",
     "countryName": "Equatorial Guinea",
     "continent": "Africa",
-    "difficulty": 1
+    "difficulty": 3
   },
   {
     "countryCode": "ER",
@@ -472,12 +460,6 @@
     "countryName": "French Polynesia",
     "continent": "Oceania",
     "difficulty": 4
-  },
-  {
-    "countryCode": "TF",
-    "countryName": "French Southern and Antarctic Lands",
-    "continent": "Antarctica",
-    "difficulty": 5
   },
   {
     "countryCode": "GA",
@@ -580,12 +562,6 @@
     "countryName": "Haiti",
     "continent": "North America",
     "difficulty": 4
-  },
-  {
-    "countryCode": "HM",
-    "countryName": "Heard Island and McDonald Islands",
-    "continent": "Antarctica",
-    "difficulty": 5
   },
   {
     "countryCode": "HN",
@@ -1234,12 +1210,6 @@
     "countryName": "South Africa",
     "continent": "Africa",
     "difficulty": 1
-  },
-  {
-    "countryCode": "GS",
-    "countryName": "South Georgia and the South Sandwich Islands",
-    "continent": "Antarctica",
-    "difficulty": 5
   },
   {
     "countryCode": "SS",

@@ -1,5 +1,5 @@
 import { GameMode, type Levels } from '@/state/secureStoreStructure';
-import { type Country } from '@/util/generateMultipleChoice/generateMultipleChoice';
+import { type Country } from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export type GameModeScreenNames = 'Standard' | 'Rapid';
@@ -15,7 +15,8 @@ export type ScreenNames =
 export type GameResult = {
   correct: number;
   incorrect: number;
-  // highestStreak: number;
+  highestStreak: number;
+  timeTaken: number;
 };
 
 export type RootStackParamList = {

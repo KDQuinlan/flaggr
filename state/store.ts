@@ -1,11 +1,8 @@
 import { create } from 'zustand';
 import {
-  GameMode,
-  Levels,
   ProgressionStructure,
   defaultProgressionStructure,
 } from './secureStoreStructure';
-import { ScreenNames } from '@/types/navigation';
 
 type State = {
   isInitialised: boolean;

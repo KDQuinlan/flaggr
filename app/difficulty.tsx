@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { NAME_MAP } from '@/constants/mappers';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import generateMultipleChoice from '@/util/generateMultipleChoice/generateMultipleChoice';
+import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
 import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
 
 const Difficulty = () => {

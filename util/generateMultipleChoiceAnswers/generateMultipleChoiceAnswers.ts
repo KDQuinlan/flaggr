@@ -1,6 +1,6 @@
 import { MAXIMUM_DIFFICULTY, MINIMUM_DIFFICULTY } from '@/constants/common';
 import countries from '../../assets/data/countries.json';
-import { type Country } from '../generateMultipleChoice/generateMultipleChoice';
+import { type Country } from '../generateMultipleChoiceQuestions/generateMultipleChoice';
 import shuffleArray from '../shuffleArray/shuffleArray';
 
 const generateMultipleChoiceAnswers = (

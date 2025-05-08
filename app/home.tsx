@@ -16,7 +16,6 @@ import {
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
-
   return (
     <SafeAreaView style={styles.rootContainer}>
       <ScrollView

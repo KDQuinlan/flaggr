@@ -1,7 +1,7 @@
 import { colors } from '@/components/colors';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { useNavigation } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -15,6 +15,8 @@ import { ProgressBar } from 'react-native-paper';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/generateMultipleChoiceAnswers';
 import formatTime from '@/util/formatTime/formatTime';
+import { ANSWER_LETTERS } from '@/constants/common';
+import determineButtonColor from '@/util/determineButtonColor/determineButtonColor';
 
 // TODO - Add animation fading
 
@@ -29,13 +31,14 @@ const MultipleChoice = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const [correctTotal, setCorrectTotal] = useState<number>(0);
   const [incorrectTotal, setIncorrectTotal] = useState<number>(0);
+  const [streak, setStreak] = useState<number>(0);
+  const [highestStreak, setHighestStreak] = useState<number>(0);
   const [timeElapsedInSeconds, setTimeElapsedInSeconds] = useState<number>(0);
+  const timeRef = useRef<number>(0);
 
-  const answerLetters = ['A.', 'B.', 'C.', 'D.'];
   const correctAnswer = questions[questionNumberIndex].countryName;
   const continent = questions[questionNumberIndex].continent;
-  const isFinalQuestion =
-    questionNumberIndex + 1 === questions.length ? true : false;
+  const isFinalQuestion = questionNumberIndex + 1 === questions.length;
 
   !answers &&
     setAnswers(
@@ -43,17 +46,21 @@ const MultipleChoice = () => {
     );
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      timeRef.current += 100;
+      if (timeRef.current % 1000 === 0) {
+        setTimeElapsedInSeconds(timeRef.current / 1000);
+      }
+    }, 100);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
     navigation.setOptions({
       title: difficulty,
       headerRight: () => <Text>{formatTime(timeElapsedInSeconds)}</Text>,
     });
   }, [navigation, timeElapsedInSeconds]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setTimeElapsedInSeconds(timeElapsedInSeconds + 1);
-    }, 1000);
-  }, [timeElapsedInSeconds]);
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -81,12 +88,11 @@ const MultipleChoice = () => {
               activeOpacity={0.8}
               style={{
                 ...styles.answerBox,
-                backgroundColor:
-                  item !== userAnswer
-                    ? colors.white
-                    : userAnswer === correctAnswer
-                      ? 'green'
-                      : 'red',
+                backgroundColor: determineButtonColor(
+                  item,
+                  userAnswer,
+                  correctAnswer
+                ),
               }}
               onPress={() => {
                 setIsButtonDisabled(true);
@@ -99,9 +105,17 @@ const MultipleChoice = () => {
                 const newIncorrectTotal = isCorrect
                   ? incorrectTotal
                   : incorrectTotal + 1;
+                const newStreakTotal = isCorrect ? streak + 1 : 0;
+                const newHighestStreakTotal = Math.max(
+                  highestStreak,
+                  newStreakTotal
+                );
+                const newTimeTaken = timeRef.current / 1000;
 
                 setCorrectTotal(newCorrectTotal);
                 setIncorrectTotal(newIncorrectTotal);
+                setStreak(newStreakTotal);
+                setHighestStreak(newHighestStreakTotal);
 
                 setTimeout(() => {
                   setUserAnswer(null);
@@ -109,11 +123,13 @@ const MultipleChoice = () => {
                   if (isFinalQuestion) {
                     setIsButtonDisabled(true);
                     navigation.navigate('summary', {
-                      difficulty: difficulty,
-                      gameMode: gameMode,
+                      difficulty,
+                      gameMode,
                       gameResult: {
                         correct: newCorrectTotal,
                         incorrect: newIncorrectTotal,
+                        highestStreak: newHighestStreakTotal,
+                        timeTaken: newTimeTaken,
                       },
                     });
                   } else {
@@ -125,7 +141,9 @@ const MultipleChoice = () => {
                 }, 500);
               }}
             >
-              <Text style={styles.answerOrderText}>{answerLetters[index]}</Text>
+              <Text style={styles.answerOrderText}>
+                {ANSWER_LETTERS[index]}
+              </Text>
               <Text style={styles.answerText}>{item}</Text>
             </TouchableOpacity>
           )}

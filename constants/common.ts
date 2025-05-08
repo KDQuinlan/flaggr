@@ -5,3 +5,4 @@ export const MINIMUM_DIFFICULTY = 1;
 export const MAXIMUM_DIFFICULTY = 5;
 
 export const TO_PERCENTAGE_MULTIPLIER = 100;
+export const ANSWER_LETTERS = ['A.', 'B.', 'C.', 'D.'];
