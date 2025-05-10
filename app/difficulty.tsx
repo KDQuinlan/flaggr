@@ -35,8 +35,16 @@ const Difficulty = () => {
               <GameSelect
                 title={levelData.name}
                 description={getCompletionDescription(levelData)}
-                progress={levelData.userScore / TO_PERCENTAGE_MULTIPLIER}
-                score={levelData.userScore}
+                progress={
+                  name === 'Rapid'
+                    ? levelData.userScore / levelData.advancementRequirement
+                    : levelData.userScore / TO_PERCENTAGE_MULTIPLIER
+                }
+                score={
+                  name === 'Rapid'
+                    ? `${levelData.userScore}`
+                    : `${levelData.userScore}%`
+                }
                 onPress={() =>
                   navigation.navigate('multipleChoice', {
                     difficulty: levelData.name,

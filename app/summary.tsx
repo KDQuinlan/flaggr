@@ -29,13 +29,14 @@ const Summary = () => {
   const { difficulty, gameMode, gameResult } = route.params;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;
 
-  const resultPercentage = useMemo(
-    () =>
-      correct + incorrect > 0
-        ? (correct / (correct + incorrect)) * TO_PERCENTAGE_MULTIPLIER
-        : 0,
-    [correct, incorrect]
-  );
+  const resultPercentage = useMemo(() => {
+    if (gameMode === 'rapid') {
+      return correct;
+    }
+    return correct + incorrect > 0
+      ? (correct / (correct + incorrect)) * TO_PERCENTAGE_MULTIPLIER
+      : 0;
+  }, [correct, incorrect, gameMode]);
 
   const progression = userProgression.games[gameMode][LEVEL_MAP[difficulty]];
   const initialProgressionRef = useRef(userProgression);
@@ -58,7 +59,7 @@ const Summary = () => {
             LEVEL_MAP[userNextLevel]
           ].isLocked
         : false,
-    [gameMode, difficulty, userNextLevel]
+    [gameMode, userNextLevel]
   );
 
   const isNewHighScore = useMemo(
@@ -124,8 +125,12 @@ const Summary = () => {
         <Text style={styles.subTitle}>Summary</Text>
 
         <SummaryInfoRow
-          title={timeTaken ? 'Score' : 'Accuracy'}
-          value={`${resultPercentage.toFixed(1)}%`}
+          title="Score"
+          value={
+            gameMode === 'rapid'
+              ? resultPercentage.toString()
+              : `${resultPercentage.toFixed(1)}%`
+          }
         />
         <SummaryInfoRow title="Correct" value={correct} />
         <SummaryInfoRow title="Incorrect" value={incorrect} />
@@ -139,13 +144,21 @@ const Summary = () => {
         {initialIsNextLevelLocked &&
           isAdvancementRequirementMet &&
           userNextLevel && <Text>You've unlocked {userNextLevel}</Text>}
-        {isNewHighScore && <Text>New high score - {resultPercentage}%</Text>}
+        {isNewHighScore && (
+          <Text>
+            New high score -{' '}
+            {gameMode === 'rapid'
+              ? resultPercentage
+              : `${resultPercentage.toFixed(1)}%`}
+          </Text>
+        )}
         {userNextLevelProgression &&
           userNextLevelProgression.isLocked &&
           !isAdvancementRequirementMet && (
             <Text>
               To unlock {userNextLevel}, you need a score of{' '}
-              {userNextLevelProgression.advancementRequirement}%
+              {userNextLevelProgression.advancementRequirement}
+              {gameMode === 'rapid' ? '' : '%'}
             </Text>
           )}
         <TouchableOpacity
