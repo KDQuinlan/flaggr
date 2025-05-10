@@ -15,15 +15,16 @@ import { ProgressBar } from 'react-native-paper';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/generateMultipleChoiceAnswers';
 import formatTime from '@/util/formatTime/formatTime';
-import { ANSWER_LETTERS } from '@/constants/common';
+import { ANSWER_LETTERS, RAPID_TIME_ALLOWANCE_IN_S } from '@/constants/common';
 import determineButtonColor from '@/util/determineButtonColor/determineButtonColor';
+import { LEVEL_TO_DIFFICULTY_ID_MAP } from '@/constants/mappers';
 
 // TODO - Add animation fading
 
 const MultipleChoice = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'multipleChoice'>>();
-  const { difficulty, gameMode, difficultyId, questions } = route.params;
+  const { difficulty, gameMode, questions } = route.params;
 
   const [questionNumberIndex, setQuestionNumberIndex] = useState<number>(0);
   const [userAnswer, setUserAnswer] = useState<string | null>(null);
@@ -33,34 +34,67 @@ const MultipleChoice = () => {
   const [incorrectTotal, setIncorrectTotal] = useState<number>(0);
   const [streak, setStreak] = useState<number>(0);
   const [highestStreak, setHighestStreak] = useState<number>(0);
-  const [timeElapsedInSeconds, setTimeElapsedInSeconds] = useState<number>(0);
-  const timeRef = useRef<number>(0);
+  const [timeElapsedInSeconds, setTimeElapsedInSeconds] = useState<number>(
+    gameMode === 'rapid' ? RAPID_TIME_ALLOWANCE_IN_S : 0
+  );
+  const timeRef = useRef<number>(
+    gameMode === 'rapid' ? RAPID_TIME_ALLOWANCE_IN_S * 1000 : 0
+  );
+  const correctTotalRef = useRef<number>(0);
+  const incorrectTotalRef = useRef<number>(0);
+  const highestStreakRef = useRef<number>(0);
 
   const correctAnswer = questions[questionNumberIndex].countryName;
   const continent = questions[questionNumberIndex].continent;
   const isFinalQuestion = questionNumberIndex + 1 === questions.length;
+  const isGameCountingUp = gameMode === 'standard';
 
-  !answers &&
-    setAnswers(
-      generateMultipleChoiceAnswers(correctAnswer, difficultyId, continent)
-    );
+  useEffect(() => {
+    correctTotalRef.current = correctTotal;
+    incorrectTotalRef.current = incorrectTotal;
+    highestStreakRef.current = highestStreak;
+  }, [correctTotal, incorrectTotal, highestStreak]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      timeRef.current += 100;
-      if (timeRef.current % 1000 === 0) {
-        setTimeElapsedInSeconds(timeRef.current / 1000);
+      timeRef.current += isGameCountingUp ? 100 : -100;
+      if (timeRef.current % 1000 === 0 || timeRef.current <= 0) {
+        setTimeElapsedInSeconds(
+          isGameCountingUp
+            ? timeRef.current / 1000
+            : Math.max(timeRef.current / 1000, 0)
+        );
+      }
+      if (!isGameCountingUp && timeRef.current <= 0) {
+        navigation.navigate('summary', {
+          difficulty,
+          gameMode,
+          gameResult: {
+            correct: correctTotalRef.current,
+            incorrect: incorrectTotalRef.current,
+            highestStreak: highestStreakRef.current,
+          },
+        });
       }
     }, 100);
     return () => clearInterval(interval);
-  }, []);
+  }, [navigation, isGameCountingUp]);
 
   useEffect(() => {
     navigation.setOptions({
       title: difficulty,
-      headerRight: () => <Text>{formatTime(timeElapsedInSeconds)}</Text>,
+      headerRight: () => <Text>{formatTime(timeElapsedInSeconds, false)}</Text>,
     });
   }, [navigation, timeElapsedInSeconds]);
+
+  !answers &&
+    setAnswers(
+      generateMultipleChoiceAnswers(
+        correctAnswer,
+        LEVEL_TO_DIFFICULTY_ID_MAP[difficulty],
+        continent
+      )
+    );
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -110,7 +144,9 @@ const MultipleChoice = () => {
                   highestStreak,
                   newStreakTotal
                 );
-                const newTimeTaken = timeRef.current / 1000;
+                const newTimeTaken = isGameCountingUp
+                  ? timeRef.current / 1000
+                  : RAPID_TIME_ALLOWANCE_IN_S - timeRef.current / 1000;
 
                 setCorrectTotal(newCorrectTotal);
                 setIncorrectTotal(newIncorrectTotal);

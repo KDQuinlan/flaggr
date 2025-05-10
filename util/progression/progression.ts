@@ -5,8 +5,6 @@ import {
   ProgressionStructure,
 } from '@/state/secureStoreStructure';
 
-// TODO - update from string
-
 const getNextLevelKey = (
   gameMode: GameMode,
   currentLevelId: number,

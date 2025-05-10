@@ -1,12 +1,14 @@
 import { GameMode, LevelKeys, Levels } from '@/state/secureStoreStructure';
 import { GameModeScreenNames } from '@/types/navigation';
 
-export const NAME_MAP: Record<string, GameMode> = {
+export const NAME_MAP: Record<GameModeScreenNames, GameMode> = {
   Standard: 'standard',
+  Rapid: 'rapid',
 };
 
 export const REVERSE_NAME_MAP: Record<GameMode, GameModeScreenNames> = {
   standard: 'Standard',
+  rapid: 'Rapid',
 };
 
 export const LEVEL_MAP: Record<Levels, LevelKeys> = {
@@ -17,10 +19,10 @@ export const LEVEL_MAP: Record<Levels, LevelKeys> = {
   'Level 5': 'levelFive',
 };
 
-export const REVERSE_LEVEL_MAP: Record<LevelKeys, Levels> = {
-  levelOne: 'Level 1',
-  levelTwo: 'Level 2',
-  levelThree: 'Level 3',
-  levelFour: 'Level 4',
-  levelFive: 'Level 5',
+export const LEVEL_TO_DIFFICULTY_ID_MAP: Record<Levels, number> = {
+  'Level 1': 1,
+  'Level 2': 2,
+  'Level 3': 3,
+  'Level 4': 4,
+  'Level 5': 5,
 };

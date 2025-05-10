@@ -1,4 +1,4 @@
-export type GameMode = 'standard';
+export type GameMode = 'standard' | 'rapid';
 export type Levels = 'Level 1' | 'Level 2' | 'Level 3' | 'Level 4' | 'Level 5';
 export type LevelKeys =
   | 'levelOne'
@@ -78,6 +78,58 @@ export const defaultProgressionStructure: ProgressionStructure = {
         userScore: 0,
         advancementRequirement: 80,
         length: 10,
+      },
+    },
+    rapid: {
+      levelOne: {
+        id: 1,
+        name: 'Level 1',
+        isCompleted: false,
+        isInProgress: false,
+        isLocked: false,
+        userScore: 0,
+        advancementRequirement: 15,
+        length: 999,
+      },
+      levelTwo: {
+        id: 2,
+        name: 'Level 2',
+        isCompleted: false,
+        isInProgress: false,
+        isLocked: true,
+        userScore: 0,
+        advancementRequirement: 15,
+        length: 999,
+      },
+      levelThree: {
+        id: 3,
+        name: 'Level 3',
+        isCompleted: false,
+        isInProgress: false,
+        isLocked: true,
+        userScore: 0,
+        advancementRequirement: 15,
+        length: 999,
+      },
+      levelFour: {
+        id: 4,
+        name: 'Level 4',
+        isCompleted: false,
+        isInProgress: false,
+        isLocked: true,
+        userScore: 0,
+        advancementRequirement: 15,
+        length: 999,
+      },
+      levelFive: {
+        id: 5,
+        name: 'Level 5',
+        isCompleted: false,
+        isInProgress: false,
+        isLocked: true,
+        userScore: 0,
+        advancementRequirement: 15,
+        length: 999,
       },
     },
   },

@@ -41,7 +41,6 @@ const Difficulty = () => {
                   navigation.navigate('multipleChoice', {
                     difficulty: levelData.name,
                     gameMode: NAME_MAP[name],
-                    difficultyId: levelData.id,
                     questions: generateMultipleChoice(
                       levelData.id,
                       levelData.length

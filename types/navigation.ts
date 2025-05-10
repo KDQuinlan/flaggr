@@ -16,8 +16,10 @@ export type GameResult = {
   correct: number;
   incorrect: number;
   highestStreak: number;
-  timeTaken: number;
+  timeTaken?: number;
 };
+
+// TODO - Extend multipleChoice to handle custom
 
 export type RootStackParamList = {
   index: undefined;
@@ -25,7 +27,6 @@ export type RootStackParamList = {
   multipleChoice: {
     difficulty: Levels;
     gameMode: GameMode;
-    difficultyId: number;
     questions: Country[];
   };
   summary: { difficulty: Levels; gameMode: GameMode; gameResult: GameResult };

@@ -11,8 +11,6 @@ import { gameSelectStyles as styles } from './gameSelect.styles';
 import en from '@/locales/en';
 import { colors } from '../colors';
 
-// TODO - Update progressBar param to be react component
-
 type GameSelectProps = {
   title: string;
   description?: string;
@@ -62,7 +60,9 @@ const GameSelect: React.FC<GameSelectProps> = ({
               {description}
             </Text>
           </View>
-          {!!score && <Text style={styles.score}>{`${score}%`}</Text>}
+          {description === 'Completed' && (
+            <Text style={styles.score}>{`${score}%`}</Text>
+          )}
         </View>
         {progress !== null && progress !== undefined && (
           <ProgressBar

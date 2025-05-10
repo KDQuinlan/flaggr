@@ -41,11 +41,15 @@ const Summary = () => {
   const initialProgressionRef = useRef(userProgression);
   const isAdvancementRequirementMet =
     resultPercentage >= progression.advancementRequirement;
+
   const userNextLevel = getNextLevelKey(
     gameMode,
     progression.id,
     userProgression
   );
+
+  const userNextLevelProgression =
+    userNextLevel && userProgression.games[gameMode][LEVEL_MAP[userNextLevel]];
 
   const initialIsNextLevelLocked = useMemo(
     () =>
@@ -120,20 +124,30 @@ const Summary = () => {
         <Text style={styles.subTitle}>Summary</Text>
 
         <SummaryInfoRow
-          title="Score"
+          title={timeTaken ? 'Score' : 'Accuracy'}
           value={`${resultPercentage.toFixed(1)}%`}
         />
         <SummaryInfoRow title="Correct" value={correct} />
         <SummaryInfoRow title="Incorrect" value={incorrect} />
         <SummaryInfoRow title="Highest streak" value={highestStreak} />
-        <SummaryInfoRow
-          title="Time taken"
-          value={formatTime(timeTaken, true)}
-        />
+        {timeTaken && (
+          <SummaryInfoRow
+            title="Time taken"
+            value={formatTime(timeTaken, true)}
+          />
+        )}
         {initialIsNextLevelLocked &&
           isAdvancementRequirementMet &&
           userNextLevel && <Text>You've unlocked {userNextLevel}</Text>}
         {isNewHighScore && <Text>New high score - {resultPercentage}%</Text>}
+        {userNextLevelProgression &&
+          userNextLevelProgression.isLocked &&
+          !isAdvancementRequirementMet && (
+            <Text>
+              To unlock {userNextLevel}, you need a score of{' '}
+              {userNextLevelProgression.advancementRequirement}%
+            </Text>
+          )}
         <TouchableOpacity
           style={styles.buttonContainer}
           activeOpacity={0.8}
