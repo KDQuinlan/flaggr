@@ -18,6 +18,7 @@ import formatTime from '@/util/formatTime/formatTime';
 import { ANSWER_LETTERS, RAPID_TIME_ALLOWANCE_IN_S } from '@/constants/common';
 import determineButtonColor from '@/util/determineButtonColor/determineButtonColor';
 import { LEVEL_TO_DIFFICULTY_ID_MAP } from '@/constants/mappers';
+import React from 'react';
 
 // TODO - Add animation fading
 

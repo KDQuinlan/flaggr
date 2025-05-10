@@ -3,6 +3,7 @@ import GameSelect from '@/components/gameSelect/gameSelect';
 import en from '@/locales/en';
 import { NavigationProps } from '@/types/navigation';
 import { useNavigation } from 'expo-router';
+import React from 'react';
 import {
   SafeAreaView,
   ScrollView,

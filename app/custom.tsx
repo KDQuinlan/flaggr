@@ -1,4 +1,5 @@
 import { colors } from '@/components/colors';
+import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 
 const Custom = () => {

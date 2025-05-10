@@ -10,6 +10,7 @@ import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
 import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
+import React from 'react';
 
 const Difficulty = () => {
   const navigation = useNavigation<NavigationProps>();
