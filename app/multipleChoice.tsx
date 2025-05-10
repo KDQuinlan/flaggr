@@ -20,8 +20,6 @@ import determineButtonColor from '@/util/determineButtonColor/determineButtonCol
 import { LEVEL_TO_DIFFICULTY_ID_MAP } from '@/constants/mappers';
 import React from 'react';
 
-// TODO - Add animation fading
-
 const MultipleChoice = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'multipleChoice'>>();
@@ -166,7 +164,8 @@ const MultipleChoice = () => {
                         correct: newCorrectTotal,
                         incorrect: newIncorrectTotal,
                         highestStreak: newHighestStreakTotal,
-                        timeTaken: newTimeTaken,
+                        timeTaken:
+                          gameMode === 'standard' ? newTimeTaken : undefined,
                       },
                     });
                   } else {

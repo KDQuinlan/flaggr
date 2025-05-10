@@ -8,6 +8,8 @@ export type Country = {
   difficulty: number;
 };
 
+// TODO - Extend to handle custom i.e difficulty -> []number
+
 const generateMultipleChoice = (
   difficulty: number,
   numberOfQuestions: number

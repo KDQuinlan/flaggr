@@ -18,9 +18,17 @@ const en = {
       name: 'Rapid',
       description: 'Quick-fire flag questions',
     },
+    mastery: {
+      name: 'Mastery',
+      description: 'The ultimate Flaggr test',
+    },
     custom: {
       name: 'Custom',
       description: 'Custom Flaggr experience',
+    },
+    index: {
+      name: 'Index',
+      description: 'Flag information',
     },
   },
 } as const;

@@ -20,6 +20,8 @@ type GameSelectProps = {
   onPress?: (event: GestureResponderEvent) => void;
 };
 
+// TODO - Add image props
+
 const GameSelect: React.FC<GameSelectProps> = ({
   title,
   description,
