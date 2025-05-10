@@ -39,6 +39,11 @@ const HomeScreen = () => {
             navigation.navigate('difficulty', { name: en.games.rapid.name })
           }
         />
+        <GameSelect
+          title={en.games.custom.name}
+          description={en.games.custom.description}
+          onPress={() => navigation.navigate('custom')}
+        />
       </ScrollView>
     </SafeAreaView>
   );

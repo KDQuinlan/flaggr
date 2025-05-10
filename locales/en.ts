@@ -18,6 +18,10 @@ const en = {
       name: 'Rapid',
       description: 'Quick-fire flag questions',
     },
+    custom: {
+      name: 'Custom',
+      description: 'Custom Flaggr experience',
+    },
   },
 } as const;
 

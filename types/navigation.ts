@@ -2,7 +2,7 @@ import { GameMode, type Levels } from '@/state/secureStoreStructure';
 import { type Country } from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-export type GameModeScreenNames = 'Standard' | 'Rapid';
+export type GameModeScreenNames = 'Standard' | 'Rapid' | 'custom';
 export type GameTypeScreenNames = 'Multiple Choice';
 
 export type ScreenNames =
@@ -29,6 +29,7 @@ export type RootStackParamList = {
     gameMode: GameMode;
     questions: Country[];
   };
+  custom: undefined;
   summary: { difficulty: Levels; gameMode: GameMode; gameResult: GameResult };
 };
 
