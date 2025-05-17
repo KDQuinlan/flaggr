@@ -8,15 +8,14 @@ export type Country = {
   difficulty: number;
 };
 
-// TODO - Extend to handle custom i.e difficulty -> []number
-
 const generateMultipleChoice = (
-  difficulty: number,
+  difficulty: number | number[],
   numberOfQuestions: number
 ): Country[] => {
-  const countriesByDifficultyInput = countries.filter(
-    (c: Country) => c.difficulty === difficulty
-  );
+  const countriesByDifficultyInput =
+    typeof difficulty === 'number'
+      ? countries.filter((c: Country) => c.difficulty === difficulty)
+      : countries.filter((c: Country) => difficulty.includes(c.difficulty));
 
   const shuffled = shuffleArray(countriesByDifficultyInput);
 
