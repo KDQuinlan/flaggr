@@ -1,3 +1,4 @@
+import React from 'react';
 import { colors } from '@/components/colors';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { useNavigation } from 'expo-router';
@@ -18,7 +19,7 @@ import formatTime from '@/util/formatTime/formatTime';
 import { ANSWER_LETTERS, RAPID_TIME_ALLOWANCE_IN_S } from '@/constants/common';
 import determineButtonColor from '@/util/determineButtonColor/determineButtonColor';
 import { LEVEL_TO_DIFFICULTY_ID_MAP } from '@/constants/mappers';
-import React from 'react';
+import flags from '@/assets/images/flags';
 
 const MultipleChoice = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -95,6 +96,9 @@ const MultipleChoice = () => {
       )
     );
 
+  const FlagComponent =
+    flags[questions[questionNumberIndex].countryCode.toLowerCase()];
+
   return (
     <SafeAreaView style={styles.rootContainer}>
       <ProgressBar
@@ -103,12 +107,10 @@ const MultipleChoice = () => {
         style={styles.progressBar}
       />
       <View style={styles.flagContainer}>
-        <Image
-          source={{
-            uri: `https://flagcdn.com/w320/${questions[questionNumberIndex].countryCode.toLowerCase()}.png`,
-          }}
-          style={styles.image}
-          resizeMode="contain"
+        <FlagComponent
+          width="100%"
+          height="100%"
+          preserveAspectRatio="xMidYMid meet"
         />
       </View>
       <View style={styles.answersContainer}>
