@@ -3,9 +3,8 @@ import { colors } from '../colors';
 
 // TODO - refactor for smaller screen sizes
 
-export const gameSelectStyles = StyleSheet.create({
+export const difficultySelectStyles = StyleSheet.create({
   gameModeContainer: {
-    backgroundColor: colors.white,
     marginHorizontal: 20,
     marginTop: 25,
     borderRadius: 10,
@@ -41,5 +40,18 @@ export const gameSelectStyles = StyleSheet.create({
     color: colors.lightBlack,
     marginTop: 4,
     flexWrap: 'wrap',
+  },
+  progressBar: {
+    marginTop: 5,
+    height: 5,
+    borderRadius: 10,
+    width: '100%',
+  },
+  score: {
+    justifyContent: 'center',
+    alignSelf: 'flex-end',
+    color: colors.offBlack,
+    fontWeight: 'bold',
+    fontSize: 20,
   },
 });

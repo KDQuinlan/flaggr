@@ -1,0 +1,99 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
+import React, { ReactElement } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  GestureResponderEvent,
+} from 'react-native';
+import { ProgressBar } from 'react-native-paper';
+import { difficultySelectStyles as styles } from './difficultySelect.styles';
+import en from '@/locales/en';
+import { colors } from '../colors';
+import { LEVEL_TO_FLAG_AMOUNT_MAP } from '@/constants/mappers';
+import { Levels } from '@/state/secureStoreStructure';
+
+type DifficultySelectProps = {
+  title: Levels;
+  description: string;
+  gameMode: string;
+  icon?: ReactElement;
+  score: number;
+  progress: number;
+  advancementRequirement: number;
+  onPress: (event: GestureResponderEvent) => void;
+};
+
+const DifficultySelect: React.FC<DifficultySelectProps> = ({
+  title,
+  description,
+  gameMode,
+  icon,
+  score,
+  progress,
+  advancementRequirement,
+  onPress,
+}) => {
+  const isLocked = description === en.games.states.locked;
+
+  const hasRapidOverbar =
+    gameMode === 'Rapid' && score > advancementRequirement;
+
+  const overProgress =
+    (score - advancementRequirement) /
+    (LEVEL_TO_FLAG_AMOUNT_MAP[title] - score);
+
+  return (
+    <TouchableOpacity
+      style={{
+        ...styles.gameModeContainer,
+        backgroundColor: isLocked ? colors.offWhite : colors.white,
+      }}
+      onPress={onPress}
+      activeOpacity={0.8}
+      disabled={isLocked}
+    >
+      <Ionicons
+        name="checkmark-circle"
+        size={32}
+        color="green"
+        style={styles.gameIcon}
+      />
+      {/* <Image
+        style={{ height: 32, width: 32, marginRight: 15 }}
+        source={require('@/assets/images/gamemodeStandard/gamemode-standard.png')}
+      /> */}
+      <View style={styles.textContainer}>
+        <View style={styles.gameDetailsContainer}>
+          <View>
+            <Text style={styles.title} numberOfLines={2} adjustsFontSizeToFit>
+              {title}
+            </Text>
+            <Text style={styles.description} numberOfLines={3}>
+              {description}
+            </Text>
+          </View>
+          {description === 'Completed' && (
+            <Text style={styles.score}>
+              {gameMode === 'Rapid' ? score : `${score}%`}
+            </Text>
+          )}
+        </View>
+        {score !== null && score !== undefined && advancementRequirement && (
+          <ProgressBar
+            progress={hasRapidOverbar ? overProgress : progress}
+            color={
+              hasRapidOverbar ? colors.legendaryOrange : colors.bluePrimary
+            }
+            style={{
+              ...styles.progressBar,
+              ...(hasRapidOverbar && { backgroundColor: colors.bluePrimary }),
+            }}
+          />
+        )}
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+export default DifficultySelect;

@@ -11,4 +11,7 @@ export const colors = {
   // Blues
   bluePrimary: '#0073E6',
   blueSecondary: '#0082D3',
+
+  // Oranges
+  legendaryOrange: '#FCB100',
 };

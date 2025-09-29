@@ -1,5 +1,12 @@
 import { GameMode, LevelKeys, Levels } from '@/state/secureStoreStructure';
 import { GameModeScreenNames } from '@/types/navigation';
+import {
+  LEVEL_FIVE_FLAGS_AMOUNT,
+  LEVEL_FOUR_FLAGS_AMOUNT,
+  LEVEL_ONE_FLAGS_AMOUNT,
+  LEVEL_THREE_FLAGS_AMOUNT,
+  LEVEL_TWO_FLAGS_AMOUNT,
+} from './common';
 
 export const NAME_MAP: Record<GameModeScreenNames, GameMode> = {
   Standard: 'standard',
@@ -25,4 +32,12 @@ export const LEVEL_TO_DIFFICULTY_ID_MAP: Record<Levels, number> = {
   'Level 3': 3,
   'Level 4': 4,
   'Level 5': 5,
+};
+
+export const LEVEL_TO_FLAG_AMOUNT_MAP: Record<Levels, number> = {
+  'Level 1': LEVEL_ONE_FLAGS_AMOUNT,
+  'Level 2': LEVEL_TWO_FLAGS_AMOUNT,
+  'Level 3': LEVEL_THREE_FLAGS_AMOUNT,
+  'Level 4': LEVEL_FOUR_FLAGS_AMOUNT,
+  'Level 5': LEVEL_FIVE_FLAGS_AMOUNT,
 };

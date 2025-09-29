@@ -6,38 +6,27 @@ import {
   TouchableOpacity,
   GestureResponderEvent,
 } from 'react-native';
-import { ProgressBar } from 'react-native-paper';
 import { gameSelectStyles as styles } from './gameSelect.styles';
 import en from '@/locales/en';
-import { colors } from '../colors';
 
 type GameSelectProps = {
   title: string;
-  description?: string;
+  description: string;
   icon?: ReactElement;
-  score?: string;
-  progress?: number;
-  onPress?: (event: GestureResponderEvent) => void;
+  onPress: (event: GestureResponderEvent) => void;
 };
-
-// TODO - Add image props
 
 const GameSelect: React.FC<GameSelectProps> = ({
   title,
   description,
   icon,
-  score,
-  progress,
   onPress,
 }) => {
   const isLocked = description === en.games.states.locked;
 
   return (
     <TouchableOpacity
-      style={{
-        ...styles.gameModeContainer,
-        backgroundColor: isLocked ? colors.offWhite : colors.white,
-      }}
+      style={styles.gameModeContainer}
       onPress={onPress}
       activeOpacity={0.8}
       disabled={isLocked}
@@ -62,17 +51,7 @@ const GameSelect: React.FC<GameSelectProps> = ({
               {description}
             </Text>
           </View>
-          {description === 'Completed' && (
-            <Text style={styles.score}>{score}</Text>
-          )}
         </View>
-        {progress !== null && progress !== undefined && (
-          <ProgressBar
-            progress={progress}
-            color="blue"
-            style={styles.progressBar}
-          />
-        )}
       </View>
     </TouchableOpacity>
   );
