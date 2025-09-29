@@ -46,6 +46,7 @@ export const gameSelectStyles = StyleSheet.create({
     height: 5,
     borderRadius: 10,
     width: '100%',
+    backgroundColor: 'red',
   },
   score: {
     justifyContent: 'center',
