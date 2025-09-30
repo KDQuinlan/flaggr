@@ -95,10 +95,10 @@ const MultipleChoice = () => {
           }
         }
       }
-    }, 250);
+    }, 1000);
 
     return () => clearInterval(interval);
-  }, [isGameCountingUp, gameMode, navigation, difficulty]);
+  }, [isGameCountingUp, gameMode, navigation, difficulty, timeLimit]);
 
   useEffect(() => {
     navigation.setOptions({

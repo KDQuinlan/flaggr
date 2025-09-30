@@ -1,7 +1,7 @@
 import { colors } from '@/components/colors';
 import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
 import { VALID_REGIONS } from '@/constants/common';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -11,26 +11,30 @@ import {
 } from 'react-native';
 
 const CustomScreen = () => {
+  const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
+
   return (
     <SafeAreaView style={styles.rootContainer}>
       <View>
         <Text style={{ alignSelf: 'center', fontSize: 24, fontWeight: 'bold' }}>
           Modifiers
         </Text>
-        <Text>Region(s)</Text>
-        <ModifierMultiSelect varient="regions" modifier={VALID_REGIONS} />
-        <Text>Time</Text>
+        <Text style={styles.subheaderText}>Region(s)</Text>
+        <ModifierMultiSelect
+          varient="regions"
+          modifier={VALID_REGIONS}
+          onChange={setSelectedRegions}
+        />
+        <Text style={styles.subheaderText}>Time</Text>
       </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          disabled={true}
-          activeOpacity={0.8}
-          accessibilityLabel="Continue to difficulty selection"
-          accessibilityRole="button"
-        >
-          <Text>Start</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        style={styles.button}
+        activeOpacity={0.8}
+        accessibilityLabel="Continue to difficulty selection"
+        accessibilityRole="button"
+      >
+        <Text style={styles.buttonText}>Start</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -39,14 +43,13 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     backgroundColor: colors.white,
-    paddingVertical: 20,
+    paddingTop: 20,
+    paddingBottom: 30,
     justifyContent: 'space-between',
   },
-  buttonContainer: {
+  button: {
     backgroundColor: colors.offWhite,
-    paddingHorizontal: 20,
     paddingVertical: 10,
-    marginTop: 20,
     borderRadius: 5,
     width: 150,
     justifyContent: 'center',
@@ -57,6 +60,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 6,
     elevation: 4,
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: colors.black,
+  },
+  subheaderText: {
+    paddingBottom: 10,
+    paddingLeft: 10,
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: colors.blueSecondary,
   },
 });
 

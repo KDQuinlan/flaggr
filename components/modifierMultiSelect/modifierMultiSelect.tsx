@@ -1,11 +1,5 @@
-import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native';
 import { colors } from '@/components/colors';
 
 type ModifierMultiSelectVarients = 'regions' | 'quizType';
@@ -13,38 +7,52 @@ type ModifierMultiSelectVarients = 'regions' | 'quizType';
 type ModifierMultiSelectProps = {
   varient: ModifierMultiSelectVarients;
   modifier: string[];
+  onChange?: (selected: string[]) => void;
 };
 
 const ModifierMultiSelect: React.FC<ModifierMultiSelectProps> = ({
   varient,
   modifier,
+  onChange,
 }) => {
-  // TODO - test responsive screen size scaling using dynamic equal height
-  // const [maxHeight, setMaxHeight] = React.useState(50);
+  const [selected, setSelected] = useState<string[]>([]);
+
+  const toggleModifier = (modifierKey: string) => {
+    setSelected((prev) => {
+      const newSelection = prev.includes(modifierKey)
+        ? prev.filter((m) => m !== modifierKey)
+        : [...prev, modifierKey];
+      onChange?.(newSelection);
+      return newSelection;
+    });
+  };
 
   return (
     <FlatList
-      data={Object.entries(modifier)}
-      keyExtractor={([modifierKey]) => modifierKey}
+      data={modifier}
+      keyExtractor={(item) => item}
       numColumns={2}
-      style={{ flexGrow: 0 }}
+      style={{ flexGrow: 0, paddingBottom: 20 }}
       contentContainerStyle={{ paddingHorizontal: 12 }}
       columnWrapperStyle={{ justifyContent: 'space-between', marginBottom: 12 }}
       renderItem={({ item }) => {
-        const [modifierKey, modifierData] = item;
+        const isSelected = selected.includes(item);
         return (
           <TouchableOpacity
-            // onLayout={(e) => {
-            //   const { height } = e.nativeEvent.layout;
-            //   setMaxHeight((prev) => Math.max(prev, height));
-            // }}
-            style={styles.button}
+            style={[styles.button, isSelected && styles.buttonSelected]}
             activeOpacity={0.8}
-            onPress={() => console.log('Press')}
-            accessibilityLabel="Continue to difficulty selection"
+            onPress={() => toggleModifier(item)}
+            accessibilityLabel={`Toggle ${item}`}
             accessibilityRole="button"
           >
-            <Text style={{ textAlign: 'center' }}>{modifierData}</Text>
+            <Text
+              style={[
+                styles.buttonText,
+                isSelected && styles.buttonTextSelected,
+              ]}
+            >
+              {item}
+            </Text>
           </TouchableOpacity>
         );
       }}
@@ -65,6 +73,20 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 6,
     elevation: 4,
+  },
+  buttonSelected: {
+    backgroundColor: colors.bluePrimary,
+    shadowOpacity: 0,
+    elevation: 0,
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: colors.black,
+    fontSize: 16,
+  },
+  buttonTextSelected: {
+    color: colors.white,
+    fontWeight: 'bold',
   },
 });
 

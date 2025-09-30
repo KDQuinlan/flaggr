@@ -24,6 +24,8 @@ type DifficultySelectProps = {
   onPress: (event: GestureResponderEvent) => void;
 };
 
+// TODO - remove hardcoded usage of 'rapid'
+
 const DifficultySelect: React.FC<DifficultySelectProps> = ({
   title,
   description,
@@ -37,7 +39,7 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
   const isLocked = description === en.games.states.locked;
 
   const hasRapidOverbar =
-    gameMode === 'Rapid' && score > advancementRequirement;
+    gameMode === 'rapid' && score > advancementRequirement;
 
   const overProgress =
     (score - advancementRequirement) /
@@ -75,7 +77,7 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
           </View>
           {description === 'Completed' && (
             <Text style={styles.score}>
-              {gameMode === 'Rapid' ? score : `${score}%`}
+              {gameMode === 'rapid' ? score : `${score}%`}
             </Text>
           )}
         </View>
