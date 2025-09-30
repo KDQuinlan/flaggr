@@ -11,10 +11,12 @@ const en = {
       perfected: 'Perfected',
     },
     standard: {
+      id: 'standard',
       name: 'Standard',
       description: 'One flag, four choices',
     },
     rapid: {
+      id: 'rapid',
       name: 'Rapid',
       description: 'Quick-fire flag questions',
     },
@@ -23,6 +25,7 @@ const en = {
       description: 'The ultimate Flaggr test',
     },
     custom: {
+      id: 'custom',
       name: 'Custom',
       description: 'Custom Flaggr experience',
     },

@@ -1,5 +1,4 @@
-import { GameMode, LevelKeys, Levels } from '@/state/secureStoreStructure';
-import { GameModeScreenNames } from '@/types/navigation';
+import { LevelKeys, Levels } from '@/state/secureStoreStructure';
 import {
   LEVEL_FIVE_FLAGS_AMOUNT,
   LEVEL_FOUR_FLAGS_AMOUNT,
@@ -7,16 +6,6 @@ import {
   LEVEL_THREE_FLAGS_AMOUNT,
   LEVEL_TWO_FLAGS_AMOUNT,
 } from './common';
-
-export const NAME_MAP: Record<GameModeScreenNames, GameMode> = {
-  Standard: 'standard',
-  Rapid: 'rapid',
-};
-
-export const REVERSE_NAME_MAP: Record<GameMode, GameModeScreenNames> = {
-  standard: 'Standard',
-  rapid: 'Rapid',
-};
 
 export const LEVEL_MAP: Record<Levels, LevelKeys> = {
   'Level 1': 'levelOne',

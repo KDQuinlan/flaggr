@@ -18,11 +18,17 @@ export type LevelData = {
   length: number;
 };
 
+export type CustomData = {
+  highScore: number;
+};
+
 export type GameProgression = Record<LevelKeys, LevelData>;
 
 export type ProgressionStructure = {
   games: {
-    [key in GameMode]: GameProgression;
+    standard: GameProgression;
+    rapid: GameProgression;
+    custom: CustomData;
   };
 };
 
@@ -131,6 +137,9 @@ export const defaultProgressionStructure: ProgressionStructure = {
         advancementRequirement: 15,
         length: 999,
       },
+    },
+    custom: {
+      highScore: 0,
     },
   },
 };

@@ -1,5 +1,4 @@
 import type { NavigationProps } from '@/types/navigation';
-import { REVERSE_NAME_MAP } from '@/constants/mappers';
 import { GameMode } from '@/state/secureStoreStructure';
 
 export const resetToDifficultyScreen = (
@@ -13,7 +12,7 @@ export const resetToDifficultyScreen = (
       {
         name: 'difficulty',
         params: {
-          name: REVERSE_NAME_MAP[gameMode],
+          name: gameMode,
         },
       },
     ],

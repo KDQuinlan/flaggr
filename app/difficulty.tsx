@@ -5,7 +5,6 @@ import GameSelect from '@/components/gameSelect/gameSelect';
 import stateStore from '@/state/store';
 import getCompletionDescription from '@/util/getCompletionDescription/getCompletionDescription';
 import { useEffect } from 'react';
-import { NAME_MAP } from '@/constants/mappers';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
@@ -17,11 +16,11 @@ const Difficulty = () => {
   const navigation = useNavigation<NavigationProps>();
   const userProgression = stateStore((state) => state.userProgress);
   const route = useRoute<RouteProp<RootStackParamList, 'difficulty'>>();
-  const { name } = route.params;
-  const progression = userProgression.games[NAME_MAP[name]];
+  const { id } = route.params;
+  const progression = userProgression.games[id];
 
   useEffect(() => {
-    navigation.setOptions({ title: name });
+    navigation.setOptions({ title: id });
   }, [navigation]);
 
   return (
@@ -37,10 +36,11 @@ const Difficulty = () => {
               <DifficultySelect
                 title={levelData.name}
                 description={getCompletionDescription(levelData)}
-                gameMode={name}
+                // TODO - confirm gamemode id prop
+                gameMode={id}
                 advancementRequirement={levelData.advancementRequirement}
                 progress={
-                  name === 'Rapid'
+                  id === 'rapid'
                     ? levelData.userScore / levelData.advancementRequirement
                     : levelData.userScore / TO_PERCENTAGE_MULTIPLIER
                 }
@@ -48,7 +48,7 @@ const Difficulty = () => {
                 onPress={() =>
                   navigation.navigate('multipleChoice', {
                     difficulty: levelData.name,
-                    gameMode: NAME_MAP[name],
+                    gameMode: id,
                     questions: generateMultipleChoice(
                       levelData.id,
                       levelData.length

@@ -30,14 +30,18 @@ const HomeScreen = () => {
           title={en.games.standard.name}
           description={en.games.standard.description}
           onPress={() =>
-            navigation.navigate('difficulty', { name: en.games.standard.name })
+            navigation.navigate('difficulty', {
+              id: en.games.standard.id,
+            })
           }
         />
         <GameSelect
           title={en.games.rapid.name}
           description={en.games.rapid.description}
           onPress={() =>
-            navigation.navigate('difficulty', { name: en.games.rapid.name })
+            navigation.navigate('difficulty', {
+              id: en.games.rapid.id,
+            })
           }
         />
         <GameSelect
