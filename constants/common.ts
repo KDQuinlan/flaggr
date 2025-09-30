@@ -4,6 +4,9 @@ export const VERSION_KEY = 1;
 export const MINIMUM_DIFFICULTY = 1;
 export const MAXIMUM_DIFFICULTY = 5;
 
+export const MINIMUM_CUSTOM_TIME_LIMIT_SECONDS = 30;
+export const MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS = 240;
+
 export const LEVEL_ONE_FLAGS_AMOUNT = 37;
 export const LEVEL_TWO_FLAGS_AMOUNT = 40;
 export const LEVEL_THREE_FLAGS_AMOUNT = 57;

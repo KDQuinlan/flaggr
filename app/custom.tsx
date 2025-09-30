@@ -1,6 +1,11 @@
+import Slider from '@react-native-community/slider';
 import { colors } from '@/components/colors';
 import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
-import { VALID_REGIONS } from '@/constants/common';
+import {
+  MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS,
+  MINIMUM_CUSTOM_TIME_LIMIT_SECONDS,
+  VALID_REGIONS,
+} from '@/constants/common';
 import React, { useState } from 'react';
 import {
   SafeAreaView,
@@ -12,6 +17,12 @@ import {
 
 const CustomScreen = () => {
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
+  const [timeLimit, setTimeLimit] = useState<number>(
+    MINIMUM_CUSTOM_TIME_LIMIT_SECONDS
+  );
+
+  console.log(timeLimit);
+  // TODO - remove decimal potential from slider
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -26,6 +37,12 @@ const CustomScreen = () => {
           onChange={setSelectedRegions}
         />
         <Text style={styles.subheaderText}>Time</Text>
+        <Slider
+          style={{ width: '60%', alignSelf: 'center' }}
+          minimumValue={MINIMUM_CUSTOM_TIME_LIMIT_SECONDS}
+          maximumValue={MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS}
+          onValueChange={(val) => setTimeLimit(val)}
+        />
       </View>
       <TouchableOpacity
         style={styles.button}
