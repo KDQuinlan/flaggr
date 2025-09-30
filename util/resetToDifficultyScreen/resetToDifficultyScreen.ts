@@ -1,22 +1,8 @@
-import type {
-  DifficultyScreenGameIds,
-  NavigationProps,
-} from '@/types/navigation';
+import type { NavigationProps } from '@/types/navigation';
+import { StackActions } from '@react-navigation/native';
 
-export const resetToDifficultyScreen = (
-  navigation: NavigationProps,
-  gameMode: DifficultyScreenGameIds
-) => {
-  navigation.reset({
-    index: 1,
-    routes: [
-      { name: 'index' },
-      {
-        name: 'difficulty',
-        params: {
-          id: gameMode,
-        },
-      },
-    ],
-  });
+export const resetToDifficultyScreen = (navigation: NavigationProps) => {
+  const state = navigation.getState();
+
+  navigation.dispatch(StackActions.pop(state.routes.length - 2));
 };

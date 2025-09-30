@@ -102,7 +102,7 @@ const Summary = () => {
   ]);
 
   const handleContinue = () => {
-    resetToDifficultyScreen(navigation, gameMode);
+    resetToDifficultyScreen(navigation);
   };
 
   const SummaryInfoRow = ({
