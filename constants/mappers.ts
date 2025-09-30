@@ -15,12 +15,12 @@ export const LEVEL_MAP: Record<Levels, LevelKeys> = {
   'Level 5': 'levelFive',
 };
 
-export const LEVEL_TO_DIFFICULTY_ID_MAP: Record<Levels, number> = {
-  'Level 1': 1,
-  'Level 2': 2,
-  'Level 3': 3,
-  'Level 4': 4,
-  'Level 5': 5,
+export const DIFFICULTY_ID_TO_LEVEL_MAP: Record<number, Levels> = {
+  1: 'Level 1',
+  2: 'Level 2',
+  3: 'Level 3',
+  4: 'Level 4',
+  5: 'Level 5',
 };
 
 export const LEVEL_TO_FLAG_AMOUNT_MAP: Record<Levels, number> = {

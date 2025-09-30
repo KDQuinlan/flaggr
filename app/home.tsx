@@ -32,6 +32,7 @@ const HomeScreen = () => {
           onPress={() =>
             navigation.navigate('difficulty', {
               id: en.games.standard.id,
+              title: en.games.standard.name,
             })
           }
         />
@@ -41,6 +42,7 @@ const HomeScreen = () => {
           onPress={() =>
             navigation.navigate('difficulty', {
               id: en.games.rapid.id,
+              title: en.games.rapid.name,
             })
           }
         />

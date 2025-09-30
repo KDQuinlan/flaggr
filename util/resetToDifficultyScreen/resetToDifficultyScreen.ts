@@ -14,7 +14,7 @@ export const resetToDifficultyScreen = (
       {
         name: 'difficulty',
         params: {
-          name: gameMode,
+          id: gameMode,
         },
       },
     ],

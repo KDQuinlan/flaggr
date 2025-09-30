@@ -1,14 +1,16 @@
 import { useNavigation } from 'expo-router';
 import { View, StyleSheet, SafeAreaView, FlatList } from 'react-native';
 import { colors } from '@/components/colors';
-import GameSelect from '@/components/gameSelect/gameSelect';
 import stateStore from '@/state/store';
 import getCompletionDescription from '@/util/getCompletionDescription/getCompletionDescription';
 import { useEffect } from 'react';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
-import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
+import {
+  RAPID_TIME_ALLOWANCE_IN_S,
+  TO_PERCENTAGE_MULTIPLIER,
+} from '@/constants/common';
 import React from 'react';
 import DifficultySelect from '@/components/difficultySelect/difficultySelect';
 
@@ -16,11 +18,11 @@ const Difficulty = () => {
   const navigation = useNavigation<NavigationProps>();
   const userProgression = stateStore((state) => state.userProgress);
   const route = useRoute<RouteProp<RootStackParamList, 'difficulty'>>();
-  const { id } = route.params;
+  const { id, title } = route.params;
   const progression = userProgression.games[id];
 
   useEffect(() => {
-    navigation.setOptions({ title: id });
+    navigation.setOptions({ title });
   }, [navigation]);
 
   return (
@@ -47,12 +49,13 @@ const Difficulty = () => {
                 score={levelData.userScore}
                 onPress={() =>
                   navigation.navigate('multipleChoice', {
-                    difficulty: levelData.name,
+                    title: levelData.name,
                     gameMode: id,
                     questions: generateMultipleChoice(
                       levelData.id,
                       levelData.length
                     ),
+                    timeLimit: id === 'rapid' ? RAPID_TIME_ALLOWANCE_IN_S : 0,
                   })
                 }
               />

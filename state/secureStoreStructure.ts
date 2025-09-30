@@ -1,5 +1,5 @@
-export type GameMode = 'standard' | 'rapid';
 export type Levels = 'Level 1' | 'Level 2' | 'Level 3' | 'Level 4' | 'Level 5';
+export type Difficulties = 1 | 2 | 3 | 4 | 5;
 export type LevelKeys =
   | 'levelOne'
   | 'levelTwo'
