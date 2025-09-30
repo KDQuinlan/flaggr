@@ -1,13 +1,13 @@
 import { LEVEL_MAP } from '@/constants/mappers';
 import type {
-  GameMode,
   Levels,
   ProgressionStructure,
 } from '@/state/secureStoreStructure';
+import { DifficultyScreenGameIds } from '@/types/navigation';
 
 const createUpdatedProgressionStructure = (
   existingProgression: ProgressionStructure,
-  gameMode: GameMode,
+  gameMode: DifficultyScreenGameIds,
   difficulty: Levels,
   isAdvancementRequirementMet: boolean,
   resultPercentage: number,

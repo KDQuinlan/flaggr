@@ -45,6 +45,7 @@ const MultipleChoice = () => {
 
   const correctAnswer = questions[questionNumberIndex].countryName;
   const continent = questions[questionNumberIndex].continent;
+  console.log(questions[questionNumberIndex], difficulty);
   const isFinalQuestion = questionNumberIndex + 1 === questions.length;
   const isGameCountingUp = gameMode === 'standard';
 

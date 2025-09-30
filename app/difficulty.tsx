@@ -36,7 +36,7 @@ const Difficulty = () => {
               <DifficultySelect
                 title={levelData.name}
                 description={getCompletionDescription(levelData)}
-                // TODO - confirm gamemode id prop
+                // TODO - confirm gamemode id
                 gameMode={id}
                 advancementRequirement={levelData.advancementRequirement}
                 progress={

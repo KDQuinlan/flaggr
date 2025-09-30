@@ -4,6 +4,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export type GameTypeScreenNames = 'Multiple Choice';
 export type DifficultyScreenGameIds = 'standard' | 'rapid';
+export type SummaryScreenAllowedIds = 'standard' | 'rapid';
+export type PlayableGameModes = 'standard' | 'rapid' | 'custom';
 
 export type ScreenNames =
   | 'Index'
@@ -28,9 +30,14 @@ export type RootStackParamList = {
     difficulty: Levels;
     gameMode: GameMode;
     questions: Country[];
+    // timeLimit: number;
   };
   custom: undefined;
-  summary: { difficulty: Levels; gameMode: GameMode; gameResult: GameResult };
+  summary: {
+    difficulty: Levels;
+    gameMode: SummaryScreenAllowedIds;
+    gameResult: GameResult;
+  };
 };
 
 export type NavigationProps = NativeStackNavigationProp<RootStackParamList>;

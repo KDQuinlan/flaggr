@@ -1,9 +1,11 @@
-import type { NavigationProps } from '@/types/navigation';
-import { GameMode } from '@/state/secureStoreStructure';
+import type {
+  DifficultyScreenGameIds,
+  NavigationProps,
+} from '@/types/navigation';
 
 export const resetToDifficultyScreen = (
   navigation: NavigationProps,
-  gameMode: GameMode
+  gameMode: DifficultyScreenGameIds
 ) => {
   navigation.reset({
     index: 1,

@@ -1,12 +1,9 @@
 import { MAXIMUM_DIFFICULTY } from '@/constants/common';
-import {
-  GameMode,
-  Levels,
-  ProgressionStructure,
-} from '@/state/secureStoreStructure';
+import { Levels, ProgressionStructure } from '@/state/secureStoreStructure';
+import { DifficultyScreenGameIds } from '@/types/navigation';
 
 const getNextLevelKey = (
-  gameMode: GameMode,
+  gameMode: DifficultyScreenGameIds,
   currentLevelId: number,
   progression: ProgressionStructure
 ): Levels | null => {
