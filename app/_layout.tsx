@@ -2,7 +2,6 @@ import { colors } from '@/components/colors';
 import en from '@/locales/en';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
 import { View } from 'react-native';
 
 export default function RootLayout() {
@@ -15,6 +14,7 @@ export default function RootLayout() {
           headerStyle: {
             backgroundColor: colors.offWhite,
           },
+          headerTintColor: colors.bluePrimary,
         }}
       >
         <Stack.Screen

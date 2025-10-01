@@ -20,7 +20,6 @@ import persistProgression from '@/util/persistProgression/persistProgression';
 import createUpdatedProgressionStructure from '@/util/createdUpdatedProgressionStructure/createdUpdatedProgressionStructure';
 import { resetToDifficultyScreen } from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import formatTime from '@/util/formatTime/formatTime';
-import React from 'react';
 
 const Summary = () => {
   const navigation = useNavigation<NavigationProps>();

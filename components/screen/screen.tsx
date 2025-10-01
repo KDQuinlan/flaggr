@@ -1,4 +1,3 @@
-import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar } from 'react-native';
 import { colors } from '@/components/colors';
 

@@ -11,7 +11,6 @@ import {
   RAPID_TIME_ALLOWANCE_IN_S,
   TO_PERCENTAGE_MULTIPLIER,
 } from '@/constants/common';
-import React from 'react';
 import DifficultySelect from '@/components/difficultySelect/difficultySelect';
 
 const Difficulty = () => {
