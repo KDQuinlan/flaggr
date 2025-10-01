@@ -4,8 +4,12 @@ export const VERSION_KEY = 1;
 export const MINIMUM_DIFFICULTY = 1;
 export const MAXIMUM_DIFFICULTY = 5;
 
-export const MINIMUM_CUSTOM_TIME_LIMIT_SECONDS = 30;
+export const MINIMUM_CUSTOM_TIME_LIMIT_SECONDS = 0;
 export const MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS = 240;
+
+export const MINIMUM_GAME_LENGTH = 0;
+export const MAXIMUM_GAME_LENGTH = 30;
+export const DEFAULT_GAME_LENGTH = 10;
 
 export const LEVEL_ONE_FLAGS_AMOUNT = 37;
 export const LEVEL_TWO_FLAGS_AMOUNT = 40;

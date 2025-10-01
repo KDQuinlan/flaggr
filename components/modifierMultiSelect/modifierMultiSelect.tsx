@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '@/components/colors';
 
 type ModifierMultiSelectVarients = 'regions' | 'quizType';
@@ -28,17 +28,12 @@ const ModifierMultiSelect: React.FC<ModifierMultiSelectProps> = ({
   };
 
   return (
-    <FlatList
-      data={modifier}
-      keyExtractor={(item) => item}
-      numColumns={2}
-      style={{ flexGrow: 0, paddingBottom: 20 }}
-      contentContainerStyle={{ paddingHorizontal: 12 }}
-      columnWrapperStyle={{ justifyContent: 'space-between', marginBottom: 12 }}
-      renderItem={({ item }) => {
+    <View style={styles.container}>
+      {modifier.map((item) => {
         const isSelected = selected.includes(item);
         return (
           <TouchableOpacity
+            key={item}
             style={[styles.button, isSelected && styles.buttonSelected]}
             activeOpacity={0.8}
             onPress={() => toggleModifier(item)}
@@ -55,12 +50,19 @@ const ModifierMultiSelect: React.FC<ModifierMultiSelectProps> = ({
             </Text>
           </TouchableOpacity>
         );
-      }}
-    />
+      })}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    paddingHorizontal: 12,
+    paddingBottom: 10,
+  },
   button: {
     width: '48%',
     backgroundColor: colors.offWhite,
@@ -73,6 +75,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 6,
     elevation: 4,
+    marginBottom: 12,
   },
   buttonSelected: {
     backgroundColor: colors.bluePrimary,

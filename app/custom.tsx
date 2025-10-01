@@ -1,49 +1,92 @@
-import Slider from '@react-native-community/slider';
-import { colors } from '@/components/colors';
-import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
-import {
-  MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS,
-  MINIMUM_CUSTOM_TIME_LIMIT_SECONDS,
-  VALID_REGIONS,
-} from '@/constants/common';
 import React, { useState } from 'react';
+import Slider from '@react-native-community/slider';
 import {
   SafeAreaView,
   StyleSheet,
-  View,
   Text,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
+import { colors } from '@/components/colors';
+import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
+import {
+  DEFAULT_GAME_LENGTH,
+  MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS,
+  MAXIMUM_GAME_LENGTH,
+  MINIMUM_CUSTOM_TIME_LIMIT_SECONDS,
+  MINIMUM_GAME_LENGTH,
+  VALID_REGIONS,
+} from '@/constants/common';
+import { TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP } from '@/constants/mappers';
 
 const CustomScreen = () => {
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
+  const [gameLength, setGameLength] = useState<number>(DEFAULT_GAME_LENGTH);
   const [timeLimit, setTimeLimit] = useState<number>(
     MINIMUM_CUSTOM_TIME_LIMIT_SECONDS
   );
 
-  console.log(timeLimit);
-  // TODO - remove decimal potential from slider
+  const displayTime =
+    timeLimit === MINIMUM_CUSTOM_TIME_LIMIT_SECONDS
+      ? 'Unlimited'
+      : `${timeLimit} Seconds`;
+
+  const displayGameLength = gameLength === 0 ? 'No Limit' : gameLength;
 
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <View>
-        <Text style={{ alignSelf: 'center', fontSize: 24, fontWeight: 'bold' }}>
-          Modifiers
-        </Text>
-        <Text style={styles.subheaderText}>Region(s)</Text>
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+      >
+        <Text style={styles.header}>Modifiers</Text>
+
+        <Text style={styles.subheader}>Regions</Text>
         <ModifierMultiSelect
           varient="regions"
           modifier={VALID_REGIONS}
           onChange={setSelectedRegions}
         />
-        <Text style={styles.subheaderText}>Time</Text>
+
+        <Text style={styles.subheader}>Time Limit</Text>
+        <Text style={styles.helperText}>{displayTime}</Text>
+
         <Slider
-          style={{ width: '60%', alignSelf: 'center' }}
+          style={styles.slider}
           minimumValue={MINIMUM_CUSTOM_TIME_LIMIT_SECONDS}
           maximumValue={MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS}
-          onValueChange={(val) => setTimeLimit(val)}
+          step={15}
+          value={0}
+          onValueChange={setTimeLimit}
         />
-      </View>
+
+        <Text style={styles.helperText}>
+          Score Multiplier Bonus:{' '}
+          {TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimit]}
+        </Text>
+
+        <Text style={styles.subheader}>Game Length</Text>
+
+        <Text style={styles.helperText}>
+          Maximum Questions: {displayGameLength}
+        </Text>
+
+        <Slider
+          style={styles.slider}
+          minimumValue={MINIMUM_GAME_LENGTH}
+          maximumValue={MAXIMUM_GAME_LENGTH}
+          step={5}
+          value={10}
+          onValueChange={setGameLength}
+        />
+
+        {gameLength === 0 && (
+          <Text style={styles.helperText}>
+            No limit could result in a significant amount of questions!
+          </Text>
+        )}
+      </ScrollView>
+
       <TouchableOpacity
         style={styles.button}
         activeOpacity={0.8}
@@ -60,15 +103,43 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     backgroundColor: colors.white,
-    paddingTop: 20,
+    paddingTop: 10,
     paddingBottom: 30,
     justifyContent: 'space-between',
   },
+  scrollContainer: {
+    paddingHorizontal: 12,
+    paddingBottom: 20,
+    alignItems: 'center',
+  },
+  header: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    color: colors.bluePrimary,
+    paddingBottom: 10,
+  },
+  subheader: {
+    paddingBottom: 10,
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: colors.blueSecondary,
+    alignSelf: 'center',
+  },
+  helperText: {
+    color: colors.blueSecondary,
+    fontSize: 14,
+    paddingBottom: 10,
+    textAlign: 'center',
+  },
+  slider: {
+    width: '75%',
+    alignSelf: 'center',
+  },
   button: {
-    backgroundColor: colors.offWhite,
+    backgroundColor: colors.bluePrimary,
     paddingVertical: 10,
     borderRadius: 5,
-    width: 150,
+    width: '50%',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
@@ -81,14 +152,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: colors.black,
-  },
-  subheaderText: {
-    paddingBottom: 10,
-    paddingLeft: 10,
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: colors.blueSecondary,
+    color: colors.white,
   },
 });
 

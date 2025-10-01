@@ -30,3 +30,23 @@ export const LEVEL_TO_FLAG_AMOUNT_MAP: Record<Levels, number> = {
   'Level 4': LEVEL_FOUR_FLAGS_AMOUNT,
   'Level 5': LEVEL_FIVE_FLAGS_AMOUNT,
 };
+
+export const TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP: Record<number, number> = {
+  0: 0.0,
+  15: 1.25,
+  30: 1.2,
+  45: 1.15,
+  60: 1.1,
+  75: 1.08,
+  90: 1.06,
+  105: 1.05,
+  120: 1.03,
+  135: 1.02,
+  150: 1.015,
+  165: 1.01,
+  180: 1.0,
+  195: 1.0,
+  210: 1.0,
+  225: 1.0,
+  240: 1.0,
+};
