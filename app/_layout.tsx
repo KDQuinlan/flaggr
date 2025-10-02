@@ -44,6 +44,14 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen
+          name="customSummary"
+          options={{
+            headerShown: true,
+            gestureEnabled: false,
+            headerBackVisible: false,
+          }}
+        />
+        <Stack.Screen
           name="summary"
           options={{
             headerShown: true,

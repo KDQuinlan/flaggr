@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { colors } from '@/components/colors';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { useNavigation } from 'expo-router';
@@ -57,7 +57,7 @@ const MultipleChoice = () => {
   const correctAnswer = countryName;
 
   const isFinalQuestion = questionNumberIndex + 1 === questions.length;
-  const isGameCountingUp = gameMode === 'standard';
+  const isGameCountingUp = gameMode !== 'rapid' && timeLimit === 0;
 
   useEffect(() => {
     setAnswers(
@@ -91,7 +91,13 @@ const MultipleChoice = () => {
               },
             });
           } else {
-            // TODO: custom summary navigation
+            navigation.navigate('customSummary', {
+              gameResult: {
+                correct: correctTotalRef.current,
+                incorrect: incorrectTotalRef.current,
+                highestStreak: highestStreakRef.current,
+              },
+            });
           }
         }
       }
@@ -159,7 +165,13 @@ const MultipleChoice = () => {
           },
         });
       } else {
-        // TODO: custom summary navigation
+        navigation.navigate('customSummary', {
+          gameResult: {
+            correct: correctTotalRef.current,
+            incorrect: incorrectTotalRef.current,
+            highestStreak: highestStreakRef.current,
+          },
+        });
       }
     } else {
       setQuestionNumberIndex((prev) => prev + 1);

@@ -12,131 +12,67 @@ import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import stateStore from '@/state/store';
-import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
-import { LEVEL_MAP } from '@/constants/mappers';
-import getNextLevelKey from '@/util/getNextLevelKey/getNextLevelKey';
 import { ProgressionStructure } from '@/state/secureStoreStructure';
 import persistProgression from '@/util/persistProgression/persistProgression';
 import createUpdatedProgressionStructure from '@/util/updatedProgressionStructure/createdUpdatedProgressionStructure';
 import { resetToDifficultyScreen } from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import formatTime from '@/util/formatTime/formatTime';
 import SummaryInfoRow from '@/components/summaryInfoRow/summaryInfoRow';
+import createUpdatedCustomProgressionStructure from '@/util/updatedProgressionStructure/createUpdatedCustomProgressionStructure';
 
-const Summary = () => {
+// TODO - add time remaining?
+
+const CustomSummary = () => {
   const navigation = useNavigation<NavigationProps>();
-  const route = useRoute<RouteProp<RootStackParamList, 'summary'>>();
+  const route = useRoute<RouteProp<RootStackParamList, 'customSummary'>>();
   const userProgression = stateStore((state) => state.userProgress);
+  console.log(`High Score - ${userProgression.games.custom.highScore}`);
   const setProgression = stateStore((state) => state.setProgression);
-  const { difficulty, gameMode, gameResult } = route.params;
+  const { gameResult } = route.params;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;
 
   const initialProgressionRef = useRef(userProgression);
 
   const resultPercentage = useMemo(() => {
-    if (gameMode !== 'standard') return correct;
-    return correct + incorrect > 0
-      ? (correct / (correct + incorrect)) * TO_PERCENTAGE_MULTIPLIER
-      : 0;
-  }, [correct, incorrect, gameMode]);
+    return correct;
+  }, [correct, incorrect]);
 
-  const progression =
-    initialProgressionRef.current.games[gameMode][LEVEL_MAP[difficulty]];
-
-  const isAdvancementRequirementMet = useMemo(
-    () => resultPercentage >= progression.advancementRequirement,
-    [resultPercentage, progression.advancementRequirement]
-  );
-
-  const userNextLevel = getNextLevelKey(
-    gameMode,
-    progression.id,
-    initialProgressionRef.current
-  );
-
-  const userNextLevelProgression =
-    userNextLevel &&
-    initialProgressionRef.current.games[gameMode][LEVEL_MAP[userNextLevel]];
-
-  const initialIsNextLevelLocked = useMemo(
-    () =>
-      userNextLevel
-        ? initialProgressionRef.current.games[gameMode][
-            LEVEL_MAP[userNextLevel]
-          ].isLocked
-        : false,
-    [gameMode, userNextLevel]
-  );
+  const progression = initialProgressionRef.current.games.custom;
 
   const isNewHighScore = useMemo(
-    () => progression.isCompleted && resultPercentage > progression.userScore,
-    [progression.isCompleted, progression.userScore, resultPercentage]
+    () => resultPercentage > progression.highScore,
+    [progression.highScore, resultPercentage]
   );
 
-  const unlockedMessage =
-    initialIsNextLevelLocked && isAdvancementRequirementMet && userNextLevel
-      ? `You've unlocked ${userNextLevel}`
-      : null;
-
   const newHighScoreMessage = isNewHighScore
-    ? `New high score - ${
-        gameMode === 'rapid'
-          ? resultPercentage
-          : `${resultPercentage.toFixed(1)}%`
-      }`
+    ? `New high score - ${resultPercentage}`
     : null;
 
-  const unlockRequirementMessage =
-    userNextLevelProgression &&
-    userNextLevelProgression.isLocked &&
-    !isAdvancementRequirementMet
-      ? `To unlock ${userNextLevel}, you need a score of ${
-          userNextLevelProgression.advancementRequirement
-        }${gameMode === 'rapid' ? '' : '%'}`
-      : null;
-
   useEffect(() => {
-    navigation.setOptions({ title: `Summary - ${difficulty}` });
-  }, [navigation, difficulty]);
+    navigation.setOptions({ title: 'Summary - Custom' });
+  }, [navigation]);
 
   useEffect(() => {
     const updatedProgression: ProgressionStructure =
-      createUpdatedProgressionStructure(
+      createUpdatedCustomProgressionStructure(
         initialProgressionRef.current,
-        gameMode,
-        difficulty,
-        isAdvancementRequirementMet,
-        resultPercentage,
-        userNextLevel
+        resultPercentage
       );
 
     setProgression(updatedProgression);
     persistProgression(updatedProgression);
-  }, [
-    gameMode,
-    difficulty,
-    resultPercentage,
-    userNextLevel,
-    isAdvancementRequirementMet,
-    setProgression,
-  ]);
+  }, [resultPercentage, setProgression]);
 
   const handleContinue = () => resetToDifficultyScreen(navigation);
 
   return (
     <SafeAreaView style={styles.rootContainer}>
       <View style={styles.summaryContainer}>
-        <Text style={styles.title}>{difficulty} Completed!</Text>
+        <Text style={styles.title}>Custom Game Completed!</Text>
         <Ionicons name="checkmark-circle" size={60} color="green" />
         <Text style={styles.subTitle}>Summary</Text>
 
-        <SummaryInfoRow
-          title="Score"
-          value={
-            gameMode === 'rapid'
-              ? resultPercentage.toString()
-              : `${resultPercentage.toFixed(1)}%`
-          }
-        />
+        <SummaryInfoRow title="Score" value={resultPercentage.toString()} />
         <SummaryInfoRow title="Correct" value={correct} />
         <SummaryInfoRow title="Incorrect" value={incorrect} />
         <SummaryInfoRow title="Highest streak" value={highestStreak} />
@@ -146,9 +82,7 @@ const Summary = () => {
             value={formatTime(timeTaken, true)}
           />
         )}
-        {unlockedMessage && <Text>{unlockedMessage}</Text>}
         {newHighScoreMessage && <Text>{newHighScoreMessage}</Text>}
-        {unlockRequirementMessage && <Text>{unlockRequirementMessage}</Text>}
 
         <TouchableOpacity
           style={styles.buttonContainer}
@@ -199,4 +133,4 @@ const styles = StyleSheet.create({
   buttonText: { fontSize: 20, fontWeight: '500' },
 });
 
-export default Summary;
+export default CustomSummary;

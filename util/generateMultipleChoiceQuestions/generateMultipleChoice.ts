@@ -8,18 +8,38 @@ export type Country = {
   difficulty: number;
 };
 
+export type Continents =
+  | 'Europe'
+  | 'Asia'
+  | 'Africa'
+  | 'South America'
+  | 'North America'
+  | 'Oceania';
+
 const generateMultipleChoice = (
   difficulty: number | number[],
-  numberOfQuestions: number
+  numberOfQuestions: number,
+  continents?: string[]
 ): Country[] => {
-  const countriesByDifficultyInput =
-    typeof difficulty === 'number'
-      ? countries.filter((c: Country) => c.difficulty === difficulty)
-      : countries.filter((c: Country) => difficulty.includes(c.difficulty));
+  const countriesByDifficultyAndContinent = countries.filter((c: Country) => {
+    const matchesDifficulty =
+      typeof difficulty === 'number'
+        ? c.difficulty === difficulty
+        : difficulty.includes(c.difficulty);
 
-  const shuffled = shuffleArray(countriesByDifficultyInput);
+    const matchesContinent =
+      !continents ||
+      continents.length === 0 ||
+      continents.includes(c.continent);
 
-  return shuffled.slice(0, numberOfQuestions);
+    return matchesDifficulty && matchesContinent;
+  });
+
+  const shuffled = shuffleArray(countriesByDifficultyAndContinent);
+  const questions =
+    numberOfQuestions === 0 ? shuffled : shuffled.slice(0, numberOfQuestions);
+
+  return questions;
 };
 
 export default generateMultipleChoice;

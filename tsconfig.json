@@ -4,6 +4,7 @@
     "jsx": "react-native",
     "typeRoots": ["./declarations.d.ts"],
     "strict": true,
+    "resolveJsonModule": true,
     "paths": {
       "@/*": ["./*"]
     }

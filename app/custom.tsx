@@ -11,6 +11,7 @@ import { colors } from '@/components/colors';
 import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
 import {
   DEFAULT_GAME_LENGTH,
+  GAME_DIFFICULTIES,
   MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS,
   MAXIMUM_GAME_LENGTH,
   MINIMUM_CUSTOM_TIME_LIMIT_SECONDS,
@@ -18,13 +19,19 @@ import {
   VALID_REGIONS,
 } from '@/constants/common';
 import { TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP } from '@/constants/mappers';
+import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
+import { useNavigation } from 'expo-router';
+import { NavigationProps } from '@/types/navigation';
 
 const CustomScreen = () => {
+  const navigation = useNavigation<NavigationProps>();
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const [gameLength, setGameLength] = useState<number>(DEFAULT_GAME_LENGTH);
   const [timeLimit, setTimeLimit] = useState<number>(
     MINIMUM_CUSTOM_TIME_LIMIT_SECONDS
   );
+
+  const isDisabled = selectedRegions.length === 0;
 
   const displayTime =
     timeLimit === MINIMUM_CUSTOM_TIME_LIMIT_SECONDS
@@ -88,12 +95,31 @@ const CustomScreen = () => {
       </ScrollView>
 
       <TouchableOpacity
-        style={styles.button}
+        style={isDisabled ? styles.buttonDisabled : styles.buttonEnabled}
+        disabled={isDisabled}
         activeOpacity={0.8}
         accessibilityLabel="Continue to difficulty selection"
         accessibilityRole="button"
+        onPress={() =>
+          navigation.navigate('multipleChoice', {
+            title: 'Custom',
+            gameMode: 'custom',
+            questions: generateMultipleChoice(
+              GAME_DIFFICULTIES,
+              gameLength,
+              selectedRegions
+            ),
+            timeLimit,
+          })
+        }
       >
-        <Text style={styles.buttonText}>Start</Text>
+        <Text
+          style={
+            isDisabled ? styles.buttonTextDisabled : styles.buttonTextEnabled
+          }
+        >
+          Start
+        </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -135,7 +161,7 @@ const styles = StyleSheet.create({
     width: '75%',
     alignSelf: 'center',
   },
-  button: {
+  buttonEnabled: {
     backgroundColor: colors.bluePrimary,
     paddingVertical: 10,
     borderRadius: 5,
@@ -149,7 +175,21 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 4,
   },
-  buttonText: {
+  buttonDisabled: {
+    backgroundColor: colors.offWhite,
+    paddingVertical: 10,
+    borderRadius: 5,
+    width: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
+  buttonTextEnabled: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: colors.white,
+  },
+  buttonTextDisabled: {
     fontSize: 16,
     fontWeight: 'bold',
     color: colors.white,

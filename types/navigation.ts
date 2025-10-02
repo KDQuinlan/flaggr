@@ -32,10 +32,13 @@ export type RootStackParamList = {
     questions: Country[];
     timeLimit: number;
   };
-  custom: undefined;
   summary: {
     difficulty: Levels;
     gameMode: SummaryScreenAllowedIds;
+    gameResult: GameResult;
+  };
+  custom: undefined;
+  customSummary: {
     gameResult: GameResult;
   };
 };
