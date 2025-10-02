@@ -37,6 +37,7 @@ const Difficulty = () => {
               <DifficultySelect
                 title={levelData.name}
                 description={getCompletionDescription(levelData)}
+                icon={levelKey}
                 // TODO - confirm gamemode id
                 gameMode={id}
                 advancementRequirement={levelData.advancementRequirement}

@@ -1,23 +1,25 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import React, { ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   GestureResponderEvent,
+  Image,
 } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 import { difficultySelectStyles as styles } from './difficultySelect.styles';
 import en from '@/locales/en';
 import { colors } from '../colors';
 import { LEVEL_TO_FLAG_AMOUNT_MAP } from '@/constants/mappers';
-import { Levels } from '@/state/secureStoreStructure';
+import { LevelKeys, Levels } from '@/state/secureStoreStructure';
+import iconsMap from '@/assets/images/icons';
 
 type DifficultySelectProps = {
   title: Levels;
   description: string;
   gameMode: string;
-  icon?: ReactElement;
+  icon: string;
   score: number;
   progress: number;
   advancementRequirement: number;
@@ -55,16 +57,16 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
       activeOpacity={0.8}
       disabled={isLocked}
     >
-      <Ionicons
+      {/* <Ionicons
         name="checkmark-circle"
         size={32}
         color="green"
         style={styles.gameIcon}
-      />
-      {/* <Image
-        style={{ height: 32, width: 32, marginRight: 15 }}
-        source={require('@/assets/images/gamemodeStandard/gamemode-standard.png')}
       /> */}
+      <Image
+        style={{ height: 56, width: 56, marginRight: 15 }}
+        source={iconsMap[icon]}
+      />
       <View style={styles.textContainer}>
         <View style={styles.gameDetailsContainer}>
           <View>

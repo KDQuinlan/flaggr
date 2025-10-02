@@ -5,14 +5,16 @@ import {
   Text,
   TouchableOpacity,
   GestureResponderEvent,
+  Image,
 } from 'react-native';
 import { gameSelectStyles as styles } from './gameSelect.styles';
 import en from '@/locales/en';
+import iconsMap from '@/assets/images/icons';
 
 type GameSelectProps = {
   title: string;
   description: string;
-  icon?: ReactElement;
+  icon: string;
   onPress: (event: GestureResponderEvent) => void;
 };
 
@@ -31,16 +33,16 @@ const GameSelect: React.FC<GameSelectProps> = ({
       activeOpacity={0.8}
       disabled={isLocked}
     >
-      <Ionicons
+      {/* <Ionicons
         name="checkmark-circle"
         size={32}
         color="green"
         style={styles.gameIcon}
-      />
-      {/* <Image
-        style={{ height: 32, width: 32, marginRight: 15 }}
-        source={require('@/assets/images/gamemodeStandard/gamemode-standard.png')}
       /> */}
+      <Image
+        style={{ height: 56, width: 56, marginRight: 15 }}
+        source={iconsMap[icon]}
+      />
       <View style={styles.textContainer}>
         <View style={styles.gameDetailsContainer}>
           <View>

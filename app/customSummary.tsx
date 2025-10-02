@@ -14,7 +14,6 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import stateStore from '@/state/store';
 import { ProgressionStructure } from '@/state/secureStoreStructure';
 import persistProgression from '@/util/persistProgression/persistProgression';
-import createUpdatedProgressionStructure from '@/util/updatedProgressionStructure/createdUpdatedProgressionStructure';
 import { resetToDifficultyScreen } from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import formatTime from '@/util/formatTime/formatTime';
 import SummaryInfoRow from '@/components/summaryInfoRow/summaryInfoRow';
@@ -68,7 +67,7 @@ const CustomSummary = () => {
   return (
     <SafeAreaView style={styles.rootContainer}>
       <View style={styles.summaryContainer}>
-        <Text style={styles.title}>Custom Game Completed!</Text>
+        <Text style={styles.title}>Completed!</Text>
         <Ionicons name="checkmark-circle" size={60} color="green" />
         <Text style={styles.subTitle}>Summary</Text>
 

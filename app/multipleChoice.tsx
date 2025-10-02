@@ -57,7 +57,7 @@ const MultipleChoice = () => {
   const correctAnswer = countryName;
 
   const isFinalQuestion = questionNumberIndex + 1 === questions.length;
-  const isGameCountingUp = gameMode !== 'rapid' && timeLimit === 0;
+  const isGameCountingUp = timeLimit === 0;
 
   useEffect(() => {
     setAnswers(
@@ -104,12 +104,12 @@ const MultipleChoice = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isGameCountingUp, gameMode, navigation, difficulty, timeLimit]);
+  }, [isGameCountingUp, gameMode, navigation, timeLimit]);
 
   useEffect(() => {
     navigation.setOptions({
       title,
-      headerRight: () => <Text>{formatTime(timeElapsedInSeconds, false)}</Text>,
+      headerRight: () => <Text>{formatTime(timeElapsedInSeconds)}</Text>,
     });
   }, [navigation, timeElapsedInSeconds, title]);
 
@@ -170,6 +170,7 @@ const MultipleChoice = () => {
             correct: correctTotalRef.current,
             incorrect: incorrectTotalRef.current,
             highestStreak: highestStreakRef.current,
+            timeTaken: isGameCountingUp ? timeTaken : undefined,
           },
         });
       }

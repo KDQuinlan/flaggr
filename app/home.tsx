@@ -28,6 +28,7 @@ const HomeScreen = () => {
         <GameSelect
           title={en.games.standard.name}
           description={en.games.standard.description}
+          icon={en.games.standard.id}
           onPress={() =>
             navigation.navigate('difficulty', {
               id: en.games.standard.id,
@@ -38,6 +39,7 @@ const HomeScreen = () => {
         <GameSelect
           title={en.games.rapid.name}
           description={en.games.rapid.description}
+          icon={en.games.rapid.id}
           onPress={() =>
             navigation.navigate('difficulty', {
               id: en.games.rapid.id,
@@ -48,6 +50,7 @@ const HomeScreen = () => {
         <GameSelect
           title={en.games.custom.name}
           description={en.games.custom.description}
+          icon={en.games.custom.id}
           onPress={() => navigation.navigate('custom')}
         />
       </ScrollView>
