@@ -13,7 +13,9 @@ import { colors } from '@/components/colors';
 import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
 import {
   DEFAULT_GAME_LENGTH,
+  DEFAULT_SCORE_MULTIPLIER,
   GAME_DIFFICULTIES,
+  INDEPENDENT_COUNTRIES_PENALTY,
   MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS,
   MAXIMUM_GAME_LENGTH,
   MINIMUM_CUSTOM_TIME_LIMIT_SECONDS,
@@ -24,16 +26,26 @@ import { TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP } from '@/constants/mappers';
 import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
 import { useNavigation } from 'expo-router';
 import { NavigationProps } from '@/types/navigation';
+import { Checkbox } from 'react-native-paper';
+
+// TODO - break each section into a separate component?
+// TODO - Add line below regions to separate independent countries
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
+  const [isIndependentOnly, setIsIndependentOnly] = useState<boolean>(false);
   const [gameLength, setGameLength] = useState<number>(DEFAULT_GAME_LENGTH);
   const [timeLimit, setTimeLimit] = useState<number>(
     MINIMUM_CUSTOM_TIME_LIMIT_SECONDS
   );
 
   const isDisabled = selectedRegions.length === 0;
+
+  const finalScoreMultiplier =
+    DEFAULT_SCORE_MULTIPLIER *
+    (timeLimit !== 0 ? TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimit] : 1) *
+    (isIndependentOnly ? INDEPENDENT_COUNTRIES_PENALTY : 1);
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -42,7 +54,12 @@ const CustomScreen = () => {
         showsVerticalScrollIndicator={false}
       >
         {/* Regions */}
-        <View style={styles.modifierContainer}>
+        <View
+          style={{
+            ...styles.modifierContainer,
+            paddingBottom: isIndependentOnly ? 10 : 0,
+          }}
+        >
           <View style={styles.sectionHeader}>
             <Image
               style={styles.sectionIcon}
@@ -55,6 +72,23 @@ const CustomScreen = () => {
             modifier={VALID_REGIONS}
             onChange={setSelectedRegions}
           />
+          <View style={styles.independentCountriesContainer}>
+            <View style={styles.independentCountriesTextContainer}>
+              <Text>Independent Countries Only</Text>
+              {isIndependentOnly && (
+                <Text style={{ fontSize: 12 }}>
+                  ({INDEPENDENT_COUNTRIES_PENALTY}x Score Multiplier)
+                </Text>
+              )}
+            </View>
+            <Checkbox
+              color={colors.blueSecondary}
+              status={isIndependentOnly ? 'checked' : 'unchecked'}
+              onPress={() => {
+                setIsIndependentOnly(!isIndependentOnly);
+              }}
+            />
+          </View>
         </View>
 
         {/* Game Rules */}
@@ -69,7 +103,14 @@ const CustomScreen = () => {
 
           {/* Time Limit */}
           <View style={styles.ruleContainer}>
-            <Text style={styles.ruleLabel}>Time Limit</Text>
+            <View style={styles.sliderHeaderContainer}>
+              <Text style={styles.ruleLabel}>Time Limit</Text>
+
+              <Text style={styles.sliderQuantityText}>
+                {timeLimit === 0 ? 'Unlimited' : `${timeLimit} Seconds`}
+              </Text>
+            </View>
+
             <Slider
               style={styles.slider}
               minimumValue={MINIMUM_CUSTOM_TIME_LIMIT_SECONDS}
@@ -88,7 +129,14 @@ const CustomScreen = () => {
 
           {/* Game Length */}
           <View style={styles.ruleContainer}>
-            <Text style={styles.ruleLabel}>Game Length</Text>
+            <View style={styles.sliderHeaderContainer}>
+              <Text style={styles.ruleLabel}>Game Length</Text>
+
+              <Text style={styles.sliderQuantityText}>
+                {gameLength === 0 ? 'Unlimited' : `${gameLength} Questions`}
+              </Text>
+            </View>
+
             <Slider
               style={styles.slider}
               minimumValue={MINIMUM_GAME_LENGTH}
@@ -101,47 +149,50 @@ const CustomScreen = () => {
               <Text style={styles.sliderLabelText}>Unlimited</Text>
               <Text style={styles.sliderLabelText}>{MAXIMUM_GAME_LENGTH}</Text>
             </View>
+            {gameLength === 0 && (
+              <Text style={styles.helperText}>
+                No limit could result in a significant amount of questions!
+              </Text>
+            )}
           </View>
+        </View>
+        <View style={styles.modifierContainer}>
+          <Text style={styles.helperText}>
+            Score Multiplier: {finalScoreMultiplier}
+          </Text>
 
-          {gameLength === 0 && (
-            <Text style={styles.helperText}>
-              No limit could result in a significant amount of questions!
+          <TouchableOpacity
+            style={isDisabled ? styles.buttonDisabled : styles.buttonEnabled}
+            disabled={isDisabled}
+            activeOpacity={0.8}
+            accessibilityLabel="Continue to difficulty selection"
+            accessibilityRole="button"
+            onPress={() =>
+              navigation.navigate('multipleChoice', {
+                title: 'Custom',
+                gameMode: 'custom',
+                questions: generateMultipleChoice(
+                  GAME_DIFFICULTIES,
+                  gameLength,
+                  selectedRegions,
+                  isIndependentOnly
+                ),
+                timeLimit,
+              })
+            }
+          >
+            <Text
+              style={
+                isDisabled
+                  ? styles.buttonTextDisabled
+                  : styles.buttonTextEnabled
+              }
+            >
+              Start
             </Text>
-          )}
+          </TouchableOpacity>
         </View>
       </ScrollView>
-
-      <Text style={styles.helperText}>
-        Score Multiplier Bonus: {TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimit]}
-      </Text>
-
-      <TouchableOpacity
-        style={isDisabled ? styles.buttonDisabled : styles.buttonEnabled}
-        disabled={isDisabled}
-        activeOpacity={0.8}
-        accessibilityLabel="Continue to difficulty selection"
-        accessibilityRole="button"
-        onPress={() =>
-          navigation.navigate('multipleChoice', {
-            title: 'Custom',
-            gameMode: 'custom',
-            questions: generateMultipleChoice(
-              GAME_DIFFICULTIES,
-              gameLength,
-              selectedRegions
-            ),
-            timeLimit,
-          })
-        }
-      >
-        <Text
-          style={
-            isDisabled ? styles.buttonTextDisabled : styles.buttonTextEnabled
-          }
-        >
-          Start
-        </Text>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -151,13 +202,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.offWhite,
     paddingTop: 10,
-    paddingBottom: 30,
     justifyContent: 'space-between',
   },
   scrollContainer: {
     paddingHorizontal: 12,
-    paddingBottom: 20,
-    alignItems: 'center',
   },
   modifierContainer: {
     backgroundColor: colors.white,
@@ -169,6 +217,15 @@ const styles = StyleSheet.create({
     elevation: 4,
     marginBottom: 20,
     width: '100%',
+  },
+  independentCountriesContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 10,
+  },
+  independentCountriesTextContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -194,30 +251,45 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     color: colors.blueSecondary,
-    paddingLeft: 15,
+    paddingLeft: 10,
     marginBottom: 5,
   },
   slider: {
     width: '100%',
     alignSelf: 'center',
   },
+  sliderHeaderContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 10,
+  },
   sliderLabels: {
     justifyContent: 'space-between',
     flexDirection: 'row',
-    paddingHorizontal: 15,
+    paddingLeft: 10,
+    paddingRight: 15,
   },
   sliderLabelText: {
     fontSize: 12,
   },
+  sliderQuantityText: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    textAlign: 'center',
+    fontSize: 12,
+    color: colors.blueSecondary,
+  },
   helperText: {
     color: colors.blueSecondary,
     fontSize: 14,
-    paddingBottom: 10,
     textAlign: 'center',
+    paddingTop: 10,
   },
   buttonEnabled: {
     backgroundColor: colors.bluePrimary,
     paddingVertical: 10,
+    marginVertical: 10,
     borderRadius: 5,
     width: '50%',
     justifyContent: 'center',
@@ -230,8 +302,10 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   buttonDisabled: {
-    backgroundColor: colors.offWhite,
+    backgroundColor: colors.bluePrimary,
+    opacity: 0.5,
     paddingVertical: 10,
+    marginVertical: 10,
     borderRadius: 5,
     width: '50%',
     justifyContent: 'center',

@@ -1,3 +1,4 @@
+import { NON_INDEPENDENT_COUNTRY_CODES } from '@/constants/common';
 import countries from '../../assets/data/countries.json';
 import shuffleArray from '../shuffleArray/shuffleArray';
 
@@ -19,7 +20,8 @@ export type Continents =
 const generateMultipleChoice = (
   difficulty: number | number[],
   numberOfQuestions: number,
-  continents?: string[]
+  continents?: string[],
+  independentOnly?: boolean
 ): Country[] => {
   const countriesByDifficultyAndContinent = countries.filter((c: Country) => {
     const matchesDifficulty =
@@ -32,7 +34,11 @@ const generateMultipleChoice = (
       continents.length === 0 ||
       continents.includes(c.continent);
 
-    return matchesDifficulty && matchesContinent;
+    const matchesIndependent =
+      !independentOnly ||
+      !NON_INDEPENDENT_COUNTRY_CODES.includes(c.countryCode);
+
+    return matchesDifficulty && matchesContinent && matchesIndependent;
   });
 
   const shuffled = shuffleArray(countriesByDifficultyAndContinent);

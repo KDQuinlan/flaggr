@@ -10,10 +10,11 @@ export const GAME_CONTINENTS = [
 
 export const MINIMUM_CUSTOM_TIME_LIMIT_SECONDS = 0;
 export const MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS = 240;
-
 export const MINIMUM_GAME_LENGTH = 0;
 export const MAXIMUM_GAME_LENGTH = 30;
 export const DEFAULT_GAME_LENGTH = 10;
+export const DEFAULT_SCORE_MULTIPLIER = 1;
+export const INDEPENDENT_COUNTRIES_PENALTY = 0.9;
 
 export const LEVEL_ONE_FLAGS_AMOUNT = 36;
 export const LEVEL_TWO_FLAGS_AMOUNT = 41;
@@ -32,4 +33,61 @@ export const VALID_REGIONS = [
   'South America',
   'Oceania',
   'Africa',
+];
+
+export const NON_INDEPENDENT_COUNTRY_CODES = [
+  'AI',
+  'AQ',
+  'AS',
+  'AW',
+  'AX',
+  'BL',
+  'BM',
+  'BQ',
+  'BV',
+  'CC',
+  'CK',
+  'CW',
+  'CX',
+  'EH',
+  'FK',
+  'FO',
+  'GF',
+  'GG',
+  'GI',
+  'GL',
+  'GP',
+  'GS',
+  'GU',
+  'HK',
+  'HM',
+  'IM',
+  'IO',
+  'JE',
+  'KY',
+  'MF',
+  'MO',
+  'MP',
+  'MQ',
+  'MS',
+  'NC',
+  'NF',
+  'NU',
+  'PF',
+  'PM',
+  'PN',
+  'PR',
+  'PS',
+  'RE',
+  'SH',
+  'SJ',
+  'SX',
+  'TC',
+  'TF',
+  'TK',
+  'UM',
+  'VG',
+  'VI',
+  'WF',
+  'YT',
 ];
