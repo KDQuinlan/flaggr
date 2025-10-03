@@ -26,10 +26,9 @@ import { TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP } from '@/constants/mappers';
 import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
 import { useNavigation } from 'expo-router';
 import { NavigationProps } from '@/types/navigation';
-import { Checkbox } from 'react-native-paper';
+import { Divider, Switch } from 'react-native-paper';
 
 // TODO - break each section into a separate component?
-// TODO - Add line below regions to separate independent countries
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -42,10 +41,11 @@ const CustomScreen = () => {
 
   const isDisabled = selectedRegions.length === 0;
 
-  const finalScoreMultiplier =
+  const finalScoreMultiplier = (
     DEFAULT_SCORE_MULTIPLIER *
     (timeLimit !== 0 ? TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimit] : 1) *
-    (isIndependentOnly ? INDEPENDENT_COUNTRIES_PENALTY : 1);
+    (isIndependentOnly ? INDEPENDENT_COUNTRIES_PENALTY : 1)
+  ).toFixed(2);
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -54,12 +54,7 @@ const CustomScreen = () => {
         showsVerticalScrollIndicator={false}
       >
         {/* Regions */}
-        <View
-          style={{
-            ...styles.modifierContainer,
-            paddingBottom: isIndependentOnly ? 10 : 0,
-          }}
-        >
+        <View style={styles.modifierContainer}>
           <View style={styles.sectionHeader}>
             <Image
               style={styles.sectionIcon}
@@ -72,21 +67,22 @@ const CustomScreen = () => {
             modifier={VALID_REGIONS}
             onChange={setSelectedRegions}
           />
+          <Divider style={styles.divier} />
           <View style={styles.independentCountriesContainer}>
             <View style={styles.independentCountriesTextContainer}>
-              <Text>Independent Countries Only</Text>
+              <Text style={styles.independentCountriesText}>
+                Independent Countries Only
+              </Text>
               {isIndependentOnly && (
-                <Text style={{ fontSize: 12 }}>
+                <Text style={styles.independentCountriesMultiplierText}>
                   ({INDEPENDENT_COUNTRIES_PENALTY}x Score Multiplier)
                 </Text>
               )}
             </View>
-            <Checkbox
+            <Switch
               color={colors.blueSecondary}
-              status={isIndependentOnly ? 'checked' : 'unchecked'}
-              onPress={() => {
-                setIsIndependentOnly(!isIndependentOnly);
-              }}
+              value={isIndependentOnly}
+              onValueChange={setIsIndependentOnly}
             />
           </View>
         </View>
@@ -107,7 +103,9 @@ const CustomScreen = () => {
               <Text style={styles.ruleLabel}>Time Limit</Text>
 
               <Text style={styles.sliderQuantityText}>
-                {timeLimit === 0 ? 'Unlimited' : `${timeLimit} Seconds`}
+                {timeLimit === 0
+                  ? 'Unlimited'
+                  : `${timeLimit} Seconds (${TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimit]}x)`}
               </Text>
             </View>
 
@@ -216,16 +214,27 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 4,
     marginBottom: 20,
+    paddingBottom: 5,
     width: '100%',
   },
   independentCountriesContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 10,
+    paddingLeft: 15,
   },
   independentCountriesTextContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  independentCountriesText: {
+    color: colors.blueSecondary,
+    fontWeight: '500',
+    paddingRight: 5,
+  },
+  independentCountriesMultiplierText: {
+    color: colors.blueSecondary,
+    fontWeight: '500',
+    fontSize: 12,
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -271,6 +280,7 @@ const styles = StyleSheet.create({
   },
   sliderLabelText: {
     fontSize: 12,
+    color: colors.blueSecondary,
   },
   sliderQuantityText: {
     position: 'absolute',
@@ -279,6 +289,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 12,
     color: colors.blueSecondary,
+    fontWeight: '500',
   },
   helperText: {
     color: colors.blueSecondary,
@@ -321,6 +332,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: colors.white,
+  },
+  divier: {
+    height: 1,
+    backgroundColor: colors.lightGrey,
+    marginVertical: 5,
   },
 });
 
