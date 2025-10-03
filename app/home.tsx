@@ -12,8 +12,6 @@ import {
   StatusBar,
 } from 'react-native';
 
-// TODO - make mastery gamemode to go through specific continents/regions?
-
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   return (

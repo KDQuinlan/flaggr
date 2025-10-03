@@ -6,6 +6,8 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
+  View,
+  Image,
 } from 'react-native';
 import { colors } from '@/components/colors';
 import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
@@ -33,66 +35,85 @@ const CustomScreen = () => {
 
   const isDisabled = selectedRegions.length === 0;
 
-  const displayTime =
-    timeLimit === MINIMUM_CUSTOM_TIME_LIMIT_SECONDS
-      ? 'Unlimited'
-      : `${timeLimit} Seconds`;
-
-  const displayGameLength = gameLength === 0 ? 'No Limit' : gameLength;
-
   return (
     <SafeAreaView style={styles.rootContainer}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.header}>Modifiers</Text>
+        {/* Regions */}
+        <View style={styles.modifierContainer}>
+          <View style={styles.sectionHeader}>
+            <Image
+              style={styles.sectionIcon}
+              source={require('@/assets/images/icons/resources/custom/region.png')}
+            />
+            <Text style={styles.subheader}>Regions</Text>
+          </View>
+          <ModifierMultiSelect
+            varient="regions"
+            modifier={VALID_REGIONS}
+            onChange={setSelectedRegions}
+          />
+        </View>
 
-        <Text style={styles.subheader}>Regions</Text>
-        <ModifierMultiSelect
-          varient="regions"
-          modifier={VALID_REGIONS}
-          onChange={setSelectedRegions}
-        />
+        {/* Game Rules */}
+        <View style={styles.modifierContainer}>
+          <View style={styles.sectionHeader}>
+            <Image
+              style={styles.sectionIcon}
+              source={require('@/assets/images/icons/resources/custom/cog.png')}
+            />
+            <Text style={styles.subheader}>Game Rules</Text>
+          </View>
 
-        <Text style={styles.subheader}>Time Limit</Text>
-        <Text style={styles.helperText}>{displayTime}</Text>
+          {/* Time Limit */}
+          <View style={styles.ruleContainer}>
+            <Text style={styles.ruleLabel}>Time Limit</Text>
+            <Slider
+              style={styles.slider}
+              minimumValue={MINIMUM_CUSTOM_TIME_LIMIT_SECONDS}
+              maximumValue={MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS}
+              step={15}
+              value={0}
+              onValueChange={setTimeLimit}
+            />
+            <View style={styles.sliderLabels}>
+              <Text style={styles.sliderLabelText}>Unlimited</Text>
+              <Text style={styles.sliderLabelText}>
+                {MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS}
+              </Text>
+            </View>
+          </View>
 
-        <Slider
-          style={styles.slider}
-          minimumValue={MINIMUM_CUSTOM_TIME_LIMIT_SECONDS}
-          maximumValue={MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS}
-          step={15}
-          value={0}
-          onValueChange={setTimeLimit}
-        />
+          {/* Game Length */}
+          <View style={styles.ruleContainer}>
+            <Text style={styles.ruleLabel}>Game Length</Text>
+            <Slider
+              style={styles.slider}
+              minimumValue={MINIMUM_GAME_LENGTH}
+              maximumValue={MAXIMUM_GAME_LENGTH}
+              step={5}
+              value={10}
+              onValueChange={setGameLength}
+            />
+            <View style={styles.sliderLabels}>
+              <Text style={styles.sliderLabelText}>Unlimited</Text>
+              <Text style={styles.sliderLabelText}>{MAXIMUM_GAME_LENGTH}</Text>
+            </View>
+          </View>
 
-        <Text style={styles.helperText}>
-          Score Multiplier Bonus:{' '}
-          {TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimit]}
-        </Text>
-
-        <Text style={styles.subheader}>Game Length</Text>
-
-        <Text style={styles.helperText}>
-          Maximum Questions: {displayGameLength}
-        </Text>
-
-        <Slider
-          style={styles.slider}
-          minimumValue={MINIMUM_GAME_LENGTH}
-          maximumValue={MAXIMUM_GAME_LENGTH}
-          step={5}
-          value={10}
-          onValueChange={setGameLength}
-        />
-
-        {gameLength === 0 && (
-          <Text style={styles.helperText}>
-            No limit could result in a significant amount of questions!
-          </Text>
-        )}
+          {gameLength === 0 && (
+            <Text style={styles.helperText}>
+              No limit could result in a significant amount of questions!
+            </Text>
+          )}
+        </View>
       </ScrollView>
+
+      <Text style={styles.helperText}>
+        Score Multiplier Bonus: {TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimit]}
+      </Text>
 
       <TouchableOpacity
         style={isDisabled ? styles.buttonDisabled : styles.buttonEnabled}
@@ -128,7 +149,7 @@ const CustomScreen = () => {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.offWhite,
     paddingTop: 10,
     paddingBottom: 30,
     justifyContent: 'space-between',
@@ -138,28 +159,61 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     alignItems: 'center',
   },
-  header: {
-    fontWeight: 'bold',
-    fontSize: 24,
-    color: colors.bluePrimary,
-    paddingBottom: 10,
+  modifierContainer: {
+    backgroundColor: colors.white,
+    borderRadius: 10,
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 4,
+    marginBottom: 20,
+    width: '100%',
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    paddingLeft: 10,
+    alignItems: 'center',
+  },
+  sectionIcon: {
+    height: 20,
+    width: 20,
   },
   subheader: {
-    paddingBottom: 10,
-    fontSize: 16,
+    paddingVertical: 10,
+    fontSize: 18,
     fontWeight: 'bold',
     color: colors.blueSecondary,
+    paddingLeft: 10,
+  },
+  ruleContainer: {
+    paddingLeft: 10,
+    paddingBottom: 10,
+  },
+  ruleLabel: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: colors.blueSecondary,
+    paddingLeft: 15,
+    marginBottom: 5,
+  },
+  slider: {
+    width: '100%',
     alignSelf: 'center',
+  },
+  sliderLabels: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    paddingHorizontal: 15,
+  },
+  sliderLabelText: {
+    fontSize: 12,
   },
   helperText: {
     color: colors.blueSecondary,
     fontSize: 14,
     paddingBottom: 10,
     textAlign: 'center',
-  },
-  slider: {
-    width: '75%',
-    alignSelf: 'center',
   },
   buttonEnabled: {
     backgroundColor: colors.bluePrimary,

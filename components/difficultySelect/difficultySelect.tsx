@@ -1,5 +1,4 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -57,12 +56,6 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
       activeOpacity={0.8}
       disabled={isLocked}
     >
-      {/* <Ionicons
-        name="checkmark-circle"
-        size={32}
-        color="green"
-        style={styles.gameIcon}
-      /> */}
       <Image
         style={{ height: 56, width: 56, marginRight: 15 }}
         source={iconsMap[icon]}

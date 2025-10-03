@@ -21,8 +21,6 @@ export type GameResult = {
   timeTaken?: number;
 };
 
-// TODO - Extend multipleChoice to handle custom
-
 export type RootStackParamList = {
   index: undefined;
   difficulty: { id: DifficultyScreenGameIds; title: ScreenNames };

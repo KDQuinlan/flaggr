@@ -15,8 +15,8 @@ export const MINIMUM_GAME_LENGTH = 0;
 export const MAXIMUM_GAME_LENGTH = 30;
 export const DEFAULT_GAME_LENGTH = 10;
 
-export const LEVEL_ONE_FLAGS_AMOUNT = 37;
-export const LEVEL_TWO_FLAGS_AMOUNT = 40;
+export const LEVEL_ONE_FLAGS_AMOUNT = 36;
+export const LEVEL_TWO_FLAGS_AMOUNT = 41;
 export const LEVEL_THREE_FLAGS_AMOUNT = 57;
 export const LEVEL_FOUR_FLAGS_AMOUNT = 55;
 export const LEVEL_FIVE_FLAGS_AMOUNT = 53;
