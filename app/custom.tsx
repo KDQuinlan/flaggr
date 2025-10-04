@@ -29,6 +29,7 @@ import { NavigationProps } from '@/types/navigation';
 import { Divider, Switch } from 'react-native-paper';
 
 // TODO - break each section into a separate component?
+// TODO - add reset filters
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();

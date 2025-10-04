@@ -34,7 +34,7 @@ export const LEVEL_TO_FLAG_AMOUNT_MAP: Record<Levels, number> = {
 export const TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP: Record<number, number> = {
   0: 0.0,
   15: 1.3,
-  30: 1.5,
+  30: 1.25,
   45: 1.2,
   60: 1.15,
   75: 1.1,

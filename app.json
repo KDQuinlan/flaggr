@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Flaggr",
-    "slug": "Flaggr",
+    "slug": "flaggr",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -15,20 +15,24 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.kquinlan.flaggr"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "packagerOpts": {
-      "sourceExts": ["js", "jsx", "svgx"],
-      "transformer": "node_modules/react-native-svg-transformer/index.js"
-    },
     "plugins": ["expo-router", "expo-secure-store"],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "46b6813e-1138-428b-9d88-101e62f3ac08"
+      }
+    },
+    "owner": "kquinlan"
   }
 }
