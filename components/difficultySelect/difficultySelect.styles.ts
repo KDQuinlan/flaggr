@@ -40,6 +40,7 @@ export const difficultySelectStyles = StyleSheet.create({
     color: colors.lightBlack,
     marginTop: 4,
     flexWrap: 'wrap',
+    fontSize: 16,
   },
   progressBar: {
     marginTop: 5,
@@ -52,6 +53,6 @@ export const difficultySelectStyles = StyleSheet.create({
     alignSelf: 'flex-end',
     color: colors.offBlack,
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 18,
   },
 });

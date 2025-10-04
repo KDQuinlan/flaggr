@@ -9,6 +9,7 @@ import {
   FlatList,
   Text,
   TouchableOpacity,
+  useWindowDimensions,
 } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 import { RouteProp, useRoute } from '@react-navigation/native';
@@ -20,6 +21,11 @@ import flags from '@/assets/images/flags';
 import { DIFFICULTY_ID_TO_LEVEL_MAP } from '@/constants/mappers';
 
 const MultipleChoice = () => {
+  const { height } = useWindowDimensions();
+  const isSmallScreen = height < 700;
+  const dynamicSpacing = isSmallScreen ? 5 : 20;
+  const dynamicPadding = isSmallScreen ? 5 : 20;
+
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'multipleChoice'>>();
   const { title, gameMode, questions, timeLimit } = route.params;
@@ -204,20 +210,30 @@ const MultipleChoice = () => {
             <TouchableOpacity
               disabled={isButtonDisabled}
               activeOpacity={0.8}
-              style={{
-                ...styles.answerBox,
-                backgroundColor: determineButtonColor(
-                  item,
-                  userAnswer,
-                  correctAnswer
-                ),
-              }}
+              style={[
+                styles.answerBox,
+                {
+                  backgroundColor: determineButtonColor(
+                    item,
+                    userAnswer,
+                    correctAnswer
+                  ),
+                  marginTop: dynamicSpacing,
+                  paddingVertical: dynamicPadding,
+                },
+              ]}
               onPress={() => handleAnswerPress(item)}
             >
               <Text style={styles.answerOrderText}>
                 {ANSWER_LETTERS[index]}
               </Text>
-              <Text style={styles.answerText}>{item}</Text>
+              <Text
+                style={styles.answerText}
+                adjustsFontSizeToFit
+                numberOfLines={2}
+              >
+                {item}
+              </Text>
             </TouchableOpacity>
           )}
         />
@@ -238,14 +254,13 @@ const styles = StyleSheet.create({
     flex: 3,
   },
   answerBox: {
-    flex: 1,
     flexDirection: 'row',
-    backgroundColor: colors.white,
     alignItems: 'center',
     marginHorizontal: 20,
-    marginTop: 20,
-    paddingVertical: 20,
     borderRadius: 5,
+    backgroundColor: colors.white,
+    flexShrink: 1,
+    minHeight: 50,
   },
   progressBar: {
     marginBottom: 25,
@@ -262,8 +277,9 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   answerText: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '500',
+    flexShrink: 1,
   },
 });
 
