@@ -1,11 +1,5 @@
 import { useNavigation } from 'expo-router';
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  FlatList,
-  ScrollView,
-} from 'react-native';
+import { StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { colors } from '@/components/colors';
 import stateStore from '@/state/store';
 import getCompletionDescription from '@/util/getCompletionDescription/getCompletionDescription';

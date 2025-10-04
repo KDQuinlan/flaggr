@@ -20,6 +20,8 @@ import determineButtonColor from '@/util/determineButtonColor/determineButtonCol
 import flags from '@/assets/images/flags';
 import { DIFFICULTY_ID_TO_LEVEL_MAP } from '@/constants/mappers';
 
+// TODO - resolve small screen issues
+
 const MultipleChoice = () => {
   const { height } = useWindowDimensions();
   const isSmallScreen = height < 700;
@@ -277,7 +279,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   answerText: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '500',
     flexShrink: 1,
   },

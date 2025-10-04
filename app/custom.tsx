@@ -287,14 +287,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    marginRight: 10,
+    paddingRight: 15,
   },
   sliderQuantityContainer: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'flex-end',
   },
   sliderQuantityText: {
-    textAlign: 'center',
+    textAlign: 'right',
     fontSize: 12,
     color: colors.blueSecondary,
     fontWeight: '500',
