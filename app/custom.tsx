@@ -61,7 +61,7 @@ const CustomScreen = () => {
               style={styles.sectionIcon}
               source={require('@/assets/images/icons/resources/custom/region.png')}
             />
-            <Text style={styles.subheader}>Regions</Text>
+            <Text style={styles.subHeader}>Regions</Text>
           </View>
           <ModifierMultiSelect
             varient="regions"
@@ -95,19 +95,27 @@ const CustomScreen = () => {
               style={styles.sectionIcon}
               source={require('@/assets/images/icons/resources/custom/cog.png')}
             />
-            <Text style={styles.subheader}>Game Rules</Text>
+            <Text style={styles.subHeader}>Game Rules</Text>
           </View>
 
           {/* Time Limit */}
           <View style={styles.ruleContainer}>
             <View style={styles.sliderHeaderContainer}>
-              <Text style={styles.ruleLabel}>Time Limit</Text>
-
-              <Text style={styles.sliderQuantityText}>
-                {timeLimit === 0
-                  ? 'Unlimited'
-                  : `${timeLimit} Seconds (${TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimit]}x)`}
+              <Text
+                style={styles.ruleLabel}
+                numberOfLines={1}
+                adjustsFontSizeToFit
+              >
+                Time Limit
               </Text>
+
+              <View style={styles.sliderQuantityContainer}>
+                <Text style={styles.sliderQuantityText}>
+                  {timeLimit === 0
+                    ? 'Unlimited'
+                    : `${timeLimit} Seconds (${TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimit]}x)`}
+                </Text>
+              </View>
             </View>
 
             <Slider
@@ -118,6 +126,7 @@ const CustomScreen = () => {
               value={0}
               onValueChange={setTimeLimit}
             />
+
             <View style={styles.sliderLabels}>
               <Text style={styles.sliderLabelText}>Unlimited</Text>
               <Text style={styles.sliderLabelText}>
@@ -221,21 +230,26 @@ const styles = StyleSheet.create({
   independentCountriesContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     paddingLeft: 15,
+    paddingRight: 15,
   },
   independentCountriesTextContainer: {
+    flex: 1,
+    flexShrink: 1,
     justifyContent: 'center',
-    alignItems: 'center',
   },
   independentCountriesText: {
     color: colors.blueSecondary,
     fontWeight: '500',
     paddingRight: 5,
+    flexWrap: 'wrap',
   },
   independentCountriesMultiplierText: {
     color: colors.blueSecondary,
-    fontWeight: '500',
     fontSize: 12,
+    fontStyle: 'italic',
+    opacity: 0.8,
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -246,7 +260,7 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20,
   },
-  subheader: {
+  subHeader: {
     paddingVertical: 10,
     fontSize: 18,
     fontWeight: 'bold',
@@ -271,7 +285,21 @@ const styles = StyleSheet.create({
   sliderHeaderContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
     marginRight: 10,
+  },
+  sliderQuantityContainer: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  sliderQuantityText: {
+    textAlign: 'center',
+    fontSize: 12,
+    color: colors.blueSecondary,
+    fontWeight: '500',
+    flexShrink: 1,
+    flexWrap: 'wrap',
   },
   sliderLabels: {
     justifyContent: 'space-between',
@@ -282,15 +310,6 @@ const styles = StyleSheet.create({
   sliderLabelText: {
     fontSize: 12,
     color: colors.blueSecondary,
-  },
-  sliderQuantityText: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    textAlign: 'center',
-    fontSize: 12,
-    color: colors.blueSecondary,
-    fontWeight: '500',
   },
   helperText: {
     color: colors.blueSecondary,

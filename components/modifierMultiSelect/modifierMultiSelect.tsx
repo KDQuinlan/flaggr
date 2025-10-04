@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '@/components/colors';
+import { PixelRatio } from 'react-native';
 
 type ModifierMultiSelectVarients = 'regions' | 'quizType';
 
@@ -9,6 +10,9 @@ type ModifierMultiSelectProps = {
   modifier: string[];
   onChange?: (selected: string[]) => void;
 };
+
+const fontScale = PixelRatio.getFontScale();
+const dynamicButtonHeight = Math.min(50 * fontScale, 80);
 
 const ModifierMultiSelect: React.FC<ModifierMultiSelectProps> = ({
   varient,
@@ -64,8 +68,8 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '48%',
+    height: dynamicButtonHeight,
     backgroundColor: colors.offWhite,
-    padding: 8,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
@@ -76,15 +80,15 @@ const styles = StyleSheet.create({
     elevation: 4,
     marginBottom: 12,
   },
-  buttonSelected: {
-    backgroundColor: colors.bluePrimary,
-    shadowOpacity: 0,
-    elevation: 0,
-  },
   buttonText: {
     textAlign: 'center',
     color: colors.black,
     fontSize: 16,
+  },
+  buttonSelected: {
+    backgroundColor: colors.bluePrimary,
+    shadowOpacity: 0,
+    elevation: 0,
   },
   buttonTextSelected: {
     color: colors.white,

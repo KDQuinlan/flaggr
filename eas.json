@@ -6,6 +6,7 @@
     "preview": {
       "distribution": "internal",
       "android": {
+        "gradleCommand": ":app:assembleRelease --warning-mode all",
         "buildType": "apk"
       }
     },

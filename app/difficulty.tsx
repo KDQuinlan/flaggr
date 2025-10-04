@@ -1,5 +1,11 @@
 import { useNavigation } from 'expo-router';
-import { View, StyleSheet, SafeAreaView, FlatList } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  FlatList,
+  ScrollView,
+} from 'react-native';
 import { colors } from '@/components/colors';
 import stateStore from '@/state/store';
 import getCompletionDescription from '@/util/getCompletionDescription/getCompletionDescription';
@@ -26,43 +32,38 @@ const Difficulty = () => {
 
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <FlatList
-        data={Object.entries(progression)}
-        keyExtractor={([levelKey]) => levelKey}
-        renderItem={({ item }) => {
-          const [levelKey, levelData] = item;
-
-          return (
-            <View>
-              <DifficultySelect
-                title={levelData.name}
-                description={getCompletionDescription(levelData)}
-                icon={levelKey}
-                // TODO - confirm gamemode id
-                gameMode={id}
-                advancementRequirement={levelData.advancementRequirement}
-                progress={
-                  id === 'rapid'
-                    ? levelData.userScore / levelData.advancementRequirement
-                    : levelData.userScore / TO_PERCENTAGE_MULTIPLIER
-                }
-                score={levelData.userScore}
-                onPress={() =>
-                  navigation.navigate('multipleChoice', {
-                    title: levelData.name,
-                    gameMode: id,
-                    questions: generateMultipleChoice(
-                      levelData.id,
-                      levelData.length
-                    ),
-                    timeLimit: id === 'rapid' ? RAPID_TIME_ALLOWANCE_IN_S : 0,
-                  })
-                }
-              />
-            </View>
-          );
-        }}
-      />
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+      >
+        {Object.entries(progression).map(([levelKey, levelData]) => (
+          <DifficultySelect
+            key={levelKey}
+            title={levelData.name}
+            description={getCompletionDescription(levelData)}
+            icon={levelKey}
+            gameMode={id}
+            advancementRequirement={levelData.advancementRequirement}
+            progress={
+              id === 'rapid'
+                ? levelData.userScore / levelData.advancementRequirement
+                : levelData.userScore / TO_PERCENTAGE_MULTIPLIER
+            }
+            score={levelData.userScore}
+            onPress={() =>
+              navigation.navigate('multipleChoice', {
+                title: levelData.name,
+                gameMode: id,
+                questions: generateMultipleChoice(
+                  levelData.id,
+                  levelData.length
+                ),
+                timeLimit: id === 'rapid' ? RAPID_TIME_ALLOWANCE_IN_S : 0,
+              })
+            }
+          />
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -71,6 +72,11 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     backgroundColor: colors.offWhite,
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'flex-start',
+    paddingBottom: 20,
   },
 });
 

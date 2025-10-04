@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     justifyContent: 'flex-start',
+    paddingBottom: 20,
   },
   titleContainer: {
     alignItems: 'center',
