@@ -33,7 +33,7 @@ const GameSelect: React.FC<GameSelectProps> = ({
       disabled={isLocked}
     >
       <Image
-        style={{ height: 56, width: 56, marginRight: 15 }}
+        style={{ height: 48, width: 48, marginRight: 10 }}
         source={iconsMap[icon]}
       />
       <View style={styles.textContainer}>

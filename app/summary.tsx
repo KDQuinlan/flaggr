@@ -5,12 +5,14 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
+  ScrollView,
+  Image,
+  Animated,
 } from 'react-native';
 import { colors } from '@/components/colors';
 import { useEffect, useMemo, useRef } from 'react';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import stateStore from '@/state/store';
 import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
 import { LEVEL_MAP } from '@/constants/mappers';
@@ -21,6 +23,8 @@ import createUpdatedProgressionStructure from '@/util/updatedProgressionStructur
 import { resetToDifficultyScreen } from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import formatTime from '@/util/formatTime/formatTime';
 import SummaryInfoRow from '@/components/summaryInfoRow/summaryInfoRow';
+import iconsMap from '@/assets/images/icons';
+import typedKeys from '@/util/typedKeys/typedKeys';
 
 const Summary = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -68,13 +72,13 @@ const Summary = () => {
   );
 
   const isNewHighScore = useMemo(
-    () => progression.isCompleted && resultPercentage > progression.userScore,
+    () => resultPercentage > progression.userScore,
     [progression.isCompleted, progression.userScore, resultPercentage]
   );
 
   const unlockedMessage =
     initialIsNextLevelLocked && isAdvancementRequirementMet && userNextLevel
-      ? `You've unlocked ${userNextLevel}`
+      ? `You've unlocked ${userNextLevel}!`
       : null;
 
   const newHighScoreMessage = isNewHighScore
@@ -122,44 +126,121 @@ const Summary = () => {
 
   const handleContinue = () => resetToDifficultyScreen(navigation);
 
-  return (
-    <SafeAreaView style={styles.rootContainer}>
-      <View style={styles.summaryContainer}>
-        <Text style={styles.title}>{difficulty} Completed!</Text>
-        <Ionicons name="checkmark-circle" size={60} color="green" />
-        <Text style={styles.subTitle}>Summary</Text>
+  const AnimatedSummary = () => {
+    const rows = [
+      {
+        title: 'Score',
+        value:
+          gameMode === 'rapid'
+            ? resultPercentage.toString()
+            : `${resultPercentage.toFixed(1)}%`,
+      },
+      { title: 'Correct', value: correct },
+      { title: 'Incorrect', value: incorrect },
+      { title: 'Highest streak', value: highestStreak },
+      ...(timeTaken
+        ? [{ title: 'Time taken', value: formatTime(timeTaken, true) }]
+        : []),
+    ];
+    const animatedValues = useRef(
+      rows.map(() => new Animated.Value(0))
+    ).current;
 
-        <SummaryInfoRow
-          title="Score"
-          value={
-            gameMode === 'rapid'
-              ? resultPercentage.toString()
-              : `${resultPercentage.toFixed(1)}%`
-          }
-        />
-        <SummaryInfoRow title="Correct" value={correct} />
-        <SummaryInfoRow title="Incorrect" value={incorrect} />
-        <SummaryInfoRow title="Highest streak" value={highestStreak} />
-        {timeTaken && (
-          <SummaryInfoRow
-            title="Time taken"
-            value={formatTime(timeTaken, true)}
-          />
-        )}
-        {unlockedMessage && <Text>{unlockedMessage}</Text>}
+    useEffect(() => {
+      const animations = animatedValues.map((val, i) =>
+        Animated.timing(val, {
+          toValue: 1,
+          duration: 400,
+          delay: i * 150,
+          useNativeDriver: true,
+        })
+      );
+
+      Animated.stagger(150, animations).start();
+    }, [animatedValues]);
+
+    return (
+      <View style={styles.animationContainer}>
+        {rows.map((row, i) => (
+          <Animated.View
+            key={i}
+            style={{
+              opacity: animatedValues[i],
+              transform: [
+                {
+                  translateY: animatedValues[i].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [20, 0],
+                  }),
+                },
+              ],
+            }}
+          >
+            <SummaryInfoRow title={row.title} value={row.value} />
+          </Animated.View>
+        ))}
+      </View>
+    );
+  };
+
+  const ProgressionSummary = () => {
+    if (!newHighScoreMessage && !unlockRequirementMessage && !unlockedMessage)
+      return null;
+
+    return (
+      <View style={styles.sectionContainer}>
         {newHighScoreMessage && <Text>{newHighScoreMessage}</Text>}
         {unlockRequirementMessage && <Text>{unlockRequirementMessage}</Text>}
+        {unlockedMessage && <Text>{unlockedMessage}</Text>}
 
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          activeOpacity={0.8}
-          onPress={handleContinue}
-          accessibilityLabel="Continue to difficulty selection"
-          accessibilityRole="button"
-        >
-          <Text style={styles.buttonText}>Continue</Text>
-        </TouchableOpacity>
+        {unlockedMessage && userNextLevel && (
+          <View style={styles.difficultyImageContainer}>
+            {typedKeys(userProgression.games[gameMode]).map((difficultyKey) => (
+              <Image
+                key={String(difficultyKey)}
+                style={{
+                  height: 56,
+                  width: 56,
+                  opacity:
+                    userProgression.games[gameMode][difficultyKey].isLocked ===
+                    false
+                      ? 1
+                      : 0.3,
+                }}
+                source={iconsMap[difficultyKey]}
+              />
+            ))}
+          </View>
+        )}
       </View>
+    );
+  };
+
+  return (
+    <SafeAreaView style={styles.rootContainer}>
+      <ScrollView style={styles.summaryContainer}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.title}>{difficulty} Completed!</Text>
+          <Image
+            style={{ height: 56, width: 56 }}
+            source={iconsMap[LEVEL_MAP[difficulty]]}
+          />
+          <AnimatedSummary />
+        </View>
+        <ProgressionSummary />
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            activeOpacity={0.8}
+            onPress={handleContinue}
+            accessibilityLabel="Continue to difficulty selection"
+            accessibilityRole="button"
+          >
+            <Text style={styles.buttonText}>Continue</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -170,33 +251,59 @@ const styles = StyleSheet.create({
     backgroundColor: colors.offWhite,
   },
   summaryContainer: {
+    paddingHorizontal: 12,
+  },
+  sectionContainer: {
     backgroundColor: colors.white,
+    borderRadius: 10,
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 4,
+    width: '100%',
+    justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: 20,
-    paddingVertical: 20,
-    paddingHorizontal: 10,
-    marginTop: 20,
+    marginTop: 10,
+    paddingVertical: 10,
   },
   buttonContainer: {
     backgroundColor: colors.offWhite,
-    paddingHorizontal: 20,
+    marginVertical: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  animationContainer: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  difficultyImageContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: colors.bluePrimary,
     paddingVertical: 10,
-    marginTop: 20,
     borderRadius: 5,
+    width: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 4,
   },
   title: {
     textAlign: 'center',
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: '600',
     paddingBottom: 10,
   },
-  subTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    paddingTop: 10,
-    paddingBottom: 20,
-  },
-  buttonText: { fontSize: 20, fontWeight: '500' },
+  buttonText: { fontSize: 20, fontWeight: '500', color: colors.white },
 });
 
 export default Summary;

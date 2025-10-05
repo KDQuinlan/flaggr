@@ -57,7 +57,7 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
       disabled={isLocked}
     >
       <Image
-        style={{ height: 56, width: 56, marginRight: 15 }}
+        style={{ height: 56, width: 56, marginRight: 10 }}
         source={iconsMap[icon]}
       />
       <View style={styles.textContainer}>

@@ -24,7 +24,7 @@ export const difficultySelectStyles = StyleSheet.create({
   textContainer: {
     flex: 1,
     flexShrink: 1,
-    paddingRight: 20,
+    paddingRight: 10,
   },
   gameDetailsContainer: {
     flexDirection: 'row',
