@@ -197,8 +197,8 @@ const MultipleChoice = () => {
           source={flags[countryCode.toLowerCase()]}
           contentFit="contain"
           style={{
-            width: 400,
-            height: 300,
+            width: '100%',
+            height: '100%',
             alignSelf: 'center',
             aspectRatio: 4 / 3,
           }}
