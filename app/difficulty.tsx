@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     justifyContent: 'flex-start',
+    alignItems: 'center',
     paddingBottom: 20,
   },
 });

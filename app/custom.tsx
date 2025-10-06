@@ -76,7 +76,7 @@ const CustomScreen = () => {
               </Text>
               {isIndependentOnly && (
                 <Text style={styles.independentCountriesMultiplierText}>
-                  ({INDEPENDENT_COUNTRIES_PENALTY}x Score Multiplier)
+                  {INDEPENDENT_COUNTRIES_PENALTY}x Score Multiplier
                 </Text>
               )}
             </View>
@@ -248,8 +248,6 @@ const styles = StyleSheet.create({
   independentCountriesMultiplierText: {
     color: colors.blueSecondary,
     fontSize: 12,
-    fontStyle: 'italic',
-    opacity: 0.8,
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -310,6 +308,7 @@ const styles = StyleSheet.create({
   sliderLabelText: {
     fontSize: 12,
     color: colors.blueSecondary,
+    fontStyle: 'italic',
   },
   helperText: {
     color: colors.blueSecondary,

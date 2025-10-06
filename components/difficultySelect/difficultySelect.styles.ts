@@ -17,6 +17,7 @@ export const difficultySelectStyles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 6,
     elevation: 4,
+    maxWidth: 600,
   },
   gameIcon: {
     marginRight: 15,

@@ -34,7 +34,7 @@ const MultipleChoice = () => {
 
   const [questionNumberIndex, setQuestionNumberIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState<string | null>(null);
-  const [answers, setAnswers] = useState<string[] | null>(null);
+  const [answers, setAnswers] = useState<string[]>([]);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [correctTotal, setCorrectTotal] = useState(0);
   const [incorrectTotal, setIncorrectTotal] = useState(0);
@@ -186,7 +186,7 @@ const MultipleChoice = () => {
       setQuestionNumberIndex((prev) => prev + 1);
     }
 
-    setAnswers(null);
+    setAnswers([]);
     setIsButtonDisabled(false);
   };
 
@@ -205,40 +205,35 @@ const MultipleChoice = () => {
         />
       </View>
       <View style={styles.answersContainer}>
-        <FlatList
-          data={answers}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => (
-            <TouchableOpacity
-              disabled={isButtonDisabled}
-              activeOpacity={0.8}
-              style={[
-                styles.answerBox,
-                {
-                  backgroundColor: determineButtonColor(
-                    item,
-                    userAnswer,
-                    correctAnswer
-                  ),
-                  marginTop: dynamicSpacing,
-                  paddingVertical: dynamicPadding,
-                },
-              ]}
-              onPress={() => handleAnswerPress(item)}
+        {answers.map((item, index) => (
+          <TouchableOpacity
+            key={index.toString()}
+            disabled={isButtonDisabled}
+            activeOpacity={0.8}
+            style={[
+              styles.answerBox,
+              {
+                backgroundColor: determineButtonColor(
+                  item,
+                  userAnswer,
+                  correctAnswer
+                ),
+                marginTop: dynamicSpacing,
+                paddingVertical: dynamicPadding,
+              },
+            ]}
+            onPress={() => handleAnswerPress(item)}
+          >
+            <Text style={styles.answerOrderText}>{ANSWER_LETTERS[index]}</Text>
+            <Text
+              style={styles.answerText}
+              adjustsFontSizeToFit
+              numberOfLines={2}
             >
-              <Text style={styles.answerOrderText}>
-                {ANSWER_LETTERS[index]}
-              </Text>
-              <Text
-                style={styles.answerText}
-                adjustsFontSizeToFit
-                numberOfLines={2}
-              >
-                {item}
-              </Text>
-            </TouchableOpacity>
-          )}
-        />
+              {item}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </View>
     </SafeAreaView>
   );
@@ -254,6 +249,9 @@ const styles = StyleSheet.create({
   },
   answersContainer: {
     flex: 3,
+    maxWidth: 500,
+    alignSelf: 'center',
+    width: '100%',
   },
   answerBox: {
     flexDirection: 'row',

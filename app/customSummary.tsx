@@ -5,6 +5,8 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
+  Animated,
+  ScrollView,
 } from 'react-native';
 import { colors } from '@/components/colors';
 import { useEffect, useMemo, useRef } from 'react';
@@ -25,7 +27,6 @@ const CustomSummary = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'customSummary'>>();
   const userProgression = stateStore((state) => state.userProgress);
-  console.log(`High Score - ${userProgression.games.custom.highScore}`);
   const setProgression = stateStore((state) => state.setProgression);
   const { gameResult } = route.params;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;
@@ -44,7 +45,7 @@ const CustomSummary = () => {
   );
 
   const newHighScoreMessage = isNewHighScore
-    ? `New high score - ${resultPercentage}`
+    ? `New High Score - ${resultPercentage}`
     : null;
 
   useEffect(() => {
@@ -64,35 +65,83 @@ const CustomSummary = () => {
 
   const handleContinue = () => resetToDifficultyScreen(navigation);
 
+  const AnimatedSummary = () => {
+    const rows = [
+      {
+        title: 'Score',
+        value: resultPercentage.toString(),
+      },
+      { title: 'Correct', value: correct },
+      { title: 'Incorrect', value: incorrect },
+      { title: 'Best Streak', value: highestStreak },
+      ...(timeTaken
+        ? [{ title: 'Time', value: formatTime(timeTaken, true) }]
+        : []),
+    ];
+    const animatedValues = useRef(
+      rows.map(() => new Animated.Value(0))
+    ).current;
+
+    useEffect(() => {
+      const animations = animatedValues.map((val, i) =>
+        Animated.timing(val, {
+          toValue: 1,
+          duration: 400,
+          delay: i * 150,
+          useNativeDriver: true,
+        })
+      );
+
+      Animated.stagger(150, animations).start();
+    }, [animatedValues]);
+
+    return (
+      <View style={styles.animationContainer}>
+        {rows.map((row, i) => (
+          <Animated.View
+            key={i}
+            style={{
+              opacity: animatedValues[i],
+              transform: [
+                {
+                  translateY: animatedValues[i].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [20, 0],
+                  }),
+                },
+              ],
+            }}
+          >
+            <SummaryInfoRow title={row.title} value={row.value} />
+          </Animated.View>
+        ))}
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <View style={styles.summaryContainer}>
-        <Text style={styles.title}>Completed!</Text>
-        <Ionicons name="checkmark-circle" size={60} color="green" />
-        <Text style={styles.subTitle}>Summary</Text>
-
-        <SummaryInfoRow title="Score" value={resultPercentage.toString()} />
-        <SummaryInfoRow title="Correct" value={correct} />
-        <SummaryInfoRow title="Incorrect" value={incorrect} />
-        <SummaryInfoRow title="Highest streak" value={highestStreak} />
-        {timeTaken && (
-          <SummaryInfoRow
-            title="Time taken"
-            value={formatTime(timeTaken, true)}
-          />
-        )}
-        {newHighScoreMessage && <Text>{newHighScoreMessage}</Text>}
-
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          activeOpacity={0.8}
-          onPress={handleContinue}
-          accessibilityLabel="Continue to difficulty selection"
-          accessibilityRole="button"
-        >
-          <Text style={styles.buttonText}>Continue</Text>
-        </TouchableOpacity>
-      </View>
+      <ScrollView style={styles.summaryContainer}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.title}>Completed!</Text>
+          {/* <Ionicons name="checkmark-circle" size={60} color="green" /> */}
+          <AnimatedSummary />
+        </View>
+        <View style={styles.sectionContainer}>
+          {newHighScoreMessage && <Text>{newHighScoreMessage}</Text>}
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            activeOpacity={0.8}
+            onPress={handleContinue}
+            accessibilityLabel="Continue to difficulty selection"
+            accessibilityRole="button"
+          >
+            <Text style={styles.buttonText}>Continue</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -103,19 +152,45 @@ const styles = StyleSheet.create({
     backgroundColor: colors.offWhite,
   },
   summaryContainer: {
+    paddingHorizontal: 12,
+  },
+  sectionContainer: {
     backgroundColor: colors.white,
+    borderRadius: 10,
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 4,
+    width: '100%',
+    justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: 20,
-    paddingVertical: 20,
-    paddingHorizontal: 10,
-    marginTop: 20,
+    marginTop: 10,
+    paddingVertical: 10,
   },
   buttonContainer: {
     backgroundColor: colors.offWhite,
-    paddingHorizontal: 20,
+    marginVertical: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  animationContainer: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    backgroundColor: colors.bluePrimary,
     paddingVertical: 10,
-    marginTop: 20,
     borderRadius: 5,
+    width: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 4,
   },
   title: {
     textAlign: 'center',
@@ -129,7 +204,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 20,
   },
-  buttonText: { fontSize: 20, fontWeight: '500' },
+  buttonText: { fontSize: 20, fontWeight: '500', color: colors.white },
 });
 
 export default CustomSummary;

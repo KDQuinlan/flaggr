@@ -82,7 +82,7 @@ const Summary = () => {
       : null;
 
   const newHighScoreMessage = isNewHighScore
-    ? `New high score - ${
+    ? `New High Score - ${
         gameMode === 'rapid'
           ? resultPercentage
           : `${resultPercentage.toFixed(1)}%`
@@ -137,9 +137,9 @@ const Summary = () => {
       },
       { title: 'Correct', value: correct },
       { title: 'Incorrect', value: incorrect },
-      { title: 'Highest streak', value: highestStreak },
+      { title: 'Best Streak', value: highestStreak },
       ...(timeTaken
-        ? [{ title: 'Time taken', value: formatTime(timeTaken, true) }]
+        ? [{ title: 'Time', value: formatTime(timeTaken, true) }]
         : []),
     ];
     const animatedValues = useRef(
