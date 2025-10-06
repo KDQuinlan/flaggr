@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import { colors } from '@/components/colors';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { useNavigation } from 'expo-router';
+import { Image } from 'expo-image';
 import {
   View,
   StyleSheet,
   SafeAreaView,
-  FlatList,
   Text,
   TouchableOpacity,
   useWindowDimensions,
@@ -19,8 +19,6 @@ import { ANSWER_LETTERS } from '@/constants/common';
 import determineButtonColor from '@/util/determineButtonColor/determineButtonColor';
 import flags from '@/assets/images/flags';
 import { DIFFICULTY_ID_TO_LEVEL_MAP } from '@/constants/mappers';
-
-// TODO - resolve small screen issues
 
 const MultipleChoice = () => {
   const { height } = useWindowDimensions();
@@ -75,7 +73,6 @@ const MultipleChoice = () => {
 
   useEffect(() => {
     timeUpRef.current = false;
-
     const interval = setInterval(() => {
       const elapsedSec = Math.floor((Date.now() - startTimeRef.current) / 1000);
 
@@ -87,7 +84,6 @@ const MultipleChoice = () => {
 
         if (remaining <= 0 && !timeUpRef.current) {
           timeUpRef.current = true;
-
           if (gameMode !== 'custom') {
             navigation.navigate('summary', {
               difficulty: DIFFICULTY_ID_TO_LEVEL_MAP[difficulty],
@@ -120,8 +116,6 @@ const MultipleChoice = () => {
       headerRight: () => <Text>{formatTime(timeElapsedInSeconds)}</Text>,
     });
   }, [navigation, timeElapsedInSeconds, title]);
-
-  const FlagComponent = flags[countryCode.toLowerCase()];
 
   const handleAnswerPress = (answer: string) => {
     setIsButtonDisabled(true);
@@ -197,13 +191,20 @@ const MultipleChoice = () => {
         color="blue"
         style={styles.progressBar}
       />
+
       <View style={styles.flagContainer}>
-        <FlagComponent
-          width="100%"
-          height="100%"
-          preserveAspectRatio="xMidYMid meet"
+        <Image
+          source={flags[countryCode.toLowerCase()]}
+          contentFit="contain"
+          style={{
+            width: 400,
+            height: 300,
+            alignSelf: 'center',
+            aspectRatio: 4 / 3,
+          }}
         />
       </View>
+
       <View style={styles.answersContainer}>
         {answers.map((item, index) => (
           <TouchableOpacity
