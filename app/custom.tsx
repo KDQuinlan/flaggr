@@ -29,22 +29,39 @@ import {
   MINIMUM_CUSTOM_TIME_LIMIT_SECONDS,
   MINIMUM_GAME_LENGTH,
 } from '@/constants/common';
+import stateStore from '@/state/store';
+import setCurrentCustomGame from '@/util/updatedProgressionStructure/setCurrentCustomGame';
+import HighScoreAccordion from '@/components/highScoreAccordion/highScoreAccordion';
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  const userProgression = stateStore((state) => state.userProgress);
+  const setProgression = stateStore((state) => state.setProgression);
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const [isIndependentOnly, setIsIndependentOnly] = useState<boolean>(false);
-  const [gameLength, setGameLength] = useState<number>(DEFAULT_GAME_LENGTH);
-  const [timeLimit, setTimeLimit] = useState<number>(
+  const [gameLengthSlider, setGameLengthSlider] =
+    useState<number>(DEFAULT_GAME_LENGTH);
+  const [timeLimitSlider, setTimeLimitSlider] = useState<number>(
     MINIMUM_CUSTOM_TIME_LIMIT_SECONDS
   );
+
+  const {
+    score,
+    regions,
+    independentCountriesOnly,
+    timeLimit,
+    gameLength,
+    correct,
+    incorrect,
+    streak,
+  } = userProgression.games.custom.bestGame;
 
   const handleReset = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     setSelectedRegions([]);
     setIsIndependentOnly(false);
-    setGameLength(DEFAULT_GAME_LENGTH);
-    setTimeLimit(MINIMUM_CUSTOM_TIME_LIMIT_SECONDS);
+    setGameLengthSlider(DEFAULT_GAME_LENGTH);
+    setTimeLimitSlider(MINIMUM_CUSTOM_TIME_LIMIT_SECONDS);
   };
 
   useLayoutEffect(() => {
@@ -69,7 +86,9 @@ const CustomScreen = () => {
   const finalScoreMultiplier = parseFloat(
     (
       DEFAULT_SCORE_MULTIPLIER *
-      (timeLimit !== 0 ? TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimit] : 1) *
+      (timeLimitSlider !== 0
+        ? TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimitSlider]
+        : 1) *
       (isIndependentOnly ? INDEPENDENT_COUNTRIES_PENALTY : 1)
     ).toFixed(2)
   );
@@ -80,6 +99,18 @@ const CustomScreen = () => {
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
       >
+        {!!score && (
+          <HighScoreAccordion
+            score={score}
+            regions={regions}
+            independentCountriesOnly={independentCountriesOnly}
+            timeLimit={timeLimit}
+            gameLength={gameLength}
+            correct={correct}
+            incorrect={incorrect}
+            streak={streak}
+          />
+        )}
         {/* Regions */}
         <View style={styles.modifierContainer}>
           <View style={styles.sectionHeader}>
@@ -137,9 +168,9 @@ const CustomScreen = () => {
 
               <View style={styles.sliderQuantityContainer}>
                 <Text style={styles.sliderQuantityText}>
-                  {timeLimit === 0
+                  {timeLimitSlider === 0
                     ? 'Unlimited'
-                    : `${timeLimit} Seconds (${TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimit]}x)`}
+                    : `${timeLimitSlider} Seconds (${TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimitSlider]}x)`}
                 </Text>
               </View>
             </View>
@@ -149,8 +180,8 @@ const CustomScreen = () => {
               minimumValue={MINIMUM_CUSTOM_TIME_LIMIT_SECONDS}
               maximumValue={MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS}
               step={15}
-              value={timeLimit}
-              onValueChange={setTimeLimit}
+              value={timeLimitSlider}
+              onValueChange={setTimeLimitSlider}
             />
 
             <View style={styles.sliderLabels}>
@@ -167,7 +198,9 @@ const CustomScreen = () => {
               <Text style={styles.ruleLabel}>Game Length</Text>
 
               <Text style={styles.sliderQuantityText}>
-                {gameLength === 0 ? 'Unlimited' : `${gameLength} Questions`}
+                {gameLengthSlider === 0
+                  ? 'Unlimited'
+                  : `${gameLengthSlider} Questions`}
               </Text>
             </View>
 
@@ -176,14 +209,14 @@ const CustomScreen = () => {
               minimumValue={MINIMUM_GAME_LENGTH}
               maximumValue={MAXIMUM_GAME_LENGTH}
               step={5}
-              value={gameLength}
-              onValueChange={setGameLength}
+              value={gameLengthSlider}
+              onValueChange={setGameLengthSlider}
             />
             <View style={styles.sliderLabels}>
               <Text style={styles.sliderLabelText}>Unlimited</Text>
               <Text style={styles.sliderLabelText}>{MAXIMUM_GAME_LENGTH}</Text>
             </View>
-            {gameLength === 0 && (
+            {gameLengthSlider === 0 && (
               <Text style={styles.helperText}>
                 No limit could result in a significant amount of questions!
               </Text>
@@ -201,20 +234,28 @@ const CustomScreen = () => {
             activeOpacity={0.8}
             accessibilityLabel="Continue to difficulty selection"
             accessibilityRole="button"
-            onPress={() =>
+            onPress={() => {
+              setProgression(
+                setCurrentCustomGame(userProgression, {
+                  regions: selectedRegions,
+                  independentCountriesOnly: isIndependentOnly,
+                  timeLimit: timeLimitSlider,
+                  gameLength: gameLengthSlider,
+                  scoreMultiplier: finalScoreMultiplier,
+                })
+              );
               navigation.navigate('multipleChoice', {
                 title: 'Custom',
                 gameMode: 'custom',
                 questions: generateMultipleChoice(
                   GAME_DIFFICULTIES,
-                  gameLength,
+                  gameLengthSlider,
                   selectedRegions,
                   isIndependentOnly
                 ),
-                timeLimit,
-                scoreMultiplier: finalScoreMultiplier,
-              })
-            }
+                timeLimit: timeLimitSlider,
+              });
+            }}
           >
             <Text
               style={

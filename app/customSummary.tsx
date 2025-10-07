@@ -19,26 +19,28 @@ import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import persistProgression from '@/util/persistProgression/persistProgression';
 import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import formatTime from '@/util/formatTime/formatTime';
-import createUpdatedCustomProgressionStructure from '@/util/updatedProgressionStructure/createUpdatedCustomProgressionStructure';
+import setBestGameData from '@/util/updatedProgressionStructure/setBestGameData';
 
 const CustomSummary = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'customSummary'>>();
   const userProgression = stateStore((state) => state.userProgress);
   const setProgression = stateStore((state) => state.setProgression);
-  const { gameResult, score } = route.params;
+  const { gameResult, finalScore } = route.params;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;
+  const { regions, independentCountriesOnly, timeLimit, gameLength } =
+    userProgression.games.custom.currentGame;
 
   const initialProgressionRef = useRef(userProgression);
   const progression = initialProgressionRef.current.games.custom;
 
   const isNewHighScore = useMemo(
-    () => score > progression.highScore,
-    [progression.highScore, score]
+    () => finalScore > progression.bestGame.score,
+    [progression.bestGame.score, finalScore]
   );
 
   const newHighScoreMessage = isNewHighScore
-    ? `New High Score - ${score}`
+    ? `New High Score - ${finalScore}`
     : null;
 
   useEffect(() => {
@@ -46,15 +48,25 @@ const CustomSummary = () => {
   }, [navigation]);
 
   useEffect(() => {
-    const updatedProgression: ProgressionStructure =
-      createUpdatedCustomProgressionStructure(
+    if (isNewHighScore) {
+      const updatedProgression: ProgressionStructure = setBestGameData(
         initialProgressionRef.current,
-        score
+        {
+          score: finalScore,
+          regions,
+          independentCountriesOnly,
+          timeLimit,
+          gameLength,
+          correct,
+          incorrect,
+          streak: highestStreak,
+        }
       );
 
-    setProgression(updatedProgression);
-    persistProgression(updatedProgression);
-  }, [score, setProgression]);
+      setProgression(updatedProgression);
+      persistProgression(updatedProgression);
+    }
+  }, [finalScore, setProgression]);
 
   const handleContinue = () => resetToDifficultyScreen(navigation);
 
@@ -62,7 +74,7 @@ const CustomSummary = () => {
     const rows = [
       {
         title: 'Score',
-        value: score,
+        value: finalScore,
       },
       { title: 'Correct', value: correct },
       { title: 'Incorrect', value: incorrect },

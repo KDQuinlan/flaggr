@@ -18,8 +18,28 @@ export type LevelData = {
   length: number;
 };
 
+export type CustomCurrentData = {
+  regions: string[];
+  independentCountriesOnly: boolean;
+  timeLimit: number;
+  gameLength: number;
+  scoreMultiplier: number;
+};
+
+export type CustomBestData = {
+  score: number;
+  regions: string[];
+  independentCountriesOnly: boolean;
+  timeLimit: number;
+  gameLength: number;
+  correct: number;
+  incorrect: number;
+  streak: number;
+};
+
 export type CustomData = {
-  highScore: number;
+  currentGame: CustomCurrentData;
+  bestGame: CustomBestData;
 };
 
 export type GameProgression = Record<LevelKeys, LevelData>;
@@ -139,7 +159,23 @@ export const defaultProgressionStructure: ProgressionStructure = {
       },
     },
     custom: {
-      highScore: 0,
+      currentGame: {
+        regions: [],
+        independentCountriesOnly: false,
+        timeLimit: 0,
+        gameLength: 0,
+        scoreMultiplier: 0,
+      },
+      bestGame: {
+        score: 0,
+        regions: [],
+        independentCountriesOnly: false,
+        timeLimit: 0,
+        gameLength: 0,
+        correct: 0,
+        incorrect: 0,
+        streak: 0,
+      },
     },
   },
 };

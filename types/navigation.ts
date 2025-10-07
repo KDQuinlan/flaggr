@@ -21,6 +21,8 @@ export type GameResult = {
   timeTaken?: number;
 };
 
+// TODO - remove scoreMultiplier and add it to state
+
 export type RootStackParamList = {
   index: undefined;
   difficulty: { id: DifficultyScreenGameIds; title: ScreenNames };
@@ -29,7 +31,6 @@ export type RootStackParamList = {
     gameMode: PlayableGameModes;
     questions: Country[];
     timeLimit: number;
-    scoreMultiplier?: number;
   };
   summary: {
     difficulty: Levels;
@@ -39,7 +40,7 @@ export type RootStackParamList = {
   custom: undefined;
   customSummary: {
     gameResult: GameResult;
-    score: number;
+    finalScore: number;
   };
 };
 

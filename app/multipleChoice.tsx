@@ -14,33 +14,14 @@ import { ProgressBar } from 'react-native-paper';
 
 import { colors } from '@/components/colors';
 import { ANSWER_LETTERS } from '@/constants/common';
-import {
-  DIFFICULTY_ID_TO_LEVEL_MAP,
-  DIFFICULTY_TO_SCORE,
-  STREAK_TIER_TO_MULTIPLIER,
-} from '@/constants/mappers';
+import { DIFFICULTY_ID_TO_LEVEL_MAP } from '@/constants/mappers';
 import determineButtonColor from '@/util/determineButtonColor/determineButtonColor';
 import formatTime from '@/util/formatTime/formatTime';
 import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/generateMultipleChoiceAnswers';
 import flags from '@/assets/images/flags';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
-
-const determineScoreToAdd = (
-  isCorrect: boolean,
-  difficulty: number,
-  streak: number
-) => {
-  if (!isCorrect) return 0;
-  let scoreToAdd;
-
-  const questionScoreValue = DIFFICULTY_TO_SCORE[difficulty];
-  const streakMultipler =
-    STREAK_TIER_TO_MULTIPLIER[Math.min(Math.floor(streak / 5), 5)];
-
-  scoreToAdd = questionScoreValue * streakMultipler;
-
-  return scoreToAdd;
-};
+import determineScoreToAdd from '@/util/determineScoreToAdd/determineScoreToAdd';
+import stateStore from '@/state/store';
 
 const MultipleChoice = () => {
   const { height } = useWindowDimensions();
@@ -49,9 +30,10 @@ const MultipleChoice = () => {
   const dynamicPadding = isSmallScreen ? 5 : 20;
 
   const navigation = useNavigation<NavigationProps>();
+  const userProgression = stateStore((state) => state.userProgress);
   const route = useRoute<RouteProp<RootStackParamList, 'multipleChoice'>>();
-  const { title, gameMode, questions, timeLimit, scoreMultiplier } =
-    route.params;
+  const { title, gameMode, questions, timeLimit } = route.params;
+  const { scoreMultiplier } = userProgression.games.custom.currentGame;
 
   // TODO - Add strong types to useStates
 
@@ -132,7 +114,7 @@ const MultipleChoice = () => {
                 incorrect: incorrectTotalRef.current,
                 highestStreak: highestStreakRef.current,
               },
-              score: Math.round(customScoreRef.current * scoreMultiplier!),
+              finalScore: Math.round(customScoreRef.current * scoreMultiplier!),
             });
           }
         }
@@ -211,7 +193,7 @@ const MultipleChoice = () => {
             highestStreak: highestStreakRef.current,
             timeTaken: isGameCountingUp ? timeTaken : undefined,
           },
-          score: Math.round(customScoreRef.current * scoreMultiplier!),
+          finalScore: Math.round(customScoreRef.current * scoreMultiplier!),
         });
       }
     } else {
