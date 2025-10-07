@@ -29,6 +29,7 @@ export type RootStackParamList = {
     gameMode: PlayableGameModes;
     questions: Country[];
     timeLimit: number;
+    scoreMultiplier?: number;
   };
   summary: {
     difficulty: Levels;
@@ -38,6 +39,7 @@ export type RootStackParamList = {
   custom: undefined;
   customSummary: {
     gameResult: GameResult;
+    score: number;
   };
 };
 

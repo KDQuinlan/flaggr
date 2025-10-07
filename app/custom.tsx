@@ -12,9 +12,13 @@ import Slider from '@react-native-community/slider';
 import * as Haptics from 'expo-haptics';
 import { useNavigation } from 'expo-router';
 import { Divider, Switch } from 'react-native-paper';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { colors } from '@/components/colors';
 import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
+import { TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP } from '@/constants/mappers';
+import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
+import { NavigationProps } from '@/types/navigation';
 import {
   DEFAULT_GAME_LENGTH,
   DEFAULT_SCORE_MULTIPLIER,
@@ -25,12 +29,6 @@ import {
   MINIMUM_CUSTOM_TIME_LIMIT_SECONDS,
   MINIMUM_GAME_LENGTH,
 } from '@/constants/common';
-import { TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP } from '@/constants/mappers';
-import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
-import { NavigationProps } from '@/types/navigation';
-
-// TODO - break each section into a separate component?
-// TODO - add reset filters
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -42,7 +40,7 @@ const CustomScreen = () => {
   );
 
   const handleReset = () => {
-    Haptics.selectionAsync();
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     setSelectedRegions([]);
     setIsIndependentOnly(false);
     setGameLength(DEFAULT_GAME_LENGTH);
@@ -52,8 +50,15 @@ const CustomScreen = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={() => handleReset()}>
-          <Text>Reset</Text>
+        <TouchableOpacity
+          onPress={() => handleReset()}
+          style={styles.resetButton}
+        >
+          <Ionicons
+            name="reload-outline"
+            size={20}
+            color={colors.blueSecondary}
+          />
         </TouchableOpacity>
       ),
     });
@@ -61,11 +66,13 @@ const CustomScreen = () => {
 
   const isDisabled = selectedRegions.length === 0;
 
-  const finalScoreMultiplier = (
-    DEFAULT_SCORE_MULTIPLIER *
-    (timeLimit !== 0 ? TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimit] : 1) *
-    (isIndependentOnly ? INDEPENDENT_COUNTRIES_PENALTY : 1)
-  ).toFixed(2);
+  const finalScoreMultiplier = parseFloat(
+    (
+      DEFAULT_SCORE_MULTIPLIER *
+      (timeLimit !== 0 ? TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimit] : 1) *
+      (isIndependentOnly ? INDEPENDENT_COUNTRIES_PENALTY : 1)
+    ).toFixed(2)
+  );
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -205,6 +212,7 @@ const CustomScreen = () => {
                   isIndependentOnly
                 ),
                 timeLimit,
+                scoreMultiplier: finalScoreMultiplier,
               })
             }
           >
@@ -375,6 +383,12 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: colors.lightGrey,
     marginVertical: 5,
+  },
+  resetButton: {
+    flexDirection: 'row',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

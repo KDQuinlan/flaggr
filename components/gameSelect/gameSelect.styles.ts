@@ -2,8 +2,6 @@ import { StyleSheet } from 'react-native';
 
 import { colors } from '../colors';
 
-// TODO - refactor for smaller screen sizes
-
 export const gameSelectStyles = StyleSheet.create({
   gameModeContainer: {
     backgroundColor: colors.white,

@@ -21,31 +21,24 @@ import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDiffi
 import formatTime from '@/util/formatTime/formatTime';
 import createUpdatedCustomProgressionStructure from '@/util/updatedProgressionStructure/createUpdatedCustomProgressionStructure';
 
-// TODO - add time remaining?
-
 const CustomSummary = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'customSummary'>>();
   const userProgression = stateStore((state) => state.userProgress);
   const setProgression = stateStore((state) => state.setProgression);
-  const { gameResult } = route.params;
+  const { gameResult, score } = route.params;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;
 
   const initialProgressionRef = useRef(userProgression);
-
-  const resultPercentage = useMemo(() => {
-    return correct;
-  }, [correct, incorrect]);
-
   const progression = initialProgressionRef.current.games.custom;
 
   const isNewHighScore = useMemo(
-    () => resultPercentage > progression.highScore,
-    [progression.highScore, resultPercentage]
+    () => score > progression.highScore,
+    [progression.highScore, score]
   );
 
   const newHighScoreMessage = isNewHighScore
-    ? `New High Score - ${resultPercentage}`
+    ? `New High Score - ${score}`
     : null;
 
   useEffect(() => {
@@ -56,12 +49,12 @@ const CustomSummary = () => {
     const updatedProgression: ProgressionStructure =
       createUpdatedCustomProgressionStructure(
         initialProgressionRef.current,
-        resultPercentage
+        score
       );
 
     setProgression(updatedProgression);
     persistProgression(updatedProgression);
-  }, [resultPercentage, setProgression]);
+  }, [score, setProgression]);
 
   const handleContinue = () => resetToDifficultyScreen(navigation);
 
@@ -69,7 +62,7 @@ const CustomSummary = () => {
     const rows = [
       {
         title: 'Score',
-        value: resultPercentage.toString(),
+        value: score,
       },
       { title: 'Correct', value: correct },
       { title: 'Incorrect', value: incorrect },
@@ -127,9 +120,11 @@ const CustomSummary = () => {
           {/* <Ionicons name="checkmark-circle" size={60} color="green" /> */}
           <AnimatedSummary />
         </View>
-        <View style={styles.sectionContainer}>
-          {newHighScoreMessage && <Text>{newHighScoreMessage}</Text>}
-        </View>
+        {isNewHighScore && (
+          <View style={styles.sectionContainer}>
+            <Text>{newHighScoreMessage}</Text>
+          </View>
+        )}
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.button}

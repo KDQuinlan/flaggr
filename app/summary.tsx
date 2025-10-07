@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import {
   Animated,
   Image,
@@ -8,9 +8,11 @@ import {
   Text,
   TouchableOpacity,
   View,
+  BackHandler,
 } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { colors } from '@/components/colors';
 import SummaryInfoRow from '@/components/summaryInfoRow/summaryInfoRow';
@@ -28,6 +30,21 @@ import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDiffi
 import typedKeys from '@/util/typedKeys/typedKeys';
 
 const Summary = () => {
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        return true;
+      };
+
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        onBackPress
+      );
+
+      return () => subscription.remove();
+    }, [])
+  );
+
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'summary'>>();
   const userProgression = stateStore((state) => state.userProgress);

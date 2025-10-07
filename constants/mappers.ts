@@ -50,3 +50,20 @@ export const TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP: Record<number, number> = {
   225: 1.0,
   240: 1.0,
 };
+
+export const DIFFICULTY_TO_SCORE: Record<number, number> = {
+  1: 10,
+  2: 12,
+  3: 15,
+  4: 19,
+  5: 24,
+};
+
+export const STREAK_TIER_TO_MULTIPLIER: Record<number, number> = {
+  0: 1,
+  1: 1.05,
+  2: 1.1,
+  3: 1.15,
+  4: 1.2,
+  5: 1.25,
+};

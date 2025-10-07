@@ -14,12 +14,33 @@ import { ProgressBar } from 'react-native-paper';
 
 import { colors } from '@/components/colors';
 import { ANSWER_LETTERS } from '@/constants/common';
-import { DIFFICULTY_ID_TO_LEVEL_MAP } from '@/constants/mappers';
+import {
+  DIFFICULTY_ID_TO_LEVEL_MAP,
+  DIFFICULTY_TO_SCORE,
+  STREAK_TIER_TO_MULTIPLIER,
+} from '@/constants/mappers';
 import determineButtonColor from '@/util/determineButtonColor/determineButtonColor';
 import formatTime from '@/util/formatTime/formatTime';
 import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/generateMultipleChoiceAnswers';
 import flags from '@/assets/images/flags';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
+
+const determineScoreToAdd = (
+  isCorrect: boolean,
+  difficulty: number,
+  streak: number
+) => {
+  if (!isCorrect) return 0;
+  let scoreToAdd;
+
+  const questionScoreValue = DIFFICULTY_TO_SCORE[difficulty];
+  const streakMultipler =
+    STREAK_TIER_TO_MULTIPLIER[Math.min(Math.floor(streak / 5), 5)];
+
+  scoreToAdd = questionScoreValue * streakMultipler;
+
+  return scoreToAdd;
+};
 
 const MultipleChoice = () => {
   const { height } = useWindowDimensions();
@@ -29,7 +50,10 @@ const MultipleChoice = () => {
 
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'multipleChoice'>>();
-  const { title, gameMode, questions, timeLimit } = route.params;
+  const { title, gameMode, questions, timeLimit, scoreMultiplier } =
+    route.params;
+
+  // TODO - Add strong types to useStates
 
   const [questionNumberIndex, setQuestionNumberIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState<string | null>(null);
@@ -40,12 +64,14 @@ const MultipleChoice = () => {
   const [streak, setStreak] = useState(0);
   const [highestStreak, setHighestStreak] = useState(0);
   const [timeElapsedInSeconds, setTimeElapsedInSeconds] = useState(timeLimit);
+  const [customScore, setCustomScore] = useState<number>(0);
 
   const startTimeRef = useRef<number>(Date.now());
   const correctTotalRef = useRef<number>(correctTotal);
   const incorrectTotalRef = useRef<number>(incorrectTotal);
   const highestStreakRef = useRef<number>(highestStreak);
   const timeUpRef = useRef<boolean>(false);
+  const customScoreRef = useRef<number>(customScore);
 
   useEffect(() => {
     correctTotalRef.current = correctTotal;
@@ -58,6 +84,10 @@ const MultipleChoice = () => {
   useEffect(() => {
     highestStreakRef.current = highestStreak;
   }, [highestStreak]);
+
+  useEffect(() => {
+    customScoreRef.current = customScore;
+  }, [customScore]);
 
   const { continent, difficulty, countryName, countryCode } =
     questions[questionNumberIndex];
@@ -102,6 +132,7 @@ const MultipleChoice = () => {
                 incorrect: incorrectTotalRef.current,
                 highestStreak: highestStreakRef.current,
               },
+              score: Math.round(customScoreRef.current * scoreMultiplier!),
             });
           }
         }
@@ -135,6 +166,11 @@ const MultipleChoice = () => {
     setIncorrectTotal(newIncorrectTotal);
     setStreak(newStreakTotal);
     setHighestStreak(newHighestStreakTotal);
+
+    gameMode === 'custom' &&
+      setCustomScore(
+        customScore + determineScoreToAdd(isCorrect, difficulty, streak)
+      );
 
     setTimeout(() => {
       handleNextQuestionOrSummary(
@@ -175,6 +211,7 @@ const MultipleChoice = () => {
             highestStreak: highestStreakRef.current,
             timeTaken: isGameCountingUp ? timeTaken : undefined,
           },
+          score: Math.round(customScoreRef.current * scoreMultiplier!),
         });
       }
     } else {
