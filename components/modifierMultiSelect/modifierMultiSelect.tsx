@@ -1,46 +1,53 @@
-import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  PixelRatio,
+} from 'react-native';
 import { colors } from '@/components/colors';
-import { PixelRatio } from 'react-native';
+import { VALID_REGIONS } from '@/constants/common';
 
 type ModifierMultiSelectVarients = 'regions' | 'quizType';
 
 type ModifierMultiSelectProps = {
   varient: ModifierMultiSelectVarients;
-  modifier: string[];
+  value: string[];
   onChange?: (selected: string[]) => void;
 };
 
 const fontScale = PixelRatio.getFontScale();
 const dynamicButtonHeight = Math.min(50 * fontScale, 80);
 
-const ModifierMultiSelect: React.FC<ModifierMultiSelectProps> = ({
-  varient,
-  modifier,
-  onChange,
-}) => {
-  const [selected, setSelected] = useState<string[]>([]);
+const MODIFIER_OPTIONS = {
+  regions: VALID_REGIONS,
+  quizType: [],
+};
 
-  const toggleModifier = (modifierKey: string) => {
-    setSelected((prev) => {
-      const newSelection = prev.includes(modifierKey)
-        ? prev.filter((m) => m !== modifierKey)
-        : [...prev, modifierKey];
-      onChange?.(newSelection);
-      return newSelection;
-    });
+export default function ModifierMultiSelect({
+  varient,
+  value = [],
+  onChange,
+}: ModifierMultiSelectProps) {
+  const toggleModifier = (item: string) => {
+    const newSelection = value.includes(item)
+      ? value.filter((m) => m !== item)
+      : [...value, item];
+    onChange?.(newSelection);
   };
+
+  const options = MODIFIER_OPTIONS[varient];
 
   return (
     <View style={styles.container}>
-      {modifier.map((item) => {
-        const isSelected = selected.includes(item);
+      {options.map((item) => {
+        const isSelected = value.includes(item);
         return (
           <TouchableOpacity
             key={item}
             style={[styles.button, isSelected && styles.buttonSelected]}
-            activeOpacity={0.8}
             onPress={() => toggleModifier(item)}
+            activeOpacity={0.8}
             accessibilityLabel={`Toggle ${item}`}
             accessibilityRole="button"
           >
@@ -57,7 +64,7 @@ const ModifierMultiSelect: React.FC<ModifierMultiSelectProps> = ({
       })}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -67,21 +74,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   button: {
-    width: '48%',
+    flexBasis: '48%',
     height: dynamicButtonHeight,
     backgroundColor: colors.offWhite,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 12,
     shadowColor: colors.black,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
     shadowRadius: 6,
     elevation: 4,
-    marginBottom: 12,
   },
   buttonText: {
-    textAlign: 'center',
     color: colors.black,
     fontSize: 16,
   },
@@ -95,5 +101,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-export default ModifierMultiSelect;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import Slider from '@react-native-community/slider';
 import {
   SafeAreaView,
@@ -9,6 +9,7 @@ import {
   View,
   Image,
 } from 'react-native';
+import * as Haptics from 'expo-haptics';
 import { colors } from '@/components/colors';
 import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
 import {
@@ -20,7 +21,6 @@ import {
   MAXIMUM_GAME_LENGTH,
   MINIMUM_CUSTOM_TIME_LIMIT_SECONDS,
   MINIMUM_GAME_LENGTH,
-  VALID_REGIONS,
 } from '@/constants/common';
 import { TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP } from '@/constants/mappers';
 import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
@@ -39,6 +39,24 @@ const CustomScreen = () => {
   const [timeLimit, setTimeLimit] = useState<number>(
     MINIMUM_CUSTOM_TIME_LIMIT_SECONDS
   );
+
+  const handleReset = () => {
+    Haptics.selectionAsync();
+    setSelectedRegions([]);
+    setIsIndependentOnly(false);
+    setGameLength(DEFAULT_GAME_LENGTH);
+    setTimeLimit(MINIMUM_CUSTOM_TIME_LIMIT_SECONDS);
+  };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={() => handleReset()}>
+          <Text>Reset</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation, handleReset]);
 
   const isDisabled = selectedRegions.length === 0;
 
@@ -65,7 +83,7 @@ const CustomScreen = () => {
           </View>
           <ModifierMultiSelect
             varient="regions"
-            modifier={VALID_REGIONS}
+            value={selectedRegions}
             onChange={setSelectedRegions}
           />
           <Divider style={styles.divier} />
@@ -123,7 +141,7 @@ const CustomScreen = () => {
               minimumValue={MINIMUM_CUSTOM_TIME_LIMIT_SECONDS}
               maximumValue={MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS}
               step={15}
-              value={0}
+              value={timeLimit}
               onValueChange={setTimeLimit}
             />
 
@@ -150,7 +168,7 @@ const CustomScreen = () => {
               minimumValue={MINIMUM_GAME_LENGTH}
               maximumValue={MAXIMUM_GAME_LENGTH}
               step={5}
-              value={10}
+              value={gameLength}
               onValueChange={setGameLength}
             />
             <View style={styles.sliderLabels}>
