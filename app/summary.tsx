@@ -1,29 +1,30 @@
-import { useNavigation } from 'expo-router';
+import { useEffect, useMemo, useRef } from 'react';
 import {
-  View,
-  StyleSheet,
+  Animated,
+  Image,
   SafeAreaView,
+  ScrollView,
+  StyleSheet,
   Text,
   TouchableOpacity,
-  ScrollView,
-  Image,
-  Animated,
+  View,
 } from 'react-native';
-import { colors } from '@/components/colors';
-import { useEffect, useMemo, useRef } from 'react';
-import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import stateStore from '@/state/store';
-import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
-import { LEVEL_MAP } from '@/constants/mappers';
-import getNextLevelKey from '@/util/getNextLevelKey/getNextLevelKey';
-import { ProgressionStructure } from '@/state/secureStoreStructure';
-import persistProgression from '@/util/persistProgression/persistProgression';
-import createUpdatedProgressionStructure from '@/util/updatedProgressionStructure/createdUpdatedProgressionStructure';
-import { resetToDifficultyScreen } from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
-import formatTime from '@/util/formatTime/formatTime';
+import { useNavigation } from 'expo-router';
+
+import { colors } from '@/components/colors';
 import SummaryInfoRow from '@/components/summaryInfoRow/summaryInfoRow';
 import iconsMap from '@/assets/images/icons';
+import { LEVEL_MAP } from '@/constants/mappers';
+import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
+import { NavigationProps, RootStackParamList } from '@/types/navigation';
+import stateStore from '@/state/store';
+import { ProgressionStructure } from '@/state/secureStoreStructure';
+import createUpdatedProgressionStructure from '@/util/updatedProgressionStructure/createdUpdatedProgressionStructure';
+import formatTime from '@/util/formatTime/formatTime';
+import getNextLevelKey from '@/util/getNextLevelKey/getNextLevelKey';
+import persistProgression from '@/util/persistProgression/persistProgression';
+import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import typedKeys from '@/util/typedKeys/typedKeys';
 
 const Summary = () => {

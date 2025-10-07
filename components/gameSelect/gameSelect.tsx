@@ -6,6 +6,7 @@ import {
   GestureResponderEvent,
   Image,
 } from 'react-native';
+
 import { gameSelectStyles as styles } from './gameSelect.styles';
 import en from '@/locales/en';
 import iconsMap from '@/assets/images/icons';

@@ -1,24 +1,24 @@
-import { useNavigation } from 'expo-router';
+import { useEffect, useMemo, useRef } from 'react';
+import { RouteProp, useRoute } from '@react-navigation/native';
 import {
-  View,
-  StyleSheet,
+  Animated,
   SafeAreaView,
+  ScrollView,
+  StyleSheet,
   Text,
   TouchableOpacity,
-  Animated,
-  ScrollView,
+  View,
 } from 'react-native';
+import { useNavigation } from 'expo-router';
+
 import { colors } from '@/components/colors';
-import { useEffect, useMemo, useRef } from 'react';
-import { NavigationProps, RootStackParamList } from '@/types/navigation';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import SummaryInfoRow from '@/components/summaryInfoRow/summaryInfoRow';
 import stateStore from '@/state/store';
 import { ProgressionStructure } from '@/state/secureStoreStructure';
+import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import persistProgression from '@/util/persistProgression/persistProgression';
-import { resetToDifficultyScreen } from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
+import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import formatTime from '@/util/formatTime/formatTime';
-import SummaryInfoRow from '@/components/summaryInfoRow/summaryInfoRow';
 import createUpdatedCustomProgressionStructure from '@/util/updatedProgressionStructure/createUpdatedCustomProgressionStructure';
 
 // TODO - add time remaining?

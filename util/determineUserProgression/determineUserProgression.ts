@@ -1,10 +1,11 @@
+import { useRef } from 'react';
+
 import { LEVEL_MAP } from '@/constants/mappers';
 import {
   ProgressionStructure,
   type Levels,
 } from '@/state/secureStoreStructure';
 import { SummaryScreenAllowedIds } from '@/types/navigation';
-import { useRef } from 'react';
 import getNextLevelKey from '../getNextLevelKey/getNextLevelKey';
 
 const determineUserProgression = (

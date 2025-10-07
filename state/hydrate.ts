@@ -1,4 +1,5 @@
 import * as SecureStore from 'expo-secure-store';
+
 import stateStore from './store';
 import { STORAGE_KEY } from '@/constants/common';
 import { defaultProgressionStructure } from './secureStoreStructure';

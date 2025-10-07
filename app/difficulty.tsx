@@ -1,17 +1,18 @@
-import { useNavigation } from 'expo-router';
-import { StyleSheet, SafeAreaView, ScrollView } from 'react-native';
-import { colors } from '@/components/colors';
-import stateStore from '@/state/store';
-import getCompletionDescription from '@/util/getCompletionDescription/getCompletionDescription';
 import { useEffect } from 'react';
-import { NavigationProps, RootStackParamList } from '@/types/navigation';
+import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
+import { useNavigation } from 'expo-router';
+
+import { colors } from '@/components/colors';
+import DifficultySelect from '@/components/difficultySelect/difficultySelect';
 import {
   RAPID_TIME_ALLOWANCE_IN_S,
   TO_PERCENTAGE_MULTIPLIER,
 } from '@/constants/common';
-import DifficultySelect from '@/components/difficultySelect/difficultySelect';
+import { NavigationProps, RootStackParamList } from '@/types/navigation';
+import stateStore from '@/state/store';
+import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
+import getCompletionDescription from '@/util/getCompletionDescription/getCompletionDescription';
 
 const Difficulty = () => {
   const navigation = useNavigation<NavigationProps>();

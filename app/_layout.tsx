@@ -1,8 +1,9 @@
-import { colors } from '@/components/colors';
-import en from '@/locales/en';
+import { View } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
+
+import { colors } from '@/components/colors';
+import en from '@/locales/en';
 
 export default function RootLayout() {
   return (

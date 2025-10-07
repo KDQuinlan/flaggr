@@ -1,15 +1,18 @@
 import { useLayoutEffect, useState } from 'react';
-import Slider from '@react-native-community/slider';
 import {
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
-  ScrollView,
   View,
   Image,
 } from 'react-native';
+import Slider from '@react-native-community/slider';
 import * as Haptics from 'expo-haptics';
+import { useNavigation } from 'expo-router';
+import { Divider, Switch } from 'react-native-paper';
+
 import { colors } from '@/components/colors';
 import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
 import {
@@ -24,9 +27,7 @@ import {
 } from '@/constants/common';
 import { TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP } from '@/constants/mappers';
 import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
-import { useNavigation } from 'expo-router';
 import { NavigationProps } from '@/types/navigation';
-import { Divider, Switch } from 'react-native-paper';
 
 // TODO - break each section into a separate component?
 // TODO - add reset filters

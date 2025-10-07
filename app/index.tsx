@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import stateStore from '@/state/store';
+
+import HomeScreen from './home';
 import Loading from '@/app/loading';
 import { hydrateStore } from '@/state/hydrate';
-import HomeScreen from './home';
+import stateStore from '@/state/store';
 
 const IndexScreen = () => {
   const isInitialised = stateStore((state) => state.isInitialised);

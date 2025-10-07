@@ -1,24 +1,25 @@
 import { useEffect, useRef, useState } from 'react';
-import { colors } from '@/components/colors';
-import { NavigationProps, RootStackParamList } from '@/types/navigation';
-import { useNavigation } from 'expo-router';
-import { Image } from 'expo-image';
 import {
-  View,
-  StyleSheet,
   SafeAreaView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   useWindowDimensions,
+  View,
 } from 'react-native';
-import { ProgressBar } from 'react-native-paper';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/generateMultipleChoiceAnswers';
-import formatTime from '@/util/formatTime/formatTime';
+import { useNavigation } from 'expo-router';
+import { Image } from 'expo-image';
+import { ProgressBar } from 'react-native-paper';
+
+import { colors } from '@/components/colors';
 import { ANSWER_LETTERS } from '@/constants/common';
-import determineButtonColor from '@/util/determineButtonColor/determineButtonColor';
-import flags from '@/assets/images/flags';
 import { DIFFICULTY_ID_TO_LEVEL_MAP } from '@/constants/mappers';
+import determineButtonColor from '@/util/determineButtonColor/determineButtonColor';
+import formatTime from '@/util/formatTime/formatTime';
+import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/generateMultipleChoiceAnswers';
+import flags from '@/assets/images/flags';
+import { NavigationProps, RootStackParamList } from '@/types/navigation';
 
 const MultipleChoice = () => {
   const { height } = useWindowDimensions();
