@@ -26,7 +26,7 @@ type DifficultySelectProps = {
   onPress: (event: GestureResponderEvent) => void;
 };
 
-// TODO - remove hardcoded usage of 'rapid'
+// TODO - Add accessibility
 
 const DifficultySelect: React.FC<DifficultySelectProps> = ({
   title,

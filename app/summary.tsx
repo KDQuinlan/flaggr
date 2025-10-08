@@ -30,6 +30,8 @@ import persistProgression from '@/util/persistProgression/persistProgression';
 import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import typedKeys from '@/util/typedKeys/typedKeys';
 
+// TODO - use focus effect hook from expo instead?
+
 const Summary = () => {
   useFocusEffect(
     useCallback(() => {
@@ -125,7 +127,9 @@ const Summary = () => {
       : null;
 
   useEffect(() => {
-    navigation.setOptions({ title: `Summary - ${difficulty}` });
+    navigation.setOptions({
+      title: t('screens.summary.summary', { difficulty }),
+    });
   }, [navigation, difficulty]);
 
   useEffect(() => {

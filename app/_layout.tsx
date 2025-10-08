@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import '@/i18n'; // initialize translations
+import '@/locales/i18n'; // initialize translations
 
 import { colors } from '@/components/colors';
 import en from '@/locales/en';

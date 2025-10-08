@@ -52,6 +52,14 @@ export type ProgressionStructure = {
   };
 };
 
+export type UserSettingStructure = {
+  locale: string;
+};
+
+export const defaultUserSettings: UserSettingStructure = {
+  locale: 'en',
+};
+
 export const defaultProgressionStructure: ProgressionStructure = {
   games: {
     standard: {

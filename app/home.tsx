@@ -9,18 +9,19 @@ import {
   View,
 } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import * as Localization from 'expo-localization';
+import { useTranslation } from 'react-i18next';
+// import * as Localization from 'expo-localization';
 
 import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
 import en from '@/locales/en';
 import { NavigationProps } from '@/types/navigation';
 
-const locales = Localization.getLocales();
-console.log(locales[0].languageCode);
+// const locales = Localization.getLocales();
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  const { t } = useTranslation('home');
   return (
     <SafeAreaView style={styles.rootContainer}>
       <ScrollView
@@ -35,30 +36,30 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
         <GameSelect
-          title={en.screens.home.standard.name}
-          description={en.screens.home.standard.description}
+          title={t('standard.title')}
+          description={t('standard.description')}
           icon="standard"
           onPress={() =>
             navigation.navigate('difficulty', {
               id: 'standard',
-              title: en.screens.home.standard.name,
+              title: 'Standard',
             })
           }
         />
         <GameSelect
-          title={en.screens.home.rapid.name}
-          description={en.screens.home.rapid.description}
+          title={t('rapid.title')}
+          description={t('rapid.description')}
           icon="rapid"
           onPress={() =>
             navigation.navigate('difficulty', {
               id: 'rapid',
-              title: en.screens.home.rapid.name,
+              title: 'Rapid',
             })
           }
         />
         <GameSelect
-          title={en.screens.home.custom.name}
-          description={en.screens.home.custom.description}
+          title={t('custom.title')}
+          description={t('custom.description')}
           icon="custom"
           onPress={() => navigation.navigate('custom')}
         />

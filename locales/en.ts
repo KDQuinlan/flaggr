@@ -11,6 +11,7 @@ const en = {
     },
   },
   screens: {
+    loading: 'Loading...',
     home: {
       standard: {
         name: 'Standard',
@@ -36,6 +37,7 @@ const en = {
     },
     multipleChoice: {},
     summary: {
+      summary: '{{difficulty}} Summary',
       completed: '{{difficulty}} Completed!',
       score: 'Score',
       correct: 'Correct',
@@ -43,7 +45,7 @@ const en = {
       streak: 'Best Streak',
       time: 'Time',
       unlockMessage: 'You have unlocked {{userNextLevel}}',
-      newHighScore: '{{score}}{{numberSuffix}} is a new high score!',
+      newHighScore: 'New High Score {{score}}{{numberSuffix}}',
       unlockRequirementMessage:
         'To unlock {{userNextLevel}}, you need a score of {{advancementRequirement}}{{numberSuffix}}',
       continue: 'Continue',
@@ -51,6 +53,18 @@ const en = {
     custom: {
       scoreMultiplier: '{{value}}× Score Multiplier',
       start: 'Start',
+      highScoreAccordion: {
+        title: 'High Score {{score}}',
+        regions: 'Regions {{regions}}',
+        independentCountriesOnlyEnabled: 'Independent Countries Only Enabled',
+        independentCountriesOnlyDisabled: 'Independent Countries Only Disabled',
+        timeLimit: 'Time Limit {{timeLimit}}',
+        gameLength: 'Game Length {{gameLength}}',
+        stats: 'Stats',
+        correct: 'Correct {{correct}}',
+        incorrect: 'Incorrect {{incorrect}}',
+        bestStreak: 'Best Streak {{streak}}',
+      },
       regions: {
         title: 'Regions',
         independentCountriesOnly: 'Independent Countries Only',
@@ -65,6 +79,17 @@ const en = {
         gameLengthWarning:
           'No limit could result in a significant amount of questions!',
       },
+    },
+    customSummary: {
+      summary: 'Summary',
+      completed: 'Completed!',
+      score: 'Score',
+      correct: 'Correct',
+      incorrect: 'Incorrect',
+      streak: 'Best Streak',
+      time: 'Time',
+      newHighScore: 'New High Score: {{score}}',
+      continue: 'Continue',
     },
   },
 } as const;

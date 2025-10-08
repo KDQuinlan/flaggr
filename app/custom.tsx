@@ -108,34 +108,64 @@ const CustomScreen = () => {
       >
         {!!score && (
           <List.Accordion
-            title={`High Score: ${score}`}
+            title={t('screens.custom.highScoreAccordion.title', { score })}
             left={(props) => <List.Icon {...props} icon="trophy" />}
             expanded={isScoreAccordionExpanded}
             onPress={() =>
               setIsScoreAccordionExpanded(!isScoreAccordionExpanded)
             }
           >
-            <List.Item title={`Regions: ${regions}`} />
             <List.Item
-              title={`Independent Countries Only: ${independentCountriesOnly ? 'Enabled' : 'Disabled'}`}
+              title={t('screens.custom.highScoreAccordion.regions', {
+                regions: regions.join(', '),
+              })}
             />
-            <List.Item title={`Time Limit: ${timeLimit}`} />
-            <List.Item title={`Game Length: ${gameLength}`} />
-            {/* <TouchableOpacity onPress={() => console.log('Clicked')}>
-                <Text>Tap me!</Text>
-              </TouchableOpacity> */}
+            <List.Item
+              title={
+                independentCountriesOnly
+                  ? t(
+                      'screens.custom.highScoreAccordion.independentCountriesOnlyEnabled'
+                    )
+                  : t(
+                      'screens.custom.highScoreAccordion.independentCountriesOnlyDisabled'
+                    )
+              }
+            />
+            <List.Item
+              title={t('screens.custom.highScoreAccordion.timeLimit', {
+                timeLimit,
+              })}
+            />
+            <List.Item
+              title={t('screens.custom.highScoreAccordion.gameLength', {
+                gameLength,
+              })}
+            />
 
             <List.Accordion
-              title={`Stats`}
+              title={t('screens.custom.highScoreAccordion.stats')}
               left={(props) => <List.Icon {...props} icon="chart-line" />}
               expanded={isStatsAccordionExpanded}
               onPress={() =>
                 setIsStatsAccordionExpanded(!isStatsAccordionExpanded)
               }
+              style={{ marginLeft: 8 }}
             >
-              <List.Item title={`Correct: ${correct}`} />
-              <List.Item title={`Incorrect: ${incorrect}`} />
-              <List.Item title={`Best Streak: ${streak}`} />
+              <List.Item
+                title={t('screens.custom.highScoreAccordion.correct', {
+                  correct,
+                })}
+              />
+              <List.Item
+                title={t('screens.custom.highScoreAccordion.incorrect', {
+                  incorrect,
+                })}
+              />
+              <List.Item
+                title={t('screens.custom.highScoreAccordion.bestStreak', {
+                  streak,
+                })}
+              />
             </List.Accordion>
           </List.Accordion>
         )}

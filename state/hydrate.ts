@@ -1,23 +1,47 @@
 import * as SecureStore from 'expo-secure-store';
 
 import stateStore from './store';
-import { STORAGE_KEY } from '@/constants/common';
-import { defaultProgressionStructure } from './secureStoreStructure';
+import {
+  STORAGE_KEY_PROGRESSION,
+  STORAGE_KEY_SETTINGS,
+} from '@/constants/common';
+import {
+  defaultProgressionStructure,
+  defaultUserSettings,
+} from './secureStoreStructure';
 
 // TODO - Implement versioning
+// TODO - add error handling and parallel reads
 
 export const hydrateStore = async () => {
-  const { setIsInitialised, setProgression } = stateStore.getState();
-  const userProgression = await SecureStore.getItemAsync(STORAGE_KEY);
+  const { setIsInitialised, setUserSettings, setProgression } =
+    stateStore.getState();
 
+  const userSettings = await SecureStore.getItemAsync(STORAGE_KEY_SETTINGS);
+  const userProgression = await SecureStore.getItemAsync(
+    STORAGE_KEY_PROGRESSION
+  );
+
+  // Restore progression or initialize default
   if (userProgression) {
     setProgression(JSON.parse(userProgression));
-    setIsInitialised();
   } else {
     await SecureStore.setItemAsync(
-      STORAGE_KEY,
+      STORAGE_KEY_PROGRESSION,
       JSON.stringify(defaultProgressionStructure)
     );
-    setIsInitialised();
   }
+
+  // Restore user settings or initialize default
+  if (userSettings) {
+    setUserSettings(JSON.parse(userSettings));
+  } else {
+    await SecureStore.setItemAsync(
+      STORAGE_KEY_SETTINGS,
+      JSON.stringify(defaultUserSettings)
+    );
+  }
+
+  // Signal ready
+  setIsInitialised();
 };

@@ -25,7 +25,7 @@ export type GameResult = {
 
 export type RootStackParamList = {
   index: undefined;
-  difficulty: { id: DifficultyScreenGameIds; title: ScreenNames };
+  difficulty: { id: DifficultyScreenGameIds; title: string };
   multipleChoice: {
     title: Levels | 'Custom';
     gameMode: PlayableGameModes;

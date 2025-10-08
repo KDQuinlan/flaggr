@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useRef } from 'react';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { RouteProp, useFocusEffect, useRoute } from '@react-navigation/native';
 import {
   Animated,
+  BackHandler,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -10,6 +11,7 @@ import {
   View,
 } from 'react-native';
 import { useNavigation } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 
 import { colors } from '@/components/colors';
 import SummaryInfoRow from '@/components/summaryInfoRow/summaryInfoRow';
@@ -22,8 +24,24 @@ import formatTime from '@/util/formatTime/formatTime';
 import setBestGameData from '@/util/updatedProgressionStructure/setBestGameData';
 
 const CustomSummary = () => {
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        return true;
+      };
+
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        onBackPress
+      );
+
+      return () => subscription.remove();
+    }, [])
+  );
+
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'customSummary'>>();
+  const { t } = useTranslation();
   const userProgression = stateStore((state) => state.userProgress);
   const setProgression = stateStore((state) => state.setProgression);
   const { gameResult, finalScore } = route.params;
@@ -40,11 +58,11 @@ const CustomSummary = () => {
   );
 
   const newHighScoreMessage = isNewHighScore
-    ? `New High Score - ${finalScore}`
+    ? t('screens.customSummary.newHighScore', { score: finalScore })
     : null;
 
   useEffect(() => {
-    navigation.setOptions({ title: 'Summary - Custom' });
+    navigation.setOptions({ title: t('screens.customSummary.summary') });
   }, [navigation]);
 
   useEffect(() => {
@@ -73,14 +91,19 @@ const CustomSummary = () => {
   const AnimatedSummary = () => {
     const rows = [
       {
-        title: 'Score',
+        title: t('screens.customSummary.score'),
         value: finalScore,
       },
-      { title: 'Correct', value: correct },
-      { title: 'Incorrect', value: incorrect },
-      { title: 'Best Streak', value: highestStreak },
+      { title: t('screens.customSummary.correct'), value: correct },
+      { title: t('screens.customSummary.incorrect'), value: incorrect },
+      { title: t('screens.customSummary.streak'), value: highestStreak },
       ...(timeTaken
-        ? [{ title: 'Time', value: formatTime(timeTaken, true) }]
+        ? [
+            {
+              title: t('screens.customSummary.time'),
+              value: formatTime(timeTaken, true),
+            },
+          ]
         : []),
     ];
     const animatedValues = useRef(
@@ -128,8 +151,9 @@ const CustomSummary = () => {
     <SafeAreaView style={styles.rootContainer}>
       <ScrollView style={styles.summaryContainer}>
         <View style={styles.sectionContainer}>
-          <Text style={styles.title}>Completed!</Text>
-          {/* <Ionicons name="checkmark-circle" size={60} color="green" /> */}
+          <Text style={styles.title}>
+            {t('screens.customSummary.completed')}
+          </Text>
           <AnimatedSummary />
         </View>
         {isNewHighScore && (
@@ -142,10 +166,12 @@ const CustomSummary = () => {
             style={styles.button}
             activeOpacity={0.8}
             onPress={handleContinue}
-            accessibilityLabel="Continue to difficulty selection"
+            accessibilityLabel={t('screens.customSummary.continue')}
             accessibilityRole="button"
           >
-            <Text style={styles.buttonText}>Continue</Text>
+            <Text style={styles.buttonText}>
+              {t('screens.customSummary.continue')}
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
