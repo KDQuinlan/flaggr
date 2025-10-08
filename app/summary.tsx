@@ -10,6 +10,7 @@ import {
   View,
   BackHandler,
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
@@ -47,10 +48,12 @@ const Summary = () => {
 
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'summary'>>();
+  const { t } = useTranslation();
   const userProgression = stateStore((state) => state.userProgress);
   const setProgression = stateStore((state) => state.setProgression);
   const { difficulty, gameMode, gameResult } = route.params;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;
+  const numberSuffix = gameMode === 'rapid' ? '' : '%';
 
   const initialProgressionRef = useRef(userProgression);
 
@@ -96,24 +99,29 @@ const Summary = () => {
 
   const unlockedMessage =
     initialIsNextLevelLocked && isAdvancementRequirementMet && userNextLevel
-      ? `You've unlocked ${userNextLevel}!`
+      ? t('screens.summary.unlockMessage', { userNextLevel })
       : null;
 
+  const scoreDisplay =
+    gameMode === 'rapid' ? resultPercentage : resultPercentage.toFixed(1);
+
   const newHighScoreMessage = isNewHighScore
-    ? `New High Score - ${
-        gameMode === 'rapid'
-          ? resultPercentage
-          : `${resultPercentage.toFixed(1)}%`
-      }`
+    ? t('screens.summary.newHighScore', {
+        score: scoreDisplay,
+        numberSuffix: numberSuffix,
+      })
     : null;
 
   const unlockRequirementMessage =
     userNextLevelProgression &&
     userNextLevelProgression.isLocked &&
     !isAdvancementRequirementMet
-      ? `To unlock ${userNextLevel}, you need a score of ${
-          userNextLevelProgression.advancementRequirement
-        }${gameMode === 'rapid' ? '' : '%'}`
+      ? t('screens.summary.unlockRequirementMessage', {
+          userNextLevel,
+          advancementRequirement:
+            userNextLevelProgression.advancementRequirement,
+          numberSuffix: numberSuffix,
+        })
       : null;
 
   useEffect(() => {
@@ -147,17 +155,22 @@ const Summary = () => {
   const AnimatedSummary = () => {
     const rows = [
       {
-        title: 'Score',
+        title: t('screens.summary.score'),
         value:
           gameMode === 'rapid'
             ? resultPercentage.toString()
             : `${resultPercentage.toFixed(1)}%`,
       },
-      { title: 'Correct', value: correct },
-      { title: 'Incorrect', value: incorrect },
-      { title: 'Best Streak', value: highestStreak },
+      { title: t('screens.summary.correct'), value: correct },
+      { title: t('screens.summary.incorrect'), value: incorrect },
+      { title: t('screens.summary.streak'), value: highestStreak },
       ...(timeTaken
-        ? [{ title: 'Time', value: formatTime(timeTaken, true) }]
+        ? [
+            {
+              title: t('screens.summary.time'),
+              value: formatTime(timeTaken, true),
+            },
+          ]
         : []),
     ];
     const animatedValues = useRef(
@@ -238,7 +251,9 @@ const Summary = () => {
     <SafeAreaView style={styles.rootContainer}>
       <ScrollView style={styles.summaryContainer}>
         <View style={styles.sectionContainer}>
-          <Text style={styles.title}>{difficulty} Completed!</Text>
+          <Text style={styles.title}>
+            {t('screens.summary.completed', { difficulty })}
+          </Text>
           <Image
             style={{ height: 56, width: 56 }}
             source={iconsMap[LEVEL_MAP[difficulty]]}
@@ -252,10 +267,12 @@ const Summary = () => {
             style={styles.button}
             activeOpacity={0.8}
             onPress={handleContinue}
-            accessibilityLabel="Continue to difficulty selection"
+            accessibilityLabel={t('screens.summary.continue')}
             accessibilityRole="button"
           >
-            <Text style={styles.buttonText}>Continue</Text>
+            <Text style={styles.buttonText}>
+              {t('screens.summary.continue')}
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

@@ -13,6 +13,7 @@ import * as Haptics from 'expo-haptics';
 import { useNavigation } from 'expo-router';
 import { Divider, List, Switch } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useTranslation } from 'react-i18next';
 
 import { colors } from '@/components/colors';
 import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
@@ -34,6 +35,7 @@ import setCurrentCustomGame from '@/util/updatedProgressionStructure/setCurrentC
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  const { t } = useTranslation();
   const userProgression = stateStore((state) => state.userProgress);
   const setProgression = stateStore((state) => state.setProgression);
   const [isScoreAccordionExpanded, setIsScoreAccordionExpanded] =
@@ -144,7 +146,9 @@ const CustomScreen = () => {
               style={styles.sectionIcon}
               source={require('@/assets/images/icons/resources/custom/region.png')}
             />
-            <Text style={styles.subHeader}>Regions</Text>
+            <Text style={styles.subHeader}>
+              {t('screens.custom.regions.title')}
+            </Text>
           </View>
           <ModifierMultiSelect
             varient="regions"
@@ -155,11 +159,13 @@ const CustomScreen = () => {
           <View style={styles.independentCountriesContainer}>
             <View style={styles.independentCountriesTextContainer}>
               <Text style={styles.independentCountriesText}>
-                Independent Countries Only
+                {t('screens.custom.regions.independentCountriesOnly')}
               </Text>
               {isIndependentOnly && (
                 <Text style={styles.independentCountriesMultiplierText}>
-                  {INDEPENDENT_COUNTRIES_PENALTY}x Score Multiplier
+                  {t('screens.custom.scoreMultiplier', {
+                    value: INDEPENDENT_COUNTRIES_PENALTY,
+                  })}
                 </Text>
               )}
             </View>
@@ -178,7 +184,9 @@ const CustomScreen = () => {
               style={styles.sectionIcon}
               source={require('@/assets/images/icons/resources/custom/cog.png')}
             />
-            <Text style={styles.subHeader}>Game Rules</Text>
+            <Text style={styles.subHeader}>
+              {t('screens.custom.gameRules.title')}
+            </Text>
           </View>
 
           {/* Time Limit */}
@@ -189,14 +197,18 @@ const CustomScreen = () => {
                 numberOfLines={1}
                 adjustsFontSizeToFit
               >
-                Time Limit
+                {t('screens.custom.gameRules.timeLimit')}
               </Text>
 
               <View style={styles.sliderQuantityContainer}>
                 <Text style={styles.sliderQuantityText}>
                   {timeLimitSlider === 0
-                    ? 'Unlimited'
-                    : `${timeLimitSlider} Seconds (${TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimitSlider]}x)`}
+                    ? t('screens.custom.gameRules.unlimited')
+                    : t('screens.custom.gameRules.timeLimitQuantity', {
+                        timeLimit: timeLimitSlider,
+                        scoreMultiplier:
+                          TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimitSlider],
+                      })}
                 </Text>
               </View>
             </View>
@@ -211,7 +223,9 @@ const CustomScreen = () => {
             />
 
             <View style={styles.sliderLabels}>
-              <Text style={styles.sliderLabelText}>Unlimited</Text>
+              <Text style={styles.sliderLabelText}>
+                {t('screens.custom.gameRules.unlimited')}
+              </Text>
               <Text style={styles.sliderLabelText}>
                 {MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS}
               </Text>
@@ -221,12 +235,16 @@ const CustomScreen = () => {
           {/* Game Length */}
           <View style={styles.ruleContainer}>
             <View style={styles.sliderHeaderContainer}>
-              <Text style={styles.ruleLabel}>Game Length</Text>
+              <Text style={styles.ruleLabel}>
+                {t('screens.custom.gameRules.gameLength')}
+              </Text>
 
               <Text style={styles.sliderQuantityText}>
                 {gameLengthSlider === 0
-                  ? 'Unlimited'
-                  : `${gameLengthSlider} Questions`}
+                  ? t('screens.custom.gameRules.unlimited')
+                  : t('screens.custom.gameRules.gameLengthQuantity', {
+                      gameLength: gameLengthSlider,
+                    })}
               </Text>
             </View>
 
@@ -239,19 +257,23 @@ const CustomScreen = () => {
               onValueChange={setGameLengthSlider}
             />
             <View style={styles.sliderLabels}>
-              <Text style={styles.sliderLabelText}>Unlimited</Text>
+              <Text style={styles.sliderLabelText}>
+                {t('screens.custom.gameRules.unlimited')}
+              </Text>
               <Text style={styles.sliderLabelText}>{MAXIMUM_GAME_LENGTH}</Text>
             </View>
             {gameLengthSlider === 0 && (
               <Text style={styles.helperText}>
-                No limit could result in a significant amount of questions!
+                {t('screens.custom.gameRules.gameLengthWarning')}
               </Text>
             )}
           </View>
         </View>
         <View style={styles.modifierContainer}>
           <Text style={styles.helperText}>
-            Score Multiplier: {finalScoreMultiplier}
+            {t('screens.custom.scoreMultiplier', {
+              value: finalScoreMultiplier,
+            })}
           </Text>
 
           <TouchableOpacity
@@ -290,7 +312,7 @@ const CustomScreen = () => {
                   : styles.buttonTextEnabled
               }
             >
-              Start
+              {t('screens.custom.start')}
             </Text>
           </TouchableOpacity>
         </View>

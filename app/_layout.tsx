@@ -1,6 +1,7 @@
 import { View } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import '@/i18n'; // initialize translations
 
 import { colors } from '@/components/colors';
 import en from '@/locales/en';
@@ -41,7 +42,7 @@ export default function RootLayout() {
           name="custom"
           options={{
             headerShown: true,
-            title: en.games.custom.name,
+            title: en.screens.home.custom.name,
           }}
         />
         <Stack.Screen

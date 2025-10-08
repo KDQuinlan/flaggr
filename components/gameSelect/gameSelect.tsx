@@ -24,7 +24,7 @@ const GameSelect: React.FC<GameSelectProps> = ({
   icon,
   onPress,
 }) => {
-  const isLocked = description === en.games.states.locked;
+  const isLocked = description === en.screens.difficulty.states.locked;
 
   return (
     <TouchableOpacity

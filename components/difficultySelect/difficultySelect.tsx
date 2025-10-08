@@ -38,7 +38,7 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
   advancementRequirement,
   onPress,
 }) => {
-  const isLocked = description === en.games.states.locked;
+  const isLocked = description === en.screens.difficulty.states.locked;
 
   const hasRapidOverbar =
     gameMode === 'rapid' && score > advancementRequirement;
