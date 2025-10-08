@@ -11,7 +11,7 @@ import {
 import Slider from '@react-native-community/slider';
 import * as Haptics from 'expo-haptics';
 import { useNavigation } from 'expo-router';
-import { Divider, Switch } from 'react-native-paper';
+import { Divider, List, Switch } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { colors } from '@/components/colors';
@@ -31,12 +31,15 @@ import {
 } from '@/constants/common';
 import stateStore from '@/state/store';
 import setCurrentCustomGame from '@/util/updatedProgressionStructure/setCurrentCustomGame';
-import HighScoreAccordion from '@/components/highScoreAccordion/highScoreAccordion';
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const userProgression = stateStore((state) => state.userProgress);
   const setProgression = stateStore((state) => state.setProgression);
+  const [isScoreAccordionExpanded, setIsScoreAccordionExpanded] =
+    useState<boolean>(false);
+  const [isStatsAccordionExpanded, setIsStatsAccordionExpanded] =
+    useState<boolean>(false);
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const [isIndependentOnly, setIsIndependentOnly] = useState<boolean>(false);
   const [gameLengthSlider, setGameLengthSlider] =
@@ -58,6 +61,8 @@ const CustomScreen = () => {
 
   const handleReset = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    setIsScoreAccordionExpanded(false);
+    setIsStatsAccordionExpanded(false);
     setSelectedRegions([]);
     setIsIndependentOnly(false);
     setGameLengthSlider(DEFAULT_GAME_LENGTH);
@@ -100,16 +105,37 @@ const CustomScreen = () => {
         showsVerticalScrollIndicator={false}
       >
         {!!score && (
-          <HighScoreAccordion
-            score={score}
-            regions={regions}
-            independentCountriesOnly={independentCountriesOnly}
-            timeLimit={timeLimit}
-            gameLength={gameLength}
-            correct={correct}
-            incorrect={incorrect}
-            streak={streak}
-          />
+          <List.Accordion
+            title={`High Score: ${score}`}
+            left={(props) => <List.Icon {...props} icon="trophy" />}
+            expanded={isScoreAccordionExpanded}
+            onPress={() =>
+              setIsScoreAccordionExpanded(!isScoreAccordionExpanded)
+            }
+          >
+            <List.Item title={`Regions: ${regions}`} />
+            <List.Item
+              title={`Independent Countries Only: ${independentCountriesOnly ? 'Enabled' : 'Disabled'}`}
+            />
+            <List.Item title={`Time Limit: ${timeLimit}`} />
+            <List.Item title={`Game Length: ${gameLength}`} />
+            {/* <TouchableOpacity onPress={() => console.log('Clicked')}>
+                <Text>Tap me!</Text>
+              </TouchableOpacity> */}
+
+            <List.Accordion
+              title={`Stats`}
+              left={(props) => <List.Icon {...props} icon="chart-line" />}
+              expanded={isStatsAccordionExpanded}
+              onPress={() =>
+                setIsStatsAccordionExpanded(!isStatsAccordionExpanded)
+              }
+            >
+              <List.Item title={`Correct: ${correct}`} />
+              <List.Item title={`Incorrect: ${incorrect}`} />
+              <List.Item title={`Best Streak: ${streak}`} />
+            </List.Accordion>
+          </List.Accordion>
         )}
         {/* Regions */}
         <View style={styles.modifierContainer}>
