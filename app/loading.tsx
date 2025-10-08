@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { colors } from '@/components/colors';
 
 const Loading = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('loading');
 
   return (
     <View style={styles.container}>
       <ActivityIndicator size="large" color={colors.bluePrimary} />
-      <Text style={styles.text}>{t('screens.loading')}</Text>
+      <Text style={styles.text}>{t('loading')}</Text>
     </View>
   );
 };

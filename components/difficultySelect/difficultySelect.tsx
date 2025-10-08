@@ -7,11 +7,11 @@ import {
   Image,
 } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 
 import { difficultySelectStyles as styles } from './difficultySelect.styles';
-import en from '@/locales/en';
 import { colors } from '../colors';
-import { LEVEL_TO_FLAG_AMOUNT_MAP } from '@/constants/mappers';
+import { LEVEL_MAP, LEVEL_TO_FLAG_AMOUNT_MAP } from '@/constants/mappers';
 import { Levels } from '@/state/secureStoreStructure';
 import iconsMap from '@/assets/images/icons';
 
@@ -38,8 +38,9 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
   advancementRequirement,
   onPress,
 }) => {
-  const isLocked = description === en.screens.difficulty.states.locked;
+  const { t } = useTranslation(['difficulty', 'data']);
 
+  const isLocked = description === t('states.locked');
   const hasRapidOverbar =
     gameMode === 'rapid' && score > advancementRequirement;
 
@@ -65,7 +66,7 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
         <View style={styles.gameDetailsContainer}>
           <View>
             <Text style={styles.title} numberOfLines={2} adjustsFontSizeToFit>
-              {title}
+              {t(`levels.${LEVEL_MAP[title]}`, { ns: 'data' })}
             </Text>
             <Text style={styles.description} numberOfLines={3}>
               {description}

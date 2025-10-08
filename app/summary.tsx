@@ -50,7 +50,7 @@ const Summary = () => {
 
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'summary'>>();
-  const { t } = useTranslation();
+  const { t } = useTranslation('summary');
   const userProgression = stateStore((state) => state.userProgress);
   const setProgression = stateStore((state) => state.setProgression);
   const { difficulty, gameMode, gameResult } = route.params;
@@ -101,14 +101,14 @@ const Summary = () => {
 
   const unlockedMessage =
     initialIsNextLevelLocked && isAdvancementRequirementMet && userNextLevel
-      ? t('screens.summary.unlockMessage', { userNextLevel })
+      ? t('unlockMessage', { userNextLevel })
       : null;
 
   const scoreDisplay =
     gameMode === 'rapid' ? resultPercentage : resultPercentage.toFixed(1);
 
   const newHighScoreMessage = isNewHighScore
-    ? t('screens.summary.newHighScore', {
+    ? t('newHighScore', {
         score: scoreDisplay,
         numberSuffix: numberSuffix,
       })
@@ -118,7 +118,7 @@ const Summary = () => {
     userNextLevelProgression &&
     userNextLevelProgression.isLocked &&
     !isAdvancementRequirementMet
-      ? t('screens.summary.unlockRequirementMessage', {
+      ? t('unlockRequirementMessage', {
           userNextLevel,
           advancementRequirement:
             userNextLevelProgression.advancementRequirement,
@@ -128,7 +128,7 @@ const Summary = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: t('screens.summary.summary', { difficulty }),
+      title: t('summary', { difficulty }),
     });
   }, [navigation, difficulty]);
 
@@ -159,19 +159,19 @@ const Summary = () => {
   const AnimatedSummary = () => {
     const rows = [
       {
-        title: t('screens.summary.score'),
+        title: t('score'),
         value:
           gameMode === 'rapid'
             ? resultPercentage.toString()
             : `${resultPercentage.toFixed(1)}%`,
       },
-      { title: t('screens.summary.correct'), value: correct },
-      { title: t('screens.summary.incorrect'), value: incorrect },
-      { title: t('screens.summary.streak'), value: highestStreak },
+      { title: t('correct'), value: correct },
+      { title: t('incorrect'), value: incorrect },
+      { title: t('streak'), value: highestStreak },
       ...(timeTaken
         ? [
             {
-              title: t('screens.summary.time'),
+              title: t('time'),
               value: formatTime(timeTaken, true),
             },
           ]
@@ -255,9 +255,7 @@ const Summary = () => {
     <SafeAreaView style={styles.rootContainer}>
       <ScrollView style={styles.summaryContainer}>
         <View style={styles.sectionContainer}>
-          <Text style={styles.title}>
-            {t('screens.summary.completed', { difficulty })}
-          </Text>
+          <Text style={styles.title}>{t('completed', { difficulty })}</Text>
           <Image
             style={{ height: 56, width: 56 }}
             source={iconsMap[LEVEL_MAP[difficulty]]}
@@ -271,12 +269,10 @@ const Summary = () => {
             style={styles.button}
             activeOpacity={0.8}
             onPress={handleContinue}
-            accessibilityLabel={t('screens.summary.continue')}
+            accessibilityLabel={t('continue')}
             accessibilityRole="button"
           >
-            <Text style={styles.buttonText}>
-              {t('screens.summary.continue')}
-            </Text>
+            <Text style={styles.buttonText}>{t('continue')}</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

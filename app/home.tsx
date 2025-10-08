@@ -14,7 +14,6 @@ import { useTranslation } from 'react-i18next';
 
 import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
-import en from '@/locales/en';
 import { NavigationProps } from '@/types/navigation';
 
 // const locales = Localization.getLocales();

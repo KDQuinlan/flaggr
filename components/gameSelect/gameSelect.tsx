@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 import { gameSelectStyles as styles } from './gameSelect.styles';
-import en from '@/locales/en';
 import iconsMap from '@/assets/images/icons';
 
 type GameSelectProps = {
@@ -24,14 +23,11 @@ const GameSelect: React.FC<GameSelectProps> = ({
   icon,
   onPress,
 }) => {
-  const isLocked = description === en.screens.difficulty.states.locked;
-
   return (
     <TouchableOpacity
       style={styles.gameModeContainer}
       onPress={onPress}
       activeOpacity={0.8}
-      disabled={isLocked}
     >
       <Image
         style={{ height: 48, width: 48, marginRight: 10 }}

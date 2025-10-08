@@ -31,7 +31,7 @@ export default function ModifierMultiSelect({
   value = [],
   onChange,
 }: ModifierMultiSelectProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation('data');
 
   const toggleModifier = (item: string) => {
     const newSelection = value.includes(item)
@@ -55,7 +55,7 @@ export default function ModifierMultiSelect({
             style={[styles.button, isSelected && styles.buttonSelected]}
             onPress={() => toggleModifier(item)}
             activeOpacity={0.8}
-            accessibilityLabel={t('data.regions.buttonAccessibility', {
+            accessibilityLabel={t('regions.buttonAccessibility', {
               option: regionFormattedForLocalisation,
             })}
             accessibilityRole="button"
@@ -66,7 +66,7 @@ export default function ModifierMultiSelect({
                 isSelected && styles.buttonTextSelected,
               ]}
             >
-              {t(`data.regions.${regionFormattedForLocalisation}`)}
+              {t(`regions.${regionFormattedForLocalisation}`)}
             </Text>
           </TouchableOpacity>
         );
