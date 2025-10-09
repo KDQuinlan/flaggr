@@ -5,6 +5,7 @@ import {
   StyleSheet,
   PixelRatio,
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 import { colors } from '@/components/colors';
 import { VALID_REGIONS } from '@/constants/common';
@@ -30,6 +31,8 @@ export default function ModifierMultiSelect({
   value = [],
   onChange,
 }: ModifierMultiSelectProps) {
+  const { t } = useTranslation('data');
+
   const toggleModifier = (item: string) => {
     const newSelection = value.includes(item)
       ? value.filter((m) => m !== item)
@@ -43,13 +46,18 @@ export default function ModifierMultiSelect({
     <View style={styles.container}>
       {options.map((item) => {
         const isSelected = value.includes(item);
+        const regionFormattedForLocalisation = item
+          .toLowerCase()
+          .replace(/\s+/g, '');
         return (
           <TouchableOpacity
             key={item}
             style={[styles.button, isSelected && styles.buttonSelected]}
             onPress={() => toggleModifier(item)}
             activeOpacity={0.8}
-            accessibilityLabel={`Toggle ${item}`}
+            accessibilityLabel={t('regions.buttonAccessibility', {
+              option: regionFormattedForLocalisation,
+            })}
             accessibilityRole="button"
           >
             <Text
@@ -58,7 +66,7 @@ export default function ModifierMultiSelect({
                 isSelected && styles.buttonTextSelected,
               ]}
             >
-              {item}
+              {t(`regions.${regionFormattedForLocalisation}`)}
             </Text>
           </TouchableOpacity>
         );

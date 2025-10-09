@@ -8,7 +8,7 @@ const SummaryInfoRow = ({
   value: number | string;
 }) => (
   <View style={styles.summaryInfoContainer}>
-    <Text>{title}:</Text>
+    <Text>{title}</Text>
     <Text>{value}</Text>
   </View>
 );

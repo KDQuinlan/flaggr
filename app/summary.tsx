@@ -10,6 +10,7 @@ import {
   View,
   BackHandler,
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
@@ -29,6 +30,8 @@ import persistProgression from '@/util/persistProgression/persistProgression';
 import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import typedKeys from '@/util/typedKeys/typedKeys';
 
+// TODO - use focus effect hook from expo instead?
+
 const Summary = () => {
   useFocusEffect(
     useCallback(() => {
@@ -47,10 +50,15 @@ const Summary = () => {
 
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'summary'>>();
+  const { t } = useTranslation('summary');
   const userProgression = stateStore((state) => state.userProgress);
   const setProgression = stateStore((state) => state.setProgression);
   const { difficulty, gameMode, gameResult } = route.params;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;
+  const numberSuffix = gameMode === 'rapid' ? '' : '%';
+  const translatedDifficulty = t(`levels.${LEVEL_MAP[difficulty]}`, {
+    ns: 'data',
+  });
 
   const initialProgressionRef = useRef(userProgression);
 
@@ -96,28 +104,41 @@ const Summary = () => {
 
   const unlockedMessage =
     initialIsNextLevelLocked && isAdvancementRequirementMet && userNextLevel
-      ? `You've unlocked ${userNextLevel}!`
+      ? t('unlockMessage', {
+          userNextLevel: t(`levels.${LEVEL_MAP[userNextLevel]}`, {
+            ns: 'data',
+          }),
+        })
       : null;
 
+  const scoreDisplay =
+    gameMode === 'rapid' ? resultPercentage : resultPercentage.toFixed(1);
+
   const newHighScoreMessage = isNewHighScore
-    ? `New High Score - ${
-        gameMode === 'rapid'
-          ? resultPercentage
-          : `${resultPercentage.toFixed(1)}%`
-      }`
+    ? t('newHighScore', {
+        score: scoreDisplay,
+        numberSuffix: numberSuffix,
+      })
     : null;
 
   const unlockRequirementMessage =
     userNextLevelProgression &&
     userNextLevelProgression.isLocked &&
     !isAdvancementRequirementMet
-      ? `To unlock ${userNextLevel}, you need a score of ${
-          userNextLevelProgression.advancementRequirement
-        }${gameMode === 'rapid' ? '' : '%'}`
+      ? t('unlockRequirementMessage', {
+          userNextLevel: t(`levels.${LEVEL_MAP[userNextLevel]}`, {
+            ns: 'data',
+          }),
+          advancementRequirement:
+            userNextLevelProgression.advancementRequirement,
+          numberSuffix: numberSuffix,
+        })
       : null;
 
   useEffect(() => {
-    navigation.setOptions({ title: `Summary - ${difficulty}` });
+    navigation.setOptions({
+      title: t('summary', { difficulty: translatedDifficulty }),
+    });
   }, [navigation, difficulty]);
 
   useEffect(() => {
@@ -147,17 +168,22 @@ const Summary = () => {
   const AnimatedSummary = () => {
     const rows = [
       {
-        title: 'Score',
+        title: t('score'),
         value:
           gameMode === 'rapid'
             ? resultPercentage.toString()
             : `${resultPercentage.toFixed(1)}%`,
       },
-      { title: 'Correct', value: correct },
-      { title: 'Incorrect', value: incorrect },
-      { title: 'Best Streak', value: highestStreak },
+      { title: t('correct'), value: correct },
+      { title: t('incorrect'), value: incorrect },
+      { title: t('streak'), value: highestStreak },
       ...(timeTaken
-        ? [{ title: 'Time', value: formatTime(timeTaken, true) }]
+        ? [
+            {
+              title: t('time'),
+              value: formatTime(timeTaken, true),
+            },
+          ]
         : []),
     ];
     const animatedValues = useRef(
@@ -238,7 +264,9 @@ const Summary = () => {
     <SafeAreaView style={styles.rootContainer}>
       <ScrollView style={styles.summaryContainer}>
         <View style={styles.sectionContainer}>
-          <Text style={styles.title}>{difficulty} Completed!</Text>
+          <Text style={styles.title}>
+            {t('completed', { difficulty: translatedDifficulty })}
+          </Text>
           <Image
             style={{ height: 56, width: 56 }}
             source={iconsMap[LEVEL_MAP[difficulty]]}
@@ -252,10 +280,10 @@ const Summary = () => {
             style={styles.button}
             activeOpacity={0.8}
             onPress={handleContinue}
-            accessibilityLabel="Continue to difficulty selection"
+            accessibilityLabel={t('continue')}
             accessibilityRole="button"
           >
-            <Text style={styles.buttonText}>Continue</Text>
+            <Text style={styles.buttonText}>{t('continue')}</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

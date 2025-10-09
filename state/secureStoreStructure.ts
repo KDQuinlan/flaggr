@@ -1,3 +1,7 @@
+import * as Localization from 'expo-localization';
+const locales = Localization.getLocales();
+const locale = locales[0].languageCode;
+
 export type Levels = 'Level 1' | 'Level 2' | 'Level 3' | 'Level 4' | 'Level 5';
 export type Difficulties = 1 | 2 | 3 | 4 | 5;
 export type LevelKeys =
@@ -50,6 +54,14 @@ export type ProgressionStructure = {
     rapid: GameProgression;
     custom: CustomData;
   };
+};
+
+export type UserSettingStructure = {
+  locale: string;
+};
+
+export const defaultUserSettings: UserSettingStructure = {
+  locale: locale ?? 'en',
 };
 
 export const defaultProgressionStructure: ProgressionStructure = {

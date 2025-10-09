@@ -1,4 +1,5 @@
-export const STORAGE_KEY = 'flaggr-store';
+export const STORAGE_KEY_PROGRESSION = 'flaggr-progression';
+export const STORAGE_KEY_SETTINGS = 'flaggr-settings';
 export const VERSION_KEY = 1;
 
 export const MINIMUM_DIFFICULTY = 1;

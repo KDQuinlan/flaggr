@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 
 import { colors } from '@/components/colors';
 import DifficultySelect from '@/components/difficultySelect/difficultySelect';
@@ -16,13 +17,14 @@ import getCompletionDescription from '@/util/getCompletionDescription/getComplet
 
 const Difficulty = () => {
   const navigation = useNavigation<NavigationProps>();
-  const userProgression = stateStore((state) => state.userProgress);
   const route = useRoute<RouteProp<RootStackParamList, 'difficulty'>>();
+  const { t } = useTranslation('difficulty');
+  const userProgression = stateStore((state) => state.userProgress);
   const { id, title } = route.params;
   const progression = userProgression.games[id];
 
   useEffect(() => {
-    navigation.setOptions({ title });
+    navigation.setOptions({ title: t(`titles.${title.toLowerCase()}`) });
   }, [navigation]);
 
   return (

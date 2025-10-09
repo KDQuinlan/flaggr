@@ -5,16 +5,23 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { useTranslation } from 'react-i18next';
+// import i18n from '@/locales/i18n';
+// onPress={() => i18n.changeLanguage('es')}
 
 import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
-import en from '@/locales/en';
 import { NavigationProps } from '@/types/navigation';
+
+// TODO - Shorten localisation country names for better UI usage
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  const { t } = useTranslation('home');
   return (
     <SafeAreaView style={styles.rootContainer}>
       <ScrollView
@@ -22,34 +29,38 @@ const HomeScreen = () => {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>{en.home.title}</Text>
+          <Ionicons name="settings" size={20} color={colors.offWhite} />
+          <Text style={styles.title}>Flaggr</Text>
+          <TouchableOpacity>
+            <Ionicons name="settings" size={20} color={colors.blueSecondary} />
+          </TouchableOpacity>
         </View>
         <GameSelect
-          title={en.games.standard.name}
-          description={en.games.standard.description}
-          icon={en.games.standard.id}
+          title={t('standard.title')}
+          description={t('standard.description')}
+          icon="standard"
           onPress={() =>
             navigation.navigate('difficulty', {
-              id: en.games.standard.id,
-              title: en.games.standard.name,
+              id: 'standard',
+              title: 'Standard',
             })
           }
         />
         <GameSelect
-          title={en.games.rapid.name}
-          description={en.games.rapid.description}
-          icon={en.games.rapid.id}
+          title={t('rapid.title')}
+          description={t('rapid.description')}
+          icon="rapid"
           onPress={() =>
             navigation.navigate('difficulty', {
-              id: en.games.rapid.id,
-              title: en.games.rapid.name,
+              id: 'rapid',
+              title: 'Rapid',
             })
           }
         />
         <GameSelect
-          title={en.games.custom.name}
-          description={en.games.custom.description}
-          icon={en.games.custom.id}
+          title={t('custom.title')}
+          description={t('custom.description')}
+          icon="custom"
           onPress={() => navigation.navigate('custom')}
         />
       </ScrollView>
@@ -70,9 +81,12 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   titleContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     paddingTop: 10,
+    width: '100%',
+    paddingHorizontal: 20,
   },
   title: {
     fontWeight: 'bold',

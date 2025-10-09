@@ -13,6 +13,7 @@ import * as Haptics from 'expo-haptics';
 import { useNavigation } from 'expo-router';
 import { Divider, List, Switch } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useTranslation } from 'react-i18next';
 
 import { colors } from '@/components/colors';
 import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
@@ -34,6 +35,7 @@ import setCurrentCustomGame from '@/util/updatedProgressionStructure/setCurrentC
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  const { t } = useTranslation('custom');
   const userProgression = stateStore((state) => state.userProgress);
   const setProgression = stateStore((state) => state.setProgression);
   const [isScoreAccordionExpanded, setIsScoreAccordionExpanded] =
@@ -106,34 +108,60 @@ const CustomScreen = () => {
       >
         {!!score && (
           <List.Accordion
-            title={`High Score: ${score}`}
+            title={t('highScoreAccordion.title', { score })}
             left={(props) => <List.Icon {...props} icon="trophy" />}
             expanded={isScoreAccordionExpanded}
             onPress={() =>
               setIsScoreAccordionExpanded(!isScoreAccordionExpanded)
             }
           >
-            <List.Item title={`Regions: ${regions}`} />
             <List.Item
-              title={`Independent Countries Only: ${independentCountriesOnly ? 'Enabled' : 'Disabled'}`}
+              title={t('highScoreAccordion.regions', {
+                regions: regions.join(', '),
+              })}
             />
-            <List.Item title={`Time Limit: ${timeLimit}`} />
-            <List.Item title={`Game Length: ${gameLength}`} />
-            {/* <TouchableOpacity onPress={() => console.log('Clicked')}>
-                <Text>Tap me!</Text>
-              </TouchableOpacity> */}
+            <List.Item
+              title={
+                independentCountriesOnly
+                  ? t('highScoreAccordion.independentCountriesOnlyEnabled')
+                  : t('highScoreAccordion.independentCountriesOnlyDisabled')
+              }
+            />
+            <List.Item
+              title={t('highScoreAccordion.timeLimit', {
+                timeLimit,
+              })}
+            />
+            <List.Item
+              title={t('highScoreAccordion.gameLength', {
+                gameLength,
+              })}
+            />
 
             <List.Accordion
-              title={`Stats`}
+              title={t('highScoreAccordion.stats')}
               left={(props) => <List.Icon {...props} icon="chart-line" />}
               expanded={isStatsAccordionExpanded}
               onPress={() =>
                 setIsStatsAccordionExpanded(!isStatsAccordionExpanded)
               }
+              style={{ marginLeft: 8 }}
             >
-              <List.Item title={`Correct: ${correct}`} />
-              <List.Item title={`Incorrect: ${incorrect}`} />
-              <List.Item title={`Best Streak: ${streak}`} />
+              <List.Item
+                title={t('highScoreAccordion.correct', {
+                  correct,
+                })}
+              />
+              <List.Item
+                title={t('highScoreAccordion.incorrect', {
+                  incorrect,
+                })}
+              />
+              <List.Item
+                title={t('highScoreAccordion.bestStreak', {
+                  streak,
+                })}
+              />
             </List.Accordion>
           </List.Accordion>
         )}
@@ -144,7 +172,7 @@ const CustomScreen = () => {
               style={styles.sectionIcon}
               source={require('@/assets/images/icons/resources/custom/region.png')}
             />
-            <Text style={styles.subHeader}>Regions</Text>
+            <Text style={styles.subHeader}>{t('regions.title')}</Text>
           </View>
           <ModifierMultiSelect
             varient="regions"
@@ -155,11 +183,13 @@ const CustomScreen = () => {
           <View style={styles.independentCountriesContainer}>
             <View style={styles.independentCountriesTextContainer}>
               <Text style={styles.independentCountriesText}>
-                Independent Countries Only
+                {t('regions.independentCountriesOnly')}
               </Text>
               {isIndependentOnly && (
                 <Text style={styles.independentCountriesMultiplierText}>
-                  {INDEPENDENT_COUNTRIES_PENALTY}x Score Multiplier
+                  {t('scoreMultiplier', {
+                    value: INDEPENDENT_COUNTRIES_PENALTY,
+                  })}
                 </Text>
               )}
             </View>
@@ -178,7 +208,7 @@ const CustomScreen = () => {
               style={styles.sectionIcon}
               source={require('@/assets/images/icons/resources/custom/cog.png')}
             />
-            <Text style={styles.subHeader}>Game Rules</Text>
+            <Text style={styles.subHeader}>{t('gameRules.title')}</Text>
           </View>
 
           {/* Time Limit */}
@@ -189,14 +219,18 @@ const CustomScreen = () => {
                 numberOfLines={1}
                 adjustsFontSizeToFit
               >
-                Time Limit
+                {t('gameRules.timeLimit')}
               </Text>
 
               <View style={styles.sliderQuantityContainer}>
                 <Text style={styles.sliderQuantityText}>
                   {timeLimitSlider === 0
-                    ? 'Unlimited'
-                    : `${timeLimitSlider} Seconds (${TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimitSlider]}x)`}
+                    ? t('gameRules.unlimited')
+                    : t('gameRules.timeLimitQuantity', {
+                        timeLimit: timeLimitSlider,
+                        scoreMultiplier:
+                          TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimitSlider],
+                      })}
                 </Text>
               </View>
             </View>
@@ -211,7 +245,9 @@ const CustomScreen = () => {
             />
 
             <View style={styles.sliderLabels}>
-              <Text style={styles.sliderLabelText}>Unlimited</Text>
+              <Text style={styles.sliderLabelText}>
+                {t('gameRules.unlimited')}
+              </Text>
               <Text style={styles.sliderLabelText}>
                 {MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS}
               </Text>
@@ -221,12 +257,14 @@ const CustomScreen = () => {
           {/* Game Length */}
           <View style={styles.ruleContainer}>
             <View style={styles.sliderHeaderContainer}>
-              <Text style={styles.ruleLabel}>Game Length</Text>
+              <Text style={styles.ruleLabel}>{t('gameRules.gameLength')}</Text>
 
               <Text style={styles.sliderQuantityText}>
                 {gameLengthSlider === 0
-                  ? 'Unlimited'
-                  : `${gameLengthSlider} Questions`}
+                  ? t('gameRules.unlimited')
+                  : t('gameRules.gameLengthQuantity', {
+                      gameLength: gameLengthSlider,
+                    })}
               </Text>
             </View>
 
@@ -239,19 +277,23 @@ const CustomScreen = () => {
               onValueChange={setGameLengthSlider}
             />
             <View style={styles.sliderLabels}>
-              <Text style={styles.sliderLabelText}>Unlimited</Text>
+              <Text style={styles.sliderLabelText}>
+                {t('gameRules.unlimited')}
+              </Text>
               <Text style={styles.sliderLabelText}>{MAXIMUM_GAME_LENGTH}</Text>
             </View>
             {gameLengthSlider === 0 && (
               <Text style={styles.helperText}>
-                No limit could result in a significant amount of questions!
+                {t('gameRules.gameLengthWarning')}
               </Text>
             )}
           </View>
         </View>
         <View style={styles.modifierContainer}>
           <Text style={styles.helperText}>
-            Score Multiplier: {finalScoreMultiplier}
+            {t('scoreMultiplier', {
+              value: finalScoreMultiplier,
+            })}
           </Text>
 
           <TouchableOpacity
@@ -290,7 +332,7 @@ const CustomScreen = () => {
                   : styles.buttonTextEnabled
               }
             >
-              Start
+              {t('start')}
             </Text>
           </TouchableOpacity>
         </View>

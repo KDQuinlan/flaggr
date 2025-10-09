@@ -1,11 +1,13 @@
 import { View } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useTranslation } from 'react-i18next';
 
+import '@/locales/i18n'; // initialize translations
 import { colors } from '@/components/colors';
-import en from '@/locales/en';
 
 export default function RootLayout() {
+  const { t } = useTranslation('custom');
   return (
     <View style={{ flex: 1, backgroundColor: colors.offWhite }}>
       <StatusBar style="dark" backgroundColor={colors.offWhite} />
@@ -41,7 +43,7 @@ export default function RootLayout() {
           name="custom"
           options={{
             headerShown: true,
-            title: en.games.custom.name,
+            title: t('title'),
           }}
         />
         <Stack.Screen
