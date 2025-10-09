@@ -11,6 +11,7 @@ import en_summary from './en/summary';
 import en_custom from './en/custom';
 import en_customSummary from './en/customSummary';
 import en_loading from './en/loading';
+import en_setup from './en/setup';
 
 // Spanish namespaces
 import es_data from './es/data';
@@ -20,6 +21,7 @@ import es_summary from './es/summary';
 import es_custom from './es/custom';
 import es_customSummary from './es/customSummary';
 import es_loading from './es/loading';
+import es_setup from './es/setup';
 
 i18n.use(initReactI18next).init({
   compatibilityJSON: 'v4',
@@ -35,6 +37,7 @@ i18n.use(initReactI18next).init({
       custom: en_custom,
       customSummary: en_customSummary,
       loading: en_loading,
+      setup: en_setup,
     },
     es: {
       data: es_data,
@@ -44,6 +47,7 @@ i18n.use(initReactI18next).init({
       custom: es_custom,
       customSummary: es_customSummary,
       loading: es_loading,
+      setup: es_setup,
     },
   },
 

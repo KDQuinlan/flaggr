@@ -36,6 +36,11 @@ export const VALID_REGIONS = [
   'Africa',
 ];
 
+export const LANGUAGES = [
+  { label: 'English', value: 'en' },
+  { label: 'Español', value: 'es' },
+];
+
 export const NON_INDEPENDENT_COUNTRY_CODES = [
   'AI',
   'AQ',
