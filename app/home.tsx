@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useTranslation } from 'react-i18next';
-import i18n from '@/locales/i18n';
+// import i18n from '@/locales/i18n';
+// onPress={() => i18n.changeLanguage('es')}
 
 import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
@@ -31,12 +32,7 @@ const HomeScreen = () => {
           <Ionicons name="settings" size={20} color={colors.offWhite} />
           <Text style={styles.title}>Flaggr</Text>
           <TouchableOpacity>
-            <Ionicons
-              name="settings"
-              size={20}
-              color={colors.blueSecondary}
-              // onPress={() => i18n.changeLanguage('es')}
-            />
+            <Ionicons name="settings" size={20} color={colors.blueSecondary} />
           </TouchableOpacity>
         </View>
         <GameSelect
