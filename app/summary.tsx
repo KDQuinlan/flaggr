@@ -56,6 +56,9 @@ const Summary = () => {
   const { difficulty, gameMode, gameResult } = route.params;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;
   const numberSuffix = gameMode === 'rapid' ? '' : '%';
+  const translatedDifficulty = t(`levels.${LEVEL_MAP[difficulty]}`, {
+    ns: 'data',
+  });
 
   const initialProgressionRef = useRef(userProgression);
 
@@ -101,7 +104,11 @@ const Summary = () => {
 
   const unlockedMessage =
     initialIsNextLevelLocked && isAdvancementRequirementMet && userNextLevel
-      ? t('unlockMessage', { userNextLevel })
+      ? t('unlockMessage', {
+          userNextLevel: t(`levels.${LEVEL_MAP[userNextLevel]}`, {
+            ns: 'data',
+          }),
+        })
       : null;
 
   const scoreDisplay =
@@ -119,7 +126,9 @@ const Summary = () => {
     userNextLevelProgression.isLocked &&
     !isAdvancementRequirementMet
       ? t('unlockRequirementMessage', {
-          userNextLevel,
+          userNextLevel: t(`levels.${LEVEL_MAP[userNextLevel]}`, {
+            ns: 'data',
+          }),
           advancementRequirement:
             userNextLevelProgression.advancementRequirement,
           numberSuffix: numberSuffix,
@@ -128,7 +137,7 @@ const Summary = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: t('summary', { difficulty }),
+      title: t('summary', { difficulty: translatedDifficulty }),
     });
   }, [navigation, difficulty]);
 
@@ -255,7 +264,9 @@ const Summary = () => {
     <SafeAreaView style={styles.rootContainer}>
       <ScrollView style={styles.summaryContainer}>
         <View style={styles.sectionContainer}>
-          <Text style={styles.title}>{t('completed', { difficulty })}</Text>
+          <Text style={styles.title}>
+            {t('completed', { difficulty: translatedDifficulty })}
+          </Text>
           <Image
             style={{ height: 56, width: 56 }}
             source={iconsMap[LEVEL_MAP[difficulty]]}

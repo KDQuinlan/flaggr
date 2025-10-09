@@ -10,13 +10,13 @@ import {
 } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useTranslation } from 'react-i18next';
-// import * as Localization from 'expo-localization';
+import i18n from '@/locales/i18n';
 
 import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
 
-// const locales = Localization.getLocales();
+// TODO - Shorten localisation country names for better UI usage
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -31,7 +31,12 @@ const HomeScreen = () => {
           <Ionicons name="settings" size={20} color={colors.offWhite} />
           <Text style={styles.title}>Flaggr</Text>
           <TouchableOpacity>
-            <Ionicons name="settings" size={20} color={colors.blueSecondary} />
+            <Ionicons
+              name="settings"
+              size={20}
+              color={colors.blueSecondary}
+              // onPress={() => i18n.changeLanguage('es')}
+            />
           </TouchableOpacity>
         </View>
         <GameSelect

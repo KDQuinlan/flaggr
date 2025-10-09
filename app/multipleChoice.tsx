@@ -11,10 +11,11 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import { Image } from 'expo-image';
 import { ProgressBar } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 
 import { colors } from '@/components/colors';
 import { ANSWER_LETTERS } from '@/constants/common';
-import { DIFFICULTY_ID_TO_LEVEL_MAP } from '@/constants/mappers';
+import { DIFFICULTY_ID_TO_LEVEL_MAP, LEVEL_MAP } from '@/constants/mappers';
 import determineButtonColor from '@/util/determineButtonColor/determineButtonColor';
 import formatTime from '@/util/formatTime/formatTime';
 import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/generateMultipleChoiceAnswers';
@@ -22,6 +23,7 @@ import flags from '@/assets/images/flags';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import determineScoreToAdd from '@/util/determineScoreToAdd/determineScoreToAdd';
 import stateStore from '@/state/store';
+import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 
 const MultipleChoice = () => {
   const { height } = useWindowDimensions();
@@ -30,8 +32,9 @@ const MultipleChoice = () => {
   const dynamicPadding = isSmallScreen ? 5 : 20;
 
   const navigation = useNavigation<NavigationProps>();
-  const userProgression = stateStore((state) => state.userProgress);
   const route = useRoute<RouteProp<RootStackParamList, 'multipleChoice'>>();
+  const { t } = useTranslation('data');
+  const userProgression = stateStore((state) => state.userProgress);
   const { title, gameMode, questions, timeLimit } = route.params;
   const { scoreMultiplier } = userProgression.games.custom.currentGame;
 
@@ -126,7 +129,10 @@ const MultipleChoice = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      title,
+      title:
+        title === 'Custom'
+          ? t('title', { ns: 'custom' })
+          : t(`levels.${LEVEL_MAP[title]}`),
       headerRight: () => <Text>{formatTime(timeElapsedInSeconds)}</Text>,
     });
   }, [navigation, timeElapsedInSeconds, title]);
@@ -251,7 +257,7 @@ const MultipleChoice = () => {
               adjustsFontSizeToFit
               numberOfLines={2}
             >
-              {item}
+              {t(`countries.${toJsonKeyFormat(item)}`)}
             </Text>
           </TouchableOpacity>
         ))}

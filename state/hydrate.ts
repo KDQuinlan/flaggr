@@ -1,5 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
 
+import i18n from '@/locales/i18n';
 import stateStore from './store';
 import {
   STORAGE_KEY_PROGRESSION,
@@ -40,6 +41,7 @@ export const hydrateStore = async () => {
       STORAGE_KEY_SETTINGS,
       JSON.stringify(defaultUserSettings)
     );
+    i18n.changeLanguage(defaultUserSettings.locale);
   }
 
   // Signal ready
