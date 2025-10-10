@@ -2,28 +2,31 @@ import { create } from 'zustand';
 
 import {
   ProgressionStructure,
+  UserSettingStructure,
   defaultProgressionStructure,
+  defaultUserSettings,
 } from './secureStoreStructure';
 
 type State = {
   isInitialised: boolean;
-  locale: string;
+  userSettings: UserSettingStructure;
   userProgress: ProgressionStructure;
 };
 
 type Actions = {
   setIsInitialised: () => void;
-  setUserSettings: (locale: string) => void;
+  setUserSettings: (userSettings: UserSettingStructure) => void;
   setProgression: (progression: ProgressionStructure) => void;
 };
 
 const stateStore = create<State & Actions>((set) => ({
   isInitialised: false,
-  locale: 'en',
+  userSettings: defaultUserSettings,
   userProgress: defaultProgressionStructure,
 
   setIsInitialised: () => set(() => ({ isInitialised: true })),
-  setUserSettings: (locale: string) => set(() => ({ locale })),
+  setUserSettings: (userSettings: UserSettingStructure) =>
+    set(() => ({ userSettings })),
   setProgression: (progression: ProgressionStructure) =>
     set(() => ({ userProgress: progression })),
 }));

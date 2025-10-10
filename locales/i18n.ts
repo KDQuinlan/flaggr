@@ -1,25 +1,8 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-// TODO - replace imports with index usage
-
-// English namespaces
-import en_data from './en/data';
-import en_home from './en/home';
-import en_difficulty from './en/difficulty';
-import en_summary from './en/summary';
-import en_custom from './en/custom';
-import en_customSummary from './en/customSummary';
-import en_loading from './en/loading';
-
-// Spanish namespaces
-import es_data from './es/data';
-import es_home from './es/home';
-import es_difficulty from './es/difficulty';
-import es_summary from './es/summary';
-import es_custom from './es/custom';
-import es_customSummary from './es/customSummary';
-import es_loading from './es/loading';
+import en from '@/locales/en/index';
+import es from '@/locales/es/index';
 
 i18n.use(initReactI18next).init({
   compatibilityJSON: 'v4',
@@ -28,22 +11,26 @@ i18n.use(initReactI18next).init({
 
   resources: {
     en: {
-      data: en_data,
-      home: en_home,
-      difficulty: en_difficulty,
-      summary: en_summary,
-      custom: en_custom,
-      customSummary: en_customSummary,
-      loading: en_loading,
+      data: en.data,
+      home: en.home,
+      difficulty: en.difficulty,
+      summary: en.summary,
+      custom: en.custom,
+      customSummary: en.customSummary,
+      loading: en.loading,
+      setup: en.setup,
+      settings: en.settings,
     },
     es: {
-      data: es_data,
-      home: es_home,
-      difficulty: es_difficulty,
-      summary: es_summary,
-      custom: es_custom,
-      customSummary: es_customSummary,
-      loading: es_loading,
+      data: es.data,
+      home: es.home,
+      difficulty: es.difficulty,
+      summary: es.summary,
+      custom: es.custom,
+      customSummary: es.customSummary,
+      loading: es.loading,
+      setup: es.setup,
+      settings: es.settings,
     },
   },
 

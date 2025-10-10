@@ -7,7 +7,7 @@ import '@/locales/i18n'; // initialize translations
 import { colors } from '@/components/colors';
 
 export default function RootLayout() {
-  const { t } = useTranslation('custom');
+  // const { t } = useTranslation('custom');
   return (
     <View style={{ flex: 1, backgroundColor: colors.offWhite }}>
       <StatusBar style="dark" backgroundColor={colors.offWhite} />
@@ -28,6 +28,26 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen
+          name="setup"
+          options={{
+            headerShown: false,
+            gestureEnabled: false,
+          }}
+        />
+        <Stack.Screen
+          name="home"
+          options={{
+            headerShown: false,
+            gestureEnabled: false,
+          }}
+        />
+        <Stack.Screen
+          name="settings"
+          options={{
+            headerShown: true,
+          }}
+        />
+        <Stack.Screen
           name="difficulty"
           options={{
             headerShown: true,
@@ -43,7 +63,6 @@ export default function RootLayout() {
           name="custom"
           options={{
             headerShown: true,
-            title: t('title'),
           }}
         />
         <Stack.Screen

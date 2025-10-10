@@ -5,6 +5,8 @@ import difficulty from './difficulty';
 import summary from './summary';
 import custom from './custom';
 import customSummary from './customSummary';
+import setup from './setup';
+import settings from './settings';
 
 export default {
   data,
@@ -14,4 +16,6 @@ export default {
   summary,
   custom,
   customSummary,
+  setup,
+  settings,
 };

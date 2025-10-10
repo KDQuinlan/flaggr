@@ -26,7 +26,7 @@ import { ProgressionStructure } from '@/state/secureStoreStructure';
 import createUpdatedProgressionStructure from '@/util/updatedProgressionStructure/createdUpdatedProgressionStructure';
 import formatTime from '@/util/formatTime/formatTime';
 import getNextLevelKey from '@/util/getNextLevelKey/getNextLevelKey';
-import persistProgression from '@/util/persistProgression/persistProgression';
+import persistProgression from '@/util/persistState/persistProgression';
 import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import typedKeys from '@/util/typedKeys/typedKeys';
 

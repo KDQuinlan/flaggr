@@ -18,7 +18,7 @@ import SummaryInfoRow from '@/components/summaryInfoRow/summaryInfoRow';
 import stateStore from '@/state/store';
 import { ProgressionStructure } from '@/state/secureStoreStructure';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
-import persistProgression from '@/util/persistProgression/persistProgression';
+import persistProgression from '@/util/persistState/persistProgression';
 import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import formatTime from '@/util/formatTime/formatTime';
 import setBestGameData from '@/util/updatedProgressionStructure/setBestGameData';
