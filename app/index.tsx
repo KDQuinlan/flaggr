@@ -10,6 +10,7 @@ import stateStore from '@/state/store';
 
 const IndexScreen = () => {
   const isInitialised = stateStore((state) => state.isInitialised);
+  const userSettings = stateStore((state) => state.userSettings);
 
   useEffect(() => {
     const loadData = async () => {
@@ -20,8 +21,11 @@ const IndexScreen = () => {
   }, []);
 
   if (!isInitialised) return <Loading />;
-
-  return <SetupScreen />;
+  if (!userSettings.isSetup) {
+    return <SetupScreen />;
+  } else {
+    return <HomeScreen />;
+  }
 };
 
 export default IndexScreen;

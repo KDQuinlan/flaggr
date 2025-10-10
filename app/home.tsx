@@ -10,12 +10,11 @@ import {
 } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useTranslation } from 'react-i18next';
-// import i18n from '@/locales/i18n';
-// onPress={() => i18n.changeLanguage('es')}
 
 import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
+import { APP_NAME } from '@/constants/common';
 
 // TODO - Shorten localisation country names for better UI usage
 
@@ -30,8 +29,8 @@ const HomeScreen = () => {
       >
         <View style={styles.titleContainer}>
           <Ionicons name="settings" size={20} color={colors.offWhite} />
-          <Text style={styles.title}>Flaggr</Text>
-          <TouchableOpacity>
+          <Text style={styles.title}>{APP_NAME}</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('settings')}>
             <Ionicons name="settings" size={20} color={colors.blueSecondary} />
           </TouchableOpacity>
         </View>

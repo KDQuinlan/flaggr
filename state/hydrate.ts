@@ -1,6 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
-
 import i18n from '@/locales/i18n';
+
 import stateStore from './store';
 import {
   STORAGE_KEY_PROGRESSION,
@@ -18,14 +18,15 @@ export const hydrateStore = async () => {
   const { setIsInitialised, setUserSettings, setProgression } =
     stateStore.getState();
 
-  const userSettings = await SecureStore.getItemAsync(STORAGE_KEY_SETTINGS);
-  const userProgression = await SecureStore.getItemAsync(
+  const userSettingsSecure =
+    await SecureStore.getItemAsync(STORAGE_KEY_SETTINGS);
+  const userProgressionSecure = await SecureStore.getItemAsync(
     STORAGE_KEY_PROGRESSION
   );
 
   // Restore progression or initialize default
-  if (userProgression) {
-    setProgression(JSON.parse(userProgression));
+  if (userProgressionSecure) {
+    setProgression(JSON.parse(userProgressionSecure));
   } else {
     await SecureStore.setItemAsync(
       STORAGE_KEY_PROGRESSION,
@@ -34,15 +35,17 @@ export const hydrateStore = async () => {
   }
 
   // Restore user settings or initialize default
-  if (userSettings) {
-    setUserSettings(JSON.parse(userSettings));
+  if (userSettingsSecure) {
+    setUserSettings(JSON.parse(userSettingsSecure));
   } else {
     await SecureStore.setItemAsync(
       STORAGE_KEY_SETTINGS,
       JSON.stringify(defaultUserSettings)
     );
-    i18n.changeLanguage(defaultUserSettings.locale);
   }
+
+  const { userSettings } = stateStore.getState();
+  i18n.changeLanguage(userSettings.locale);
 
   // Signal ready
   setIsInitialised();

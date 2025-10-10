@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -49,6 +49,12 @@ const CustomScreen = () => {
   const [timeLimitSlider, setTimeLimitSlider] = useState<number>(
     MINIMUM_CUSTOM_TIME_LIMIT_SECONDS
   );
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: t('title'),
+    });
+  }, [navigation]);
 
   const {
     score,
