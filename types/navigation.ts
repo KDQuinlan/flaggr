@@ -21,8 +21,6 @@ export type GameResult = {
   timeTaken?: number;
 };
 
-// TODO - remove scoreMultiplier and add it to state
-
 export type RootStackParamList = {
   index: undefined;
   setup: undefined;

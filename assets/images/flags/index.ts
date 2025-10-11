@@ -1,3 +1,5 @@
+import { ImageSourcePropType } from 'react-native';
+
 import AdFlag from './resources/ad.png';
 import AeFlag from './resources/ae.png';
 import AfFlag from './resources/af.png';
@@ -248,8 +250,7 @@ import ZaFlag from './resources/za.png';
 import ZmFlag from './resources/zm.png';
 import ZwFlag from './resources/zw.png';
 
-// TODO - remove any type
-type FlagMap = Record<string, any>;
+type FlagMap = Record<string, ImageSourcePropType>;
 
 const flags: FlagMap = {
   ad: AdFlag,

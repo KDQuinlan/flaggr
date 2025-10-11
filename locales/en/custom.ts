@@ -1,5 +1,6 @@
 export default {
   title: 'Custom',
+  reset: 'Reset options',
   scoreMultiplier: '{{value}}× Score Multiplier',
   start: 'Start',
   highScoreAccordion: {

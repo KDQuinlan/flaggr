@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   View,
   Text,
@@ -25,8 +24,6 @@ type DifficultySelectProps = {
   advancementRequirement: number;
   onPress: (event: GestureResponderEvent) => void;
 };
-
-// TODO - Add accessibility
 
 const DifficultySelect: React.FC<DifficultySelectProps> = ({
   title,
@@ -57,6 +54,10 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
       onPress={onPress}
       activeOpacity={0.8}
       disabled={isLocked}
+      accessibilityRole="button"
+      accessibilityLabel={t(`levels.${LEVEL_MAP[title]}`, {
+        level: t('title', { ns: 'data' }),
+      })}
     >
       <Image
         style={{ height: 56, width: 56, marginRight: 10 }}
@@ -72,7 +73,7 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
               {description}
             </Text>
           </View>
-          {description === 'Completed' && (
+          {(description === 'Completed' || description === 'Perfected') && (
             <Text style={styles.score}>
               {gameMode === 'rapid' ? score : `${score}%`}
             </Text>

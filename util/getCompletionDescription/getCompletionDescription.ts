@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { LevelData } from '@/state/secureStoreStructure';
 
-// TODO - do we need 'perfected' here?
+// TODO - add perfected ability for rapid
 
 const getCompletionDescription = (levelData: LevelData): string => {
   const { t } = useTranslation('difficulty');
@@ -11,8 +11,8 @@ const getCompletionDescription = (levelData: LevelData): string => {
   if (isLocked) return t('states.locked');
   if (!isLocked && !isInProgress && !isCompleted) return t('states.notStarted');
   if (isInProgress) return t('states.inProgress');
-  if (isCompleted) return t('states.completed');
   if (isCompleted && userScore === 100) return t('states.perfected');
+  if (isCompleted) return t('states.completed');
 
   return t('states.notStarted');
 };

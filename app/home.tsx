@@ -30,11 +30,16 @@ const HomeScreen = () => {
         <View style={styles.titleContainer}>
           <Ionicons name="settings" size={20} color={colors.offWhite} />
           <Text style={styles.title}>{APP_NAME}</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('settings')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('settings')}
+            accessibilityRole="button"
+            accessibilityLabel={t('title', { ns: 'settings' })}
+          >
             <Ionicons name="settings" size={20} color={colors.blueSecondary} />
           </TouchableOpacity>
         </View>
         <GameSelect
+          id="standard"
           title={t('standard.title')}
           description={t('standard.description')}
           icon="standard"
@@ -46,6 +51,7 @@ const HomeScreen = () => {
           }
         />
         <GameSelect
+          id="rapid"
           title={t('rapid.title')}
           description={t('rapid.description')}
           icon="rapid"
@@ -57,6 +63,7 @@ const HomeScreen = () => {
           }
         />
         <GameSelect
+          id="custom"
           title={t('custom.title')}
           description={t('custom.description')}
           icon="custom"

@@ -10,4 +10,11 @@ export default {
     completed: 'Completado',
     perfected: 'Perfeccionado',
   },
+  levels: {
+    levelOne: 'Iniciar {{level}}',
+    levelTwo: 'Iniciar {{level}}',
+    levelThree: 'Iniciar {{level}}',
+    levelFour: 'Iniciar {{level}}',
+    levelFive: 'Iniciar {{level}}',
+  },
 };
