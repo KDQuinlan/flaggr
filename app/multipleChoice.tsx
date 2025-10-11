@@ -38,17 +38,16 @@ const MultipleChoice = () => {
   const { title, gameMode, questions, timeLimit } = route.params;
   const { scoreMultiplier } = userProgression.games.custom.currentGame;
 
-  // TODO - Add strong types to useStates
-
-  const [questionNumberIndex, setQuestionNumberIndex] = useState(0);
+  const [questionNumberIndex, setQuestionNumberIndex] = useState<number>(0);
   const [userAnswer, setUserAnswer] = useState<string | null>(null);
   const [answers, setAnswers] = useState<string[]>([]);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [correctTotal, setCorrectTotal] = useState(0);
-  const [incorrectTotal, setIncorrectTotal] = useState(0);
-  const [streak, setStreak] = useState(0);
-  const [highestStreak, setHighestStreak] = useState(0);
-  const [timeElapsedInSeconds, setTimeElapsedInSeconds] = useState(timeLimit);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
+  const [correctTotal, setCorrectTotal] = useState<number>(0);
+  const [incorrectTotal, setIncorrectTotal] = useState<number>(0);
+  const [streak, setStreak] = useState<number>(0);
+  const [highestStreak, setHighestStreak] = useState<number>(0);
+  const [timeElapsedInSeconds, setTimeElapsedInSeconds] =
+    useState<number>(timeLimit);
   const [customScore, setCustomScore] = useState<number>(0);
 
   const startTimeRef = useRef<number>(Date.now());

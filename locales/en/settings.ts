@@ -1,5 +1,5 @@
 export default {
   title: 'Settings',
-  language: 'language',
-  continue: 'continue',
+  language: 'Language',
+  continue: 'Continue',
 };

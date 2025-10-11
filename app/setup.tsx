@@ -94,7 +94,7 @@ const SetupScreen = () => {
           }}
           style={styles.button}
           activeOpacity={0.8}
-          accessibilityLabel="Continue"
+          accessibilityLabel={t('continue')}
           accessibilityRole="button"
         >
           <Text style={styles.buttonText}>{t('continue')}</Text>
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 10,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   helperText: {
     marginTop: 4,

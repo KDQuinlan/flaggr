@@ -83,6 +83,8 @@ const CustomScreen = () => {
         <TouchableOpacity
           onPress={() => handleReset()}
           style={styles.resetButton}
+          accessibilityRole="button"
+          accessibilityLabel={t('reset')}
         >
           <Ionicons
             name="reload-outline"
@@ -248,6 +250,9 @@ const CustomScreen = () => {
               step={15}
               value={timeLimitSlider}
               onValueChange={setTimeLimitSlider}
+              minimumTrackTintColor={colors.blueSecondary}
+              maximumTrackTintColor={colors.offBlack}
+              thumbTintColor={colors.blueSecondary}
             />
 
             <View style={styles.sliderLabels}>
@@ -281,6 +286,9 @@ const CustomScreen = () => {
               step={5}
               value={gameLengthSlider}
               onValueChange={setGameLengthSlider}
+              minimumTrackTintColor={colors.blueSecondary}
+              maximumTrackTintColor={colors.offBlack}
+              thumbTintColor={colors.blueSecondary}
             />
             <View style={styles.sliderLabels}>
               <Text style={styles.sliderLabelText}>
@@ -306,7 +314,7 @@ const CustomScreen = () => {
             style={isDisabled ? styles.buttonDisabled : styles.buttonEnabled}
             disabled={isDisabled}
             activeOpacity={0.8}
-            accessibilityLabel="Continue to difficulty selection"
+            accessibilityLabel={t('start')}
             accessibilityRole="button"
             onPress={() => {
               setProgression(

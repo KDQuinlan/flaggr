@@ -30,8 +30,6 @@ import persistProgression from '@/util/persistState/persistProgression';
 import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import typedKeys from '@/util/typedKeys/typedKeys';
 
-// TODO - use focus effect hook from expo instead?
-
 const Summary = () => {
   useFocusEffect(
     useCallback(() => {

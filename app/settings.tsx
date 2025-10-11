@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigation } from 'expo-router';
 import {
   SafeAreaView,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -30,10 +29,14 @@ const SettingsScreen = () => {
   }, [language]);
 
   useEffect(() => {
+    persistUserSettings({ ...userSettings, locale: language });
+  }, [language]);
+
+  useEffect(() => {
     navigation.setOptions({
       title: t('title'),
     });
-  }, [navigation]);
+  }, [navigation, language]);
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -54,17 +57,10 @@ const SettingsScreen = () => {
         </View>
 
         <TouchableOpacity
-          onPress={() => {
-            persistUserSettings({
-              ...userSettings,
-              isSetup: true,
-              locale: language,
-            });
-            navigation.navigate('home');
-          }}
+          onPress={() => navigation.navigate('home')}
           style={styles.button}
           activeOpacity={0.8}
-          accessibilityLabel="Continue"
+          accessibilityLabel={t('continue')}
           accessibilityRole="button"
         >
           <Text style={styles.buttonText}>{t('continue')}</Text>

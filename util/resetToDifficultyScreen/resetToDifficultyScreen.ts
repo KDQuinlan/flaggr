@@ -3,8 +3,16 @@ import { StackActions } from '@react-navigation/native';
 
 const resetToDifficultyScreen = (navigation: NavigationProps) => {
   const state = navigation.getState();
+  const difficultyIndex = state.routes.findIndex(
+    (r) => r.name === 'difficulty'
+  );
 
-  navigation.dispatch(StackActions.pop(state.routes.length - 2));
+  if (difficultyIndex >= 0) {
+    const popCount = state.index - difficultyIndex;
+    if (popCount > 0) {
+      navigation.dispatch(StackActions.pop(popCount));
+    }
+  }
 };
 
 export default resetToDifficultyScreen;

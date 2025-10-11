@@ -1,5 +1,6 @@
 export default {
   title: 'Personalizado',
+  reset: 'Restablecer opciones',
   scoreMultiplier: 'Multiplicador de puntuación ×{{value}}',
   start: 'Comenzar',
   highScoreAccordion: {
