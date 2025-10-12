@@ -1,7 +1,4 @@
-import type {
-  CustomBestData,
-  ProgressionStructure,
-} from '@/state/secureStoreStructure';
+import { CustomBestData, ProgressionStructure } from '@/types/secureStore';
 
 const setBestGameData = (
   existingProgression: ProgressionStructure,

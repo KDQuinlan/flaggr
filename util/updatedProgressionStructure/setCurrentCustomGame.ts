@@ -1,7 +1,4 @@
-import type {
-  CustomCurrentData,
-  ProgressionStructure,
-} from '@/state/secureStoreStructure';
+import { CustomCurrentData, ProgressionStructure } from '@/types/secureStore';
 
 const setCurrentCustomGame = (
   existingProgression: ProgressionStructure,

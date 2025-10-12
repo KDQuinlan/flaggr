@@ -22,13 +22,13 @@ import { LEVEL_MAP } from '@/constants/mappers';
 import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import stateStore from '@/state/store';
-import { ProgressionStructure } from '@/state/secureStoreStructure';
 import createUpdatedProgressionStructure from '@/util/updatedProgressionStructure/createdUpdatedProgressionStructure';
 import formatTime from '@/util/formatTime/formatTime';
 import getNextLevelKey from '@/util/getNextLevelKey/getNextLevelKey';
 import persistProgression from '@/util/persistState/persistProgression';
 import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import typedKeys from '@/util/typedKeys/typedKeys';
+import { ProgressionStructure } from '@/types/secureStore';
 
 const Summary = () => {
   useFocusEffect(

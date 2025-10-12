@@ -2,7 +2,7 @@ import * as SecureStore from 'expo-secure-store';
 
 import { STORAGE_KEY_SETTINGS } from '@/constants/common';
 import stateStore from '@/state/store';
-import { UserSettingStructure } from '@/state/secureStoreStructure';
+import { UserSettingStructure } from '@/types/secureStore';
 
 const persistUserSettings = async (updatedSettings: UserSettingStructure) => {
   const { setUserSettings } = stateStore.getState();

@@ -1,9 +1,6 @@
 import { LEVEL_MAP } from '@/constants/mappers';
-import type {
-  Levels,
-  ProgressionStructure,
-} from '@/state/secureStoreStructure';
 import { DifficultyScreenGameIds } from '@/types/navigation';
+import { Levels, ProgressionStructure } from '@/types/secureStore';
 
 const createUpdatedProgressionStructure = (
   existingProgression: ProgressionStructure,

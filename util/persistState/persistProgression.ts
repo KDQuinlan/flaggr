@@ -1,7 +1,7 @@
 import * as SecureStore from 'expo-secure-store';
 
 import { STORAGE_KEY_PROGRESSION } from '@/constants/common';
-import { type ProgressionStructure } from '@/state/secureStoreStructure';
+import { ProgressionStructure } from '@/types/secureStore';
 
 const persistProgression = async (updatedProgression: ProgressionStructure) => {
   try {
