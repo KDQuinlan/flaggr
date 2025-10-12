@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next';
+import { LevelData } from '@/types/secureStore';
 
-import { LevelData } from '@/state/secureStoreStructure';
+import { useTranslation } from 'react-i18next';
 
 // TODO - add perfected ability for rapid
 

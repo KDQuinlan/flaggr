@@ -1,11 +1,13 @@
 import { create } from 'zustand';
 
 import {
-  ProgressionStructure,
-  UserSettingStructure,
   defaultProgressionStructure,
   defaultUserSettings,
 } from './secureStoreStructure';
+import {
+  ProgressionStructure,
+  UserSettingStructure,
+} from '@/types/secureStore';
 
 type State = {
   isInitialised: boolean;

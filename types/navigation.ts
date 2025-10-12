@@ -1,6 +1,6 @@
-import { type Levels } from '@/state/secureStoreStructure';
-import { type Country } from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Levels } from './secureStore';
+import { Country } from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
 
 export type DifficultyScreenGameIds = 'standard' | 'rapid';
 export type SummaryScreenAllowedIds = 'standard' | 'rapid';

@@ -1,4 +1,4 @@
-import { LevelKeys, Levels } from '@/state/secureStoreStructure';
+import { LevelKeys, Levels } from '@/types/secureStore';
 import {
   LEVEL_FIVE_FLAGS_AMOUNT,
   LEVEL_FOUR_FLAGS_AMOUNT,

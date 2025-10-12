@@ -11,8 +11,8 @@ import { useTranslation } from 'react-i18next';
 import { difficultySelectStyles as styles } from './difficultySelect.styles';
 import { colors } from '../colors';
 import { LEVEL_MAP, LEVEL_TO_FLAG_AMOUNT_MAP } from '@/constants/mappers';
-import { Levels } from '@/state/secureStoreStructure';
 import iconsMap from '@/assets/images/icons';
+import { Levels } from '@/types/secureStore';
 
 type DifficultySelectProps = {
   title: Levels;
