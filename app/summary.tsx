@@ -161,7 +161,8 @@ const Summary = () => {
     setProgression,
   ]);
 
-  const handleContinue = () => resetToDifficultyScreen(navigation);
+  const handleContinue = () =>
+    resetToDifficultyScreen(navigation, 'difficulty');
 
   const AnimatedSummary = () => {
     const rows = [

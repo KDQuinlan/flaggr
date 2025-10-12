@@ -55,4 +55,5 @@ export type ProgressionStructure = {
 export type UserSettingStructure = {
   isSetup: boolean;
   locale: string;
+  displayAnswerTimerMs: number;
 };

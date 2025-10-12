@@ -6,6 +6,7 @@ import {
 export const defaultUserSettings: UserSettingStructure = {
   isSetup: false,
   locale: 'en',
+  displayAnswerTimerMs: 500,
 };
 
 export const defaultProgressionStructure: ProgressionStructure = {
