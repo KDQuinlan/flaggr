@@ -86,7 +86,7 @@ const CustomSummary = () => {
     }
   }, [finalScore, setProgression]);
 
-  const handleContinue = () => resetToDifficultyScreen(navigation);
+  const handleContinue = () => resetToDifficultyScreen(navigation, 'custom');
 
   const AnimatedSummary = () => {
     const rows = [
