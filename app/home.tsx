@@ -10,18 +10,12 @@ import {
 } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useTranslation } from 'react-i18next';
-import {
-  BannerAd,
-  BannerAdSize,
-  TestIds,
-} from 'react-native-google-mobile-ads';
 
 import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
 import { APP_NAME } from '@/constants/common';
-
-const adUnitId = TestIds.BANNER;
+import AdBanner from '@/components/AdBanner/AdBanner'
 
 // TODO - Shorten localisation country names for better UI usage
 
@@ -79,17 +73,12 @@ const HomeScreen = () => {
         />
       </ScrollView>
 
-      <BannerAd
-        unitId={adUnitId}
-        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
-        requestOptions={{
-          requestNonPersonalizedAdsOnly: true,
-        }}
-        onAdFailedToLoad={(error) => console.error(error)}
-      />
+    <AdBanner/>
+    
     </SafeAreaView>
   );
 };
+
 
 const styles = StyleSheet.create({
   rootContainer: {
