@@ -1,4 +1,4 @@
-import { LevelKeys, Levels } from '@/types/secureStore';
+import { Difficulties, LevelKeys, Levels } from '@/types/secureStore';
 import {
   LEVEL_FIVE_FLAGS_AMOUNT,
   LEVEL_FOUR_FLAGS_AMOUNT,
@@ -6,6 +6,7 @@ import {
   LEVEL_THREE_FLAGS_AMOUNT,
   LEVEL_TWO_FLAGS_AMOUNT,
 } from './common';
+import { TimeLimits } from '@/types/screens';
 
 export const LEVEL_MAP: Record<Levels, LevelKeys> = {
   'Level 1': 'levelOne',
@@ -31,7 +32,7 @@ export const LEVEL_TO_FLAG_AMOUNT_MAP: Record<Levels, number> = {
   'Level 5': LEVEL_FIVE_FLAGS_AMOUNT,
 };
 
-export const TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP: Record<number, number> = {
+export const TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP: Record<TimeLimits, number> = {
   0: 0.0,
   15: 1.3,
   30: 1.25,
@@ -51,7 +52,7 @@ export const TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP: Record<number, number> = {
   240: 1.0,
 };
 
-export const DIFFICULTY_TO_SCORE: Record<number, number> = {
+export const DIFFICULTY_TO_SCORE: Record<Difficulties, number> = {
   1: 10,
   2: 12,
   3: 15,

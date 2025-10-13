@@ -38,6 +38,9 @@
       }
     },
     "owner": "kquinlan"
-
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-5099106810383341~4229137271",
+    "ios_app_id": "ca-app-pub-5099106810383341~2967794984"
   }
 }

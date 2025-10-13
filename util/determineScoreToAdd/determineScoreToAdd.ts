@@ -2,10 +2,11 @@ import {
   DIFFICULTY_TO_SCORE,
   STREAK_TIER_TO_MULTIPLIER,
 } from '@/constants/mappers';
+import { Difficulties } from '@/types/secureStore';
 
 const determineScoreToAdd = (
   isCorrect: boolean,
-  difficulty: number,
+  difficulty: Difficulties,
   streak: number
 ) => {
   if (!isCorrect) return 0;
