@@ -16,7 +16,16 @@ import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
 import { APP_NAME } from '@/constants/common';
 
+import {
+  BannerAd,
+  BannerAdSize,
+  TestIds,
+} from 'react-native-google-mobile-ads';
+
+const adUnitId = TestIds.BANNER;
+
 // TODO - Shorten localisation country names for better UI usage
+
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -38,6 +47,7 @@ const HomeScreen = () => {
             <Ionicons name="settings" size={20} color={colors.blueSecondary} />
           </TouchableOpacity>
         </View>
+
         <GameSelect
           id="standard"
           title={t('standard.title')}
@@ -70,6 +80,16 @@ const HomeScreen = () => {
           onPress={() => navigation.navigate('custom')}
         />
       </ScrollView>
+
+      <BannerAd
+  unitId={adUnitId}
+  size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+  requestOptions={{
+    requestNonPersonalizedAdsOnly: true,
+  }}
+  onAdFailedToLoad={(error) => console.error(error)}
+/>
+
     </SafeAreaView>
   );
 };
@@ -99,6 +119,10 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: '#0073E6',
   },
+  adContainer: {
+    alignItems: 'center',
+  }
 });
 
 export default HomeScreen;
+
