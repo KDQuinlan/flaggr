@@ -1,11 +1,18 @@
+import { useEffect } from 'react';
 import { View } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import * as NavigationBar from 'expo-navigation-bar';
 
-import '@/locales/i18n'; // initialize translations
+import '@/locales/i18n';
 import { colors } from '@/components/colors';
 
 export default function RootLayout() {
+  useEffect(() => {
+    NavigationBar.setBackgroundColorAsync(colors.offWhite);
+    NavigationBar.setButtonStyleAsync('dark');
+  }, []);
+
   return (
     <View style={{ flex: 1, backgroundColor: colors.offWhite }}>
       <StatusBar style="dark" backgroundColor={colors.offWhite} />
@@ -39,30 +46,10 @@ export default function RootLayout() {
             gestureEnabled: false,
           }}
         />
-        <Stack.Screen
-          name="settings"
-          options={{
-            headerShown: true,
-          }}
-        />
-        <Stack.Screen
-          name="difficulty"
-          options={{
-            headerShown: true,
-          }}
-        />
-        <Stack.Screen
-          name="multipleChoice"
-          options={{
-            headerShown: true,
-          }}
-        />
-        <Stack.Screen
-          name="custom"
-          options={{
-            headerShown: true,
-          }}
-        />
+        <Stack.Screen name="settings" options={{ headerShown: true }} />
+        <Stack.Screen name="difficulty" options={{ headerShown: true }} />
+        <Stack.Screen name="multipleChoice" options={{ headerShown: true }} />
+        <Stack.Screen name="custom" options={{ headerShown: true }} />
         <Stack.Screen
           name="customSummary"
           options={{

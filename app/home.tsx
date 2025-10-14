@@ -16,6 +16,7 @@ import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
 import { APP_NAME } from '@/constants/common';
 import AdBanner from '@/components/AdBanner/AdBanner';
+import { HOME_SCREEN_BANNER_ID } from '@/constants/adId';
 
 // TODO - Shorten localisation country names for better UI usage
 
@@ -73,7 +74,7 @@ const HomeScreen = () => {
         />
       </ScrollView>
 
-      <AdBanner />
+      <AdBanner adId={HOME_SCREEN_BANNER_ID} />
     </SafeAreaView>
   );
 };

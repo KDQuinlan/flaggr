@@ -4,12 +4,16 @@ import {
   TestIds,
 } from 'react-native-google-mobile-ads';
 
-const AdBanner = () => {
-  const adUnitId = TestIds.BANNER;
+interface AdBannerProps {
+  adId: string;
+}
+
+const AdBanner = ({ adId }: AdBannerProps) => {
+  const adToShow = __DEV__ ? TestIds.BANNER : adId;
 
   return (
     <BannerAd
-      unitId={adUnitId}
+      unitId={adToShow}
       size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
       requestOptions={{
         requestNonPersonalizedAdsOnly: true,
