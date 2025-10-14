@@ -1,24 +1,19 @@
-import { useEffect } from 'react';
-import MobileAds, {
+import {
   BannerAd,
   BannerAdSize,
   TestIds,
 } from 'react-native-google-mobile-ads';
 
 const AdBanner = () => {
-    const adUnitId = TestIds.BANNER;
-
-    useEffect(() => {
-    MobileAds().initialize();
-  }, []);
+  const adUnitId = TestIds.BANNER;
 
   return (
     <BannerAd
       unitId={adUnitId}
       size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
       requestOptions={{
-    requestNonPersonalizedAdsOnly: true,
-     }}
+        requestNonPersonalizedAdsOnly: true,
+      }}
       onAdFailedToLoad={(error) => {
         if (error.message.includes('no-fill')) {
           return;
@@ -28,7 +23,5 @@ const AdBanner = () => {
     />
   );
 };
-
-
 
 export default AdBanner;

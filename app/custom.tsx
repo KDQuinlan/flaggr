@@ -250,7 +250,9 @@ const CustomScreen = () => {
               maximumValue={MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS}
               step={15}
               value={timeLimitSlider}
-              onValueChange={() => setTimeLimitSlider}
+              onValueChange={(value: number) =>
+                setTimeLimitSlider(value as TimeLimits)
+              }
               minimumTrackTintColor={colors.blueSecondary}
               maximumTrackTintColor={colors.offBlack}
               thumbTintColor={colors.blueSecondary}

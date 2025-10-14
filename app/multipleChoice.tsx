@@ -74,7 +74,7 @@ const MultipleChoice = () => {
   }, [customScore]);
 
   const { continent, difficulty, countryName, countryCode } =
-    questions[questionNumberIndex];
+    questions[questionNumberIndex]!;
   const correctAnswer = countryName;
 
   const isFinalQuestion = questionNumberIndex + 1 === questions.length;

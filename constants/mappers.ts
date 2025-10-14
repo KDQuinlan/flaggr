@@ -6,7 +6,7 @@ import {
   LEVEL_THREE_FLAGS_AMOUNT,
   LEVEL_TWO_FLAGS_AMOUNT,
 } from './common';
-import { TimeLimits } from '@/types/screens';
+import { StreakTiers, TimeLimits } from '@/types/screens';
 
 export const LEVEL_MAP: Record<Levels, LevelKeys> = {
   'Level 1': 'levelOne',
@@ -16,7 +16,7 @@ export const LEVEL_MAP: Record<Levels, LevelKeys> = {
   'Level 5': 'levelFive',
 };
 
-export const DIFFICULTY_ID_TO_LEVEL_MAP: Record<number, Levels> = {
+export const DIFFICULTY_ID_TO_LEVEL_MAP: Record<Difficulties, Levels> = {
   1: 'Level 1',
   2: 'Level 2',
   3: 'Level 3',
@@ -60,7 +60,7 @@ export const DIFFICULTY_TO_SCORE: Record<Difficulties, number> = {
   5: 24,
 };
 
-export const STREAK_TIER_TO_MULTIPLIER: Record<number, number> = {
+export const STREAK_TIER_TO_MULTIPLIER: Record<StreakTiers, number> = {
   0: 1,
   1: 1.05,
   2: 1.1,

@@ -1,12 +1,13 @@
 import { NON_INDEPENDENT_COUNTRY_CODES } from '@/constants/common';
-import countries from '../../assets/data/countries.json';
+import countries from '@/types/countries';
 import shuffleArray from '../shuffleArray/shuffleArray';
+import { Difficulties } from '@/types/secureStore';
 
 export type Country = {
   countryCode: string;
   countryName: string;
   continent: string;
-  difficulty: number;
+  difficulty: Difficulties;
 };
 
 export type Continents =
@@ -18,7 +19,7 @@ export type Continents =
   | 'Oceania';
 
 const generateMultipleChoice = (
-  difficulty: number | number[],
+  difficulty: Difficulties | Difficulties[],
   numberOfQuestions: number,
   continents?: string[],
   independentOnly?: boolean

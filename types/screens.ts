@@ -16,3 +16,5 @@ export type TimeLimits =
   | 210
   | 225
   | 240;
+
+export type StreakTiers = 0 | 1 | 2 | 3 | 4 | 5;

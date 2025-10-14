@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import MobileAds from 'react-native-google-mobile-ads';
 
 import HomeScreen from './home';
 import SetupScreen from './setup';
@@ -16,6 +17,10 @@ const IndexScreen = () => {
     };
 
     loadData();
+  }, []);
+
+  useEffect(() => {
+    MobileAds().initialize();
   }, []);
 
   if (!isInitialised) return <Loading />;

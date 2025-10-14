@@ -15,7 +15,7 @@ import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
 import { APP_NAME } from '@/constants/common';
-import AdBanner from '@/components/AdBanner/AdBanner'
+import AdBanner from '@/components/AdBanner/AdBanner';
 
 // TODO - Shorten localisation country names for better UI usage
 
@@ -73,12 +73,10 @@ const HomeScreen = () => {
         />
       </ScrollView>
 
-    <AdBanner/>
-    
+      <AdBanner />
     </SafeAreaView>
   );
 };
-
 
 const styles = StyleSheet.create({
   rootContainer: {
