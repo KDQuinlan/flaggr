@@ -1,3 +1,5 @@
+import { Difficulties } from '@/types/secureStore';
+
 export const APP_NAME = 'Flaggr';
 export const STORAGE_KEY_PROGRESSION = 'flaggr-progression';
 export const STORAGE_KEY_SETTINGS = 'flaggr-settings';
@@ -6,7 +8,7 @@ export const VERSION_KEY = 1;
 
 export const MINIMUM_DIFFICULTY = 1;
 export const MAXIMUM_DIFFICULTY = 5;
-export const GAME_DIFFICULTIES = [1, 2, 3, 4, 5];
+export const GAME_DIFFICULTIES: Difficulties[] = [1, 2, 3, 4, 5];
 export const GAME_CONTINENTS = [
   'Europe, Asia, Africa, South America, North America, Oceania',
 ];

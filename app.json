@@ -7,7 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
@@ -26,7 +25,8 @@
     "plugins": [
       "expo-router",
       "expo-secure-store",
-      "expo-localization"
+      "expo-localization",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
@@ -38,5 +38,9 @@
       }
     },
     "owner": "kquinlan"
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-5099106810383341~4229137271",
+    "ios_app_id": "ca-app-pub-5099106810383341~2967794984"
   }
 }

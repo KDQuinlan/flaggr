@@ -32,6 +32,7 @@ import {
 } from '@/constants/common';
 import stateStore from '@/state/store';
 import setCurrentCustomGame from '@/util/updatedProgressionStructure/setCurrentCustomGame';
+import { TimeLimits } from '@/types/screens';
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -46,7 +47,7 @@ const CustomScreen = () => {
   const [isIndependentOnly, setIsIndependentOnly] = useState<boolean>(false);
   const [gameLengthSlider, setGameLengthSlider] =
     useState<number>(DEFAULT_GAME_LENGTH);
-  const [timeLimitSlider, setTimeLimitSlider] = useState<number>(
+  const [timeLimitSlider, setTimeLimitSlider] = useState<TimeLimits>(
     MINIMUM_CUSTOM_TIME_LIMIT_SECONDS
   );
 
@@ -249,7 +250,9 @@ const CustomScreen = () => {
               maximumValue={MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS}
               step={15}
               value={timeLimitSlider}
-              onValueChange={setTimeLimitSlider}
+              onValueChange={(value: number) =>
+                setTimeLimitSlider(value as TimeLimits)
+              }
               minimumTrackTintColor={colors.blueSecondary}
               maximumTrackTintColor={colors.offBlack}
               thumbTintColor={colors.blueSecondary}

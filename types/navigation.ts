@@ -18,7 +18,7 @@ export type GameResult = {
   correct: number;
   incorrect: number;
   highestStreak: number;
-  timeTaken?: number;
+  timeTaken?: number | undefined;
 };
 
 export type RootStackParamList = {

@@ -211,7 +211,7 @@ const Summary = () => {
               opacity: animatedValues[i],
               transform: [
                 {
-                  translateY: animatedValues[i].interpolate({
+                  translateY: animatedValues[i]!.interpolate({
                     inputRange: [0, 1],
                     outputRange: [20, 0],
                   }),

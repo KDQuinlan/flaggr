@@ -15,6 +15,8 @@ import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
 import { APP_NAME } from '@/constants/common';
+import AdBanner from '@/components/AdBanner/AdBanner';
+import { HOME_SCREEN_BANNER_ID } from '@/constants/adId';
 
 // TODO - Shorten localisation country names for better UI usage
 
@@ -38,6 +40,7 @@ const HomeScreen = () => {
             <Ionicons name="settings" size={20} color={colors.blueSecondary} />
           </TouchableOpacity>
         </View>
+
         <GameSelect
           id="standard"
           title={t('standard.title')}
@@ -70,6 +73,8 @@ const HomeScreen = () => {
           onPress={() => navigation.navigate('custom')}
         />
       </ScrollView>
+
+      <AdBanner adId={HOME_SCREEN_BANNER_ID} />
     </SafeAreaView>
   );
 };
@@ -98,6 +103,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 40,
     color: '#0073E6',
+  },
+  adContainer: {
+    alignItems: 'center',
   },
 });
 

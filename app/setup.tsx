@@ -21,7 +21,7 @@ import persistUserSettings from '@/util/persistState/persistUserSettings';
 import stateStore from '@/state/store';
 
 const locales = Localization.getLocales();
-const locale = locales[0].languageCode;
+const locale = locales[0]?.languageCode;
 
 const SetupScreen = () => {
   const navigation = useNavigation<NavigationProps>();

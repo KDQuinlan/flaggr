@@ -1,11 +1,12 @@
 import { MAXIMUM_DIFFICULTY, MINIMUM_DIFFICULTY } from '@/constants/common';
-import countries from '../../assets/data/countries.json';
+import countries from '@/types/countries';
 import { type Country } from '../generateMultipleChoiceQuestions/generateMultipleChoice';
 import shuffleArray from '../shuffleArray/shuffleArray';
+import { Difficulties } from '@/types/secureStore';
 
 const generateMultipleChoiceAnswers = (
   correctAnswer: string,
-  difficulty: number,
+  difficulty: Difficulties,
   continent: string
 ) => {
   let difficultyRange: number[] = [];

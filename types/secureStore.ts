@@ -8,7 +8,7 @@ export type LevelKeys =
   | 'levelFive';
 
 export type LevelData = {
-  id: number;
+  id: Difficulties;
   name: Levels;
   isCompleted: boolean;
   isInProgress: boolean;
