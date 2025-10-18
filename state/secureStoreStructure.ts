@@ -4,8 +4,10 @@ import {
 } from '@/types/secureStore';
 
 export const defaultUserSettings: UserSettingStructure = {
-  isSetup: false,
+  isSetUp: false,
   locale: 'en',
+  energyAmount: 10,
+  lastEnergyTimestamp: null,
   displayAnswerTimerMs: 500,
 };
 

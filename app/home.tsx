@@ -1,4 +1,5 @@
 import { useNavigation } from 'expo-router';
+import { Image } from 'expo-image';
 import {
   SafeAreaView,
   ScrollView,
@@ -8,7 +9,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { useTranslation } from 'react-i18next';
 
 import { colors } from '@/components/colors';
@@ -16,29 +16,61 @@ import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
 import { APP_NAME } from '@/constants/common';
 import AdBanner from '@/components/AdBanner/AdBanner';
-import { HOME_SCREEN_BANNER_ID } from '@/constants/adId';
+import { BANNER_TEST_ID } from '@/constants/adId';
+import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
 
 // TODO - Shorten localisation country names for better UI usage
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const { t } = useTranslation('home');
+
   return (
     <SafeAreaView style={styles.rootContainer}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
       >
-        <View style={styles.titleContainer}>
-          <Ionicons name="settings" size={20} color={colors.offWhite} />
-          <Text style={styles.title}>{APP_NAME}</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '100%',
+            marginTop: 30,
+            marginBottom: 10,
+            paddingHorizontal: 20,
+          }}
+        >
           <TouchableOpacity
             onPress={() => navigation.navigate('settings')}
             accessibilityRole="button"
             accessibilityLabel={t('title', { ns: 'settings' })}
+            hitSlop={10}
           >
-            <Ionicons name="settings" size={20} color={colors.blueSecondary} />
+            <Image
+              style={styles.settingsIcon}
+              source={require('@/assets/images/icons/resources/custom/cog.png')}
+            />
           </TouchableOpacity>
+
+          <View
+            style={{
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              alignItems: 'center',
+              pointerEvents: 'none',
+            }}
+          >
+            <Text
+              style={{ fontWeight: 'bold', fontSize: 40, color: '#0073E6' }}
+            >
+              {APP_NAME}
+            </Text>
+          </View>
+
+          <EnergyDisplay />
         </View>
 
         <GameSelect
@@ -74,7 +106,7 @@ const HomeScreen = () => {
         />
       </ScrollView>
 
-      <AdBanner adId={HOME_SCREEN_BANNER_ID} />
+      <AdBanner adId={BANNER_TEST_ID} />
     </SafeAreaView>
   );
 };
@@ -106,6 +138,10 @@ const styles = StyleSheet.create({
   },
   adContainer: {
     alignItems: 'center',
+  },
+  settingsIcon: {
+    height: 25,
+    width: 25,
   },
 });
 

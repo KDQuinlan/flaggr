@@ -53,7 +53,9 @@ export type ProgressionStructure = {
 };
 
 export type UserSettingStructure = {
-  isSetup: boolean;
+  isSetUp: boolean;
   locale: string;
+  energyAmount: number;
+  lastEnergyTimestamp: number | null;
   displayAnswerTimerMs: number;
 };

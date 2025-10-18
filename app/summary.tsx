@@ -30,6 +30,8 @@ import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDiffi
 import typedKeys from '@/util/typedKeys/typedKeys';
 import { ProgressionStructure } from '@/types/secureStore';
 
+// TODO - remove memoisation for progression and use getState for snapshot?
+
 const Summary = () => {
   useFocusEffect(
     useCallback(() => {

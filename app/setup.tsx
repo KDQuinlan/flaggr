@@ -87,7 +87,7 @@ const SetupScreen = () => {
           onPress={() => {
             persistUserSettings({
               ...userSettings,
-              isSetup: true,
+              isSetUp: true,
               locale: language,
             });
             navigation.navigate('home');

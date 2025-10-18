@@ -33,12 +33,19 @@ import {
 import stateStore from '@/state/store';
 import setCurrentCustomGame from '@/util/updatedProgressionStructure/setCurrentCustomGame';
 import { TimeLimits } from '@/types/screens';
+import persistUserSettings from '@/util/persistState/persistUserSettings';
+
+// TODO - refactor rn image to expo image?
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const { t } = useTranslation('custom');
   const userProgression = stateStore((state) => state.userProgress);
   const setProgression = stateStore((state) => state.setProgression);
+  const setEnergyModalVisible = stateStore((s) => s.setEnergyModalVisible);
+  const userSettings = stateStore((s) => s.userSettings);
+  const { energyAmount } = userSettings;
+
   const [isScoreAccordionExpanded, setIsScoreAccordionExpanded] =
     useState<boolean>(false);
   const [isStatsAccordionExpanded, setIsStatsAccordionExpanded] =
@@ -78,24 +85,24 @@ const CustomScreen = () => {
     setTimeLimitSlider(MINIMUM_CUSTOM_TIME_LIMIT_SECONDS);
   };
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <TouchableOpacity
-          onPress={() => handleReset()}
-          style={styles.resetButton}
-          accessibilityRole="button"
-          accessibilityLabel={t('reset')}
-        >
-          <Ionicons
-            name="reload-outline"
-            size={20}
-            color={colors.blueSecondary}
-          />
-        </TouchableOpacity>
-      ),
-    });
-  }, [navigation, handleReset]);
+  // useLayoutEffect(() => {
+  //   navigation.setOptions({
+  //     headerRight: () => (
+  // <TouchableOpacity
+  //   onPress={() => handleReset()}
+  //   style={styles.resetButton}
+  //   accessibilityRole="button"
+  //   accessibilityLabel={t('reset')}
+  // >
+  //   <Ionicons
+  //     name="reload-outline"
+  //     size={20}
+  //     color={colors.blueSecondary}
+  //   />
+  // </TouchableOpacity>
+  //     ),
+  //   });
+  // }, [navigation, handleReset]);
 
   const isDisabled = selectedRegions.length === 0;
 
@@ -108,6 +115,40 @@ const CustomScreen = () => {
       (isIndependentOnly ? INDEPENDENT_COUNTRIES_PENALTY : 1)
     ).toFixed(2)
   );
+
+  const onStartPress = () => {
+    if (energyAmount === 0) {
+      setEnergyModalVisible(true);
+    } else {
+      navigation.navigate('multipleChoice', {
+        title: 'Custom',
+        gameMode: 'custom',
+        questions: generateMultipleChoice(
+          GAME_DIFFICULTIES,
+          gameLengthSlider,
+          selectedRegions,
+          isIndependentOnly
+        ),
+        timeLimit: timeLimitSlider,
+      });
+
+      setProgression(
+        setCurrentCustomGame(userProgression, {
+          regions: selectedRegions,
+          independentCountriesOnly: isIndependentOnly,
+          timeLimit: timeLimitSlider,
+          gameLength: gameLengthSlider,
+          scoreMultiplier: finalScoreMultiplier,
+        })
+      );
+
+      persistUserSettings({
+        ...userSettings,
+        energyAmount: energyAmount - 1,
+        lastEnergyTimestamp: Date.now(),
+      });
+    }
+  };
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -176,12 +217,26 @@ const CustomScreen = () => {
         )}
         {/* Regions */}
         <View style={styles.modifierContainer}>
-          <View style={styles.sectionHeader}>
-            <Image
-              style={styles.sectionIcon}
-              source={require('@/assets/images/icons/resources/custom/region.png')}
-            />
-            <Text style={styles.subHeader}>{t('regions.title')}</Text>
+          <View style={styles.sectionContainer}>
+            <View style={styles.sectionHeader}>
+              <Image
+                style={styles.sectionIcon}
+                source={require('@/assets/images/icons/resources/custom/region.png')}
+              />
+              <Text style={styles.subHeader}>{t('regions.title')}</Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => handleReset()}
+              style={styles.resetButton}
+              accessibilityRole="button"
+              accessibilityLabel={t('reset')}
+            >
+              <Ionicons
+                name="reload-outline"
+                size={20}
+                color={colors.blueSecondary}
+              />
+            </TouchableOpacity>
           </View>
           <ModifierMultiSelect
             varient="regions"
@@ -212,12 +267,14 @@ const CustomScreen = () => {
 
         {/* Game Rules */}
         <View style={styles.modifierContainer}>
-          <View style={styles.sectionHeader}>
-            <Image
-              style={styles.sectionIcon}
-              source={require('@/assets/images/icons/resources/custom/cog.png')}
-            />
-            <Text style={styles.subHeader}>{t('gameRules.title')}</Text>
+          <View style={styles.sectionContainer}>
+            <View style={styles.sectionHeader}>
+              <Image
+                style={styles.sectionIcon}
+                source={require('@/assets/images/icons/resources/custom/cog.png')}
+              />
+              <Text style={styles.subHeader}>{t('gameRules.title')}</Text>
+            </View>
           </View>
 
           {/* Time Limit */}
@@ -319,28 +376,7 @@ const CustomScreen = () => {
             activeOpacity={0.8}
             accessibilityLabel={t('start')}
             accessibilityRole="button"
-            onPress={() => {
-              setProgression(
-                setCurrentCustomGame(userProgression, {
-                  regions: selectedRegions,
-                  independentCountriesOnly: isIndependentOnly,
-                  timeLimit: timeLimitSlider,
-                  gameLength: gameLengthSlider,
-                  scoreMultiplier: finalScoreMultiplier,
-                })
-              );
-              navigation.navigate('multipleChoice', {
-                title: 'Custom',
-                gameMode: 'custom',
-                questions: generateMultipleChoice(
-                  GAME_DIFFICULTIES,
-                  gameLengthSlider,
-                  selectedRegions,
-                  isIndependentOnly
-                ),
-                timeLimit: timeLimitSlider,
-              });
-            }}
+            onPress={onStartPress}
           >
             <Text
               style={
@@ -402,9 +438,15 @@ const styles = StyleSheet.create({
     color: colors.blueSecondary,
     fontSize: 12,
   },
+  sectionContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   sectionHeader: {
     flexDirection: 'row',
-    paddingLeft: 10,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   sectionIcon: {

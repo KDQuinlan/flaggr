@@ -6,6 +6,8 @@ import * as NavigationBar from 'expo-navigation-bar';
 
 import '@/locales/i18n';
 import { colors } from '@/components/colors';
+import EnergyModal from '@/components/energyDisplay/energyModal';
+import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
 
 export default function RootLayout() {
   useEffect(() => {
@@ -16,6 +18,7 @@ export default function RootLayout() {
   return (
     <View style={{ flex: 1, backgroundColor: colors.offWhite }}>
       <StatusBar style="dark" backgroundColor={colors.offWhite} />
+      <EnergyModal />
       <Stack
         screenOptions={{
           headerTitleAlign: 'center',
@@ -47,9 +50,15 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen name="settings" options={{ headerShown: true }} />
-        <Stack.Screen name="difficulty" options={{ headerShown: true }} />
+        <Stack.Screen
+          name="difficulty"
+          options={{ headerShown: true, headerRight: () => <EnergyDisplay /> }}
+        />
         <Stack.Screen name="multipleChoice" options={{ headerShown: true }} />
-        <Stack.Screen name="custom" options={{ headerShown: true }} />
+        <Stack.Screen
+          name="custom"
+          options={{ headerShown: true, headerRight: () => <EnergyDisplay /> }}
+        />
         <Stack.Screen
           name="customSummary"
           options={{

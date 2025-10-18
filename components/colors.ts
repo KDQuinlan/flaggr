@@ -15,4 +15,5 @@ export const colors = {
 
   // Oranges
   legendaryOrange: '#FCB100',
+  energyOrange: '#FFE788',
 };

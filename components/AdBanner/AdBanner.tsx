@@ -8,6 +8,8 @@ interface AdBannerProps {
   adId: string;
 }
 
+// TODO - use age-specific ad personalisation requirements
+
 const AdBanner = ({ adId }: AdBannerProps) => {
   const adToShow = __DEV__ ? TestIds.BANNER : adId;
 
