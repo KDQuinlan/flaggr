@@ -1,4 +1,4 @@
-import { BANNER_TEST_ID } from '@/constants/adId';
+import { BANNER_TEST_ID, REWARD_TEST_ID } from '@/constants/adId';
 import stateStore from '@/state/store';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import { useEffect, useState } from 'react';
@@ -10,7 +10,7 @@ import {
   RewardedAdReward,
 } from 'react-native-google-mobile-ads';
 
-const adUnitId = __DEV__ ? TestIds.REWARDED : BANNER_TEST_ID;
+const adUnitId = __DEV__ ? TestIds.REWARDED : REWARD_TEST_ID;
 
 const rewarded = RewardedAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,
