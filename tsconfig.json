@@ -16,14 +16,9 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     },
-    "typeRoots": [
-      "./declarations.d.ts",
-      "./node_modules/@types"
-    ],
+    "typeRoots": ["./declarations.d.ts", "./node_modules/@types"],
     "moduleResolution": "bundler"
   },
   "extends": "expo/tsconfig.base",
@@ -31,6 +26,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "expo-env.d.ts",
+    "withAdMob.js"
   ]
 }

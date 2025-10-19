@@ -26,7 +26,14 @@
       "expo-router",
       "expo-secure-store",
       "expo-localization",
-      "expo-font"
+      "expo-font",
+      "react-native-google-mobile-ads",
+      [
+        "./withAdMob.js",
+        {
+          "androidAppId": "ca-app-pub-5099106810383341~4229137271"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

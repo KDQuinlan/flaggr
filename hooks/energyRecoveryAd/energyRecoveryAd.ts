@@ -1,14 +1,14 @@
-import { BANNER_TEST_ID, REWARD_TEST_ID } from '@/constants/adId';
-import stateStore from '@/state/store';
-import persistUserSettings from '@/util/persistState/persistUserSettings';
 import { useEffect, useState } from 'react';
 import {
   RewardedAd,
   RewardedAdEventType,
   TestIds,
   AdEventType,
-  RewardedAdReward,
 } from 'react-native-google-mobile-ads';
+
+import { REWARD_TEST_ID } from '@/constants/adId';
+import stateStore from '@/state/store';
+import persistUserSettings from '@/util/persistState/persistUserSettings';
 
 const adUnitId = __DEV__ ? TestIds.REWARDED : REWARD_TEST_ID;
 
@@ -22,25 +22,19 @@ export const useRewardedAd = () => {
   const [isAdLoaded, setAdLoaded] = useState(false);
 
   useEffect(() => {
-    // Event listener for when the ad is loaded and ready to show
     const unsubscribeLoaded = rewarded.addAdEventListener(
       RewardedAdEventType.LOADED,
       () => {
         setAdLoaded(true);
-        console.log('Rewarded ad loaded.');
+        console.log('Rewarded ad loaded');
       }
     );
 
-    // Event listener for when the user has earned the reward
     const unsubscribeEarned = rewarded.addAdEventListener(
       RewardedAdEventType.EARNED_REWARD,
-      (reward: RewardedAdReward) => {
-        console.log('User earned reward!');
-        // Grant the reward to the user here
-      }
+      () => console.log('User earned reward')
     );
 
-    // Event listener for when the ad is closed
     const unsubscribeClosed = rewarded.addAdEventListener(
       AdEventType.CLOSED,
       () => {
@@ -54,10 +48,8 @@ export const useRewardedAd = () => {
       }
     );
 
-    // Start loading the first ad
     rewarded.load();
 
-    // Cleanup listeners on component unmount
     return () => {
       unsubscribeLoaded();
       unsubscribeEarned();
@@ -65,7 +57,6 @@ export const useRewardedAd = () => {
     };
   }, []);
 
-  // Function to show the ad
   const showRewardedAd = () => {
     if (isAdLoaded) {
       rewarded.show();
