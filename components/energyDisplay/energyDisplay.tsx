@@ -48,7 +48,7 @@ const EnergyDisplay = () => {
             energyAmount + 1 === MAXIMUM_ENERGY ? null : Date.now(),
         });
       }
-    }, 500);
+    }, 1000);
 
     return () => {
       clearInterval(timerInterval);
@@ -90,7 +90,7 @@ const EnergyDisplay = () => {
         </View>
       </View>
 
-      {timeLeft && currentPathname === '/' && (
+      {timeLeft && (currentPathname === '/' || currentPathname === '/home') && (
         <Text
           style={{
             position: 'absolute',
