@@ -9,6 +9,8 @@ import { colors } from '@/components/colors';
 import EnergyModal from '@/components/energyDisplay/energyModal';
 import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
 
+// TODO - fix navigation bar becoming black on dropdown usage
+
 export default function RootLayout() {
   useEffect(() => {
     NavigationBar.setBackgroundColorAsync(colors.offWhite);
