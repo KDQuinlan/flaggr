@@ -6,6 +6,7 @@ import SetupScreen from './setup';
 import Loading from '@/app/loading';
 import { hydrateStore } from '@/state/hydrate';
 import stateStore from '@/state/store';
+import PlayGames from '@/PlayGames'
 
 const IndexScreen = () => {
   const isInitialised = stateStore((state) => state.isInitialised);
@@ -18,6 +19,17 @@ const IndexScreen = () => {
 
     loadData();
   }, []);
+
+useEffect(() => {
+  (async () => {
+    try {
+      const signedIn = await PlayGames.signIn();
+      console.log(signedIn ? "✅ Signed in" : "❌ Not signed in");
+    } catch (e) {
+      console.error("Sign-in error:", e);
+    }
+  })();
+}, []);
 
   useEffect(() => {
     MobileAds().initialize();
