@@ -20,6 +20,7 @@ i18n.use(initReactI18next).init({
       loading: en.loading,
       setup: en.setup,
       settings: en.settings,
+      energy: en.energy,
     },
     es: {
       data: es.data,
@@ -31,6 +32,7 @@ i18n.use(initReactI18next).init({
       loading: es.loading,
       setup: es.setup,
       settings: es.settings,
+      energy: es.energy,
     },
   },
 

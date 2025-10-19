@@ -24,7 +24,7 @@ const IndexScreen = () => {
   }, []);
 
   if (!isInitialised) return <Loading />;
-  if (!userSettings.isSetup) {
+  if (!userSettings.isSetUp) {
     return <SetupScreen />;
   } else {
     return <HomeScreen />;

@@ -14,12 +14,18 @@ import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import stateStore from '@/state/store';
 import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
 import getCompletionDescription from '@/util/getCompletionDescription/getCompletionDescription';
+import persistUserSettings from '@/util/persistState/persistUserSettings';
+import determineSetTimestamp from '@/util/determineSetTimestamp/determineSetTimestamp';
 
 const Difficulty = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'difficulty'>>();
   const { t } = useTranslation('difficulty');
   const userProgression = stateStore((state) => state.userProgress);
+  const userSettings = stateStore((s) => s.userSettings);
+  const { energyAmount } = userSettings;
+  const setEnergyModalVisible = stateStore((s) => s.setEnergyModalVisible);
+
   const { id, title } = route.params;
   const progression = userProgression.games[id];
 
@@ -47,17 +53,27 @@ const Difficulty = () => {
                 : levelData.userScore / TO_PERCENTAGE_MULTIPLIER
             }
             score={levelData.userScore}
-            onPress={() =>
-              navigation.navigate('multipleChoice', {
-                title: levelData.name,
-                gameMode: id,
-                questions: generateMultipleChoice(
-                  levelData.id,
-                  levelData.length
-                ),
-                timeLimit: id === 'rapid' ? RAPID_TIME_ALLOWANCE_IN_S : 0,
-              })
-            }
+            onPress={() => {
+              if (energyAmount === 0) {
+                setEnergyModalVisible(true);
+              } else {
+                navigation.navigate('multipleChoice', {
+                  title: levelData.name,
+                  gameMode: id,
+                  questions: generateMultipleChoice(
+                    levelData.id,
+                    levelData.length
+                  ),
+                  timeLimit: id === 'rapid' ? RAPID_TIME_ALLOWANCE_IN_S : 0,
+                });
+
+                persistUserSettings({
+                  ...userSettings,
+                  energyAmount: energyAmount - 1,
+                  lastEnergyTimestamp: determineSetTimestamp(),
+                });
+              }
+            }}
           />
         ))}
       </ScrollView>
