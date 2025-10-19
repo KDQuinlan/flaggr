@@ -34,6 +34,7 @@ import stateStore from '@/state/store';
 import setCurrentCustomGame from '@/util/updatedProgressionStructure/setCurrentCustomGame';
 import { TimeLimits } from '@/types/screens';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
+import determineSetTimestamp from '@/util/determineSetTimestamp/determineSetTimestamp';
 
 // TODO - refactor rn image to expo image?
 
@@ -85,25 +86,6 @@ const CustomScreen = () => {
     setTimeLimitSlider(MINIMUM_CUSTOM_TIME_LIMIT_SECONDS);
   };
 
-  // useLayoutEffect(() => {
-  //   navigation.setOptions({
-  //     headerRight: () => (
-  // <TouchableOpacity
-  //   onPress={() => handleReset()}
-  //   style={styles.resetButton}
-  //   accessibilityRole="button"
-  //   accessibilityLabel={t('reset')}
-  // >
-  //   <Ionicons
-  //     name="reload-outline"
-  //     size={20}
-  //     color={colors.blueSecondary}
-  //   />
-  // </TouchableOpacity>
-  //     ),
-  //   });
-  // }, [navigation, handleReset]);
-
   const isDisabled = selectedRegions.length === 0;
 
   const finalScoreMultiplier = parseFloat(
@@ -145,7 +127,7 @@ const CustomScreen = () => {
       persistUserSettings({
         ...userSettings,
         energyAmount: energyAmount - 1,
-        lastEnergyTimestamp: Date.now(),
+        lastEnergyTimestamp: determineSetTimestamp(),
       });
     }
   };

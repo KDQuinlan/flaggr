@@ -20,6 +20,7 @@ import { BANNER_TEST_ID } from '@/constants/adId';
 import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
 
 // TODO - Shorten localisation country names for better UI usage
+// TODO - convert TouchableOpacity buttons to use Pressable
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();

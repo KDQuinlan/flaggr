@@ -1,4 +1,4 @@
-import { withAndroidManifest } from '@expo/config-plugins';
+const { withAndroidManifest } = require('@expo/config-plugins');
 
 module.exports = (config, props) => {
   const { androidAppId } = props;

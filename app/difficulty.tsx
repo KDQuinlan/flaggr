@@ -15,6 +15,7 @@ import stateStore from '@/state/store';
 import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
 import getCompletionDescription from '@/util/getCompletionDescription/getCompletionDescription';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
+import determineSetTimestamp from '@/util/determineSetTimestamp/determineSetTimestamp';
 
 const Difficulty = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -69,7 +70,7 @@ const Difficulty = () => {
                 persistUserSettings({
                   ...userSettings,
                   energyAmount: energyAmount - 1,
-                  lastEnergyTimestamp: Date.now(),
+                  lastEnergyTimestamp: determineSetTimestamp(),
                 });
               }
             }}

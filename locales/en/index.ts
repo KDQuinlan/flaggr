@@ -7,6 +7,7 @@ import custom from './custom';
 import customSummary from './customSummary';
 import setup from './setup';
 import settings from './settings';
+import energy from './energy';
 
 export default {
   data,
@@ -18,4 +19,5 @@ export default {
   customSummary,
   setup,
   settings,
+  energy,
 };

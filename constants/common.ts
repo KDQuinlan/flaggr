@@ -7,7 +7,7 @@ export const SUPPORTED_LANGUAGES = ['en', 'es'];
 export const VERSION_KEY = 1;
 
 export const MAXIMUM_ENERGY = 10;
-export const ENERGY_COOLDOWN_MINUTES = 10;
+export const ENERGY_COOLDOWN_MS = 10 * 60 * 1000;
 export const MINIMUM_DIFFICULTY = 1;
 export const MAXIMUM_DIFFICULTY = 5;
 export const GAME_DIFFICULTIES: Difficulties[] = [1, 2, 3, 4, 5];
