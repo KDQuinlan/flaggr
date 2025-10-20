@@ -32,17 +32,7 @@ const HomeScreen = () => {
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
       >
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            width: '100%',
-            marginTop: 30,
-            marginBottom: 10,
-            paddingHorizontal: 20,
-          }}
-        >
+        <View style={styles.headerContainer}>
           <TouchableOpacity
             onPress={() => navigation.navigate('settings')}
             accessibilityRole="button"
@@ -54,23 +44,9 @@ const HomeScreen = () => {
               source={require('@/assets/images/icons/resources/custom/cog.png')}
             />
           </TouchableOpacity>
-
-          <View
-            style={{
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              alignItems: 'center',
-              pointerEvents: 'none',
-            }}
-          >
-            <Text
-              style={{ fontWeight: 'bold', fontSize: 40, color: '#0073E6' }}
-            >
-              {APP_NAME}
-            </Text>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{APP_NAME}</Text>
           </View>
-
           <EnergyDisplay />
         </View>
 
@@ -86,6 +62,7 @@ const HomeScreen = () => {
             })
           }
         />
+
         <GameSelect
           id="rapid"
           title={t('rapid.title')}
@@ -98,6 +75,7 @@ const HomeScreen = () => {
             })
           }
         />
+
         <GameSelect
           id="custom"
           title={t('custom.title')}
@@ -106,7 +84,6 @@ const HomeScreen = () => {
           onPress={() => navigation.navigate('custom')}
         />
       </ScrollView>
-
       <AdBanner adId={BANNER_TEST_ID} />
     </SafeAreaView>
   );
@@ -124,13 +101,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 20,
   },
-  titleContainer: {
+  headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 10,
     width: '100%',
+    marginTop: 30,
+    marginBottom: 10,
     paddingHorizontal: 20,
+  },
+  titleContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    pointerEvents: 'none',
   },
   title: {
     fontWeight: 'bold',
