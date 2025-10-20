@@ -55,6 +55,7 @@ const MultipleChoice = () => {
   const incorrectTotalRef = useRef<number>(incorrectTotal);
   const highestStreakRef = useRef<number>(highestStreak);
   const timeUpRef = useRef<boolean>(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const customScoreRef = useRef<number>(customScore);
 
   useEffect(() => {
@@ -87,18 +88,41 @@ const MultipleChoice = () => {
   }, [questionNumberIndex, correctAnswer, difficulty, continent]);
 
   useEffect(() => {
+    startTimeRef.current = Date.now();
     timeUpRef.current = false;
-    const interval = setInterval(() => {
-      const elapsedSec = Math.floor((Date.now() - startTimeRef.current) / 1000);
+    setTimeElapsedInSeconds(isGameCountingUp ? 0 : timeLimit);
+
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    intervalRef.current = setInterval(() => {
+      if (startTimeRef.current === null) return;
+
+      const elapsedMs = Date.now() - startTimeRef.current;
+      const elapsedSec = Math.floor(elapsedMs / 1000);
 
       if (isGameCountingUp) {
         setTimeElapsedInSeconds(elapsedSec);
       } else {
         const remaining = timeLimit - elapsedSec;
-        setTimeElapsedInSeconds(Math.max(remaining, 0));
+        const currentDisplayTime = Math.max(remaining, 0);
+
+        setTimeElapsedInSeconds((prevTime) => {
+          if (prevTime !== currentDisplayTime) {
+            return currentDisplayTime;
+          }
+          return prevTime;
+        });
 
         if (remaining <= 0 && !timeUpRef.current) {
           timeUpRef.current = true;
+
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+          }
+
           if (gameMode !== 'custom') {
             navigation.navigate('summary', {
               difficulty: DIFFICULTY_ID_TO_LEVEL_MAP[difficulty],
@@ -121,10 +145,22 @@ const MultipleChoice = () => {
           }
         }
       }
-    }, 1000);
+    }, 100);
 
-    return () => clearInterval(interval);
-  }, [isGameCountingUp, gameMode, navigation, timeLimit]);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [
+    isGameCountingUp,
+    gameMode,
+    navigation,
+    timeLimit,
+    difficulty,
+    scoreMultiplier,
+  ]);
 
   useEffect(() => {
     navigation.setOptions({

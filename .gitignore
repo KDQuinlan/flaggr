@@ -35,3 +35,9 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+#android - CRITICAL FOR EAS BUILD
+android/build/
+android/app/build/
+android/.gradle/
+android/local.properties
