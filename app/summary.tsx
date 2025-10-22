@@ -29,6 +29,8 @@ import persistProgression from '@/util/persistState/persistProgression';
 import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import typedKeys from '@/util/typedKeys/typedKeys';
 import { ProgressionStructure } from '@/types/secureStore';
+import { MATCHES_PLAYED_ID } from '@/constants/leaderboard';
+import PlayGames from '@/PlayGames';
 
 // TODO - remove memoisation for progression and use getState for snapshot?
 
@@ -54,6 +56,7 @@ const Summary = () => {
   const userProgression = stateStore((state) => state.userProgress);
   const setProgression = stateStore((state) => state.setProgression);
   const { difficulty, gameMode, gameResult } = route.params;
+  const matchesPlayed = userProgression.games.matchesPlayed;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;
   const numberSuffix = gameMode === 'rapid' ? '' : '%';
   const translatedDifficulty = t(`levels.${LEVEL_MAP[difficulty]}`, {
@@ -140,6 +143,14 @@ const Summary = () => {
       title: t('summary', { difficulty: translatedDifficulty }),
     });
   }, [navigation, difficulty]);
+
+  useEffect(() => {
+    const newMatchesPlayed = matchesPlayed + 1;
+    setProgression({
+      games: { ...userProgression.games, matchesPlayed: newMatchesPlayed },
+    });
+    PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
+  }, []);
 
   useEffect(() => {
     const updatedProgression: ProgressionStructure =

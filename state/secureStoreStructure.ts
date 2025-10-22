@@ -5,6 +5,7 @@ import {
 
 export const defaultUserSettings: UserSettingStructure = {
   isSetUp: false,
+  isGoogleConnected: false,
   locale: 'en',
   energyAmount: 10,
   lastEnergyTimestamp: null,
@@ -136,5 +137,6 @@ export const defaultProgressionStructure: ProgressionStructure = {
         streak: 0,
       },
     },
+    matchesPlayed: 0,
   },
 };

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useNavigation } from 'expo-router';
 import { Image } from 'expo-image';
 import {
@@ -20,7 +21,6 @@ import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_TEST_ID } from '@/constants/adId';
 import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
 import PlayGames from '@/PlayGames';
-import { useEffect, useState } from 'react';
 
 // TODO - Shorten localisation country names for better UI usage
 // TODO - convert TouchableOpacity buttons to use Pressable
