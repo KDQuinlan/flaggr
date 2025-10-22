@@ -6,14 +6,6 @@ export type DifficultyScreenGameIds = 'standard' | 'rapid';
 export type SummaryScreenAllowedIds = 'standard' | 'rapid';
 export type PlayableGameModes = 'standard' | 'rapid' | 'custom';
 
-export type ScreenNames =
-  | 'Index'
-  | 'Difficulty'
-  | 'Summary'
-  | 'Standard'
-  | 'Rapid'
-  | 'Custom';
-
 export type GameResult = {
   correct: number;
   incorrect: number;

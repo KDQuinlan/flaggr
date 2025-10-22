@@ -55,20 +55,24 @@ class PlayGamesModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
     }
 
     @ReactMethod
-    fun showLeaderboard(leaderboardId: String, promise: Promise) {
+    fun showAllLeaderboards(promise: Promise) {
         val activity = currentActivity ?: run {
             promise.reject("E_NO_ACTIVITY", "Current activity is null")
             return
         }
 
         val leaderboardsClient = PlayGames.getLeaderboardsClient(activity)
-        
-        leaderboardsClient.getLeaderboardIntent(leaderboardId).addOnCompleteListener { task ->
+
+        leaderboardsClient.allLeaderboardsIntent.addOnCompleteListener { task ->
             if (task.isSuccessful && task.result != null) {
                 activity.startActivityForResult(task.result, 0)
                 promise.resolve(true)
             } else {
-                promise.reject("E_SHOW_LEADERBOARD_FAILED", "Failed to show leaderboard", task.exception)
+                promise.reject(
+                    "E_SHOW_ALL_LEADERBOARDS_FAILED",
+                    "Failed to show all leaderboards",
+                    task.exception
+                )
             }
         }
     }

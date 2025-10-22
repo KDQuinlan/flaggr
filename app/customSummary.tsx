@@ -22,6 +22,8 @@ import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDiffi
 import formatTime from '@/util/formatTime/formatTime';
 import setBestGameData from '@/util/updatedProgressionStructure/setBestGameData';
 import { ProgressionStructure } from '@/types/secureStore';
+import PlayGames from '@/PlayGames';
+import { HIGHEST_SCORE_ID } from '@/constants/leaderboard';
 
 const CustomSummary = () => {
   useFocusEffect(
@@ -83,6 +85,7 @@ const CustomSummary = () => {
 
       setProgression(updatedProgression);
       persistProgression(updatedProgression);
+      PlayGames.submitScore(HIGHEST_SCORE_ID, finalScore);
     }
   }, [finalScore, setProgression]);
 
