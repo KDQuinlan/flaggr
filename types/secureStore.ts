@@ -49,6 +49,7 @@ export type ProgressionStructure = {
     standard: GameProgression;
     rapid: GameProgression;
     custom: CustomData;
+    matchesPlayed: number;
   };
 };
 

@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import { useNavigation } from 'expo-router';
 import { Image } from 'expo-image';
 import {
+  Pressable,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -18,13 +20,20 @@ import { APP_NAME } from '@/constants/common';
 import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_TEST_ID } from '@/constants/adId';
 import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
+import PlayGames from '@/PlayGames';
 
 // TODO - Shorten localisation country names for better UI usage
 // TODO - convert TouchableOpacity buttons to use Pressable
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  const [showLeaderboard, setShowLeaderboard] = useState<boolean>(false);
   const { t } = useTranslation('home');
+
+  useEffect(() => {
+    showLeaderboard && PlayGames.showAllLeaderboards();
+    setTimeout(() => setShowLeaderboard(false), 250);
+  }, [showLeaderboard]);
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -84,6 +93,18 @@ const HomeScreen = () => {
           onPress={() => navigation.navigate('custom')}
         />
       </ScrollView>
+      <Pressable
+        style={({ pressed }) => [
+          styles.leaderboardContainer,
+          { opacity: pressed ? 0.7 : 1 },
+        ]}
+        onPress={() => setShowLeaderboard(true)}
+      >
+        <Image
+          style={styles.leaderboardIcon}
+          source={require('@/assets/images/icons/resources/leaderboard.png')}
+        />
+      </Pressable>
       <AdBanner adId={BANNER_TEST_ID} />
     </SafeAreaView>
   );
@@ -129,6 +150,23 @@ const styles = StyleSheet.create({
     height: 25,
     width: 25,
   },
+  leaderboardContainer: {
+    marginBottom: 20,
+    marginRight: 20,
+    backgroundColor: colors.white,
+    width: 70,
+    height: 70,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 4,
+  },
+  leaderboardIcon: { width: 50, height: 50 },
 });
 
 export default HomeScreen;

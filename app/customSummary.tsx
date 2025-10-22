@@ -22,6 +22,8 @@ import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDiffi
 import formatTime from '@/util/formatTime/formatTime';
 import setBestGameData from '@/util/updatedProgressionStructure/setBestGameData';
 import { ProgressionStructure } from '@/types/secureStore';
+import { HIGHEST_SCORE_ID, MATCHES_PLAYED_ID } from '@/constants/leaderboard';
+import PlayGames from '@/PlayGames';
 
 const CustomSummary = () => {
   useFocusEffect(
@@ -46,6 +48,7 @@ const CustomSummary = () => {
   const setProgression = stateStore((state) => state.setProgression);
   const { gameResult, finalScore } = route.params;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;
+  const matchesPlayed = userProgression.games.matchesPlayed;
   const { regions, independentCountriesOnly, timeLimit, gameLength } =
     userProgression.games.custom.currentGame;
 
@@ -66,6 +69,14 @@ const CustomSummary = () => {
   }, [navigation]);
 
   useEffect(() => {
+    const newMatchesPlayed = matchesPlayed + 1;
+    setProgression({
+      games: { ...userProgression.games, matchesPlayed: newMatchesPlayed },
+    });
+    PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
+  }, []);
+
+  useEffect(() => {
     if (isNewHighScore) {
       const updatedProgression: ProgressionStructure = setBestGameData(
         initialProgressionRef.current,
@@ -83,8 +94,9 @@ const CustomSummary = () => {
 
       setProgression(updatedProgression);
       persistProgression(updatedProgression);
+      PlayGames.submitScore(HIGHEST_SCORE_ID, finalScore);
     }
-  }, [finalScore, setProgression]);
+  }, [finalScore]);
 
   const handleContinue = () => resetToDifficultyScreen(navigation, 'custom');
 
