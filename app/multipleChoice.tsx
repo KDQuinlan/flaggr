@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { useNavigation } from 'expo-router';
+import { useFocusEffect, useNavigation } from 'expo-router';
 import { Image } from 'expo-image';
 import { ProgressBar } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
@@ -54,8 +54,6 @@ const MultipleChoice = () => {
   const correctTotalRef = useRef<number>(correctTotal);
   const incorrectTotalRef = useRef<number>(incorrectTotal);
   const highestStreakRef = useRef<number>(highestStreak);
-  const timeUpRef = useRef<boolean>(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const customScoreRef = useRef<number>(customScore);
 
   useEffect(() => {
@@ -88,81 +86,6 @@ const MultipleChoice = () => {
   }, [questionNumberIndex, correctAnswer, difficulty, continent]);
 
   useEffect(() => {
-    startTimeRef.current = Date.now();
-    timeUpRef.current = false;
-    setTimeElapsedInSeconds(isGameCountingUp ? 0 : timeLimit);
-
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-
-    intervalRef.current = setInterval(() => {
-      if (startTimeRef.current === null) return;
-
-      const elapsedMs = Date.now() - startTimeRef.current;
-      const elapsedSec = Math.floor(elapsedMs / 1000);
-
-      if (isGameCountingUp) {
-        setTimeElapsedInSeconds(elapsedSec);
-      } else {
-        const remaining = timeLimit - elapsedSec;
-        const currentDisplayTime = Math.max(remaining, 0);
-
-        setTimeElapsedInSeconds((prevTime) => {
-          if (prevTime !== currentDisplayTime) {
-            return currentDisplayTime;
-          }
-          return prevTime;
-        });
-
-        if (remaining <= 0 && !timeUpRef.current) {
-          timeUpRef.current = true;
-
-          if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-            intervalRef.current = null;
-          }
-
-          if (gameMode !== 'custom') {
-            navigation.navigate('summary', {
-              difficulty: DIFFICULTY_ID_TO_LEVEL_MAP[difficulty],
-              gameMode,
-              gameResult: {
-                correct: correctTotalRef.current,
-                incorrect: incorrectTotalRef.current,
-                highestStreak: highestStreakRef.current,
-              },
-            });
-          } else {
-            navigation.navigate('customSummary', {
-              gameResult: {
-                correct: correctTotalRef.current,
-                incorrect: incorrectTotalRef.current,
-                highestStreak: highestStreakRef.current,
-              },
-              finalScore: Math.round(customScoreRef.current * scoreMultiplier!),
-            });
-          }
-        }
-      }
-    }, 100);
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-    };
-  }, [
-    isGameCountingUp,
-    gameMode,
-    navigation,
-    timeLimit,
-    difficulty,
-    scoreMultiplier,
-  ]);
-
-  useEffect(() => {
     navigation.setOptions({
       title:
         title === 'Custom'
@@ -171,6 +94,55 @@ const MultipleChoice = () => {
       headerRight: () => <Text>{formatTime(timeElapsedInSeconds)}</Text>,
     });
   }, [navigation, timeElapsedInSeconds, title]);
+
+  useFocusEffect(
+    useCallback(() => {
+      const interval = setInterval(() => {
+        const elapsedMs = Date.now() - startTimeRef.current;
+        const elapsedSec = Math.floor(elapsedMs / 1000);
+        const remaining = Math.max(timeLimit - elapsedSec, 0);
+        const newValue = isGameCountingUp ? elapsedSec : remaining;
+
+        if (!isGameCountingUp && remaining <= 0) {
+          clearInterval(interval);
+
+          const gameResult = {
+            correct: correctTotalRef.current,
+            incorrect: incorrectTotalRef.current,
+            highestStreak: highestStreakRef.current,
+          };
+
+          if (gameMode !== 'custom') {
+            navigation.navigate('summary', {
+              difficulty: DIFFICULTY_ID_TO_LEVEL_MAP[difficulty],
+              gameMode,
+              gameResult,
+            });
+          } else {
+            navigation.navigate('customSummary', {
+              gameResult,
+              finalScore: Math.round(customScoreRef.current * scoreMultiplier!),
+            });
+          }
+
+          return;
+        }
+
+        setTimeElapsedInSeconds((prev) =>
+          prev !== newValue ? newValue : prev
+        );
+      }, 200);
+
+      return () => clearInterval(interval);
+    }, [
+      navigation,
+      gameMode,
+      timeLimit,
+      isGameCountingUp,
+      difficulty,
+      scoreMultiplier,
+    ])
+  );
 
   const handleAnswerPress = (answer: string) => {
     setIsButtonDisabled(true);
