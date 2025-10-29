@@ -14,6 +14,11 @@ export default {
     levelThree: 'Nivel 3',
     levelFour: 'Nivel 4',
     levelFive: 'Nivel 5',
+    levelSix: 'Nivel 6',
+    levelSeven: 'Nivel 7',
+    levelEight: 'Nivel 8',
+    levelNine: 'Nivel 9',
+    levelTen: 'Nivel 10',
   },
   countries: {
     afghanistan: 'Afganistán',
