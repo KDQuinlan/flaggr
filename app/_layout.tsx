@@ -8,10 +8,13 @@ import '@/locales/i18n';
 import { colors } from '@/components/colors';
 import EnergyModal from '@/components/energyDisplay/energyModal';
 import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
+import stateStore from '@/state/store';
 
 // TODO - fix navigation bar becoming black on dropdown usage
 
 export default function RootLayout() {
+  const { isPremiumUser } = stateStore((state) => state.userSettings);
+
   useEffect(() => {
     NavigationBar.setBackgroundColorAsync(colors.offWhite);
     NavigationBar.setButtonStyleAsync('dark');
@@ -24,10 +27,13 @@ export default function RootLayout() {
       <Stack
         screenOptions={{
           headerTitleAlign: 'center',
+          headerTintColor: colors.bluePrimary,
           headerStyle: {
             backgroundColor: colors.offWhite,
           },
-          headerTintColor: colors.bluePrimary,
+          headerTitleStyle: {
+            fontFamily: 'DMSansBold',
+          },
         }}
       >
         <Stack.Screen
@@ -54,12 +60,18 @@ export default function RootLayout() {
         <Stack.Screen name="settings" options={{ headerShown: true }} />
         <Stack.Screen
           name="difficulty"
-          options={{ headerShown: true, headerRight: () => <EnergyDisplay /> }}
+          options={{
+            headerShown: true,
+            ...(!isPremiumUser && { headerRight: () => <EnergyDisplay /> }),
+          }}
         />
         <Stack.Screen name="multipleChoice" options={{ headerShown: true }} />
         <Stack.Screen
           name="custom"
-          options={{ headerShown: true, headerRight: () => <EnergyDisplay /> }}
+          options={{
+            headerShown: true,
+            ...(!isPremiumUser && { headerRight: () => <EnergyDisplay /> }),
+          }}
         />
         <Stack.Screen
           name="customSummary"

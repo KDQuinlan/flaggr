@@ -23,7 +23,7 @@ const Difficulty = () => {
   const { t } = useTranslation('difficulty');
   const userProgression = stateStore((state) => state.userProgress);
   const userSettings = stateStore((s) => s.userSettings);
-  const { energyAmount } = userSettings;
+  const { energyAmount, isPremiumUser } = userSettings;
   const setEnergyModalVisible = stateStore((s) => s.setEnergyModalVisible);
 
   const { id, title } = route.params;
@@ -54,7 +54,7 @@ const Difficulty = () => {
             }
             score={levelData.userScore}
             onPress={() => {
-              if (energyAmount === 0) {
+              if (energyAmount === 0 && !isPremiumUser) {
                 setEnergyModalVisible(true);
               } else {
                 navigation.navigate('multipleChoice', {
@@ -67,11 +67,13 @@ const Difficulty = () => {
                   timeLimit: id === 'rapid' ? RAPID_TIME_ALLOWANCE_IN_S : 0,
                 });
 
-                persistUserSettings({
-                  ...userSettings,
-                  energyAmount: energyAmount - 1,
-                  lastEnergyTimestamp: determineSetTimestamp(),
-                });
+                if (!isPremiumUser) {
+                  persistUserSettings({
+                    ...userSettings,
+                    energyAmount: energyAmount - 1,
+                    lastEnergyTimestamp: determineSetTimestamp(),
+                  });
+                }
               }
             }}
           />

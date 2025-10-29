@@ -21,12 +21,14 @@ import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_TEST_ID } from '@/constants/adId';
 import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
 import PlayGames from '@/PlayGames';
+import stateStore from '@/state/store';
 
 // TODO - Shorten localisation country names for better UI usage
 // TODO - convert TouchableOpacity buttons to use Pressable
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  const { isPremiumUser } = stateStore((state) => state.userSettings);
   const [showLeaderboard, setShowLeaderboard] = useState<boolean>(false);
   const { t } = useTranslation('home');
 
@@ -56,7 +58,7 @@ const HomeScreen = () => {
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{APP_NAME}</Text>
           </View>
-          <EnergyDisplay />
+          {!isPremiumUser && <EnergyDisplay />}
         </View>
 
         <GameSelect
@@ -105,7 +107,7 @@ const HomeScreen = () => {
           source={require('@/assets/images/icons/resources/leaderboard.png')}
         />
       </Pressable>
-      <AdBanner adId={BANNER_TEST_ID} />
+      {!isPremiumUser && <AdBanner adId={BANNER_TEST_ID} />}
     </SafeAreaView>
   );
 };
@@ -139,9 +141,9 @@ const styles = StyleSheet.create({
     pointerEvents: 'none',
   },
   title: {
-    fontWeight: 'bold',
     fontSize: 40,
     color: '#0073E6',
+    fontFamily: 'Chewy',
   },
   adContainer: {
     alignItems: 'center',

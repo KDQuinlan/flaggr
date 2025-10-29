@@ -125,9 +125,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   title: {
-    fontWeight: 'bold',
     fontSize: 40,
     color: '#0073E6',
+    fontFamily: 'Chewy',
   },
   section: {
     marginTop: 20,

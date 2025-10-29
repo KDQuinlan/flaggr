@@ -56,6 +56,7 @@ export type ProgressionStructure = {
 export type UserSettingStructure = {
   isSetUp: boolean;
   isGoogleConnected: boolean;
+  isPremiumUser: boolean;
   locale: string;
   energyAmount: number;
   lastEnergyTimestamp: number | null;
