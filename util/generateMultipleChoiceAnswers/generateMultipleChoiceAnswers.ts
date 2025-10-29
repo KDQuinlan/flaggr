@@ -4,6 +4,8 @@ import { type Country } from '../generateMultipleChoiceQuestions/generateMultipl
 import shuffleArray from '../shuffleArray/shuffleArray';
 import { Difficulties } from '@/types/secureStore';
 
+// TODO - if array length !== 4 then bulk it out
+
 const generateMultipleChoiceAnswers = (
   correctAnswer: string,
   difficulty: Difficulties,
@@ -12,11 +14,31 @@ const generateMultipleChoiceAnswers = (
   let difficultyRange: number[] = [];
 
   if (difficulty === MINIMUM_DIFFICULTY) {
-    difficultyRange = [difficulty, difficulty + 1];
+    difficultyRange = [difficulty, difficulty + 1, difficulty + 2];
   } else if (difficulty === MAXIMUM_DIFFICULTY) {
-    difficultyRange = [difficulty - 1, difficulty];
+    difficultyRange = [difficulty - 2, difficulty - 1, difficulty];
+  } else if (difficulty === MINIMUM_DIFFICULTY + 1) {
+    difficultyRange = [
+      difficulty - 1,
+      difficulty,
+      difficulty + 1,
+      difficulty + 2,
+    ];
+  } else if (difficulty === MAXIMUM_DIFFICULTY - 1) {
+    difficultyRange = [
+      difficulty - 2,
+      difficulty - 1,
+      difficulty,
+      difficulty + 1,
+    ];
   } else {
-    difficultyRange = [difficulty - 1, difficulty, difficulty + 1];
+    difficultyRange = [
+      difficulty - 2,
+      difficulty - 1,
+      difficulty,
+      difficulty + 1,
+      difficulty + 2,
+    ];
   }
 
   const countriesByDifficultyInput = countries

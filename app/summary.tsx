@@ -31,6 +31,7 @@ import typedKeys from '@/util/typedKeys/typedKeys';
 import { ProgressionStructure } from '@/types/secureStore';
 import { MATCHES_PLAYED_ID } from '@/constants/leaderboard';
 import PlayGames from '@/PlayGames';
+import determineSummaryIcons from '@/util/determineSummaryIcons';
 
 // TODO - remove memoisation for progression and use getState for snapshot?
 
@@ -243,6 +244,8 @@ const Summary = () => {
     if (!newHighScoreMessage && !unlockRequirementMessage && !unlockedMessage)
       return null;
 
+    const levelIconsToShow = determineSummaryIcons(difficulty);
+
     return (
       <View style={styles.sectionContainer}>
         {newHighScoreMessage && <Text>{newHighScoreMessage}</Text>}
@@ -251,7 +254,7 @@ const Summary = () => {
 
         {unlockedMessage && userNextLevel && (
           <View style={styles.difficultyImageContainer}>
-            {typedKeys(userProgression.games[gameMode]).map((difficultyKey) => (
+            {levelIconsToShow.map((difficultyKey) => (
               <Image
                 key={String(difficultyKey)}
                 style={{

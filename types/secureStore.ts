@@ -1,11 +1,26 @@
-export type Levels = 'Level 1' | 'Level 2' | 'Level 3' | 'Level 4' | 'Level 5';
-export type Difficulties = 1 | 2 | 3 | 4 | 5;
+export type Levels =
+  | 'Level 1'
+  | 'Level 2'
+  | 'Level 3'
+  | 'Level 4'
+  | 'Level 5'
+  | 'Level 6'
+  | 'Level 7'
+  | 'Level 8'
+  | 'Level 9'
+  | 'Level 10';
+export type Difficulties = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 export type LevelKeys =
   | 'levelOne'
   | 'levelTwo'
   | 'levelThree'
   | 'levelFour'
-  | 'levelFive';
+  | 'levelFive'
+  | 'levelSix'
+  | 'levelSeven'
+  | 'levelEight'
+  | 'levelNine'
+  | 'levelTen';
 
 export type LevelData = {
   id: Difficulties;
