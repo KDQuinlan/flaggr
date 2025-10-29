@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import MobileAds from 'react-native-google-mobile-ads';
+import { useFonts } from 'expo-font';
 
 import HomeScreen from './home';
 import SetupScreen from './setup';
@@ -15,6 +16,11 @@ const IndexScreen = () => {
   const userSettings = stateStore((state) => state.userSettings);
   const { setUserSettings } = stateStore.getState();
   const [hasStoreHydrated, setHasStoreHydrated] = useState<boolean>(false);
+
+  const [fontsLoaded] = useFonts({
+    Chewy: require('@/assets/fonts/Chewy-Regular.ttf'),
+    SpaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
+  });
 
   useEffect(() => {
     const loadData = async () => {
@@ -44,10 +50,12 @@ const IndexScreen = () => {
   }, [hasStoreHydrated]);
 
   useEffect(() => {
-    MobileAds().initialize();
+    if (!userSettings.isPremiumUser) {
+      MobileAds().initialize();
+    }
   }, []);
 
-  if (!isInitialised) return <Loading />;
+  if (!isInitialised || !fontsLoaded) return <Loading />;
   if (!userSettings.isSetUp) {
     return <SetupScreen />;
   } else {

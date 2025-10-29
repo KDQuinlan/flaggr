@@ -45,7 +45,7 @@ const CustomScreen = () => {
   const setProgression = stateStore((state) => state.setProgression);
   const setEnergyModalVisible = stateStore((s) => s.setEnergyModalVisible);
   const userSettings = stateStore((s) => s.userSettings);
-  const { energyAmount } = userSettings;
+  const { energyAmount, isPremiumUser } = userSettings;
 
   const [isScoreAccordionExpanded, setIsScoreAccordionExpanded] =
     useState<boolean>(false);
@@ -99,7 +99,7 @@ const CustomScreen = () => {
   );
 
   const onStartPress = () => {
-    if (energyAmount === 0) {
+    if (energyAmount === 0 && !isPremiumUser) {
       setEnergyModalVisible(true);
     } else {
       navigation.navigate('multipleChoice', {
@@ -124,11 +124,13 @@ const CustomScreen = () => {
         })
       );
 
-      persistUserSettings({
-        ...userSettings,
-        energyAmount: energyAmount - 1,
-        lastEnergyTimestamp: determineSetTimestamp(),
-      });
+      if (!isPremiumUser) {
+        persistUserSettings({
+          ...userSettings,
+          energyAmount: energyAmount - 1,
+          lastEnergyTimestamp: determineSetTimestamp(),
+        });
+      }
     }
   };
 

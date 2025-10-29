@@ -6,6 +6,7 @@ import {
 export const defaultUserSettings: UserSettingStructure = {
   isSetUp: false,
   isGoogleConnected: false,
+  isPremiumUser: false,
   locale: 'en',
   energyAmount: 10,
   lastEnergyTimestamp: null,

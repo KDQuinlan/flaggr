@@ -32,12 +32,13 @@ export const gameSelectStyles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   title: {
-    fontWeight: 'bold',
+    fontFamily: 'DMSansBold',
     fontSize: 24,
     color: colors.offBlack,
     flexWrap: 'wrap',
   },
   description: {
+    fontFamily: 'DMSansRegular',
     color: colors.lightBlack,
     marginTop: 4,
     flexWrap: 'wrap',
