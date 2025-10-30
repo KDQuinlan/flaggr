@@ -133,12 +133,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   label: {
+    fontFamily: 'DMSansBold',
     fontSize: 16,
-    fontWeight: '600',
     marginBottom: 8,
   },
   optional: {
-    fontWeight: '400',
+    fontFamily: 'DMSans',
     fontSize: 14,
     color: '#666',
   },
@@ -152,6 +152,7 @@ const styles = StyleSheet.create({
   },
   helperText: {
     marginTop: 4,
+    fontFamily: 'DMSans',
     fontSize: 12,
     color: '#888',
   },
@@ -172,7 +173,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'DMSansBold',
     color: colors.white,
   },
 });

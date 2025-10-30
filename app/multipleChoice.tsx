@@ -91,7 +91,11 @@ const MultipleChoice = () => {
         title === 'Custom'
           ? t('title', { ns: 'custom' })
           : t(`levels.${LEVEL_MAP[title]}`),
-      headerRight: () => <Text>{formatTime(timeElapsedInSeconds)}</Text>,
+      headerRight: () => (
+        <Text style={{ fontFamily: 'DMSansBold' }}>
+          {formatTime(timeElapsedInSeconds)}
+        </Text>
+      ),
     });
   }, [navigation, timeElapsedInSeconds, title]);
 
@@ -305,14 +309,14 @@ const styles = StyleSheet.create({
   },
   answerOrderText: {
     color: colors.bluePrimary,
+    fontFamily: 'DMSansBold',
     fontSize: 20,
-    fontWeight: 'bold',
     paddingLeft: 20,
     paddingRight: 10,
   },
   answerText: {
+    fontFamily: 'DMSans',
     fontSize: 20,
-    fontWeight: '500',
     flexShrink: 1,
   },
 });

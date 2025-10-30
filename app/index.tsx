@@ -19,6 +19,8 @@ const IndexScreen = () => {
 
   const [fontsLoaded] = useFonts({
     Chewy: require('@/assets/fonts/Chewy-Regular.ttf'),
+    DMSansBold: require('@/assets/fonts/DMSans-ExtraBold.ttf'),
+    DMSans: require('@/assets/fonts/DMSans-Medium.ttf'),
     SpaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
   });
 

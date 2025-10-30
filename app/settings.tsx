@@ -99,8 +99,8 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    fontWeight: '600',
     marginBottom: 8,
+    fontFamily: 'DMSansBold',
   },
   optional: {
     fontWeight: '400',
@@ -114,11 +114,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 10,
     backgroundColor: '#fff',
-  },
-  helperText: {
-    marginTop: 4,
-    fontSize: 12,
-    color: '#888',
   },
   button: {
     backgroundColor: colors.bluePrimary,
@@ -137,8 +132,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: 'bold',
     color: colors.white,
+    fontFamily: 'DMSansBold',
   },
 });
 

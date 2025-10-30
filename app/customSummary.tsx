@@ -168,7 +168,7 @@ const CustomSummary = () => {
         </View>
         {isNewHighScore && (
           <View style={styles.sectionContainer}>
-            <Text>{newHighScoreMessage}</Text>
+            <Text style={styles.unlockText}>{newHighScoreMessage}</Text>
           </View>
         )}
         <View style={styles.buttonContainer}>
@@ -234,9 +234,9 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   title: {
+    fontFamily: 'DMSansBold',
     textAlign: 'center',
-    fontSize: 32,
-    fontWeight: '600',
+    fontSize: 28,
     paddingBottom: 10,
   },
   subTitle: {
@@ -245,7 +245,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 20,
   },
-  buttonText: { fontSize: 20, fontWeight: '500', color: colors.white },
+  unlockText: { fontFamily: 'DMSans' },
+  buttonText: { fontFamily: 'DMSansBold', fontSize: 20, color: colors.white },
 });
 
 export default CustomSummary;

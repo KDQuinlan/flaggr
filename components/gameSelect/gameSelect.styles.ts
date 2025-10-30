@@ -38,7 +38,7 @@ export const gameSelectStyles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   description: {
-    fontFamily: 'DMSansRegular',
+    fontFamily: 'DMSans',
     color: colors.lightBlack,
     marginTop: 4,
     flexWrap: 'wrap',

@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   buttonText: {
+    fontFamily: 'DMSans',
     color: colors.black,
     fontSize: 16,
   },
@@ -106,7 +107,8 @@ const styles = StyleSheet.create({
     elevation: 0,
   },
   buttonTextSelected: {
+    fontFamily: 'DMSans',
     color: colors.white,
-    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
