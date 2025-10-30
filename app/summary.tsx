@@ -248,9 +248,15 @@ const Summary = () => {
 
     return (
       <View style={styles.sectionContainer}>
-        {newHighScoreMessage && <Text>{newHighScoreMessage}</Text>}
-        {unlockRequirementMessage && <Text>{unlockRequirementMessage}</Text>}
-        {unlockedMessage && <Text>{unlockedMessage}</Text>}
+        {newHighScoreMessage && (
+          <Text style={styles.unlockText}>{newHighScoreMessage}</Text>
+        )}
+        {unlockRequirementMessage && (
+          <Text style={styles.unlockText}>{unlockRequirementMessage}</Text>
+        )}
+        {unlockedMessage && (
+          <Text style={styles.unlockText}>{unlockedMessage}</Text>
+        )}
 
         {unlockedMessage && userNextLevel && (
           <View style={styles.difficultyImageContainer}>
@@ -359,12 +365,13 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   title: {
+    fontFamily: 'DMSansBold',
     textAlign: 'center',
     fontSize: 28,
-    fontWeight: '600',
     paddingBottom: 10,
   },
-  buttonText: { fontSize: 20, fontWeight: '500', color: colors.white },
+  unlockText: { fontFamily: 'DMSans' },
+  buttonText: { fontFamily: 'DMSansBold', fontSize: 20, color: colors.white },
 });
 
 export default Summary;

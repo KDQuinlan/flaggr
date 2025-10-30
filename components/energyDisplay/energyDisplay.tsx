@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TouchableOpacity, Text, View } from 'react-native';
+import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 import { usePathname } from 'expo-router';
 import { Image } from 'expo-image';
 
@@ -60,52 +60,56 @@ const EnergyDisplay = () => {
       onPress={() => setEnergyModalVisible(!energyModalVisible)}
       hitSlop={10}
     >
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <View style={styles.parentContainer}>
         <Image
           source={require('@/assets/images/icons/resources/energy.png')}
-          style={{
-            width: 20,
-            height: 30,
-            left: 10,
-            zIndex: 1,
-          }}
+          style={styles.image}
         />
-        <View
-          style={{
-            minWidth: 50,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: colors.energyOrange,
-            borderRadius: 5,
-            paddingHorizontal: 10,
-          }}
-        >
-          <Text style={{ fontWeight: '600' }}>{energyText}</Text>
+        <View style={styles.energyContainer}>
+          <Text style={styles.energy}>{energyText}</Text>
         </View>
       </View>
 
       {timeLeft && (currentPathname === '/' || currentPathname === '/home') && (
-        <Text
-          style={{
-            position: 'absolute',
-            top: '90%',
-            fontWeight: '600',
-            fontSize: 10,
-            paddingLeft: 20,
-            alignSelf: 'center',
-          }}
-        >
-          {timeLeft}
-        </Text>
+        <Text style={styles.timer}>{timeLeft}</Text>
       )}
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  parentContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: 20,
+    height: 30,
+    left: 10,
+    zIndex: 1,
+  },
+  energyContainer: {
+    minWidth: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.energyOrange,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+  },
+  energy: {
+    fontWeight: '600',
+    fontFamily: 'DMSansBold',
+  },
+  timer: {
+    position: 'absolute',
+    top: '90%',
+    fontWeight: '600',
+    fontSize: 10,
+    paddingLeft: 20,
+    alignSelf: 'center',
+    fontFamily: 'DMSans',
+  },
+});
 
 export default EnergyDisplay;

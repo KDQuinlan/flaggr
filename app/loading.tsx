@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.offWhite,
   },
   text: {
+    fontFamily: 'DMSansBold',
     marginTop: 12,
     fontSize: 16,
     color: colors.black,

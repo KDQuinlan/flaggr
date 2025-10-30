@@ -199,6 +199,7 @@ const CustomScreen = () => {
             </List.Accordion>
           </List.Accordion>
         )}
+
         {/* Regions */}
         <View style={styles.modifierContainer}>
           <View style={styles.sectionContainer}>
@@ -227,7 +228,7 @@ const CustomScreen = () => {
             value={selectedRegions}
             onChange={setSelectedRegions}
           />
-          <Divider style={styles.divier} />
+          <Divider style={styles.divider} />
           <View style={styles.independentCountriesContainer}>
             <View style={styles.independentCountriesTextContainer}>
               <Text style={styles.independentCountriesText}>
@@ -348,7 +349,7 @@ const CustomScreen = () => {
           </View>
         </View>
         <View style={styles.modifierContainer}>
-          <Text style={styles.helperText}>
+          <Text style={styles.finalScoreMultiplierText}>
             {t('scoreMultiplier', {
               value: finalScoreMultiplier,
             })}
@@ -362,15 +363,7 @@ const CustomScreen = () => {
             accessibilityRole="button"
             onPress={onStartPress}
           >
-            <Text
-              style={
-                isDisabled
-                  ? styles.buttonTextDisabled
-                  : styles.buttonTextEnabled
-              }
-            >
-              {t('start')}
-            </Text>
+            <Text style={styles.buttonText}>{t('start')}</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -413,12 +406,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   independentCountriesText: {
+    fontFamily: 'DMSans',
     color: colors.blueSecondary,
-    fontWeight: '500',
     paddingRight: 5,
     flexWrap: 'wrap',
   },
   independentCountriesMultiplierText: {
+    fontFamily: 'DMSansBold',
     color: colors.blueSecondary,
     fontSize: 12,
   },
@@ -439,8 +433,8 @@ const styles = StyleSheet.create({
   },
   subHeader: {
     paddingVertical: 10,
+    fontFamily: 'DMSansBold',
     fontSize: 18,
-    fontWeight: 'bold',
     color: colors.blueSecondary,
     paddingLeft: 10,
   },
@@ -449,8 +443,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   ruleLabel: {
+    fontFamily: 'DMSansBold',
     fontSize: 14,
-    fontWeight: 'bold',
     color: colors.blueSecondary,
     paddingLeft: 10,
     marginBottom: 5,
@@ -471,10 +465,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   sliderQuantityText: {
+    fontFamily: 'DMSansBold',
     textAlign: 'right',
     fontSize: 12,
     color: colors.blueSecondary,
-    fontWeight: '500',
     flexShrink: 1,
     flexWrap: 'wrap',
   },
@@ -485,14 +479,16 @@ const styles = StyleSheet.create({
     paddingRight: 15,
   },
   sliderLabelText: {
+    fontFamily: 'DMSans',
     fontSize: 12,
     color: colors.blueSecondary,
-    fontStyle: 'italic',
   },
   helperText: {
+    fontFamily: 'DMSans',
     color: colors.blueSecondary,
     fontSize: 14,
     textAlign: 'center',
+    justifyContent: 'center',
     paddingTop: 10,
   },
   buttonEnabled: {
@@ -521,17 +517,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
   },
-  buttonTextEnabled: {
+  buttonText: {
+    fontFamily: 'DMSansBold',
     fontSize: 16,
-    fontWeight: 'bold',
     color: colors.white,
   },
-  buttonTextDisabled: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: colors.white,
-  },
-  divier: {
+  divider: {
     height: 1,
     backgroundColor: colors.lightGrey,
     marginVertical: 5,
@@ -541,6 +532,13 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  finalScoreMultiplierText: {
+    fontFamily: 'DMSansBold',
+    fontSize: 16,
+    color: colors.blueSecondary,
+    textAlign: 'center',
+    paddingTop: 10,
   },
 });
 

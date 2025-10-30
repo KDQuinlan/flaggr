@@ -8,8 +8,8 @@ const SummaryInfoRow = ({
   value: number | string;
 }) => (
   <View style={styles.summaryInfoContainer}>
-    <Text>{title}</Text>
-    <Text>{value}</Text>
+    <Text style={styles.title}>{title}</Text>
+    <Text style={styles.value}>{value}</Text>
   </View>
 );
 
@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  title: { fontFamily: 'DMSansBold' },
+  value: { fontFamily: 'DMSans' },
 });
 
 export default SummaryInfoRow;
