@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigation } from 'expo-router';
 import {
+  Linking,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -18,6 +20,8 @@ import { LANGUAGES } from '@/constants/common';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import stateStore from '@/state/store';
 
+// TODO - remove on render state update?
+
 const SettingsScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const userSettings = stateStore((state) => state.userSettings);
@@ -30,7 +34,7 @@ const SettingsScreen = () => {
 
   useEffect(() => {
     persistUserSettings({ ...userSettings, locale: language });
-  }, [language]);
+  }, [userSettings.locale]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -55,6 +59,18 @@ const SettingsScreen = () => {
             onChange={(item) => setLanguage(item.value)}
           />
         </View>
+
+        <Pressable
+          onPress={() =>
+            Linking.openURL('https://sites.google.com/view/flaggr')
+          }
+          style={({ pressed }) => [
+            styles.section,
+            { opacity: pressed ? 0.7 : 1 },
+          ]}
+        >
+          <Text style={styles.privacyPolicyText}>{t('privacy')}</Text>
+        </Pressable>
 
         <TouchableOpacity
           onPress={() => navigation.navigate('home')}
@@ -134,6 +150,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.white,
     fontFamily: 'DMSansBold',
+  },
+  privacyPolicyText: {
+    fontFamily: 'DMSans',
+    textDecorationLine: 'underline',
+    color: colors.blueSecondary,
   },
 });
 
