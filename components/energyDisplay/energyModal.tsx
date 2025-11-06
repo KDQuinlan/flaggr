@@ -1,9 +1,10 @@
-import { Modal, Text, Pressable, StyleSheet } from 'react-native';
+import { Modal, Text, Pressable, StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { colors } from '@/components/colors';
 import stateStore from '@/state/store';
 import { useRewardedAd } from '@/hooks/energyRecoveryAd/energyRecoveryAd';
+import PurchasePremiumButton from '../PurchasePremiumButton/PurchasePremiumButton';
 
 const EnergyModal = () => {
   const energyModalVisible = stateStore((s) => s.energyModalVisible);
@@ -40,7 +41,7 @@ const EnergyModal = () => {
             onPress={handleWatchAd}
             disabled={!isAdLoaded}
             style={({ pressed }) => [
-              styles.primaryButton,
+              styles.ctaButton,
               {
                 opacity: !isAdLoaded ? 0.6 : pressed ? 0.7 : 1,
               },
@@ -51,14 +52,17 @@ const EnergyModal = () => {
             </Text>
           </Pressable>
 
+          <Text style={styles.bodyText}>{t('removeAd')}</Text>
+          <PurchasePremiumButton />
+
           <Pressable
             onPress={closeModal}
             style={({ pressed }) => [
-              styles.secondaryButton,
+              styles.closeButton,
               { opacity: pressed ? 0.7 : 1 },
             ]}
           >
-            <Text style={styles.secondaryButtonText}>{t('close')}</Text>
+            <Text style={styles.closeButtonText}>{t('close')}</Text>
           </Pressable>
         </Pressable>
       </Pressable>
@@ -95,18 +99,18 @@ const styles = StyleSheet.create({
     color: colors.bluePrimary,
   },
   bodyText: {
-    marginBottom: 24,
+    marginBottom: 10,
     textAlign: 'center',
     color: '#333',
     fontSize: 15,
   },
-  primaryButton: {
-    backgroundColor: colors.legendaryOrange,
-    paddingVertical: 12,
-    paddingHorizontal: 28,
+  ctaButton: {
+    backgroundColor: colors.bluePrimary,
+    padding: 10,
     borderRadius: 8,
-    marginBottom: 14,
-    width: '80%',
+    marginBottom: 20,
+    width: '100%',
+    maxWidth: 240,
     alignItems: 'center',
   },
   primaryButtonText: {
@@ -114,15 +118,16 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 16,
   },
-  secondaryButton: {
+  closeButton: {
     backgroundColor: colors.bluePrimary,
     paddingVertical: 10,
     paddingHorizontal: 24,
+    marginTop: 20,
     borderRadius: 8,
     width: '60%',
     alignItems: 'center',
   },
-  secondaryButtonText: {
+  closeButtonText: {
     color: 'white',
     fontWeight: '500',
     fontSize: 15,

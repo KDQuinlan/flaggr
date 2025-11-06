@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import MobileAds from 'react-native-google-mobile-ads';
 import { useFonts } from 'expo-font';
+import Purchases, { LOG_LEVEL } from 'react-native-purchases';
 
 import HomeScreen from './home';
 import SetupScreen from './setup';
@@ -10,6 +11,7 @@ import stateStore from '@/state/store';
 import PlayGames from '@/PlayGames';
 import restoreEnergyOnLoad from '@/util/restoreEnergyOnLoad/restoreEnergyOnLoad';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
+import { REVENUE_CAT_TEST_ID } from '@/constants/adId';
 
 const IndexScreen = () => {
   const isInitialised = stateStore((state) => state.isInitialised);
@@ -54,6 +56,14 @@ const IndexScreen = () => {
   useEffect(() => {
     if (!userSettings.isPremiumUser) {
       MobileAds().initialize();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!userSettings.isPremiumUser) {
+      Purchases.setLogLevel(LOG_LEVEL.VERBOSE);
+      Purchases.configure({ apiKey: REVENUE_CAT_TEST_ID });
+      console.log('Revenue Cat initialised');
     }
   }, []);
 

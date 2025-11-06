@@ -1,0 +1,99 @@
+import { useEffect, useState } from 'react';
+import { Pressable, Text, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import Purchases, { PurchasesPackage } from 'react-native-purchases';
+
+import stateStore from '@/state/store';
+import persistUserSettings from '@/util/persistState/persistUserSettings';
+import { colors } from '../colors';
+
+// TODO - Remove revoke premium when going to PROD
+
+const PurchasePremiumButton = () => {
+  const userSettings = stateStore((state) => state.userSettings);
+  const { setUserSettings, setEnergyModalVisible } = stateStore.getState();
+  const { t } = useTranslation('energy');
+  const [offerPackage, setOfferPackage] = useState<
+    PurchasesPackage | undefined
+  >(undefined);
+
+  useEffect(() => {
+    const fetchOfferings = async () => {
+      try {
+        const offerings = await Purchases.getOfferings();
+        if (
+          offerings.current &&
+          offerings.current.availablePackages.length > 0
+        ) {
+          setOfferPackage(offerings.current.availablePackages[0]);
+        }
+      } catch (err) {
+        console.log('Error fetching offerings', err);
+      }
+    };
+
+    if (!userSettings.isPremiumUser) fetchOfferings();
+  }, []);
+
+  const handlePurchase = async () => {
+    if (!offerPackage) return;
+    try {
+      await Purchases.purchasePackage(offerPackage);
+      setUserSettings({ ...userSettings, isPremiumUser: true });
+      persistUserSettings({ ...userSettings, isPremiumUser: true });
+      setEnergyModalVisible(false);
+    } catch (error) {
+      console.log('ERROR:', error);
+    }
+  };
+
+  const handleRevokePurchase = () => {
+    setUserSettings({ ...userSettings, isPremiumUser: false });
+    persistUserSettings({ ...userSettings, isPremiumUser: false });
+  };
+
+  return (
+    <Pressable
+      onPress={
+        !userSettings.isPremiumUser ? handlePurchase : handleRevokePurchase
+      }
+      style={({ pressed }) => [
+        styles.button,
+        {
+          opacity: pressed ? 0.7 : 1,
+        },
+      ]}
+      accessibilityLabel={t('continue', { ns: 'settings' })}
+      accessibilityRole="button"
+    >
+      <Text style={styles.buttonText}>
+        {!userSettings.isPremiumUser ? t('purchase') : t('revoke')}
+      </Text>
+    </Pressable>
+  );
+};
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: colors.legendaryOrange,
+    padding: 10,
+    width: '100%',
+    maxWidth: 240,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 4,
+  },
+  buttonText: {
+    fontSize: 16,
+    color: colors.white,
+    fontFamily: 'DMSansBold',
+  },
+});
+
+export default PurchasePremiumButton;
