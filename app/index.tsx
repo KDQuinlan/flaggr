@@ -11,7 +11,7 @@ import stateStore from '@/state/store';
 import PlayGames from '@/PlayGames';
 import restoreEnergyOnLoad from '@/util/restoreEnergyOnLoad/restoreEnergyOnLoad';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
-import { REVENUE_CAT_TEST_ID } from '@/constants/adId';
+import { REVENUE_CAT_API_KEY } from '@/constants/adId';
 
 const IndexScreen = () => {
   const isInitialised = stateStore((state) => state.isInitialised);
@@ -62,7 +62,7 @@ const IndexScreen = () => {
   useEffect(() => {
     if (!userSettings.isPremiumUser) {
       Purchases.setLogLevel(LOG_LEVEL.VERBOSE);
-      Purchases.configure({ apiKey: REVENUE_CAT_TEST_ID });
+      Purchases.configure({ apiKey: REVENUE_CAT_API_KEY });
       console.log('Revenue Cat initialised');
     }
   }, []);
