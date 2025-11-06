@@ -7,7 +7,6 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -19,6 +18,7 @@ import { NavigationProps } from '@/types/navigation';
 import { LANGUAGES } from '@/constants/common';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import stateStore from '@/state/store';
+import PurchasePremiumButton from '@/components/PurchasePremiumButton/PurchasePremiumButton';
 
 // TODO - remove on render state update?
 
@@ -34,7 +34,7 @@ const SettingsScreen = () => {
 
   useEffect(() => {
     persistUserSettings({ ...userSettings, locale: language });
-  }, [userSettings.locale]);
+  }, [language]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -48,6 +48,7 @@ const SettingsScreen = () => {
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
       >
+        <PurchasePremiumButton />
         <View style={styles.section}>
           <Text style={styles.label}>{t('language')}</Text>
           <Dropdown
@@ -66,21 +67,25 @@ const SettingsScreen = () => {
           }
           style={({ pressed }) => [
             styles.section,
-            { opacity: pressed ? 0.7 : 1 },
+            {
+              opacity: pressed ? 0.7 : 1,
+            },
           ]}
         >
           <Text style={styles.privacyPolicyText}>{t('privacy')}</Text>
         </Pressable>
 
-        <TouchableOpacity
+        <Pressable
           onPress={() => navigation.navigate('home')}
-          style={styles.button}
-          activeOpacity={0.8}
+          style={({ pressed }) => [
+            styles.button,
+            { opacity: pressed ? 0.7 : 1 },
+          ]}
           accessibilityLabel={t('continue')}
           accessibilityRole="button"
         >
           <Text style={styles.buttonText}>{t('continue')}</Text>
-        </TouchableOpacity>
+        </Pressable>
       </ScrollView>
     </SafeAreaView>
   );
@@ -95,7 +100,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'flex-start',
     paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingVertical: 20,
   },
   titleContainer: {
     flexDirection: 'row',
@@ -136,7 +141,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginTop: 20,
     borderRadius: 5,
-    width: '50%',
+    width: '100%',
+    maxWidth: 240,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
