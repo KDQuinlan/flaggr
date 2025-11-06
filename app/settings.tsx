@@ -34,7 +34,7 @@ const SettingsScreen = () => {
 
   useEffect(() => {
     persistUserSettings({ ...userSettings, locale: language });
-  }, [userSettings.locale]);
+  }, [language]);
 
   useEffect(() => {
     navigation.setOptions({
