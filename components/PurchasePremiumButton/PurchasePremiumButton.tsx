@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Pressable, Text, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import Purchases, { PurchasesPackage } from 'react-native-purchases';
+import Purchases, { PurchasesStoreProduct } from 'react-native-purchases';
 
 import stateStore from '@/state/store';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
@@ -13,32 +13,23 @@ const PurchasePremiumButton = () => {
   const userSettings = stateStore((state) => state.userSettings);
   const { setUserSettings, setEnergyModalVisible } = stateStore.getState();
   const { t } = useTranslation('energy');
-  const [offerPackage, setOfferPackage] = useState<
-    PurchasesPackage | undefined
-  >(undefined);
+  const [product, setProduct] = useState<PurchasesStoreProduct | undefined>(
+    undefined
+  );
 
   useEffect(() => {
-    const fetchOfferings = async () => {
-      try {
-        const offerings = await Purchases.getOfferings();
-        if (
-          offerings.current &&
-          offerings.current.availablePackages.length > 0
-        ) {
-          setOfferPackage(offerings.current.availablePackages[0]);
-        }
-      } catch (err) {
-        console.log('Error fetching offerings', err);
-      }
+    const fetchProducts = async () => {
+      const result = await Purchases.getProducts(['premium']);
+      setProduct(result[0]);
     };
 
-    if (!userSettings.isPremiumUser) fetchOfferings();
+    fetchProducts();
   }, []);
 
   const handlePurchase = async () => {
-    if (!offerPackage) return;
+    if (!product) return;
     try {
-      await Purchases.purchasePackage(offerPackage);
+      await Purchases.purchaseStoreProduct(product);
       setUserSettings({ ...userSettings, isPremiumUser: true });
       persistUserSettings({ ...userSettings, isPremiumUser: true });
       setEnergyModalVisible(false);

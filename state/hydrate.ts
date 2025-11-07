@@ -1,5 +1,7 @@
 import * as SecureStore from 'expo-secure-store';
+import * as Network from 'expo-network';
 import i18n from '@/locales/i18n';
+import Purchases from 'react-native-purchases';
 
 import stateStore from './store';
 import {
@@ -10,11 +12,13 @@ import {
   defaultProgressionStructure,
   defaultUserSettings,
 } from './secureStoreStructure';
+import { UserSettingStructure } from '@/types/secureStore';
 
 // TODO - Implement versioning
 // TODO - add error handling and parallel reads
 
 export const hydrateStore = async () => {
+  const networkState = await Network.getNetworkStateAsync();
   const { setIsInitialised, setUserSettings, setProgression } =
     stateStore.getState();
 
@@ -24,6 +28,35 @@ export const hydrateStore = async () => {
     STORAGE_KEY_PROGRESSION
   );
 
+  const cachedUserSettings = userSettingsSecure
+    ? JSON.parse(userSettingsSecure)
+    : defaultUserSettings;
+
+  const applyUserSettings = async (settings: UserSettingStructure) => {
+    setUserSettings(settings);
+    await SecureStore.setItemAsync(
+      STORAGE_KEY_SETTINGS,
+      JSON.stringify(settings)
+    );
+  };
+
+  // Restore user settings or intialise default using server-side
+  if (networkState.isConnected && networkState.isInternetReachable) {
+    try {
+      const customerInfo = await Purchases.getCustomerInfo();
+      const isPremium =
+        customerInfo.entitlements.active['premium'] !== undefined;
+      const updated = { ...cachedUserSettings, isPremiumUser: isPremium };
+
+      await applyUserSettings(updated);
+    } catch (e) {
+      console.log(`Error fetching customer info: ${e}`);
+      await applyUserSettings(cachedUserSettings);
+    }
+  } else {
+    await applyUserSettings(cachedUserSettings);
+  }
+
   // Restore progression or initialize default
   if (userProgressionSecure) {
     setProgression(JSON.parse(userProgressionSecure));
@@ -31,16 +64,6 @@ export const hydrateStore = async () => {
     await SecureStore.setItemAsync(
       STORAGE_KEY_PROGRESSION,
       JSON.stringify(defaultProgressionStructure)
-    );
-  }
-
-  // Restore user settings or initialize default
-  if (userSettingsSecure) {
-    setUserSettings(JSON.parse(userSettingsSecure));
-  } else {
-    await SecureStore.setItemAsync(
-      STORAGE_KEY_SETTINGS,
-      JSON.stringify(defaultUserSettings)
     );
   }
 
