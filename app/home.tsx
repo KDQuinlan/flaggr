@@ -95,18 +95,32 @@ const HomeScreen = () => {
           onPress={() => navigation.navigate('custom')}
         />
       </ScrollView>
-      <Pressable
-        style={({ pressed }) => [
-          styles.leaderboardContainer,
-          { opacity: pressed ? 0.7 : 1 },
-        ]}
-        onPress={() => setShowLeaderboard(true)}
-      >
-        <Image
-          style={styles.leaderboardIcon}
-          source={require('@/assets/images/icons/resources/leaderboard.png')}
-        />
-      </Pressable>
+      <View style={styles.floatingButtonContainer}>
+        <Pressable
+          style={({ pressed }) => [
+            styles.floatingButton,
+            { opacity: pressed ? 0.7 : 1 },
+          ]}
+          onPress={() => navigation.navigate('feedback')}
+        >
+          <Image
+            style={styles.floatingIcon}
+            source={require('@/assets/images/icons/resources/feedback.png')}
+          />
+        </Pressable>
+        <Pressable
+          style={({ pressed }) => [
+            styles.floatingButton,
+            { opacity: pressed ? 0.7 : 1 },
+          ]}
+          onPress={() => setShowLeaderboard(true)}
+        >
+          <Image
+            style={styles.floatingIcon}
+            source={require('@/assets/images/icons/resources/leaderboard.png')}
+          />
+        </Pressable>
+      </View>
       {!isPremiumUser && <AdBanner adId={BANNER_TEST_ID} />}
     </SafeAreaView>
   );
@@ -145,16 +159,17 @@ const styles = StyleSheet.create({
     color: '#0073E6',
     fontFamily: 'Chewy',
   },
-  adContainer: {
-    alignItems: 'center',
-  },
   settingsIcon: {
     height: 25,
     width: 25,
   },
-  leaderboardContainer: {
+  floatingButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  floatingButton: {
     marginBottom: 20,
-    marginRight: 20,
+    marginHorizontal: 20,
     backgroundColor: colors.white,
     width: 70,
     height: 70,
@@ -168,7 +183,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 4,
   },
-  leaderboardIcon: { width: 50, height: 50 },
+  floatingIcon: { width: 50, height: 50 },
 });
 
 export default HomeScreen;

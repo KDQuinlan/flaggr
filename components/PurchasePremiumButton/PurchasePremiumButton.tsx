@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Pressable, Text, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import Purchases, { PurchasesStoreProduct } from 'react-native-purchases';
+import Purchases, {
+  PurchasesStoreProduct,
+  PRODUCT_CATEGORY,
+} from 'react-native-purchases';
 
 import stateStore from '@/state/store';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
@@ -19,7 +22,10 @@ const PurchasePremiumButton = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const result = await Purchases.getProducts(['premium']);
+      const result = await Purchases.getProducts(
+        ['premium'],
+        PRODUCT_CATEGORY.NON_SUBSCRIPTION
+      );
       setProduct(result[0]);
     };
 

@@ -57,6 +57,7 @@ export default function RootLayout() {
             gestureEnabled: false,
           }}
         />
+        <Stack.Screen name="feedback" options={{ headerShown: true }} />
         <Stack.Screen name="settings" options={{ headerShown: true }} />
         <Stack.Screen
           name="difficulty"
