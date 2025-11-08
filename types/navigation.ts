@@ -17,6 +17,7 @@ export type RootStackParamList = {
   index: undefined;
   setup: undefined;
   home: undefined;
+  feedback: undefined;
   settings: undefined;
   difficulty: { id: DifficultyScreenGameIds; title: string };
   multipleChoice: {

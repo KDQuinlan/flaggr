@@ -1,0 +1,18 @@
+export default {
+  title: 'Feedback',
+  reason: 'Type',
+  reasonPlaceholder: 'Select feedback type',
+  placeholder: 'Type your feedback here...',
+  submit: 'Submit',
+  successTitle: 'Thank you',
+  successMessage: 'Your feedback has been sent successfully',
+  errorTitle: 'Error',
+  errorNotAvailable: 'Mail services are not available on this device',
+  errorMessage: 'Unable to send email. Please try again later',
+  uiFeedback: 'UI / Design',
+  progressionFeedback: 'Progression',
+  gameplayFeedback: 'Gameplay',
+  performanceFeedback: 'Performance',
+  purchaseFeedback: 'Purchase',
+  otherFeedback: 'My issue is not listed',
+};

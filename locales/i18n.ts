@@ -21,6 +21,7 @@ i18n.use(initReactI18next).init({
       setup: en.setup,
       settings: en.settings,
       energy: en.energy,
+      feedback: en.feedback,
     },
     es: {
       data: es.data,
@@ -33,6 +34,7 @@ i18n.use(initReactI18next).init({
       setup: es.setup,
       settings: es.settings,
       energy: es.energy,
+      feedback: es.feedback,
     },
   },
 
