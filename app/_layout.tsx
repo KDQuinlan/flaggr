@@ -13,7 +13,7 @@ import stateStore from '@/state/store';
 // TODO - fix navigation bar becoming black on dropdown usage
 
 export default function RootLayout() {
-  const { isPremiumUser } = stateStore((state) => state.userSettings);
+  const { isPremiumUser } = stateStore((s) => s.userSettings);
 
   useEffect(() => {
     NavigationBar.setBackgroundColorAsync(colors.offWhite);

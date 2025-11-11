@@ -18,7 +18,6 @@ const rewarded = RewardedAd.createForAdRequest(adUnitId, {
 
 export const useRewardedAd = () => {
   const userSettings = stateStore((s) => s.userSettings);
-  const { energyAmount } = userSettings;
   const [isAdLoaded, setAdLoaded] = useState(false);
 
   useEffect(() => {

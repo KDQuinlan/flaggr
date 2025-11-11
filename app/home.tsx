@@ -28,7 +28,8 @@ import stateStore from '@/state/store';
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
-  const { isPremiumUser } = stateStore((state) => state.userSettings);
+  const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
+  const { isPremiumUser } = stateStore((s) => s.userSettings);
   const [showLeaderboard, setShowLeaderboard] = useState<boolean>(false);
   const { t } = useTranslation('home');
 
@@ -108,6 +109,7 @@ const HomeScreen = () => {
             source={require('@/assets/images/icons/resources/feedback.png')}
           />
         </Pressable>
+
         <Pressable
           style={({ pressed }) => [
             styles.floatingButton,
@@ -121,7 +123,9 @@ const HomeScreen = () => {
           />
         </Pressable>
       </View>
-      {!isPremiumUser && <AdBanner adId={BANNER_TEST_ID} />}
+      {!isPremiumUser && isInternetAvailable && (
+        <AdBanner adId={BANNER_TEST_ID} />
+      )}
     </SafeAreaView>
   );
 };

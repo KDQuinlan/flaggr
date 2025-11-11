@@ -15,10 +15,11 @@ import {
   REVENUE_CAT_API_KEY,
   REVENUE_CAT_TEST_API_KEY,
 } from '@/constants/adId';
+import useNetworkStatus from '@/hooks/useNetworkStatus/useNetworkStatus';
 
 const IndexScreen = () => {
-  const isInitialised = stateStore((state) => state.isInitialised);
-  const userSettings = stateStore((state) => state.userSettings);
+  const isInitialised = stateStore((s) => s.isInitialised);
+  const userSettings = stateStore((s) => s.userSettings);
   const { setUserSettings } = stateStore.getState();
   const [hasStoreHydrated, setHasStoreHydrated] = useState<boolean>(false);
 
@@ -28,6 +29,8 @@ const IndexScreen = () => {
     DMSans: require('@/assets/fonts/DMSans-Medium.ttf'),
     SpaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
   });
+
+  useNetworkStatus();
 
   useEffect(() => {
     const loadData = async () => {

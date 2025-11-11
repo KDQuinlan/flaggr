@@ -41,8 +41,8 @@ import determineSetTimestamp from '@/util/determineSetTimestamp/determineSetTime
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const { t } = useTranslation('custom');
-  const userProgression = stateStore((state) => state.userProgress);
-  const setProgression = stateStore((state) => state.setProgression);
+  const userProgression = stateStore((s) => s.userProgress);
+  const setProgression = stateStore((s) => s.setProgression);
   const setEnergyModalVisible = stateStore((s) => s.setEnergyModalVisible);
   const userSettings = stateStore((s) => s.userSettings);
   const { energyAmount, isPremiumUser } = userSettings;

@@ -44,8 +44,8 @@ const CustomSummary = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'customSummary'>>();
   const { t } = useTranslation('customSummary');
-  const userProgression = stateStore((state) => state.userProgress);
-  const setProgression = stateStore((state) => state.setProgression);
+  const userProgression = stateStore((s) => s.userProgress);
+  const setProgression = stateStore((s) => s.setProgression);
   const { gameResult, finalScore } = route.params;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;
   const matchesPlayed = userProgression.games.matchesPlayed;

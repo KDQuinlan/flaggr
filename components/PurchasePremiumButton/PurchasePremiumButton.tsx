@@ -13,7 +13,7 @@ import { colors } from '../colors';
 // TODO - Remove revoke premium when going to PROD
 
 const PurchasePremiumButton = () => {
-  const userSettings = stateStore((state) => state.userSettings);
+  const userSettings = stateStore((s) => s.userSettings);
   const { setUserSettings, setEnergyModalVisible } = stateStore.getState();
   const { t } = useTranslation('energy');
   const [product, setProduct] = useState<PurchasesStoreProduct | undefined>(

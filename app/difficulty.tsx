@@ -21,7 +21,7 @@ const Difficulty = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'difficulty'>>();
   const { t } = useTranslation('difficulty');
-  const userProgression = stateStore((state) => state.userProgress);
+  const userProgression = stateStore((s) => s.userProgress);
   const userSettings = stateStore((s) => s.userSettings);
   const { energyAmount, isPremiumUser } = userSettings;
   const setEnergyModalVisible = stateStore((s) => s.setEnergyModalVisible);

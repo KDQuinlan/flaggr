@@ -7,6 +7,7 @@ import { useRewardedAd } from '@/hooks/energyRecoveryAd/energyRecoveryAd';
 import PurchasePremiumButton from '../PurchasePremiumButton/PurchasePremiumButton';
 
 const EnergyModal = () => {
+  const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const energyModalVisible = stateStore((s) => s.energyModalVisible);
   const setEnergyModalVisible = stateStore((s) => s.setEnergyModalVisible);
   const { t } = useTranslation('energy');
@@ -34,27 +35,37 @@ const EnergyModal = () => {
           onPress={(e) => e.stopPropagation()}
           style={styles.modalContainer}
         >
-          <Text style={styles.titleText}>{t('title')}</Text>
-          <Text style={styles.bodyText}>{t('description')}</Text>
+          {isInternetAvailable ? (
+            <>
+              <Text style={styles.titleText}>{t('title')}</Text>
+              <Text style={styles.bodyText}>{t('description')}</Text>
 
-          <Pressable
-            onPress={handleWatchAd}
-            disabled={!isAdLoaded}
-            style={({ pressed }) => [
-              styles.ctaButton,
-              {
-                opacity: !isAdLoaded ? 0.6 : pressed ? 0.7 : 1,
-              },
-            ]}
-          >
-            <Text style={styles.primaryButtonText}>
-              {isAdLoaded ? t('watchAd') : t('loadingAd')}
-            </Text>
-          </Pressable>
+              <Pressable
+                onPress={handleWatchAd}
+                disabled={!isAdLoaded}
+                style={({ pressed }) => [
+                  styles.ctaButton,
+                  {
+                    opacity: !isAdLoaded ? 0.6 : pressed ? 0.7 : 1,
+                  },
+                ]}
+              >
+                <Text style={styles.primaryButtonText}>
+                  {isAdLoaded ? t('watchAd') : t('loadingAd')}
+                </Text>
+              </Pressable>
 
-          <Text style={styles.bodyText}>{t('removeAd')}</Text>
-          <PurchasePremiumButton />
-
+              <Text style={styles.bodyText}>{t('removeAd')}</Text>
+              <PurchasePremiumButton />
+            </>
+          ) : (
+            <>
+              <Text style={styles.titleText}>{t('notConnectedTitle')}</Text>
+              <Text style={styles.bodyText}>
+                {t('notConnectedDescription')}
+              </Text>
+            </>
+          )}
           <Pressable
             onPress={closeModal}
             style={({ pressed }) => [
