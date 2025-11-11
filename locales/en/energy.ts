@@ -6,5 +6,8 @@ export default {
   loadingAd: 'Loading Ad...',
   purchase: 'Purchase Premium',
   revoke: 'Revoke Premium',
+  notConnectedTitle: 'You are offline',
+  notConnectedDescription:
+    'Connect to the internet to refill energy, or go Premium to play anytime without ads or energy',
   close: 'Close',
 };

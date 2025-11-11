@@ -7,5 +7,8 @@ export default {
   loadingAd: 'Cargando anuncio...',
   purchase: 'Comprar Premium',
   revoke: 'Revocar Premium',
+  notConnectedTitle: 'Estás sin conexión',
+  notConnectedDescription:
+    'Conéctate a Internet para recargar energía o hazte Premium para jugar en cualquier momento sin anuncios ni energía',
   close: 'Cerrar',
 };

@@ -25,7 +25,7 @@ const locale = locales[0]?.languageCode;
 
 const SetupScreen = () => {
   const navigation = useNavigation<NavigationProps>();
-  const userSettings = stateStore((state) => state.userSettings);
+  const userSettings = stateStore((s) => s.userSettings);
   const { t } = useTranslation('setup');
   const [language, setLanguage] = useState<string>(
     locale && SUPPORTED_LANGUAGES.includes(locale) ? locale : 'en'

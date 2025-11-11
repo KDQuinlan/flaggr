@@ -54,8 +54,8 @@ const Summary = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'summary'>>();
   const { t } = useTranslation('summary');
-  const userProgression = stateStore((state) => state.userProgress);
-  const setProgression = stateStore((state) => state.setProgression);
+  const userProgression = stateStore((s) => s.userProgress);
+  const setProgression = stateStore((s) => s.setProgression);
   const { difficulty, gameMode, gameResult } = route.params;
   const matchesPlayed = userProgression.games.matchesPlayed;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;

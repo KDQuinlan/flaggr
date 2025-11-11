@@ -24,7 +24,7 @@ import PurchasePremiumButton from '@/components/PurchasePremiumButton/PurchasePr
 
 const SettingsScreen = () => {
   const navigation = useNavigation<NavigationProps>();
-  const userSettings = stateStore((state) => state.userSettings);
+  const userSettings = stateStore((s) => s.userSettings);
   const { t } = useTranslation('settings');
   const [language, setLanguage] = useState<string>(userSettings.locale);
 

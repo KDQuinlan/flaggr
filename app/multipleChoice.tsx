@@ -34,7 +34,7 @@ const MultipleChoice = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'multipleChoice'>>();
   const { t } = useTranslation('data');
-  const userProgression = stateStore((state) => state.userProgress);
+  const userProgression = stateStore((s) => s.userProgress);
   const { title, gameMode, questions, timeLimit } = route.params;
   const { scoreMultiplier } = userProgression.games.custom.currentGame;
 
