@@ -9,27 +9,29 @@ import { colors } from '@/components/colors';
 import EnergyModal from '@/components/energyDisplay/energyModal';
 import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
 import stateStore from '@/state/store';
+import { ThemeProvider, useTheme } from '@/context/ThemeContext';
 
 // TODO - fix navigation bar becoming black on dropdown usage
 
-export default function RootLayout() {
-  const { isPremiumUser } = stateStore((s) => s.userSettings);
+function RootLayoutContent() {
+  const { theme } = useTheme();
+  const { isPremiumUser, isDarkTheme } = stateStore((s) => s.userSettings);
 
   useEffect(() => {
-    NavigationBar.setBackgroundColorAsync(colors.offWhite);
-    NavigationBar.setButtonStyleAsync('dark');
-  }, []);
+    NavigationBar.setBackgroundColorAsync('red');
+    NavigationBar.setButtonStyleAsync(isDarkTheme ? 'dark' : 'light');
+  }, [isDarkTheme, theme]);
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.offWhite }}>
+    <View style={{ flex: 1, backgroundColor: colors.legendaryOrange }}>
       <StatusBar style="dark" backgroundColor={colors.offWhite} />
       <EnergyModal />
       <Stack
         screenOptions={{
           headerTitleAlign: 'center',
-          headerTintColor: colors.bluePrimary,
+          headerTintColor: theme.headerText,
           headerStyle: {
-            backgroundColor: colors.offWhite,
+            backgroundColor: theme.card,
           },
           headerTitleStyle: {
             fontFamily: 'DMSansBold',
@@ -92,5 +94,13 @@ export default function RootLayout() {
         />
       </Stack>
     </View>
+  );
+}
+
+export default function RootLayout() {
+  return (
+    <ThemeProvider>
+      <RootLayoutContent />
+    </ThemeProvider>
   );
 }

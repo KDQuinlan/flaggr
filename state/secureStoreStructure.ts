@@ -8,6 +8,7 @@ export const defaultUserSettings: UserSettingStructure = {
   isGoogleConnected: false,
   isPremiumUser: false,
   locale: 'en',
+  isDarkTheme: false,
   energyAmount: 10,
   lastEnergyTimestamp: null,
   displayAnswerTimerMs: 500,
