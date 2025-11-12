@@ -5,9 +5,9 @@ export const colors = {
   lightGrey: '#e0e0e0',
 
   // Blacks
-  black: '#000000',
-  offBlack: '#1a1a1a',
-  lightBlack: '4d4d4d',
+  black: '#121212',
+  offBlack: '#1f1f1f',
+  lightBlack: '#4d4d4d',
 
   // Blues
   bluePrimary: '#0073E6',

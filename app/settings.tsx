@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigation } from 'expo-router';
 import {
   Linking,
   Pressable,
   SafeAreaView,
   ScrollView,
-  StyleSheet,
   Text,
   View,
+  StyleSheet,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/locales/i18n';
 import { Dropdown } from 'react-native-element-dropdown';
+import { Switch } from 'react-native-paper';
 
 import { colors } from '@/components/colors';
 import { NavigationProps } from '@/types/navigation';
@@ -19,6 +20,8 @@ import { LANGUAGES } from '@/constants/common';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import stateStore from '@/state/store';
 import PurchasePremiumButton from '@/components/PurchasePremiumButton/PurchasePremiumButton';
+import { useTheme } from '@/context/ThemeContext';
+import { getSettingsStyles } from '@/styles/settings';
 
 // TODO - remove on render state update?
 
@@ -27,14 +30,23 @@ const SettingsScreen = () => {
   const userSettings = stateStore((s) => s.userSettings);
   const { t } = useTranslation('settings');
   const [language, setLanguage] = useState<string>(userSettings.locale);
+  const { theme } = useTheme();
+  // const styles = useMemo(() => getSettingsStyles(theme), [theme]);
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(
+    userSettings.isDarkTheme
+  );
 
   useEffect(() => {
     i18n.changeLanguage(language);
   }, [language]);
 
   useEffect(() => {
-    persistUserSettings({ ...userSettings, locale: language });
-  }, [language]);
+    persistUserSettings({
+      ...userSettings,
+      locale: language,
+      isDarkTheme,
+    });
+  }, [language, isDarkTheme]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -57,9 +69,17 @@ const SettingsScreen = () => {
             labelField="label"
             valueField="value"
             value={language}
+            selectedTextStyle={{ color: theme.text }}
+            itemTextStyle={{ color: theme.text }}
             onChange={(item) => setLanguage(item.value)}
           />
         </View>
+
+        {/* <Switch
+          color={colors.blueSecondary}
+          value={userSettings.isDarkTheme}
+          onValueChange={() => setIsDarkTheme(!isDarkTheme)}
+        /> */}
 
         <Pressable
           onPress={() =>

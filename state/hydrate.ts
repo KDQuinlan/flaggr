@@ -1,3 +1,4 @@
+import { Appearance } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import * as Network from 'expo-network';
 import i18n from '@/locales/i18n';
@@ -18,6 +19,8 @@ import { UserSettingStructure } from '@/types/secureStore';
 // TODO - add error handling and parallel reads
 
 export const hydrateStore = async () => {
+  const systemScheme = Appearance.getColorScheme();
+  const isSystemDark = systemScheme === 'dark';
   const networkState = await Network.getNetworkStateAsync();
   const { setIsInitialised, setUserSettings, setProgression } =
     stateStore.getState();
@@ -30,7 +33,10 @@ export const hydrateStore = async () => {
 
   const cachedUserSettings = userSettingsSecure
     ? JSON.parse(userSettingsSecure)
-    : defaultUserSettings;
+    : {
+        ...defaultUserSettings,
+        isDarkTheme: isSystemDark,
+      };
 
   const applyUserSettings = async (settings: UserSettingStructure) => {
     setUserSettings(settings);
