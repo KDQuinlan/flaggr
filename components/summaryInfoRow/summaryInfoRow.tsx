@@ -1,4 +1,8 @@
+import { useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+
+import { useTheme } from '@/context/ThemeContext';
+import { getSummaryInfoRowStyles } from './summaryInfoRow.styles';
 
 const SummaryInfoRow = ({
   title,
@@ -6,12 +10,16 @@ const SummaryInfoRow = ({
 }: {
   title: string;
   value: number | string;
-}) => (
-  <View style={styles.summaryInfoContainer}>
-    <Text style={styles.title}>{title}</Text>
-    <Text style={styles.value}>{value}</Text>
-  </View>
-);
+}) => {
+  const { theme } = useTheme();
+  const styles = useMemo(() => getSummaryInfoRowStyles(theme), [theme]);
+  return (
+    <View style={styles.summaryInfoContainer}>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.value}>{value}</Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   summaryInfoContainer: {

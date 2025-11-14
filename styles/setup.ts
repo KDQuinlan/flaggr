@@ -1,18 +1,19 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, StatusBar } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 
-export const getSettingsStyles = (theme: ThemeColors) => {
+export const getSetupStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
     rootContainer: {
       flex: 1,
       backgroundColor: theme.background,
+      paddingTop: StatusBar.currentHeight || 0,
     },
     scrollContainer: {
       flexGrow: 1,
       justifyContent: 'flex-start',
       paddingHorizontal: 20,
-      paddingVertical: 20,
+      paddingBottom: 20,
     },
     titleContainer: {
       flexDirection: 'row',
@@ -23,9 +24,9 @@ export const getSettingsStyles = (theme: ThemeColors) => {
       paddingHorizontal: 20,
     },
     title: {
-      fontWeight: 'bold',
       fontSize: 40,
       color: theme.headerText,
+      fontFamily: 'Chewy',
     },
     dropdownSection: {
       marginTop: 20,
@@ -36,14 +37,14 @@ export const getSettingsStyles = (theme: ThemeColors) => {
       marginTop: 20,
     },
     label: {
-      fontSize: 16,
       fontFamily: 'DMSansBold',
+      fontSize: 16,
       color: theme.text,
     },
     optional: {
-      fontWeight: '400',
+      fontFamily: 'DMSans',
       fontSize: 14,
-      color: '#666',
+      color: theme.helperText,
     },
     dropdown: {
       height: 50,
@@ -54,13 +55,18 @@ export const getSettingsStyles = (theme: ThemeColors) => {
       backgroundColor: theme.card,
       marginTop: 10,
     },
+    helperText: {
+      marginTop: 4,
+      fontFamily: 'DMSans',
+      fontSize: 12,
+      color: theme.helperText,
+    },
     button: {
       backgroundColor: theme.button,
       paddingVertical: 10,
       marginTop: 20,
       borderRadius: 5,
-      width: '100%',
-      maxWidth: 240,
+      width: '50%',
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf: 'center',
@@ -69,13 +75,8 @@ export const getSettingsStyles = (theme: ThemeColors) => {
     },
     buttonText: {
       fontSize: 16,
-      color: theme.buttonText,
       fontFamily: 'DMSansBold',
-    },
-    privacyPolicyText: {
-      fontFamily: 'DMSans',
-      textDecorationLine: 'underline',
-      color: theme.linkText,
+      color: theme.buttonText,
     },
   });
 };

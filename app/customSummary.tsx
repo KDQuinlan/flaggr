@@ -5,7 +5,6 @@ import {
   BackHandler,
   SafeAreaView,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -13,7 +12,6 @@ import {
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 
-import { colors } from '@/components/colors';
 import SummaryInfoRow from '@/components/summaryInfoRow/summaryInfoRow';
 import stateStore from '@/state/store';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
@@ -24,6 +22,8 @@ import setBestGameData from '@/util/updatedProgressionStructure/setBestGameData'
 import { ProgressionStructure } from '@/types/secureStore';
 import { HIGHEST_SCORE_ID, MATCHES_PLAYED_ID } from '@/constants/leaderboard';
 import PlayGames from '@/PlayGames';
+import { useTheme } from '@/context/ThemeContext';
+import { getCustomSummaryStyles } from '@/styles/customSummary';
 
 const CustomSummary = () => {
   useFocusEffect(
@@ -44,6 +44,8 @@ const CustomSummary = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'customSummary'>>();
   const { t } = useTranslation('customSummary');
+  const { theme } = useTheme();
+  const styles = useMemo(() => getCustomSummaryStyles(theme), [theme]);
   const userProgression = stateStore((s) => s.userProgress);
   const setProgression = stateStore((s) => s.setProgression);
   const { gameResult, finalScore } = route.params;
@@ -186,67 +188,5 @@ const CustomSummary = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-    backgroundColor: colors.offWhite,
-  },
-  summaryContainer: {
-    paddingHorizontal: 12,
-  },
-  sectionContainer: {
-    backgroundColor: colors.white,
-    borderRadius: 10,
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 4,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 10,
-    paddingVertical: 10,
-  },
-  buttonContainer: {
-    backgroundColor: colors.offWhite,
-    marginVertical: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  animationContainer: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  button: {
-    backgroundColor: colors.bluePrimary,
-    paddingVertical: 10,
-    borderRadius: 5,
-    width: '50%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 4,
-  },
-  title: {
-    fontFamily: 'DMSansBold',
-    textAlign: 'center',
-    fontSize: 28,
-    paddingBottom: 10,
-  },
-  subTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    paddingTop: 10,
-    paddingBottom: 20,
-  },
-  unlockText: { fontFamily: 'DMSans' },
-  buttonText: { fontFamily: 'DMSansBold', fontSize: 20, color: colors.white },
-});
 
 export default CustomSummary;

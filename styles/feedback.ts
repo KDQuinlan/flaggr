@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 
-export const getSettingsStyles = (theme: ThemeColors) => {
+export const getFeedbackStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
     rootContainer: {
       flex: 1,
@@ -12,7 +12,7 @@ export const getSettingsStyles = (theme: ThemeColors) => {
       flexGrow: 1,
       justifyContent: 'flex-start',
       paddingHorizontal: 20,
-      paddingVertical: 20,
+      paddingBottom: 20,
     },
     titleContainer: {
       flexDirection: 'row',
@@ -22,21 +22,27 @@ export const getSettingsStyles = (theme: ThemeColors) => {
       width: '100%',
       paddingHorizontal: 20,
     },
+    textBox: {
+      marginTop: 20,
+      height: 150,
+      borderWidth: 1,
+      borderColor: theme.accent,
+      borderRadius: 8,
+      padding: 12,
+      fontSize: 16,
+      backgroundColor: theme.card,
+    },
     title: {
       fontWeight: 'bold',
       fontSize: 40,
-      color: theme.headerText,
-    },
-    dropdownSection: {
-      marginTop: 20,
+      color: '#0073E6',
     },
     section: {
-      alignItems: 'center',
-      flexDirection: 'row',
       marginTop: 20,
     },
     label: {
       fontSize: 16,
+      marginBottom: 8,
       fontFamily: 'DMSansBold',
       color: theme.text,
     },
@@ -52,7 +58,6 @@ export const getSettingsStyles = (theme: ThemeColors) => {
       borderRadius: 8,
       paddingHorizontal: 10,
       backgroundColor: theme.card,
-      marginTop: 10,
     },
     button: {
       backgroundColor: theme.button,
@@ -71,11 +76,6 @@ export const getSettingsStyles = (theme: ThemeColors) => {
       fontSize: 16,
       color: theme.buttonText,
       fontFamily: 'DMSansBold',
-    },
-    privacyPolicyText: {
-      fontFamily: 'DMSans',
-      textDecorationLine: 'underline',
-      color: theme.linkText,
     },
   });
 };

@@ -4,6 +4,10 @@ export const colors = {
   offWhite: '#f1f1f1',
   lightGrey: '#e0e0e0',
 
+  // Browns
+  lightBrown: '#888',
+  darkBrown: '#666',
+
   // Blacks
   black: '#121212',
   offBlack: '#1f1f1f',

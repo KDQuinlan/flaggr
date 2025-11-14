@@ -7,7 +7,6 @@ import {
   ScrollView,
   Text,
   View,
-  StyleSheet,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/locales/i18n';
@@ -31,7 +30,7 @@ const SettingsScreen = () => {
   const { t } = useTranslation('settings');
   const [language, setLanguage] = useState<string>(userSettings.locale);
   const { theme } = useTheme();
-  // const styles = useMemo(() => getSettingsStyles(theme), [theme]);
+  const styles = useMemo(() => getSettingsStyles(theme), [theme]);
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(
     userSettings.isDarkTheme
   );
@@ -61,7 +60,7 @@ const SettingsScreen = () => {
         keyboardShouldPersistTaps="handled"
       >
         <PurchasePremiumButton />
-        <View style={styles.section}>
+        <View style={styles.dropdownSection}>
           <Text style={styles.label}>{t('language')}</Text>
           <Dropdown
             style={styles.dropdown}
@@ -69,17 +68,32 @@ const SettingsScreen = () => {
             labelField="label"
             valueField="value"
             value={language}
+            placeholder={t('selectLanguage')}
             selectedTextStyle={{ color: theme.text }}
             itemTextStyle={{ color: theme.text }}
+            containerStyle={{
+              backgroundColor: theme.card,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: theme.accent,
+            }}
+            itemContainerStyle={{
+              backgroundColor: theme.card,
+              borderRadius: 8,
+            }}
+            activeColor={theme.accent}
             onChange={(item) => setLanguage(item.value)}
           />
         </View>
 
-        {/* <Switch
-          color={colors.blueSecondary}
-          value={userSettings.isDarkTheme}
-          onValueChange={() => setIsDarkTheme(!isDarkTheme)}
-        /> */}
+        <View style={styles.section}>
+          <Text style={styles.label}>{t('darkTheme')}</Text>
+          <Switch
+            color={colors.blueSecondary}
+            value={userSettings.isDarkTheme}
+            onValueChange={() => setIsDarkTheme(!isDarkTheme)}
+          />
+        </View>
 
         <Pressable
           onPress={() =>
@@ -110,78 +124,5 @@ const SettingsScreen = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-    backgroundColor: colors.offWhite,
-  },
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: 'flex-start',
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-  },
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 10,
-    width: '100%',
-    paddingHorizontal: 20,
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 40,
-    color: '#0073E6',
-  },
-  section: {
-    marginTop: 20,
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 8,
-    fontFamily: 'DMSansBold',
-  },
-  optional: {
-    fontWeight: '400',
-    fontSize: 14,
-    color: '#666',
-  },
-  dropdown: {
-    height: 50,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    backgroundColor: '#fff',
-  },
-  button: {
-    backgroundColor: colors.bluePrimary,
-    paddingVertical: 10,
-    marginTop: 20,
-    borderRadius: 5,
-    width: '100%',
-    maxWidth: 240,
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 4,
-  },
-  buttonText: {
-    fontSize: 16,
-    color: colors.white,
-    fontFamily: 'DMSansBold',
-  },
-  privacyPolicyText: {
-    fontFamily: 'DMSans',
-    textDecorationLine: 'underline',
-    color: colors.blueSecondary,
-  },
-});
 
 export default SettingsScreen;
