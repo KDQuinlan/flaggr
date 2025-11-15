@@ -13,7 +13,7 @@ export const getMultipleChoiceStyles = (theme: ThemeColors) => {
       flex: 2,
     },
     answersContainer: {
-      flex: 3,
+      flex: 4,
       maxWidth: 500,
       alignSelf: 'center',
       width: '100%',

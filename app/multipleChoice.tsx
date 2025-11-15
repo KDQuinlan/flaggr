@@ -257,7 +257,8 @@ const MultipleChoice = () => {
                 backgroundColor: determineButtonColor(
                   item,
                   userAnswer,
-                  correctAnswer
+                  correctAnswer,
+                  theme
                 ),
                 marginTop: dynamicSpacing,
                 paddingVertical: dynamicPadding,

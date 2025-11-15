@@ -1,14 +1,13 @@
-import { useTheme } from '@/context/ThemeContext';
+import { ThemeColors } from '@/components/theme';
 
 // TODO - find red and green and add to palette
 
 const determineButtonColor = (
   item: string,
   userAnswer: string | null,
-  correctAnswer: string
+  correctAnswer: string,
+  theme: ThemeColors
 ): string => {
-  const { theme } = useTheme();
-
   if (userAnswer && item !== userAnswer && item === correctAnswer)
     return 'green';
   if (item === userAnswer && item !== correctAnswer) return 'red';
