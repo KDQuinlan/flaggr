@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Pressable, Text, StyleSheet } from 'react-native';
+import { useEffect, useMemo, useState } from 'react';
+import { Pressable, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Purchases, {
   PurchasesStoreProduct,
@@ -9,6 +9,8 @@ import Purchases, {
 import stateStore from '@/state/store';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import { colors } from '../colors';
+import { getPurchasePremiumButtonStyles } from './purchasePremiumButton.styles';
+import { useTheme } from '@/context/ThemeContext';
 
 // TODO - Remove revoke premium when going to PROD
 
@@ -16,6 +18,8 @@ const PurchasePremiumButton = () => {
   const userSettings = stateStore((s) => s.userSettings);
   const { setUserSettings, setEnergyModalVisible } = stateStore.getState();
   const { t } = useTranslation('energy');
+  const { theme } = useTheme();
+  const styles = useMemo(() => getPurchasePremiumButtonStyles(theme), [theme]);
   const [product, setProduct] = useState<PurchasesStoreProduct | undefined>(
     undefined
   );
@@ -69,28 +73,5 @@ const PurchasePremiumButton = () => {
     </Pressable>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: colors.legendaryOrange,
-    padding: 10,
-    width: '100%',
-    maxWidth: 240,
-    borderRadius: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 4,
-  },
-  buttonText: {
-    fontSize: 16,
-    color: colors.white,
-    fontFamily: 'DMSansBold',
-  },
-});
 
 export default PurchasePremiumButton;

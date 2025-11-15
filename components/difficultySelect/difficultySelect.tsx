@@ -8,11 +8,13 @@ import {
 import { ProgressBar } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import { difficultySelectStyles as styles } from './difficultySelect.styles';
+import { getDifficultySelectStyles } from './difficultySelect.styles';
 import { colors } from '../colors';
 import { LEVEL_MAP, LEVEL_TO_FLAG_AMOUNT_MAP } from '@/constants/mappers';
 import iconsMap from '@/assets/images/icons';
 import { Levels } from '@/types/secureStore';
+import { useMemo } from 'react';
+import { useTheme } from '@/context/ThemeContext';
 
 type DifficultySelectProps = {
   title: Levels;
@@ -36,6 +38,8 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
   onPress,
 }) => {
   const { t } = useTranslation(['difficulty', 'data']);
+  const { theme } = useTheme();
+  const styles = useMemo(() => getDifficultySelectStyles(theme), [theme]);
 
   const isLocked = description === t('states.locked');
   const hasRapidOverbar =
@@ -49,7 +53,7 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
     <TouchableOpacity
       style={{
         ...styles.gameModeContainer,
-        backgroundColor: isLocked ? colors.offWhite : colors.white,
+        opacity: isLocked ? 0.5 : 1,
       }}
       onPress={onPress}
       activeOpacity={0.8}

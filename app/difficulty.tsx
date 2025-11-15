@@ -1,10 +1,9 @@
-import { useEffect } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
+import { useEffect, useMemo } from 'react';
+import { SafeAreaView, ScrollView } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 
-import { colors } from '@/components/colors';
 import DifficultySelect from '@/components/difficultySelect/difficultySelect';
 import {
   RAPID_TIME_ALLOWANCE_IN_S,
@@ -16,11 +15,15 @@ import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/gener
 import getCompletionDescription from '@/util/getCompletionDescription/getCompletionDescription';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import determineSetTimestamp from '@/util/determineSetTimestamp/determineSetTimestamp';
+import { getDifficultyStyles } from '@/styles/difficulty';
+import { useTheme } from '@/context/ThemeContext';
 
 const Difficulty = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'difficulty'>>();
   const { t } = useTranslation('difficulty');
+  const { theme } = useTheme();
+  const styles = useMemo(() => getDifficultyStyles(theme), [theme]);
   const userProgression = stateStore((s) => s.userProgress);
   const userSettings = stateStore((s) => s.userSettings);
   const { energyAmount, isPremiumUser } = userSettings;
@@ -82,18 +85,5 @@ const Difficulty = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-    backgroundColor: colors.offWhite,
-  },
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    paddingBottom: 20,
-  },
-});
 
 export default Difficulty;

@@ -4,7 +4,6 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -15,7 +14,6 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 
-import { colors } from '@/components/colors';
 import SummaryInfoRow from '@/components/summaryInfoRow/summaryInfoRow';
 import iconsMap from '@/assets/images/icons';
 import { LEVEL_MAP } from '@/constants/mappers';
@@ -27,11 +25,12 @@ import formatTime from '@/util/formatTime/formatTime';
 import getNextLevelKey from '@/util/getNextLevelKey/getNextLevelKey';
 import persistProgression from '@/util/persistState/persistProgression';
 import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
-import typedKeys from '@/util/typedKeys/typedKeys';
 import { ProgressionStructure } from '@/types/secureStore';
 import { MATCHES_PLAYED_ID } from '@/constants/leaderboard';
 import PlayGames from '@/PlayGames';
 import determineSummaryIcons from '@/util/determineSummaryIcons';
+import { getSummaryStyles } from '@/styles/summary';
+import { useTheme } from '@/context/ThemeContext';
 
 // TODO - remove memoisation for progression and use getState for snapshot?
 
@@ -54,6 +53,8 @@ const Summary = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'summary'>>();
   const { t } = useTranslation('summary');
+  const { theme } = useTheme();
+  const styles = useMemo(() => getSummaryStyles(theme), [theme]);
   const userProgression = stateStore((s) => s.userProgress);
   const setProgression = stateStore((s) => s.setProgression);
   const { difficulty, gameMode, gameResult } = route.params;
@@ -311,67 +312,5 @@ const Summary = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-    backgroundColor: colors.offWhite,
-  },
-  summaryContainer: {
-    paddingHorizontal: 12,
-  },
-  sectionContainer: {
-    backgroundColor: colors.white,
-    borderRadius: 10,
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 4,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 10,
-    paddingVertical: 10,
-  },
-  buttonContainer: {
-    backgroundColor: colors.offWhite,
-    marginVertical: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  animationContainer: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  difficultyImageContainer: {
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  button: {
-    backgroundColor: colors.bluePrimary,
-    paddingVertical: 10,
-    borderRadius: 5,
-    width: '50%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 4,
-  },
-  title: {
-    fontFamily: 'DMSansBold',
-    textAlign: 'center',
-    fontSize: 28,
-    paddingBottom: 10,
-  },
-  unlockText: { fontFamily: 'DMSans' },
-  buttonText: { fontFamily: 'DMSansBold', fontSize: 20, color: colors.white },
-});
 
 export default Summary;

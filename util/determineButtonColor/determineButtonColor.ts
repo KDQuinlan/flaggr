@@ -1,15 +1,16 @@
-import { colors } from '@/components/colors';
+import { ThemeColors } from '@/components/theme';
 
 const determineButtonColor = (
   item: string,
   userAnswer: string | null,
-  correctAnswer: string
+  correctAnswer: string,
+  theme: ThemeColors
 ): string => {
   if (userAnswer && item !== userAnswer && item === correctAnswer)
-    return 'green';
-  if (item === userAnswer && item !== correctAnswer) return 'red';
-  if (item === userAnswer && item === correctAnswer) return 'green';
-  return colors.white;
+    return theme.correctText;
+  if (item === userAnswer && item !== correctAnswer) return theme.incorrectText;
+  if (item === userAnswer && item === correctAnswer) return theme.correctText;
+  return theme.card;
 };
 
 export default determineButtonColor;

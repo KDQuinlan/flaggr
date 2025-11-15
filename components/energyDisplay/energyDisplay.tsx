@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
-import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
+import { useEffect, useMemo, useState } from 'react';
+import { TouchableOpacity, Text, View } from 'react-native';
 import { usePathname } from 'expo-router';
 import { Image } from 'expo-image';
 
 import { ENERGY_COOLDOWN_MS, MAXIMUM_ENERGY } from '@/constants/common';
 import stateStore from '@/state/store';
-import { colors } from '../colors';
 import formatTime from '@/util/formatTime/formatTime';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
+import { getEnergyDisplayStyles } from './energyDisplay.styles';
+import { useTheme } from '@/context/ThemeContext';
 
 const EnergyDisplay = () => {
   const energyModalVisible = stateStore((s) => s.energyModalVisible);
@@ -15,6 +16,8 @@ const EnergyDisplay = () => {
   const userSettings = stateStore((s) => s.userSettings);
   const { energyAmount, lastEnergyTimestamp } = userSettings;
   const [timeLeft, setTimeLeft] = useState<string | null>(null);
+  const { theme } = useTheme();
+  const styles = useMemo(() => getEnergyDisplayStyles(theme), [theme]);
   const currentPathname = usePathname();
 
   const energyText =
@@ -76,40 +79,5 @@ const EnergyDisplay = () => {
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  parentContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  image: {
-    width: 20,
-    height: 30,
-    left: 10,
-    zIndex: 1,
-  },
-  energyContainer: {
-    minWidth: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.energyOrange,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-  },
-  energy: {
-    fontWeight: '600',
-    fontFamily: 'DMSansBold',
-  },
-  timer: {
-    position: 'absolute',
-    top: '90%',
-    fontWeight: '600',
-    fontSize: 10,
-    paddingLeft: 20,
-    alignSelf: 'center',
-    fontFamily: 'DMSans',
-  },
-});
 
 export default EnergyDisplay;

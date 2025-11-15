@@ -1,14 +1,10 @@
-import {
-  Text,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-  PixelRatio,
-} from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { colors } from '@/components/colors';
 import { VALID_REGIONS } from '@/constants/common';
+import { useTheme } from '@/context/ThemeContext';
+import { useMemo } from 'react';
+import { getModifierMultiSelectStyles } from './modifierMultiSelect.styles';
 
 type ModifierMultiSelectVarients = 'regions' | 'quizType';
 
@@ -17,9 +13,6 @@ type ModifierMultiSelectProps = {
   value: string[];
   onChange?: (selected: string[]) => void;
 };
-
-const fontScale = PixelRatio.getFontScale();
-const dynamicButtonHeight = Math.min(50 * fontScale, 80);
 
 const MODIFIER_OPTIONS = {
   regions: VALID_REGIONS,
@@ -32,6 +25,8 @@ export default function ModifierMultiSelect({
   onChange,
 }: ModifierMultiSelectProps) {
   const { t } = useTranslation('data');
+  const { theme } = useTheme();
+  const styles = useMemo(() => getModifierMultiSelectStyles(theme), [theme]);
 
   const toggleModifier = (item: string) => {
     const newSelection = value.includes(item)
@@ -74,41 +69,3 @@ export default function ModifierMultiSelect({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    paddingHorizontal: 12,
-  },
-  button: {
-    flexBasis: '48%',
-    height: dynamicButtonHeight,
-    backgroundColor: colors.offWhite,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 12,
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 4,
-  },
-  buttonText: {
-    fontFamily: 'DMSans',
-    color: colors.black,
-    fontSize: 16,
-  },
-  buttonSelected: {
-    backgroundColor: colors.bluePrimary,
-    shadowOpacity: 0,
-    elevation: 0,
-  },
-  buttonTextSelected: {
-    fontFamily: 'DMSans',
-    color: colors.white,
-    fontSize: 16,
-  },
-});

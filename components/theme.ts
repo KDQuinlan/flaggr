@@ -13,6 +13,10 @@ export const light = {
   buttonText: colors.white,
   headerText: colors.bluePrimary,
   linkText: colors.blueSecondary,
+  helperText: colors.darkBrown,
+  descriptionText: colors.lightBlack,
+  correctText: colors.correct,
+  incorrectText: colors.incorrect,
 
   // Surfaces
   accent: colors.lightGrey,
@@ -32,10 +36,14 @@ export const dark = {
   buttonText: colors.white,
   headerText: colors.bluePrimary,
   linkText: colors.blueSecondary,
+  helperText: colors.lightBrown,
+  descriptionText: colors.lightGrey,
+  correctText: colors.correct,
+  incorrectText: colors.incorrect,
 
   // Surfaces
   accent: colors.lightBlack,
-  shadow: colors.black,
+  shadow: colors.bluePrimary,
 };
 
 export type ThemeColors = typeof light;
