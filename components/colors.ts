@@ -20,4 +20,10 @@ export const colors = {
   // Oranges
   legendaryOrange: '#FCB100',
   energyOrange: '#FFE788',
+
+  // Reds
+  incorrect: '#E74C3C',
+
+  // Greens
+  correct: '#2ECC71',
 };

@@ -1,7 +1,5 @@
 import { ThemeColors } from '@/components/theme';
 
-// TODO - find red and green and add to palette
-
 const determineButtonColor = (
   item: string,
   userAnswer: string | null,
@@ -9,9 +7,9 @@ const determineButtonColor = (
   theme: ThemeColors
 ): string => {
   if (userAnswer && item !== userAnswer && item === correctAnswer)
-    return 'green';
-  if (item === userAnswer && item !== correctAnswer) return 'red';
-  if (item === userAnswer && item === correctAnswer) return 'green';
+    return theme.correctText;
+  if (item === userAnswer && item !== correctAnswer) return theme.incorrectText;
+  if (item === userAnswer && item === correctAnswer) return theme.correctText;
   return theme.card;
 };
 

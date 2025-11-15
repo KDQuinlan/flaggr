@@ -15,6 +15,8 @@ export const light = {
   linkText: colors.blueSecondary,
   helperText: colors.darkBrown,
   descriptionText: colors.lightBlack,
+  correctText: colors.correct,
+  incorrectText: colors.incorrect,
 
   // Surfaces
   accent: colors.lightGrey,
@@ -36,6 +38,8 @@ export const dark = {
   linkText: colors.blueSecondary,
   helperText: colors.lightBrown,
   descriptionText: colors.lightGrey,
+  correctText: colors.correct,
+  incorrectText: colors.incorrect,
 
   // Surfaces
   accent: colors.lightBlack,
