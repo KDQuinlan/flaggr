@@ -63,7 +63,7 @@ export const getFeedbackStyles = (theme: ThemeColors) => {
       backgroundColor: theme.button,
       paddingVertical: 10,
       marginTop: 20,
-      borderRadius: 5,
+      borderRadius: 8,
       width: '100%',
       maxWidth: 240,
       justifyContent: 'center',

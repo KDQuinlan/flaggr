@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
-import { colors } from '../colors';
 
 export const getEnergyModalStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -16,7 +15,7 @@ export const getEnergyModalStyles = (theme: ThemeColors) => {
       backgroundColor: theme.background,
       paddingVertical: 30,
       paddingHorizontal: 24,
-      borderRadius: 16,
+      borderRadius: 8,
       width: '100%',
       maxWidth: 340,
       alignItems: 'center',
@@ -24,10 +23,10 @@ export const getEnergyModalStyles = (theme: ThemeColors) => {
       // elevation: 6,
     },
     titleText: {
-      marginBottom: 10,
+      marginBottom: 20,
       fontWeight: '700',
       fontSize: 18,
-      color: colors.bluePrimary,
+      color: theme.headerText,
     },
     bodyText: {
       marginBottom: 10,
@@ -36,7 +35,7 @@ export const getEnergyModalStyles = (theme: ThemeColors) => {
       fontSize: 15,
     },
     ctaButton: {
-      backgroundColor: colors.bluePrimary,
+      backgroundColor: theme.button,
       padding: 10,
       borderRadius: 8,
       marginBottom: 20,
@@ -52,17 +51,14 @@ export const getEnergyModalStyles = (theme: ThemeColors) => {
       fontSize: 16,
     },
     closeButton: {
-      backgroundColor: colors.bluePrimary,
+      backgroundColor: theme.button,
       padding: 10,
       marginTop: 20,
       borderRadius: 8,
       width: '60%',
       alignItems: 'center',
-      shadowColor: colors.black,
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.1,
-      shadowRadius: 6,
-      elevation: 4,
+      shadowColor: theme.shadow,
+      // elevation: 4,
     },
     closeButtonText: {
       color: 'white',

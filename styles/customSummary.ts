@@ -14,7 +14,7 @@ export const getCustomSummaryStyles = (theme: ThemeColors) => {
     },
     sectionContainer: {
       backgroundColor: theme.card,
-      borderRadius: 10,
+      borderRadius: 8,
       shadowColor: theme.shadow,
       // elevation: 4,
       width: '100%',
@@ -35,17 +35,14 @@ export const getCustomSummaryStyles = (theme: ThemeColors) => {
       justifyContent: 'center',
     },
     button: {
-      backgroundColor: colors.bluePrimary,
+      backgroundColor: theme.button,
       paddingVertical: 10,
-      borderRadius: 5,
+      borderRadius: 8,
       width: '50%',
       justifyContent: 'center',
       alignItems: 'center',
       shadowColor: theme.shadow,
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.1,
-      shadowRadius: 6,
-      elevation: 4,
+      // elevation: 4,
     },
     title: {
       fontFamily: 'DMSansBold',
@@ -55,6 +52,6 @@ export const getCustomSummaryStyles = (theme: ThemeColors) => {
       color: theme.text,
     },
     unlockText: { fontFamily: 'DMSans', color: theme.text },
-    buttonText: { fontFamily: 'DMSansBold', fontSize: 20, color: theme.text },
+    buttonText: { fontFamily: 'DMSansBold', fontSize: 16, color: theme.text },
   });
 };

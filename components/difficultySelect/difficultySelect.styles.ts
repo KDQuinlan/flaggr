@@ -8,7 +8,7 @@ export const getDifficultySelectStyles = (theme: ThemeColors) => {
       backgroundColor: theme.card,
       marginHorizontal: 20,
       marginTop: 20,
-      borderRadius: 10,
+      borderRadius: 8,
       alignItems: 'center',
       flexDirection: 'row',
       paddingVertical: 20,
@@ -44,7 +44,7 @@ export const getDifficultySelectStyles = (theme: ThemeColors) => {
     progressBar: {
       marginTop: 5,
       height: 5,
-      borderRadius: 10,
+      borderRadius: 8,
       width: '100%',
     },
     score: {

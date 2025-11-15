@@ -14,7 +14,7 @@ export const getSummaryStyles = (theme: ThemeColors) => {
     },
     sectionContainer: {
       backgroundColor: theme.card,
-      borderRadius: 10,
+      borderRadius: 8,
       shadowColor: theme.shadow,
       // elevation: 4,
       width: '100%',
@@ -41,9 +41,9 @@ export const getSummaryStyles = (theme: ThemeColors) => {
       alignItems: 'center',
     },
     button: {
-      backgroundColor: colors.bluePrimary,
+      backgroundColor: theme.button,
       paddingVertical: 10,
-      borderRadius: 5,
+      borderRadius: 8,
       width: '50%',
       justifyContent: 'center',
       alignItems: 'center',
@@ -58,6 +58,6 @@ export const getSummaryStyles = (theme: ThemeColors) => {
       color: theme.text,
     },
     unlockText: { fontFamily: 'DMSans', color: theme.text },
-    buttonText: { fontFamily: 'DMSansBold', fontSize: 20, color: theme.text },
+    buttonText: { fontFamily: 'DMSansBold', fontSize: 16, color: colors.white },
   });
 };

@@ -14,19 +14,6 @@ export const getSettingsStyles = (theme: ThemeColors) => {
       paddingHorizontal: 20,
       paddingVertical: 20,
     },
-    titleContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingTop: 10,
-      width: '100%',
-      paddingHorizontal: 20,
-    },
-    title: {
-      fontWeight: 'bold',
-      fontSize: 40,
-      color: theme.headerText,
-    },
     dropdownSection: {
       marginTop: 20,
     },
@@ -58,7 +45,7 @@ export const getSettingsStyles = (theme: ThemeColors) => {
       backgroundColor: theme.button,
       paddingVertical: 10,
       marginTop: 20,
-      borderRadius: 5,
+      borderRadius: 8,
       width: '100%',
       maxWidth: 240,
       justifyContent: 'center',

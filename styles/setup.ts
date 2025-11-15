@@ -56,7 +56,6 @@ export const getSetupStyles = (theme: ThemeColors) => {
       marginTop: 10,
     },
     helperText: {
-      marginTop: 4,
       fontFamily: 'DMSans',
       fontSize: 12,
       color: theme.helperText,
@@ -65,7 +64,7 @@ export const getSetupStyles = (theme: ThemeColors) => {
       backgroundColor: theme.button,
       paddingVertical: 10,
       marginTop: 20,
-      borderRadius: 5,
+      borderRadius: 8,
       width: '50%',
       justifyContent: 'center',
       alignItems: 'center',

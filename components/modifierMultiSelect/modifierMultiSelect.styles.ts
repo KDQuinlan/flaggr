@@ -18,12 +18,11 @@ export const getModifierMultiSelectStyles = (theme: ThemeColors) => {
       flexBasis: '48%',
       height: dynamicButtonHeight,
       backgroundColor: theme.background,
-      borderRadius: 20,
+      borderRadius: 16,
       justifyContent: 'center',
       alignItems: 'center',
       marginBottom: 12,
       shadowColor: theme.shadow,
-      shadowOffset: { width: 0, height: 4 },
       // elevation: 4,
     },
     buttonText: {
@@ -32,7 +31,7 @@ export const getModifierMultiSelectStyles = (theme: ThemeColors) => {
       fontSize: 16,
     },
     buttonSelected: {
-      backgroundColor: colors.bluePrimary,
+      backgroundColor: theme.button,
       shadowOpacity: 0,
       elevation: 0,
     },

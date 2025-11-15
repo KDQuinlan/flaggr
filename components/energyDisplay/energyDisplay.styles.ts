@@ -20,7 +20,8 @@ export const getEnergyDisplayStyles = (theme: ThemeColors) => {
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: theme.energy,
-      borderRadius: 5,
+      borderTopRightRadius: 8,
+      borderBottomRightRadius: 8,
       paddingHorizontal: 10,
     },
     energy: {

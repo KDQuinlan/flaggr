@@ -10,7 +10,7 @@ export const getPurchasePremiumButtonStyles = (theme: ThemeColors) => {
       padding: 10,
       width: '100%',
       maxWidth: 240,
-      borderRadius: 5,
+      borderRadius: 8,
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf: 'center',
