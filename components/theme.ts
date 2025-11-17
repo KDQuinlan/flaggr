@@ -7,6 +7,8 @@ export const light = {
   button: colors.bluePrimary,
   premiumButton: colors.legendaryOrange,
   energy: colors.energyOrange,
+  correct: colors.correctRed,
+  incorrect: colors.incorrectRed,
 
   // Texts
   text: colors.black,
@@ -15,8 +17,6 @@ export const light = {
   linkText: colors.blueSecondary,
   helperText: colors.darkBrown,
   descriptionText: colors.lightBlack,
-  correctText: colors.correct,
-  incorrectText: colors.incorrect,
 
   // Surfaces
   accent: colors.lightGrey,
@@ -30,6 +30,8 @@ export const dark = {
   button: colors.bluePrimary,
   premiumButton: colors.legendaryOrange,
   energy: colors.energyOrange,
+  correct: colors.correctRed,
+  incorrect: colors.incorrectRed,
 
   // Texts
   text: colors.white,
@@ -38,12 +40,10 @@ export const dark = {
   linkText: colors.blueSecondary,
   helperText: colors.lightBrown,
   descriptionText: colors.lightGrey,
-  correctText: colors.correct,
-  incorrectText: colors.incorrect,
 
   // Surfaces
   accent: colors.lightBlack,
-  shadow: colors.bluePrimary,
+  shadow: colors.white,
 };
 
 export type ThemeColors = typeof light;

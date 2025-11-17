@@ -34,6 +34,8 @@ const HomeScreen = () => {
   const { theme } = useTheme();
   const styles = useMemo(() => getHomeStyles(theme), [theme]);
 
+  const showAds = !isPremiumUser && isInternetAvailable;
+
   useEffect(() => {
     showLeaderboard && PlayGames.showAllLeaderboards();
     setTimeout(() => setShowLeaderboard(false), 250);
@@ -97,36 +99,37 @@ const HomeScreen = () => {
           onPress={() => navigation.navigate('custom')}
         />
       </ScrollView>
-      <View style={styles.floatingButtonContainer}>
-        <Pressable
-          style={({ pressed }) => [
-            styles.floatingButton,
-            { opacity: pressed ? 0.7 : 1 },
-          ]}
-          onPress={() => navigation.navigate('feedback')}
-        >
-          <Image
-            style={styles.floatingIcon}
-            source={require('@/assets/images/icons/resources/feedback.png')}
-          />
-        </Pressable>
+      <View style={styles.anchorContainer}>
+        <View style={styles.floatingButtonContainer}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.floatingButton,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}
+            onPress={() => navigation.navigate('feedback')}
+          >
+            <Image
+              style={styles.floatingIcon}
+              source={require('@/assets/images/icons/resources/feedback.png')}
+            />
+          </Pressable>
 
-        <Pressable
-          style={({ pressed }) => [
-            styles.floatingButton,
-            { opacity: pressed ? 0.7 : 1 },
-          ]}
-          onPress={() => setShowLeaderboard(true)}
-        >
-          <Image
-            style={styles.floatingIcon}
-            source={require('@/assets/images/icons/resources/leaderboard.png')}
-          />
-        </Pressable>
+          <Pressable
+            style={({ pressed }) => [
+              styles.floatingButton,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}
+            onPress={() => setShowLeaderboard(true)}
+          >
+            <Image
+              style={styles.floatingIcon}
+              source={require('@/assets/images/icons/resources/leaderboard.png')}
+            />
+          </Pressable>
+        </View>
+
+        {showAds && <AdBanner adId={BANNER_TEST_ID} />}
       </View>
-      {!isPremiumUser && isInternetAvailable && (
-        <AdBanner adId={BANNER_TEST_ID} />
-      )}
     </SafeAreaView>
   );
 };

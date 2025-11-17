@@ -2,10 +2,11 @@ import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 
+// TODO - figure out why each subsequent button's shadow is longer
+
 export const getDifficultySelectStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
     gameModeContainer: {
-      backgroundColor: theme.card,
       marginHorizontal: 20,
       marginTop: 20,
       borderRadius: 8,
@@ -14,7 +15,6 @@ export const getDifficultySelectStyles = (theme: ThemeColors) => {
       paddingVertical: 20,
       paddingHorizontal: 15,
       shadowColor: theme.shadow,
-      // elevation: 4,
       maxWidth: 600,
     },
     gameIcon: {

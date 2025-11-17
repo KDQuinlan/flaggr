@@ -11,10 +11,9 @@ export default {
     'Los servicios de correo no están disponibles en este dispositivo',
   errorMessage:
     'No se pudo enviar el correo electrónico. Por favor, inténtalo de nuevo más tarde',
-  uiFeedback: 'Interfaz / Diseño',
-  progressionFeedback: 'Progresión',
-  gameplayFeedback: 'Jugabilidad',
-  performanceFeedback: 'Rendimiento',
-  purchaseFeedback: 'Compra',
-  otherFeedback: 'Mi problema no aparece en la lista',
+  bugFeedback: 'Error / Problema',
+  ideaFeedback: 'Idea / Sugerencia',
+  designFeedback: 'Diseño / Apariencia',
+  purchaseFeedback: 'Premium',
+  otherFeedback: 'Otro',
 };

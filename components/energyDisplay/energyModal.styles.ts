@@ -13,14 +13,14 @@ export const getEnergyModalStyles = (theme: ThemeColors) => {
     },
     modalContainer: {
       backgroundColor: theme.background,
-      paddingVertical: 30,
+      paddingVertical: 20,
       paddingHorizontal: 24,
       borderRadius: 8,
       width: '100%',
       maxWidth: 340,
+      borderWidth: 1,
+      borderColor: theme.accent,
       alignItems: 'center',
-      shadowColor: theme.shadow,
-      // elevation: 6,
     },
     titleText: {
       marginBottom: 20,

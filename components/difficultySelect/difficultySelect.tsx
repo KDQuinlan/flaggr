@@ -4,13 +4,18 @@ import {
   TouchableOpacity,
   GestureResponderEvent,
   Image,
+  Pressable,
 } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { getDifficultySelectStyles } from './difficultySelect.styles';
 import { colors } from '../colors';
-import { LEVEL_MAP, LEVEL_TO_FLAG_AMOUNT_MAP } from '@/constants/mappers';
+import {
+  LEVEL_MAP,
+  LEVEL_TO_FLAG_AMOUNT_MAP,
+  LEVELS_TO_SHADOW_ELEVATION,
+} from '@/constants/mappers';
 import iconsMap from '@/assets/images/icons';
 import { Levels } from '@/types/secureStore';
 import { useMemo } from 'react';
@@ -50,13 +55,16 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
     (LEVEL_TO_FLAG_AMOUNT_MAP[title] - score);
 
   return (
-    <TouchableOpacity
-      style={{
-        ...styles.gameModeContainer,
-        opacity: isLocked ? 0.5 : 1,
-      }}
+    <Pressable
+      style={({ pressed }) => [
+        styles.gameModeContainer,
+        {
+          opacity: pressed ? 0.7 : 1,
+          backgroundColor: isLocked ? theme.background : theme.card,
+          elevation: LEVELS_TO_SHADOW_ELEVATION[title],
+        },
+      ]}
       onPress={onPress}
-      activeOpacity={0.8}
       disabled={isLocked}
       accessibilityRole="button"
       accessibilityLabel={t(`levels.${LEVEL_MAP[title]}`, {
@@ -96,7 +104,7 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
           />
         )}
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

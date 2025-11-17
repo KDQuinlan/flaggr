@@ -13,6 +13,7 @@ export const getDifficultyStyles = (theme: ThemeColors) => {
       justifyContent: 'flex-start',
       alignItems: 'center',
       paddingBottom: 20,
+      overflow: 'visible',
     },
   });
 };

@@ -15,7 +15,7 @@ export const getPurchasePremiumButtonStyles = (theme: ThemeColors) => {
       alignItems: 'center',
       alignSelf: 'center',
       shadowColor: theme.shadow,
-      // elevation: 4,
+      elevation: 4,
     },
     buttonText: {
       fontSize: 16,

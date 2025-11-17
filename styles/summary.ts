@@ -15,13 +15,12 @@ export const getSummaryStyles = (theme: ThemeColors) => {
     sectionContainer: {
       backgroundColor: theme.card,
       borderRadius: 8,
-      shadowColor: theme.shadow,
-      // elevation: 4,
       width: '100%',
       justifyContent: 'center',
       alignItems: 'center',
       marginTop: 20,
       paddingVertical: 10,
+      paddingHorizontal: 10,
     },
     buttonContainer: {
       backgroundColor: theme.background,

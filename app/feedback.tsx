@@ -26,11 +26,10 @@ const FeedbackScreen = () => {
   const [message, setMessage] = useState<string>('');
 
   const feedbackTypes = [
-    { label: t('uiFeedback'), value: 'ui' },
-    { label: t('progressionFeedback'), value: 'progression' },
-    { label: t('gameplayFeedback'), value: 'gameplay' },
-    { label: t('performanceFeedback'), value: 'performance' },
-    { label: t('purchaseFeedback'), value: 'purchase' },
+    { label: t('bugFeedback'), value: 'bug' },
+    { label: t('ideaFeedback'), value: 'idea' },
+    { label: t('designFeedback'), value: 'design' },
+    { label: t('premeiumFeedback'), value: 'Premium' },
     { label: t('otherFeedback'), value: 'other' },
   ];
 

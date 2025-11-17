@@ -52,6 +52,20 @@ export const LEVEL_TO_FLAG_AMOUNT_MAP: Record<Levels, number> = {
   'Level 10': LEVEL_TEN_FLAGS_AMOUNT,
 };
 
+// I hate that you make me do this, react native...
+export const LEVELS_TO_SHADOW_ELEVATION: Record<Levels, number> = {
+  'Level 1': 4,
+  'Level 2': 3.3,
+  'Level 3': 2.5,
+  'Level 4': 2.2,
+  'Level 5': 2,
+  'Level 6': 1.8,
+  'Level 7': 1.7,
+  'Level 8': 1.5,
+  'Level 9': 1.4,
+  'Level 10': 1,
+};
+
 export const TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP: Record<TimeLimits, number> = {
   0: 0.0,
   15: 1.3,

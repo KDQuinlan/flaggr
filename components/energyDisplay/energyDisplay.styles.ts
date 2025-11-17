@@ -1,6 +1,8 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, PixelRatio } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
+
+const fontScale = PixelRatio.getFontScale();
 
 export const getEnergyDisplayStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -22,6 +24,8 @@ export const getEnergyDisplayStyles = (theme: ThemeColors) => {
       backgroundColor: theme.energy,
       borderTopRightRadius: 8,
       borderBottomRightRadius: 8,
+      borderTopLeftRadius: fontScale > 1.25 ? 8 : 0,
+      borderBottomLeftRadius: fontScale > 1.25 ? 8 : 0,
       paddingHorizontal: 10,
     },
     energy: {

@@ -48,15 +48,21 @@ export const getHomeStyles = (theme: ThemeColors) => {
       marginBottom: 20,
       marginHorizontal: 20,
       backgroundColor: theme.card,
+      borderWidth: 1,
+      borderColor: theme.accent,
       width: 70,
       height: 70,
       borderRadius: 10,
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf: 'flex-end',
-      shadowColor: theme.shadow,
-      // elevation: 2,
     },
     floatingIcon: { width: 50, height: 50 },
+    anchorContainer: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      bottom: 0,
+    },
   });
 };

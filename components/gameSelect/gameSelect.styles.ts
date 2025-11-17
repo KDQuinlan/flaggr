@@ -14,7 +14,7 @@ export const getGameSelectStyles = (theme: ThemeColors) => {
       paddingVertical: 20,
       paddingHorizontal: 15,
       shadowColor: theme.shadow,
-      // elevation: 0,
+      elevation: 4,
       maxWidth: 600,
     },
     gameIcon: {

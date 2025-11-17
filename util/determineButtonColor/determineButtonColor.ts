@@ -7,9 +7,9 @@ const determineButtonColor = (
   theme: ThemeColors
 ): string => {
   if (userAnswer && item !== userAnswer && item === correctAnswer)
-    return theme.correctText;
-  if (item === userAnswer && item !== correctAnswer) return theme.incorrectText;
-  if (item === userAnswer && item === correctAnswer) return theme.correctText;
+    return theme.correct;
+  if (item === userAnswer && item !== correctAnswer) return theme.incorrect;
+  if (item === userAnswer && item === correctAnswer) return theme.correct;
   return theme.card;
 };
 

@@ -22,8 +22,8 @@ export const colors = {
   energyOrange: '#FFE788',
 
   // Reds
-  incorrect: '#E74C3C',
+  incorrectRed: '#E74C3C',
 
   // Greens
-  correct: '#2ECC71',
+  correctRed: '#2ECC71',
 };
