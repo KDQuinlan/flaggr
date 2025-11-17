@@ -18,13 +18,17 @@ function RootLayoutContent() {
   const { isPremiumUser, isDarkTheme } = stateStore((s) => s.userSettings);
 
   useEffect(() => {
-    NavigationBar.setBackgroundColorAsync('red');
+    NavigationBar.setBackgroundColorAsync(theme.background);
     NavigationBar.setButtonStyleAsync(isDarkTheme ? 'dark' : 'light');
   }, [isDarkTheme, theme]);
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.legendaryOrange }}>
-      <StatusBar style="dark" backgroundColor={colors.offWhite} />
+    <View style={{ flex: 1 }}>
+      <StatusBar
+        style={isDarkTheme ? 'light' : 'dark'}
+        backgroundColor={theme.background}
+      />
+
       <EnergyModal />
       <Stack
         screenOptions={{

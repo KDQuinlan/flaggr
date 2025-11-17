@@ -1,10 +1,15 @@
-import React from 'react';
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { useMemo } from 'react';
+import { View, Text, ActivityIndicator } from 'react-native';
 import { useTranslation } from 'react-i18next';
+
 import { colors } from '@/components/colors';
+import { getLoadingStyles } from '@/styles/loading';
+import { useTheme } from '@/context/ThemeContext';
 
 const Loading = () => {
   const { t } = useTranslation('loading');
+  const { theme } = useTheme();
+  const styles = useMemo(() => getLoadingStyles(theme), [theme]);
 
   return (
     <View style={styles.container}>
@@ -15,18 +20,3 @@ const Loading = () => {
 };
 
 export default Loading;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.offWhite,
-  },
-  text: {
-    fontFamily: 'DMSansBold',
-    marginTop: 12,
-    fontSize: 16,
-    color: colors.black,
-  },
-});

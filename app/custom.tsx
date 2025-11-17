@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -35,12 +34,16 @@ import setCurrentCustomGame from '@/util/updatedProgressionStructure/setCurrentC
 import { TimeLimits } from '@/types/screens';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import determineSetTimestamp from '@/util/determineSetTimestamp/determineSetTimestamp';
+import { getCustomStyles } from '@/styles/custom';
+import { useTheme } from '@/context/ThemeContext';
 
 // TODO - refactor rn image to expo image?
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const { t } = useTranslation('custom');
+  const { theme } = useTheme();
+  const styles = useMemo(() => getCustomStyles(theme), [theme]);
   const userProgression = stateStore((s) => s.userProgress);
   const setProgression = stateStore((s) => s.setProgression);
   const setEnergyModalVisible = stateStore((s) => s.setEnergyModalVisible);
@@ -141,63 +144,72 @@ const CustomScreen = () => {
         showsVerticalScrollIndicator={false}
       >
         {!!score && (
-          <List.Accordion
-            title={t('highScoreAccordion.title', { score })}
-            left={(props) => <List.Icon {...props} icon="trophy" />}
-            expanded={isScoreAccordionExpanded}
-            onPress={() =>
-              setIsScoreAccordionExpanded(!isScoreAccordionExpanded)
-            }
-          >
-            <List.Item
-              title={t('highScoreAccordion.regions', {
-                regions: regions.join(', '),
-              })}
-            />
-            <List.Item
-              title={
-                independentCountriesOnly
-                  ? t('highScoreAccordion.independentCountriesOnlyEnabled')
-                  : t('highScoreAccordion.independentCountriesOnlyDisabled')
-              }
-            />
-            <List.Item
-              title={t('highScoreAccordion.timeLimit', {
-                timeLimit,
-              })}
-            />
-            <List.Item
-              title={t('highScoreAccordion.gameLength', {
-                gameLength,
-              })}
-            />
-
+          <View style={styles.accordionContainer}>
             <List.Accordion
-              title={t('highScoreAccordion.stats')}
-              left={(props) => <List.Icon {...props} icon="chart-line" />}
-              expanded={isStatsAccordionExpanded}
+              title={t('highScoreAccordion.title', { score })}
+              left={(props) => (
+                <List.Icon
+                  {...props}
+                  icon="trophy"
+                  color={colors.bluePrimary}
+                />
+              )}
+              expanded={isScoreAccordionExpanded}
+              style={{ backgroundColor: theme.card }}
+              titleStyle={{ color: theme.text }}
               onPress={() =>
-                setIsStatsAccordionExpanded(!isStatsAccordionExpanded)
+                setIsScoreAccordionExpanded(!isScoreAccordionExpanded)
               }
-              style={{ marginLeft: 8 }}
             >
               <List.Item
-                title={t('highScoreAccordion.correct', {
-                  correct,
+                title={t('highScoreAccordion.regions', {
+                  regions: regions.join(', '),
                 })}
+                titleStyle={{ color: theme.text }}
+                style={{ backgroundColor: theme.card }}
               />
+
               <List.Item
-                title={t('highScoreAccordion.incorrect', {
-                  incorrect,
-                })}
+                title={
+                  independentCountriesOnly
+                    ? t('highScoreAccordion.independentCountriesOnlyEnabled')
+                    : t('highScoreAccordion.independentCountriesOnlyDisabled')
+                }
+                titleStyle={{ color: theme.text }}
+                style={{ backgroundColor: theme.card }}
               />
+
               <List.Item
-                title={t('highScoreAccordion.bestStreak', {
-                  streak,
-                })}
+                title={t('highScoreAccordion.timeLimit', { timeLimit })}
+                titleStyle={{ color: theme.text }}
+                style={{ backgroundColor: theme.card }}
+              />
+
+              <List.Item
+                title={t('highScoreAccordion.gameLength', { gameLength })}
+                titleStyle={{ color: theme.text }}
+                style={{ backgroundColor: theme.card }}
+              />
+
+              <List.Item
+                title={t('highScoreAccordion.correct', { correct })}
+                titleStyle={{ color: theme.text }}
+                style={{ backgroundColor: theme.card }}
+              />
+
+              <List.Item
+                title={t('highScoreAccordion.incorrect', { incorrect })}
+                titleStyle={{ color: theme.text }}
+                style={{ backgroundColor: theme.card }}
+              />
+
+              <List.Item
+                title={t('highScoreAccordion.bestStreak', { streak })}
+                titleStyle={{ color: theme.text }}
+                style={{ backgroundColor: theme.card }}
               />
             </List.Accordion>
-          </List.Accordion>
+          </View>
         )}
 
         {/* Regions */}
@@ -296,7 +308,7 @@ const CustomScreen = () => {
                 setTimeLimitSlider(value as TimeLimits)
               }
               minimumTrackTintColor={colors.blueSecondary}
-              maximumTrackTintColor={colors.offBlack}
+              maximumTrackTintColor={theme.text}
               thumbTintColor={colors.blueSecondary}
             />
 
@@ -332,7 +344,7 @@ const CustomScreen = () => {
               value={gameLengthSlider}
               onValueChange={setGameLengthSlider}
               minimumTrackTintColor={colors.blueSecondary}
-              maximumTrackTintColor={colors.offBlack}
+              maximumTrackTintColor={theme.text}
               thumbTintColor={colors.blueSecondary}
             />
             <View style={styles.sliderLabels}>
@@ -370,176 +382,5 @@ const CustomScreen = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-    backgroundColor: colors.offWhite,
-    paddingTop: 10,
-    justifyContent: 'space-between',
-  },
-  scrollContainer: {
-    paddingHorizontal: 12,
-  },
-  modifierContainer: {
-    backgroundColor: colors.white,
-    borderRadius: 10,
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 4,
-    marginBottom: 20,
-    paddingBottom: 5,
-    width: '100%',
-  },
-  independentCountriesContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingLeft: 15,
-    paddingRight: 15,
-  },
-  independentCountriesTextContainer: {
-    flex: 1,
-    flexShrink: 1,
-    justifyContent: 'center',
-  },
-  independentCountriesText: {
-    fontFamily: 'DMSans',
-    color: colors.blueSecondary,
-    paddingRight: 5,
-    flexWrap: 'wrap',
-  },
-  independentCountriesMultiplierText: {
-    fontFamily: 'DMSansBold',
-    color: colors.blueSecondary,
-    fontSize: 12,
-  },
-  sectionContainer: {
-    flexDirection: 'row',
-    paddingHorizontal: 10,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  sectionIcon: {
-    height: 20,
-    width: 20,
-  },
-  subHeader: {
-    paddingVertical: 10,
-    fontFamily: 'DMSansBold',
-    fontSize: 18,
-    color: colors.blueSecondary,
-    paddingLeft: 10,
-  },
-  ruleContainer: {
-    paddingLeft: 10,
-    paddingBottom: 10,
-  },
-  ruleLabel: {
-    fontFamily: 'DMSansBold',
-    fontSize: 14,
-    color: colors.blueSecondary,
-    paddingLeft: 10,
-    marginBottom: 5,
-  },
-  slider: {
-    width: '100%',
-    alignSelf: 'center',
-  },
-  sliderHeaderContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    paddingRight: 15,
-  },
-  sliderQuantityContainer: {
-    flex: 1,
-    alignItems: 'flex-end',
-  },
-  sliderQuantityText: {
-    fontFamily: 'DMSansBold',
-    textAlign: 'right',
-    fontSize: 12,
-    color: colors.blueSecondary,
-    flexShrink: 1,
-    flexWrap: 'wrap',
-  },
-  sliderLabels: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    paddingLeft: 10,
-    paddingRight: 15,
-  },
-  sliderLabelText: {
-    fontFamily: 'DMSans',
-    fontSize: 12,
-    color: colors.blueSecondary,
-  },
-  helperText: {
-    fontFamily: 'DMSans',
-    color: colors.blueSecondary,
-    fontSize: 14,
-    textAlign: 'center',
-    justifyContent: 'center',
-    paddingTop: 10,
-  },
-  buttonEnabled: {
-    backgroundColor: colors.bluePrimary,
-    paddingVertical: 10,
-    marginVertical: 10,
-    borderRadius: 5,
-    width: '50%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 4,
-  },
-  buttonDisabled: {
-    backgroundColor: colors.bluePrimary,
-    opacity: 0.5,
-    paddingVertical: 10,
-    marginVertical: 10,
-    borderRadius: 5,
-    width: '50%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-  },
-  buttonText: {
-    fontFamily: 'DMSansBold',
-    fontSize: 16,
-    color: colors.white,
-  },
-  divider: {
-    height: 1,
-    backgroundColor: colors.lightGrey,
-    marginVertical: 5,
-  },
-  resetButton: {
-    flexDirection: 'row',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  finalScoreMultiplierText: {
-    fontFamily: 'DMSansBold',
-    fontSize: 16,
-    color: colors.blueSecondary,
-    textAlign: 'center',
-    paddingTop: 10,
-  },
-});
 
 export default CustomScreen;

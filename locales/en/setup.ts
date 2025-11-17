@@ -6,5 +6,6 @@ export default {
   preferNotToSay: 'Prefer not to say',
   optional: 'optional',
   adHelpText: 'Used only for ad personalization',
+  darkTheme: 'Dark Theme',
   continue: 'Continue',
 };

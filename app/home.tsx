@@ -1,19 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigation } from 'expo-router';
 import { Image } from 'expo-image';
 import {
   Pressable,
   SafeAreaView,
   ScrollView,
-  StatusBar,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { colors } from '@/components/colors';
 import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
 import { APP_NAME } from '@/constants/common';
@@ -22,6 +19,8 @@ import { BANNER_TEST_ID } from '@/constants/adId';
 import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
 import PlayGames from '@/PlayGames';
 import stateStore from '@/state/store';
+import { getHomeStyles } from '@/styles/home';
+import { useTheme } from '@/context/ThemeContext';
 
 // TODO - Shorten localisation country names for better UI usage
 // TODO - convert TouchableOpacity buttons to use Pressable
@@ -32,6 +31,10 @@ const HomeScreen = () => {
   const { isPremiumUser } = stateStore((s) => s.userSettings);
   const [showLeaderboard, setShowLeaderboard] = useState<boolean>(false);
   const { t } = useTranslation('home');
+  const { theme } = useTheme();
+  const styles = useMemo(() => getHomeStyles(theme), [theme]);
+
+  const showAds = !isPremiumUser && isInternetAvailable;
 
   useEffect(() => {
     showLeaderboard && PlayGames.showAllLeaderboards();
@@ -96,98 +99,39 @@ const HomeScreen = () => {
           onPress={() => navigation.navigate('custom')}
         />
       </ScrollView>
-      <View style={styles.floatingButtonContainer}>
-        <Pressable
-          style={({ pressed }) => [
-            styles.floatingButton,
-            { opacity: pressed ? 0.7 : 1 },
-          ]}
-          onPress={() => navigation.navigate('feedback')}
-        >
-          <Image
-            style={styles.floatingIcon}
-            source={require('@/assets/images/icons/resources/feedback.png')}
-          />
-        </Pressable>
+      <View style={styles.anchorContainer}>
+        <View style={styles.floatingButtonContainer}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.floatingButton,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}
+            onPress={() => navigation.navigate('feedback')}
+          >
+            <Image
+              style={styles.floatingIcon}
+              source={require('@/assets/images/icons/resources/feedback.png')}
+            />
+          </Pressable>
 
-        <Pressable
-          style={({ pressed }) => [
-            styles.floatingButton,
-            { opacity: pressed ? 0.7 : 1 },
-          ]}
-          onPress={() => setShowLeaderboard(true)}
-        >
-          <Image
-            style={styles.floatingIcon}
-            source={require('@/assets/images/icons/resources/leaderboard.png')}
-          />
-        </Pressable>
+          <Pressable
+            style={({ pressed }) => [
+              styles.floatingButton,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}
+            onPress={() => setShowLeaderboard(true)}
+          >
+            <Image
+              style={styles.floatingIcon}
+              source={require('@/assets/images/icons/resources/leaderboard.png')}
+            />
+          </Pressable>
+        </View>
+
+        {showAds && <AdBanner adId={BANNER_TEST_ID} />}
       </View>
-      {!isPremiumUser && isInternetAvailable && (
-        <AdBanner adId={BANNER_TEST_ID} />
-      )}
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-    backgroundColor: colors.offWhite,
-    paddingTop: StatusBar.currentHeight || 0,
-  },
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    paddingBottom: 20,
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginTop: 30,
-    marginBottom: 10,
-    paddingHorizontal: 20,
-  },
-  titleContainer: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    alignItems: 'center',
-    pointerEvents: 'none',
-  },
-  title: {
-    fontSize: 40,
-    color: '#0073E6',
-    fontFamily: 'Chewy',
-  },
-  settingsIcon: {
-    height: 25,
-    width: 25,
-  },
-  floatingButtonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  floatingButton: {
-    marginBottom: 20,
-    marginHorizontal: 20,
-    backgroundColor: colors.white,
-    width: 70,
-    height: 70,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'flex-end',
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 4,
-  },
-  floatingIcon: { width: 50, height: 50 },
-});
 
 export default HomeScreen;

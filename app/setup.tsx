@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigation } from 'expo-router';
 import {
   SafeAreaView,
   ScrollView,
-  StatusBar,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -13,12 +11,15 @@ import { useTranslation } from 'react-i18next';
 import i18n from '@/locales/i18n';
 import { Dropdown } from 'react-native-element-dropdown';
 import * as Localization from 'expo-localization';
+import { Switch } from 'react-native-paper';
 
 import { colors } from '@/components/colors';
 import { NavigationProps } from '@/types/navigation';
 import { APP_NAME, LANGUAGES, SUPPORTED_LANGUAGES } from '@/constants/common';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import stateStore from '@/state/store';
+import { getSetupStyles } from '@/styles/setup';
+import { useTheme } from '@/context/ThemeContext';
 
 const locales = Localization.getLocales();
 const locale = locales[0]?.languageCode;
@@ -26,15 +27,25 @@ const locale = locales[0]?.languageCode;
 const SetupScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const userSettings = stateStore((s) => s.userSettings);
+  const { setUserSettings } = stateStore.getState();
   const { t } = useTranslation('setup');
+  const { theme } = useTheme();
+  const styles = useMemo(() => getSetupStyles(theme), [theme]);
   const [language, setLanguage] = useState<string>(
     locale && SUPPORTED_LANGUAGES.includes(locale) ? locale : 'en'
   );
   const [ageRange, setAgeRange] = useState(null);
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(
+    userSettings.isDarkTheme
+  );
 
   useEffect(() => {
     i18n.changeLanguage(language);
   }, [language]);
+
+  useEffect(() => {
+    setUserSettings({ ...userSettings, isDarkTheme });
+  }, [isDarkTheme]);
 
   const ageRanges = [
     { label: t('underAge'), value: '12' },
@@ -54,7 +65,7 @@ const SetupScreen = () => {
           <Text style={styles.title}>{APP_NAME}</Text>
         </View>
 
-        <View style={styles.section}>
+        <View style={styles.dropdownSection}>
           <Text style={styles.label}>{t('language')}</Text>
           <Dropdown
             style={styles.dropdown}
@@ -62,33 +73,71 @@ const SetupScreen = () => {
             labelField="label"
             valueField="value"
             value={language}
+            placeholder={t('selectLanguage')}
+            selectedTextStyle={{ color: theme.text }}
+            itemTextStyle={{ color: theme.text }}
+            containerStyle={{
+              backgroundColor: theme.card,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: theme.accent,
+            }}
+            itemContainerStyle={{
+              backgroundColor: theme.card,
+              borderRadius: 8,
+            }}
+            activeColor={theme.accent}
             onChange={(item) => setLanguage(item.value)}
           />
         </View>
 
-        <View style={styles.section}>
+        <View style={styles.dropdownSection}>
           <Text style={styles.label}>
             {t('ageRange')}{' '}
             <Text style={styles.optional}>({t('optional')})</Text>
           </Text>
           <Dropdown
-            key={i18n.language}
             style={styles.dropdown}
             data={ageRanges}
             labelField="label"
             valueField="value"
-            placeholder={t('selectAgeRange')}
             value={ageRange}
+            placeholder={t('selectAgeRange')}
+            placeholderStyle={{ color: theme.text }}
+            selectedTextStyle={{ color: theme.text }}
+            itemTextStyle={{ color: theme.text }}
+            containerStyle={{
+              backgroundColor: theme.card,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: theme.accent,
+            }}
+            itemContainerStyle={{
+              backgroundColor: theme.card,
+              borderRadius: 8,
+            }}
+            activeColor={theme.accent}
             onChange={(item) => setAgeRange(item.value)}
           />
           <Text style={styles.helperText}>{t('adHelpText')}</Text>
         </View>
+
+        <View style={styles.section}>
+          <Text style={styles.label}>{t('darkTheme')}</Text>
+          <Switch
+            color={colors.blueSecondary}
+            value={userSettings.isDarkTheme}
+            onValueChange={() => setIsDarkTheme(!isDarkTheme)}
+          />
+        </View>
+
         <TouchableOpacity
           onPress={() => {
             persistUserSettings({
               ...userSettings,
               isSetUp: true,
               locale: language,
+              isDarkTheme,
             });
             navigation.navigate('home');
           }}
@@ -103,79 +152,5 @@ const SetupScreen = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-    backgroundColor: colors.offWhite,
-    paddingTop: StatusBar.currentHeight || 0,
-  },
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: 'flex-start',
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-  },
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 10,
-    width: '100%',
-    paddingHorizontal: 20,
-  },
-  title: {
-    fontSize: 40,
-    color: '#0073E6',
-    fontFamily: 'Chewy',
-  },
-  section: {
-    marginTop: 20,
-  },
-  label: {
-    fontFamily: 'DMSansBold',
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  optional: {
-    fontFamily: 'DMSans',
-    fontSize: 14,
-    color: '#666',
-  },
-  dropdown: {
-    height: 50,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    backgroundColor: colors.white,
-  },
-  helperText: {
-    marginTop: 4,
-    fontFamily: 'DMSans',
-    fontSize: 12,
-    color: '#888',
-  },
-  button: {
-    backgroundColor: colors.bluePrimary,
-    paddingVertical: 10,
-    marginTop: 20,
-    borderRadius: 5,
-    width: '50%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 4,
-  },
-  buttonText: {
-    fontSize: 16,
-    fontFamily: 'DMSansBold',
-    color: colors.white,
-  },
-});
 
 export default SetupScreen;

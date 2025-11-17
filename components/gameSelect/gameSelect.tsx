@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   View,
   Text,
@@ -8,9 +8,10 @@ import {
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { gameSelectStyles as styles } from './gameSelect.styles';
 import iconsMap from '@/assets/images/icons';
 import { PlayableGameModes } from '@/types/navigation';
+import { useTheme } from '@/context/ThemeContext';
+import { getGameSelectStyles } from './gameSelect.styles';
 
 type GameSelectProps = {
   id: PlayableGameModes;
@@ -28,6 +29,9 @@ const GameSelect: React.FC<GameSelectProps> = ({
   onPress,
 }) => {
   const { t } = useTranslation('home');
+  const { theme } = useTheme();
+  const styles = useMemo(() => getGameSelectStyles(theme), [theme]);
+
   return (
     <TouchableOpacity
       style={styles.gameModeContainer}

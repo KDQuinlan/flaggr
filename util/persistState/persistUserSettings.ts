@@ -12,7 +12,7 @@ const persistUserSettings = async (updatedSettings: UserSettingStructure) => {
       JSON.stringify(updatedSettings)
     );
     setUserSettings(updatedSettings);
-    console.log('Persisted locale to SecureStore:', updatedSettings);
+    console.log('Persisted to SecureStore:', updatedSettings);
   } catch (error) {
     console.error('Error persisting locale to SecureStore:', error);
   }

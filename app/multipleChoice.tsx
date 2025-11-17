@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   useWindowDimensions,
@@ -13,7 +12,6 @@ import { Image } from 'expo-image';
 import { ProgressBar } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import { colors } from '@/components/colors';
 import { ANSWER_LETTERS } from '@/constants/common';
 import { DIFFICULTY_ID_TO_LEVEL_MAP, LEVEL_MAP } from '@/constants/mappers';
 import determineButtonColor from '@/util/determineButtonColor/determineButtonColor';
@@ -24,6 +22,9 @@ import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import determineScoreToAdd from '@/util/determineScoreToAdd/determineScoreToAdd';
 import stateStore from '@/state/store';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
+import { useTheme } from '@/context/ThemeContext';
+import { getMultipleChoiceStyles } from '@/styles/multipleChoice';
+import { colors } from '@/components/colors';
 
 const MultipleChoice = () => {
   const { height } = useWindowDimensions();
@@ -34,6 +35,8 @@ const MultipleChoice = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'multipleChoice'>>();
   const { t } = useTranslation('data');
+  const { theme } = useTheme();
+  const styles = useMemo(() => getMultipleChoiceStyles(theme), [theme]);
   const userProgression = stateStore((s) => s.userProgress);
   const { title, gameMode, questions, timeLimit } = route.params;
   const { scoreMultiplier } = userProgression.games.custom.currentGame;
@@ -92,7 +95,7 @@ const MultipleChoice = () => {
           ? t('title', { ns: 'custom' })
           : t(`levels.${LEVEL_MAP[title]}`),
       headerRight: () => (
-        <Text style={{ fontFamily: 'DMSansBold' }}>
+        <Text style={{ fontFamily: 'DMSansBold', color: theme.text }}>
           {formatTime(timeElapsedInSeconds)}
         </Text>
       ),
@@ -225,7 +228,7 @@ const MultipleChoice = () => {
     <SafeAreaView style={styles.rootContainer}>
       <ProgressBar
         progress={questionNumberIndex / questions.length}
-        color="blue"
+        color={colors.bluePrimary}
         style={styles.progressBar}
       />
 
@@ -254,7 +257,8 @@ const MultipleChoice = () => {
                 backgroundColor: determineButtonColor(
                   item,
                   userAnswer,
-                  correctAnswer
+                  correctAnswer,
+                  theme
                 ),
                 marginTop: dynamicSpacing,
                 paddingVertical: dynamicPadding,
@@ -276,49 +280,5 @@ const MultipleChoice = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-    backgroundColor: colors.offWhite,
-  },
-  flagContainer: {
-    flex: 2,
-  },
-  answersContainer: {
-    flex: 3,
-    maxWidth: 500,
-    alignSelf: 'center',
-    width: '100%',
-  },
-  answerBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: 20,
-    borderRadius: 5,
-    backgroundColor: colors.white,
-    flexShrink: 1,
-    minHeight: 50,
-  },
-  progressBar: {
-    marginBottom: 25,
-    borderRadius: 10,
-    backgroundColor: colors.white,
-    height: 5,
-    alignSelf: 'center',
-  },
-  answerOrderText: {
-    color: colors.bluePrimary,
-    fontFamily: 'DMSansBold',
-    fontSize: 20,
-    paddingLeft: 20,
-    paddingRight: 10,
-  },
-  answerText: {
-    fontFamily: 'DMSans',
-    fontSize: 20,
-    flexShrink: 1,
-  },
-});
 
 export default MultipleChoice;
