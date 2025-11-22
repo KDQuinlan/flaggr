@@ -1,15 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigation } from 'expo-router';
 import { Image } from 'expo-image';
-import {
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  View,
-  PixelRatio,
-  Dimensions,
-} from 'react-native';
+import { Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import GameSelect from '@/components/gameSelect/gameSelect';
@@ -23,7 +15,7 @@ import stateStore from '@/state/store';
 import { getHomeStyles } from '@/styles/home';
 import { useTheme } from '@/context/ThemeContext';
 
-// TODO - refactor ad height padding
+// TODO - Shorten localisation country names for better UI usage
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -32,15 +24,9 @@ const HomeScreen = () => {
   const [showLeaderboard, setShowLeaderboard] = useState<boolean>(false);
   const { t } = useTranslation('home');
   const { theme } = useTheme();
+  const styles = useMemo(() => getHomeStyles(theme), [theme]);
 
   const showAds = !isPremiumUser && isInternetAvailable;
-  const pixelRatio = PixelRatio.get();
-  const { height } = Dimensions.get('window');
-
-  const styles = useMemo(
-    () => getHomeStyles(theme, height / pixelRatio / 5),
-    [theme]
-  );
 
   useEffect(() => {
     showLeaderboard && PlayGames.showAllLeaderboards();
@@ -135,9 +121,9 @@ const HomeScreen = () => {
             />
           </Pressable>
         </View>
-      </View>
 
-      {showAds && <AdBanner adId={BANNER_TEST_ID} />}
+        {showAds && <AdBanner adId={BANNER_TEST_ID} />}
+      </View>
     </SafeAreaView>
   );
 };
