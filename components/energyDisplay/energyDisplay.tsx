@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { TouchableOpacity, Text, View } from 'react-native';
+import { Text, View, Pressable } from 'react-native';
 import { usePathname } from 'expo-router';
 import { Image } from 'expo-image';
 
@@ -59,9 +59,10 @@ const EnergyDisplay = () => {
   }, [energyAmount, lastEnergyTimestamp]);
 
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={() => setEnergyModalVisible(!energyModalVisible)}
       hitSlop={10}
+      style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
     >
       <View style={styles.parentContainer}>
         <Image
@@ -76,7 +77,7 @@ const EnergyDisplay = () => {
       {timeLeft && (currentPathname === '/' || currentPathname === '/home') && (
         <Text style={styles.timer}>{timeLeft}</Text>
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

@@ -4,8 +4,6 @@ import { type Country } from '../generateMultipleChoiceQuestions/generateMultipl
 import shuffleArray from '../shuffleArray/shuffleArray';
 import { Difficulties } from '@/types/secureStore';
 
-// TODO - if array length !== 4 then bulk it out
-
 const generateMultipleChoiceAnswers = (
   correctAnswer: string,
   difficulty: Difficulties,
@@ -50,13 +48,31 @@ const generateMultipleChoiceAnswers = (
     )
     .map((c: Country) => c.countryName);
 
-  const shuffled = countriesByDifficultyInput.sort(() => Math.random() - 0.5);
+  if (countriesByDifficultyInput.length < 3) {
+    const bulkOutCountries = countries
+      .filter(
+        (c: Country) =>
+          c.continent === continent &&
+          c.countryName !== correctAnswer &&
+          !countriesByDifficultyInput.includes(c.countryName)
+      )
+      .map((c: Country) => c.countryName);
 
-  const associatedAnswers = shuffled.slice(0, 3);
+    const shuffled = shuffleArray([
+      ...countriesByDifficultyInput,
+      ...bulkOutCountries,
+    ]);
+    const associatedAnswers = shuffled.slice(0, 3);
+    associatedAnswers.push(correctAnswer);
 
-  associatedAnswers.push(correctAnswer);
+    return shuffleArray(associatedAnswers);
+  } else {
+    const shuffled = shuffleArray(countriesByDifficultyInput);
+    const associatedAnswers = shuffled.slice(0, 3);
+    associatedAnswers.push(correctAnswer);
 
-  return shuffleArray(associatedAnswers);
+    return shuffleArray(associatedAnswers);
+  }
 };
 
 export default generateMultipleChoiceAnswers;

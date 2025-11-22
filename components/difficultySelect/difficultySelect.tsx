@@ -1,11 +1,5 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  GestureResponderEvent,
-  Image,
-  Pressable,
-} from 'react-native';
+import { View, Text, GestureResponderEvent, Pressable } from 'react-native';
+import { Image } from 'expo-image';
 import { ProgressBar } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 

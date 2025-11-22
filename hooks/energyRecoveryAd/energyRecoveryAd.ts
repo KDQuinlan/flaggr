@@ -9,6 +9,7 @@ import {
 import { REWARD_TEST_ID } from '@/constants/adId';
 import stateStore from '@/state/store';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
+import { MAXIMUM_ENERGY } from '@/constants/common';
 
 const adUnitId = __DEV__ ? TestIds.REWARDED : REWARD_TEST_ID;
 
@@ -17,7 +18,7 @@ const rewarded = RewardedAd.createForAdRequest(adUnitId, {
 });
 
 export const useRewardedAd = () => {
-  const userSettings = stateStore((s) => s.userSettings);
+  const { userSettings } = stateStore.getState();
   const [isAdLoaded, setAdLoaded] = useState(false);
 
   useEffect(() => {
@@ -31,17 +32,18 @@ export const useRewardedAd = () => {
 
     const unsubscribeEarned = rewarded.addAdEventListener(
       RewardedAdEventType.EARNED_REWARD,
-      () => console.log('User earned reward')
+      () => {
+        persistUserSettings({
+          ...userSettings,
+          energyAmount: MAXIMUM_ENERGY,
+          lastEnergyTimestamp: null,
+        });
+      }
     );
 
     const unsubscribeClosed = rewarded.addAdEventListener(
       AdEventType.CLOSED,
       () => {
-        persistUserSettings({
-          ...userSettings,
-          energyAmount: 10,
-          lastEnergyTimestamp: null,
-        });
         setAdLoaded(false);
         rewarded.load();
       }

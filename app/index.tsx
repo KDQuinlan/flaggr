@@ -20,7 +20,6 @@ import useNetworkStatus from '@/hooks/useNetworkStatus/useNetworkStatus';
 const IndexScreen = () => {
   const isInitialised = stateStore((s) => s.isInitialised);
   const userSettings = stateStore((s) => s.userSettings);
-  const { setUserSettings } = stateStore.getState();
   const [hasStoreHydrated, setHasStoreHydrated] = useState<boolean>(false);
 
   const [fontsLoaded] = useFonts({
@@ -47,7 +46,6 @@ const IndexScreen = () => {
       (async () => {
         try {
           await PlayGames.signIn();
-          setUserSettings({ ...userSettings, isGoogleConnected: true });
           persistUserSettings({ ...userSettings, isGoogleConnected: true });
         } catch (e) {
           console.error('Sign-in error:', e);

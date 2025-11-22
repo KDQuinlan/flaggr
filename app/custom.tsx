@@ -1,13 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-  Image,
-} from 'react-native';
+import { SafeAreaView, ScrollView, Text, View, Pressable } from 'react-native';
 import Slider from '@react-native-community/slider';
+import { Image } from 'expo-image';
 import * as Haptics from 'expo-haptics';
 import { useNavigation } from 'expo-router';
 import { Divider, List, Switch } from 'react-native-paper';
@@ -36,8 +30,6 @@ import persistUserSettings from '@/util/persistState/persistUserSettings';
 import determineSetTimestamp from '@/util/determineSetTimestamp/determineSetTimestamp';
 import { getCustomStyles } from '@/styles/custom';
 import { useTheme } from '@/context/ThemeContext';
-
-// TODO - refactor rn image to expo image?
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -222,9 +214,12 @@ const CustomScreen = () => {
               />
               <Text style={styles.subHeader}>{t('regions.title')}</Text>
             </View>
-            <TouchableOpacity
+            <Pressable
               onPress={() => handleReset()}
-              style={styles.resetButton}
+              style={({ pressed }) => [
+                styles.resetButton,
+                { opacity: pressed ? 0.7 : 1 },
+              ]}
               accessibilityRole="button"
               accessibilityLabel={t('reset')}
             >
@@ -233,7 +228,7 @@ const CustomScreen = () => {
                 size={20}
                 color={colors.blueSecondary}
               />
-            </TouchableOpacity>
+            </Pressable>
           </View>
           <ModifierMultiSelect
             varient="regions"
@@ -367,16 +362,18 @@ const CustomScreen = () => {
             })}
           </Text>
 
-          <TouchableOpacity
-            style={isDisabled ? styles.buttonDisabled : styles.buttonEnabled}
+          <Pressable
+            style={({ pressed }) => [
+              isDisabled ? styles.buttonDisabled : styles.buttonEnabled,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}
             disabled={isDisabled}
-            activeOpacity={0.8}
             accessibilityLabel={t('start')}
             accessibilityRole="button"
             onPress={onStartPress}
           >
             <Text style={styles.buttonText}>{t('start')}</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </ScrollView>
     </SafeAreaView>

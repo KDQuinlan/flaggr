@@ -1,14 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigation } from 'expo-router';
 import { Image } from 'expo-image';
-import {
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import GameSelect from '@/components/gameSelect/gameSelect';
@@ -21,9 +14,6 @@ import PlayGames from '@/PlayGames';
 import stateStore from '@/state/store';
 import { getHomeStyles } from '@/styles/home';
 import { useTheme } from '@/context/ThemeContext';
-
-// TODO - Shorten localisation country names for better UI usage
-// TODO - convert TouchableOpacity buttons to use Pressable
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -48,17 +38,19 @@ const HomeScreen = () => {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.headerContainer}>
-          <TouchableOpacity
+          <Pressable
             onPress={() => navigation.navigate('settings')}
             accessibilityRole="button"
             accessibilityLabel={t('title', { ns: 'settings' })}
             hitSlop={10}
+            style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
           >
             <Image
               style={styles.settingsIcon}
               source={require('@/assets/images/icons/resources/custom/cog.png')}
             />
-          </TouchableOpacity>
+          </Pressable>
+
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{APP_NAME}</Text>
           </View>

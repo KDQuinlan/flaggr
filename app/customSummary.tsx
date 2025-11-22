@@ -3,10 +3,10 @@ import { RouteProp, useFocusEffect, useRoute } from '@react-navigation/native';
 import {
   Animated,
   BackHandler,
+  Pressable,
   SafeAreaView,
   ScrollView,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import { useNavigation } from 'expo-router';
@@ -174,15 +174,17 @@ const CustomSummary = () => {
           </View>
         )}
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            activeOpacity={0.8}
+          <Pressable
+            style={({ pressed }) => [
+              styles.button,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}
             onPress={handleContinue}
             accessibilityLabel={t('continue')}
             accessibilityRole="button"
           >
             <Text style={styles.buttonText}>{t('continue')}</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </ScrollView>
     </SafeAreaView>
