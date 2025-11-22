@@ -31,6 +31,8 @@ import PlayGames from '@/PlayGames';
 import determineSummaryIcons from '@/util/determineSummaryIcons';
 import { getSummaryStyles } from '@/styles/summary';
 import { useTheme } from '@/context/ThemeContext';
+import { BANNER_TEST_ID } from '@/constants/adId';
+import AdBanner from '@/components/AdBanner/AdBanner';
 
 // TODO - remove memoisation for progression and use getState for snapshot?
 
@@ -57,6 +59,8 @@ const Summary = () => {
   const styles = useMemo(() => getSummaryStyles(theme), [theme]);
   const userProgression = stateStore((s) => s.userProgress);
   const setProgression = stateStore((s) => s.setProgression);
+  const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
+  const { isPremiumUser } = stateStore((s) => s.userSettings);
   const { difficulty, gameMode, gameResult } = route.params;
   const matchesPlayed = userProgression.games.matchesPlayed;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;
@@ -64,6 +68,8 @@ const Summary = () => {
   const translatedDifficulty = t(`levels.${LEVEL_MAP[difficulty]}`, {
     ns: 'data',
   });
+
+  const showAds = !isPremiumUser && isInternetAvailable;
 
   const initialProgressionRef = useRef(userProgression);
 
@@ -311,6 +317,8 @@ const Summary = () => {
           </Pressable>
         </View>
       </ScrollView>
+
+      {showAds && <AdBanner adId={BANNER_TEST_ID} />}
     </SafeAreaView>
   );
 };

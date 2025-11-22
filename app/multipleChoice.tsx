@@ -25,6 +25,8 @@ import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 import { useTheme } from '@/context/ThemeContext';
 import { getMultipleChoiceStyles } from '@/styles/multipleChoice';
 import { colors } from '@/components/colors';
+import AdBanner from '@/components/AdBanner/AdBanner';
+import { BANNER_TEST_ID } from '@/constants/adId';
 
 const MultipleChoice = () => {
   const { height } = useWindowDimensions();
@@ -38,6 +40,9 @@ const MultipleChoice = () => {
   const { theme } = useTheme();
   const styles = useMemo(() => getMultipleChoiceStyles(theme), [theme]);
   const userProgression = stateStore((s) => s.userProgress);
+  const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
+  const { isPremiumUser } = stateStore((s) => s.userSettings);
+  const showAds = !isPremiumUser && isInternetAvailable;
   const { title, gameMode, questions, timeLimit } = route.params;
   const { scoreMultiplier } = userProgression.games.custom.currentGame;
 
@@ -277,6 +282,11 @@ const MultipleChoice = () => {
           </Pressable>
         ))}
       </View>
+      {showAds && (
+        <View style={styles.adContainer}>
+          <AdBanner adId={BANNER_TEST_ID} />
+        </View>
+      )}
     </SafeAreaView>
   );
 };

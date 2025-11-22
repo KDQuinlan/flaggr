@@ -24,6 +24,8 @@ import { HIGHEST_SCORE_ID, MATCHES_PLAYED_ID } from '@/constants/leaderboard';
 import PlayGames from '@/PlayGames';
 import { useTheme } from '@/context/ThemeContext';
 import { getCustomSummaryStyles } from '@/styles/customSummary';
+import { BANNER_TEST_ID } from '@/constants/adId';
+import AdBanner from '@/components/AdBanner/AdBanner';
 
 const CustomSummary = () => {
   useFocusEffect(
@@ -48,11 +50,15 @@ const CustomSummary = () => {
   const styles = useMemo(() => getCustomSummaryStyles(theme), [theme]);
   const userProgression = stateStore((s) => s.userProgress);
   const setProgression = stateStore((s) => s.setProgression);
+  const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
+  const { isPremiumUser } = stateStore((s) => s.userSettings);
   const { gameResult, finalScore } = route.params;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;
   const matchesPlayed = userProgression.games.matchesPlayed;
   const { regions, independentCountriesOnly, timeLimit, gameLength } =
     userProgression.games.custom.currentGame;
+
+  const showAds = !isPremiumUser && isInternetAvailable;
 
   const initialProgressionRef = useRef(userProgression);
   const progression = initialProgressionRef.current.games.custom;
@@ -187,6 +193,8 @@ const CustomSummary = () => {
           </Pressable>
         </View>
       </ScrollView>
+
+      {showAds && <AdBanner adId={BANNER_TEST_ID} />}
     </SafeAreaView>
   );
 };

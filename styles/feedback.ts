@@ -32,6 +32,7 @@ export const getFeedbackStyles = (theme: ThemeColors) => {
       padding: 12,
       fontSize: 16,
       backgroundColor: theme.card,
+      color: theme.text,
     },
     title: {
       fontWeight: 'bold',

@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { SafeAreaView, ScrollView } from 'react-native';
+import { SafeAreaView, ScrollView, View, Text } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
@@ -17,6 +17,8 @@ import persistUserSettings from '@/util/persistState/persistUserSettings';
 import determineSetTimestamp from '@/util/determineSetTimestamp/determineSetTimestamp';
 import { getDifficultyStyles } from '@/styles/difficulty';
 import { useTheme } from '@/context/ThemeContext';
+import AdBanner from '@/components/AdBanner/AdBanner';
+import { BANNER_TEST_ID } from '@/constants/adId';
 
 const Difficulty = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -24,8 +26,10 @@ const Difficulty = () => {
   const { t } = useTranslation('difficulty');
   const { theme } = useTheme();
   const styles = useMemo(() => getDifficultyStyles(theme), [theme]);
+  const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userProgression = stateStore((s) => s.userProgress);
   const userSettings = stateStore((s) => s.userSettings);
+  const showAds = !userSettings.isPremiumUser && isInternetAvailable;
   const { energyAmount, isPremiumUser } = userSettings;
   const setEnergyModalVisible = stateStore((s) => s.setEnergyModalVisible);
 
@@ -82,6 +86,7 @@ const Difficulty = () => {
           />
         ))}
       </ScrollView>
+      {showAds && <AdBanner adId={BANNER_TEST_ID} />}
     </SafeAreaView>
   );
 };
