@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import {
   Animated,
-  Image,
   SafeAreaView,
   ScrollView,
   Text,
-  TouchableOpacity,
   View,
   BackHandler,
+  Pressable,
 } from 'react-native';
+import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
@@ -298,15 +298,17 @@ const Summary = () => {
         <ProgressionSummary />
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            activeOpacity={0.8}
+          <Pressable
+            style={({ pressed }) => [
+              styles.button,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}
             onPress={handleContinue}
             accessibilityLabel={t('continue')}
             accessibilityRole="button"
           >
             <Text style={styles.buttonText}>{t('continue')}</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </ScrollView>
     </SafeAreaView>

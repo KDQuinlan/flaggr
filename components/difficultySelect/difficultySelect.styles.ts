@@ -2,8 +2,6 @@ import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 
-// TODO - figure out why each subsequent button's shadow is longer
-
 export const getDifficultySelectStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
     gameModeContainer: {

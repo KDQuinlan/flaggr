@@ -1,12 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigation } from 'expo-router';
-import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/locales/i18n';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -27,7 +21,6 @@ const locale = locales[0]?.languageCode;
 const SetupScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const userSettings = stateStore((s) => s.userSettings);
-  const { setUserSettings } = stateStore.getState();
   const { t } = useTranslation('setup');
   const { theme } = useTheme();
   const styles = useMemo(() => getSetupStyles(theme), [theme]);
@@ -44,7 +37,7 @@ const SetupScreen = () => {
   }, [language]);
 
   useEffect(() => {
-    setUserSettings({ ...userSettings, isDarkTheme });
+    persistUserSettings({ ...userSettings, isDarkTheme });
   }, [isDarkTheme]);
 
   const ageRanges = [
@@ -131,7 +124,7 @@ const SetupScreen = () => {
           />
         </View>
 
-        <TouchableOpacity
+        <Pressable
           onPress={() => {
             persistUserSettings({
               ...userSettings,
@@ -141,13 +134,15 @@ const SetupScreen = () => {
             });
             navigation.navigate('home');
           }}
-          style={styles.button}
-          activeOpacity={0.8}
+          style={({ pressed }) => [
+            styles.button,
+            { opacity: pressed ? 0.7 : 1 },
+          ]}
           accessibilityLabel={t('continue')}
           accessibilityRole="button"
         >
           <Text style={styles.buttonText}>{t('continue')}</Text>
-        </TouchableOpacity>
+        </Pressable>
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,8 +1,9 @@
 import { ENERGY_COOLDOWN_MS, MAXIMUM_ENERGY } from '@/constants/common';
 import stateStore from '@/state/store';
+import persistUserSettings from '../persistState/persistUserSettings';
 
 const restoreEnergyOnLoad = () => {
-  const { userSettings, setUserSettings } = stateStore.getState();
+  const { userSettings } = stateStore.getState();
 
   if (userSettings.lastEnergyTimestamp) {
     const energyOnLoad =
@@ -16,7 +17,7 @@ const restoreEnergyOnLoad = () => {
       MAXIMUM_ENERGY
     );
 
-    setUserSettings({
+    persistUserSettings({
       ...userSettings,
       energyAmount: newEnergyAmount,
       lastEnergyTimestamp:

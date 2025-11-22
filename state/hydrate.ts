@@ -76,6 +76,5 @@ export const hydrateStore = async () => {
   const { userSettings } = stateStore.getState();
   i18n.changeLanguage(userSettings.locale);
 
-  // Signal ready
   setIsInitialised();
 };

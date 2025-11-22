@@ -129,8 +129,8 @@ export const getCustomStyles = (theme: ThemeColors) => {
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf: 'center',
-      shadowColor: theme.shadow,
-      // elevation: 4,
+      shadowColor: colors.bluePrimary,
+      elevation: 2,
     },
     buttonDisabled: {
       backgroundColor: colors.bluePrimary,

@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { VALID_REGIONS } from '@/constants/common';
@@ -45,11 +45,14 @@ export default function ModifierMultiSelect({
           .toLowerCase()
           .replace(/\s+/g, '');
         return (
-          <TouchableOpacity
+          <Pressable
             key={item}
-            style={[styles.button, isSelected && styles.buttonSelected]}
+            style={({ pressed }) => [
+              styles.button,
+              isSelected && styles.buttonSelected,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}
             onPress={() => toggleModifier(item)}
-            activeOpacity={0.8}
             accessibilityLabel={t('regions.buttonAccessibility', {
               option: regionFormattedForLocalisation,
             })}
@@ -63,7 +66,7 @@ export default function ModifierMultiSelect({
             >
               {t(`regions.${regionFormattedForLocalisation}`)}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         );
       })}
     </View>

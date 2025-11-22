@@ -25,6 +25,8 @@ const FeedbackScreen = () => {
   const [type, setType] = useState<string | null>(null);
   const [message, setMessage] = useState<string>('');
 
+  const isDisabled = !type || message === '';
+
   const feedbackTypes = [
     { label: t('bugFeedback'), value: 'bug' },
     { label: t('ideaFeedback'), value: 'idea' },
@@ -108,11 +110,11 @@ const FeedbackScreen = () => {
 
         <Pressable
           onPress={handleSubmit}
-          disabled={!type || message === ''}
+          disabled={isDisabled}
           style={({ pressed }) => [
-            styles.button,
+            isDisabled ? styles.buttonDisabled : styles.buttonEnabled,
             {
-              opacity: !type || message === '' ? 0.5 : pressed ? 0.7 : 1,
+              opacity: isDisabled ? 0.5 : pressed ? 0.7 : 1,
             },
           ]}
           accessibilityLabel={t('submit')}

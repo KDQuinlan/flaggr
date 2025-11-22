@@ -67,23 +67,23 @@ export const LEVELS_TO_SHADOW_ELEVATION: Record<Levels, number> = {
 };
 
 export const TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP: Record<TimeLimits, number> = {
-  0: 0.0,
-  15: 1.3,
-  30: 1.25,
-  45: 1.2,
-  60: 1.15,
-  75: 1.1,
-  90: 1.08,
-  105: 1.06,
-  120: 1.05,
-  135: 1.04,
-  150: 1.03,
-  165: 1.02,
-  180: 1.01,
-  195: 1.0,
-  210: 1.0,
-  225: 1.0,
-  240: 1.0,
+  0: 1.0,
+  15: 15.0,
+  30: 12.0,
+  45: 10.0,
+  60: 8.5,
+  75: 7.5,
+  90: 7.0,
+  105: 6.5,
+  120: 6.0,
+  135: 5.5,
+  150: 5.0,
+  165: 4.5,
+  180: 4.0,
+  195: 3.8,
+  210: 3.5,
+  225: 3.2,
+  240: 3.0,
 };
 
 export const DIFFICULTY_TO_SCORE: Record<Difficulties, number> = {
@@ -101,9 +101,9 @@ export const DIFFICULTY_TO_SCORE: Record<Difficulties, number> = {
 
 export const STREAK_TIER_TO_MULTIPLIER: Record<StreakTiers, number> = {
   0: 1,
-  1: 1.05,
-  2: 1.1,
-  3: 1.15,
-  4: 1.2,
-  5: 1.25,
+  1: 1.1,
+  2: 1.2,
+  3: 1.3,
+  4: 1.4,
+  5: 1.5,
 };

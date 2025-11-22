@@ -1,11 +1,6 @@
 import React, { useMemo } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  GestureResponderEvent,
-  Image,
-} from 'react-native';
+import { View, Text, GestureResponderEvent, Pressable } from 'react-native';
+import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
 
 import iconsMap from '@/assets/images/icons';
@@ -33,10 +28,12 @@ const GameSelect: React.FC<GameSelectProps> = ({
   const styles = useMemo(() => getGameSelectStyles(theme), [theme]);
 
   return (
-    <TouchableOpacity
-      style={styles.gameModeContainer}
+    <Pressable
+      style={({ pressed }) => [
+        styles.gameModeContainer,
+        { opacity: pressed ? 0.7 : 1 },
+      ]}
       onPress={onPress}
-      activeOpacity={0.8}
       accessibilityRole="button"
       accessibilityLabel={t(`${id}.title`)}
     >
@@ -56,7 +53,7 @@ const GameSelect: React.FC<GameSelectProps> = ({
           </View>
         </View>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

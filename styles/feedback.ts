@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
+import { colors } from '@/components/colors';
 
 export const getFeedbackStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -59,7 +60,7 @@ export const getFeedbackStyles = (theme: ThemeColors) => {
       paddingHorizontal: 10,
       backgroundColor: theme.card,
     },
-    button: {
+    buttonEnabled: {
       backgroundColor: theme.button,
       paddingVertical: 10,
       marginTop: 20,
@@ -69,8 +70,19 @@ export const getFeedbackStyles = (theme: ThemeColors) => {
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf: 'center',
-      shadowColor: theme.shadow,
-      // elevation: 4,
+      shadowColor: colors.bluePrimary,
+      elevation: 4,
+    },
+    buttonDisabled: {
+      backgroundColor: theme.button,
+      paddingVertical: 10,
+      marginTop: 20,
+      borderRadius: 8,
+      width: '100%',
+      maxWidth: 240,
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
     },
     buttonText: {
       fontSize: 16,

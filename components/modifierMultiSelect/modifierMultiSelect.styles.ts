@@ -23,7 +23,7 @@ export const getModifierMultiSelectStyles = (theme: ThemeColors) => {
       alignItems: 'center',
       marginBottom: 12,
       shadowColor: theme.shadow,
-      elevation: 4,
+      elevation: 2,
     },
     buttonText: {
       fontFamily: 'DMSans',

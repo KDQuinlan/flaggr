@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
+  Pressable,
   SafeAreaView,
   Text,
-  TouchableOpacity,
   useWindowDimensions,
   View,
 } from 'react-native';
@@ -247,13 +247,13 @@ const MultipleChoice = () => {
 
       <View style={styles.answersContainer}>
         {answers.map((item, index) => (
-          <TouchableOpacity
+          <Pressable
             key={index.toString()}
             disabled={isButtonDisabled}
-            activeOpacity={0.8}
-            style={[
+            style={({ pressed }) => [
               styles.answerBox,
               {
+                opacity: pressed ? 0.7 : 1,
                 backgroundColor: determineButtonColor(
                   item,
                   userAnswer,
@@ -274,7 +274,7 @@ const MultipleChoice = () => {
             >
               {t(`countries.${toJsonKeyFormat(item)}`)}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         ))}
       </View>
     </SafeAreaView>

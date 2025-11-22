@@ -5,13 +5,10 @@ import { StatusBar } from 'expo-status-bar';
 import * as NavigationBar from 'expo-navigation-bar';
 
 import '@/locales/i18n';
-import { colors } from '@/components/colors';
 import EnergyModal from '@/components/energyDisplay/energyModal';
 import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
 import stateStore from '@/state/store';
 import { ThemeProvider, useTheme } from '@/context/ThemeContext';
-
-// TODO - fix navigation bar becoming black on dropdown usage
 
 function RootLayoutContent() {
   const { theme } = useTheme();
