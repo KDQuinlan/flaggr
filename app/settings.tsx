@@ -21,11 +21,14 @@ import stateStore from '@/state/store';
 import PurchasePremiumButton from '@/components/PurchasePremiumButton/PurchasePremiumButton';
 import { useTheme } from '@/context/ThemeContext';
 import { getSettingsStyles } from '@/styles/settings';
+import AdBanner from '@/components/AdBanner/AdBanner';
+import { BANNER_TEST_ID } from '@/constants/adId';
 
 // TODO - remove on render state update?
 
 const SettingsScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const { t } = useTranslation('settings');
   const [language, setLanguage] = useState<string>(userSettings.locale);
@@ -34,6 +37,8 @@ const SettingsScreen = () => {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(
     userSettings.isDarkTheme
   );
+
+  const showAds = !userSettings.isPremiumUser && isInternetAvailable;
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -121,6 +126,8 @@ const SettingsScreen = () => {
           <Text style={styles.buttonText}>{t('continue')}</Text>
         </Pressable>
       </ScrollView>
+
+      {showAds && <AdBanner adId={BANNER_TEST_ID} />}
     </SafeAreaView>
   );
 };

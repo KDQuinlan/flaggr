@@ -30,6 +30,8 @@ import persistUserSettings from '@/util/persistState/persistUserSettings';
 import determineSetTimestamp from '@/util/determineSetTimestamp/determineSetTimestamp';
 import { getCustomStyles } from '@/styles/custom';
 import { useTheme } from '@/context/ThemeContext';
+import AdBanner from '@/components/AdBanner/AdBanner';
+import { BANNER_TEST_ID } from '@/constants/adId';
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -39,8 +41,11 @@ const CustomScreen = () => {
   const userProgression = stateStore((s) => s.userProgress);
   const setProgression = stateStore((s) => s.setProgression);
   const setEnergyModalVisible = stateStore((s) => s.setEnergyModalVisible);
+  const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const { energyAmount, isPremiumUser } = userSettings;
+
+  const showAds = !isPremiumUser && isInternetAvailable;
 
   const [isScoreAccordionExpanded, setIsScoreAccordionExpanded] =
     useState<boolean>(false);
@@ -376,6 +381,8 @@ const CustomScreen = () => {
           </Pressable>
         </View>
       </ScrollView>
+
+      {showAds && <AdBanner adId={BANNER_TEST_ID} />}
     </SafeAreaView>
   );
 };

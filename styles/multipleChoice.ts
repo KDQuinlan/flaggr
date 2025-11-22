@@ -46,5 +46,9 @@ export const getMultipleChoiceStyles = (theme: ThemeColors) => {
       fontSize: 20,
       flexShrink: 1,
     },
+    adContainer: {
+      flex: 0.5,
+      justifyContent: 'flex-end',
+    },
   });
 };
