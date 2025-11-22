@@ -2,7 +2,7 @@ import { StatusBar, StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 
-export const getHomeStyles = (theme: ThemeColors, adHeight: number) => {
+export const getHomeStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
     rootContainer: {
       flex: 1,
@@ -62,7 +62,7 @@ export const getHomeStyles = (theme: ThemeColors, adHeight: number) => {
       position: 'absolute',
       left: 0,
       right: 0,
-      bottom: adHeight,
+      bottom: 0,
     },
   });
 };
