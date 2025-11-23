@@ -54,6 +54,9 @@ export const LANGUAGES = [
   { label: 'Español', value: 'es' },
   { label: 'Nederlands', value: 'nl' },
   { label: 'Українська', value: 'uk' },
+  { label: 'Italiano', value: 'it' },
+  { label: 'Magyar', value: 'hu' },
+
 ];
 
 export const NON_INDEPENDENT_COUNTRY_CODES = [

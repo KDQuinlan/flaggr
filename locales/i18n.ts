@@ -5,6 +5,8 @@ import en from '@/locales/en/_index';
 import es from '@/locales/es/_index';
 import nl from '@/locales/nl/_index';
 import uk from '@/locales/uk/_index';
+import it from '@/locales/it/_index';
+import hu from '@/locales/hu/_index';
 
 i18n.use(initReactI18next).init({
   compatibilityJSON: 'v4',
@@ -63,6 +65,32 @@ i18n.use(initReactI18next).init({
       settings: uk.settings,
       energy: uk.energy,
       feedback: uk.feedback,
+    },
+    it: {
+      data: it.data,
+      home: it.home,
+      difficulty: it.difficulty,
+      summary: it.summary,
+      custom: it.custom,
+      customSummary: it.customSummary,
+      loading: it.loading,
+      setup: it.setup,
+      settings: it.settings,
+      energy: it.energy,
+      feedback: it.feedback,
+    },
+      hu: {
+      data: hu.data,
+      home: hu.home,
+      difficulty: hu.difficulty,
+      summary: hu.summary,
+      custom: hu.custom,
+      customSummary: hu.customSummary,
+      loading: hu.loading,
+      setup: hu.setup,
+      settings: hu.settings,
+      energy: hu.energy,
+      feedback: hu.feedback,
     },
   },
 
