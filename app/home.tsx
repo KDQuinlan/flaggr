@@ -15,8 +15,6 @@ import stateStore from '@/state/store';
 import { getHomeStyles } from '@/styles/home';
 import { useTheme } from '@/context/ThemeContext';
 
-// TODO - Shorten localisation country names for better UI usage
-
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);

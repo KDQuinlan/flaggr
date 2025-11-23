@@ -37,7 +37,7 @@ export const getFeedbackStyles = (theme: ThemeColors) => {
     title: {
       fontWeight: 'bold',
       fontSize: 40,
-      color: '#0073E6',
+      color: colors.bluePrimary,
     },
     section: {
       marginTop: 20,

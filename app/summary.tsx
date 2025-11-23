@@ -34,8 +34,6 @@ import { useTheme } from '@/context/ThemeContext';
 import { BANNER_TEST_ID } from '@/constants/adId';
 import AdBanner from '@/components/AdBanner/AdBanner';
 
-// TODO - remove memoisation for progression and use getState for snapshot?
-
 const Summary = () => {
   useFocusEffect(
     useCallback(() => {

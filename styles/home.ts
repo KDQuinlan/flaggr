@@ -1,6 +1,7 @@
 import { StatusBar, StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
+import { colors } from '@/components/colors';
 
 export const getHomeStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -33,7 +34,7 @@ export const getHomeStyles = (theme: ThemeColors) => {
     },
     title: {
       fontSize: 40,
-      color: '#0073E6',
+      color: colors.bluePrimary,
       fontFamily: 'Chewy',
     },
     settingsIcon: {
