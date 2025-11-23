@@ -3,6 +3,8 @@ import { initReactI18next } from 'react-i18next';
 
 import en from '@/locales/en/_index';
 import es from '@/locales/es/_index';
+import nl from '@/locales/nl/_index';
+import uk from '@/locales/uk/_index';
 
 i18n.use(initReactI18next).init({
   compatibilityJSON: 'v4',
@@ -35,6 +37,32 @@ i18n.use(initReactI18next).init({
       settings: es.settings,
       energy: es.energy,
       feedback: es.feedback,
+    },
+    nl: {
+      data: nl.data,
+      home: nl.home,
+      difficulty: nl.difficulty,
+      summary: nl.summary,
+      custom: nl.custom,
+      customSummary: nl.customSummary,
+      loading: nl.loading,
+      setup: nl.setup,
+      settings: nl.settings,
+      energy: nl.energy,
+      feedback: nl.feedback,
+    },
+    uk: {
+      data: uk.data,
+      home: uk.home,
+      difficulty: uk.difficulty,
+      summary: uk.summary,
+      custom: uk.custom,
+      customSummary: uk.customSummary,
+      loading: uk.loading,
+      setup: uk.setup,
+      settings: uk.settings,
+      energy: uk.energy,
+      feedback: uk.feedback,
     },
   },
 

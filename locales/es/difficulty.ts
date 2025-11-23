@@ -16,5 +16,10 @@ export default {
     levelThree: 'Iniciar {{level}}',
     levelFour: 'Iniciar {{level}}',
     levelFive: 'Iniciar {{level}}',
+    levelSix: 'Iniciar {{level}}',
+    levelSeven: 'Iniciar {{level}}',
+    levelEight: 'Iniciar {{level}}',
+    levelNine: 'Iniciar {{level}}',
+    levelTen: 'Iniciar {{level}}',
   },
 };

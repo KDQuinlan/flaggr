@@ -1,0 +1,17 @@
+export default {
+  title: 'Feedback',
+  reason: 'Type',
+  reasonPlaceholder: 'Selecteer feedbacktype',
+  placeholder: 'Typ hier je feedback...',
+  submit: 'Verzenden',
+  successTitle: 'Bedankt',
+  successMessage: 'Je feedback is succesvol verzonden',
+  errorTitle: 'Fout',
+  errorNotAvailable: 'Mailservices zijn niet beschikbaar op dit apparaat',
+  errorMessage: 'E-mail kan niet worden verzonden. Probeer het later opnieuw',
+  bugFeedback: 'Bug / Probleem',
+  ideaFeedback: 'Idee / Suggestie',
+  designFeedback: 'Design / Uiterlijk',
+  premeiumFeedback: 'Premium',
+  otherFeedback: 'Overig',
+};

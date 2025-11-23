@@ -1,0 +1,14 @@
+export default {
+  standard: {
+    title: 'Стандартний',
+    description: 'Один прапор, чотири варіанти',
+  },
+  rapid: {
+    title: 'Швидкий',
+    description: 'Швидкі запитання про прапори',
+  },
+  custom: {
+    title: 'Користувацький',
+    description: 'Індивідуальний досвід Flaggr',
+  },
+};

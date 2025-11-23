@@ -1,0 +1,31 @@
+export default {
+  title: 'Користувацький режим',
+  reset: 'Скинути параметри',
+  scoreMultiplier: '{{value}}× Множник балів',
+  start: 'Почати',
+  highScoreAccordion: {
+    title: 'Рекорд {{score}}',
+    regions: 'Регіони {{regions}}',
+    independentCountriesOnlyEnabled: 'Лише незалежні країни увімкнено',
+    independentCountriesOnlyDisabled: 'Лише незалежні країни вимкнено',
+    timeLimit: 'Ліміт часу {{timeLimit}}',
+    gameLength: 'Тривалість гри {{gameLength}}',
+    stats: 'Статистика',
+    correct: 'Правильні {{correct}}',
+    incorrect: 'Неправильні {{incorrect}}',
+    bestStreak: 'Найкраща серія {{streak}}',
+  },
+  regions: {
+    title: 'Регіони',
+    independentCountriesOnly: 'Лише незалежні країни',
+  },
+  gameRules: {
+    title: 'Правила гри',
+    timeLimit: 'Ліміт часу',
+    timeLimitQuantity: '{{timeLimit}} секунд ({{scoreMultiplier}}×)',
+    gameLength: 'Тривалість гри',
+    gameLengthQuantity: '{{gameLength}} запитань',
+    unlimited: 'Без обмежень',
+    gameLengthWarning: 'Без ліміту може бути дуже багато запитань!',
+  },
+};
