@@ -41,7 +41,6 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
   const styles = useMemo(() => getDifficultySelectStyles(theme), [theme]);
 
   const isLocked = description === t('states.locked');
-  console.log(`Description: ${description}`);
   const hasRapidOverbar =
     gameMode === 'rapid' && score > advancementRequirement;
 
