@@ -36,11 +36,12 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
   advancementRequirement,
   onPress,
 }) => {
-  const { t } = useTranslation(['difficulty', 'data']);
+  const { t } = useTranslation('difficulty');
   const { theme } = useTheme();
   const styles = useMemo(() => getDifficultySelectStyles(theme), [theme]);
 
   const isLocked = description === t('states.locked');
+  console.log(`Description: ${description}`);
   const hasRapidOverbar =
     gameMode === 'rapid' && score > advancementRequirement;
 
@@ -79,7 +80,8 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
               {description}
             </Text>
           </View>
-          {(description === 'Completed' || description === 'Perfected') && (
+          {(description === t('states.completed') ||
+            description === t('states.perfected')) && (
             <Text style={styles.score}>
               {gameMode === 'rapid' ? score : `${score}%`}
             </Text>
