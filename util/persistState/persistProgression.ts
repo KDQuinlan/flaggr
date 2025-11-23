@@ -1,17 +1,19 @@
-import * as SecureStore from 'expo-secure-store';
-
 import { STORAGE_KEY_PROGRESSION } from '@/constants/common';
 import { ProgressionStructure } from '@/types/secureStore';
+import { mmkvStorage } from '@/state/mmkv';
+import stateStore from '@/state/store';
 
-const persistProgression = async (updatedProgression: ProgressionStructure) => {
+const persistProgression = (updatedProgression: ProgressionStructure) => {
+  const { setProgression } = stateStore.getState();
+
   try {
-    await SecureStore.setItemAsync(
+    mmkvStorage.set(
       STORAGE_KEY_PROGRESSION,
       JSON.stringify(updatedProgression)
     );
-    console.log('Persisted to SecureStore:', updatedProgression);
-  } catch (error) {
-    console.error('Error persisting to SecureStore:', error);
+    setProgression(updatedProgression);
+  } catch (e) {
+    console.error('Error persisting to MMKV:', e);
   }
 };
 

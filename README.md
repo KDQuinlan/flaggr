@@ -2,7 +2,7 @@
 
 The next generation of flag/geography quiz app, designed by what we wanted to see in one.
 
-This app uses Expo@52, Google Play Games Services, and RevenueCat as its primary tooling. 
+This app uses Expo@52, Google Play Games Services, Google AdMob, and RevenueCat as its primary tooling. 
 
 Currently in development for the Play Store, with iOS coming later.
 
