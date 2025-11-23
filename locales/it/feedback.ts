@@ -1,0 +1,17 @@
+export default {
+  title: 'Feedback',
+  reason: 'Tipo',
+  reasonPlaceholder: 'Seleziona il tipo di feedback',
+  placeholder: 'Scrivi qui il tuo feedback...',
+  submit: 'Invia',
+  successTitle: 'Grazie',
+  successMessage: 'Il tuo feedback è stato inviato con successo',
+  errorTitle: 'Errore',
+  errorNotAvailable: 'Servizi email non disponibili su questo dispositivo',
+  errorMessage: 'Impossibile inviare l’email. Riprova più tardi',
+  bugFeedback: 'Bug / Problema',
+  ideaFeedback: 'Idea / Suggerimento',
+  designFeedback: 'Design / Aspetto',
+  premeiumFeedback: 'Premium',
+  otherFeedback: 'Altro',
+};
