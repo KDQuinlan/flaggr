@@ -7,8 +7,8 @@ import { getDifficultySelectStyles } from './difficultySelect.styles';
 import { colors } from '../colors';
 import {
   LEVEL_MAP,
-  LEVEL_TO_FLAG_AMOUNT_MAP,
-  LEVELS_TO_SHADOW_ELEVATION,
+  LEVELS_TO_FLAG_AMOUNT_MAP,
+  LEVELS_TO_SHADOW_ELEVATION_MAP,
 } from '@/constants/mappers';
 import iconsMap from '@/assets/images/icons';
 import { Levels } from '@/types/secureStore';
@@ -46,7 +46,7 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
 
   const overProgress =
     (score - advancementRequirement) /
-    (LEVEL_TO_FLAG_AMOUNT_MAP[title] - score);
+    (LEVELS_TO_FLAG_AMOUNT_MAP[title] - score);
 
   return (
     <Pressable
@@ -55,7 +55,7 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
         {
           opacity: pressed ? 0.7 : 1,
           backgroundColor: isLocked ? theme.background : theme.card,
-          elevation: LEVELS_TO_SHADOW_ELEVATION[title],
+          elevation: LEVELS_TO_SHADOW_ELEVATION_MAP[title],
         },
       ]}
       onPress={onPress}

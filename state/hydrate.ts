@@ -16,7 +16,7 @@ import {
 import { UserSettingStructure } from '@/types/secureStore';
 
 // TODO - Implement versioning
-// TODO - add error handling and parallel reads
+// TODO - add parallel reads?
 
 export const hydrateStore = async () => {
   const systemScheme = Appearance.getColorScheme();

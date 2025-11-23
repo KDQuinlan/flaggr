@@ -68,8 +68,6 @@ export type ProgressionStructure = {
   };
 };
 
-// TODO - assess displayAnswerTimerMs
-
 export type UserSettingStructure = {
   isSetUp: boolean;
   isGoogleConnected: boolean;

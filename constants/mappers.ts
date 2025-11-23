@@ -39,7 +39,7 @@ export const DIFFICULTY_ID_TO_LEVEL_MAP: Record<Difficulties, Levels> = {
   10: 'Level 10',
 };
 
-export const LEVEL_TO_FLAG_AMOUNT_MAP: Record<Levels, number> = {
+export const LEVELS_TO_FLAG_AMOUNT_MAP: Record<Levels, number> = {
   'Level 1': LEVEL_ONE_FLAGS_AMOUNT,
   'Level 2': LEVEL_TWO_FLAGS_AMOUNT,
   'Level 3': LEVEL_THREE_FLAGS_AMOUNT,
@@ -53,7 +53,7 @@ export const LEVEL_TO_FLAG_AMOUNT_MAP: Record<Levels, number> = {
 };
 
 // I hate that you make me do this, react native...
-export const LEVELS_TO_SHADOW_ELEVATION: Record<Levels, number> = {
+export const LEVELS_TO_SHADOW_ELEVATION_MAP: Record<Levels, number> = {
   'Level 1': 4,
   'Level 2': 3.3,
   'Level 3': 2.5,
@@ -86,7 +86,7 @@ export const TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP: Record<TimeLimits, number> = {
   240: 3.0,
 };
 
-export const DIFFICULTY_TO_SCORE: Record<Difficulties, number> = {
+export const DIFFICULTY_TO_SCORE_MAP: Record<Difficulties, number> = {
   1: 10,
   2: 12,
   3: 14,
@@ -99,7 +99,7 @@ export const DIFFICULTY_TO_SCORE: Record<Difficulties, number> = {
   10: 28,
 };
 
-export const STREAK_TIER_TO_MULTIPLIER: Record<StreakTiers, number> = {
+export const STREAK_TIER_TO_MULTIPLIER_MAP: Record<StreakTiers, number> = {
   0: 1,
   1: 1.1,
   2: 1.2,

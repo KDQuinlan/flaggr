@@ -24,8 +24,6 @@ import { getSettingsStyles } from '@/styles/settings';
 import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_TEST_ID } from '@/constants/adId';
 
-// TODO - remove on render state update?
-
 const SettingsScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);

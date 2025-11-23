@@ -41,7 +41,9 @@ const MultipleChoice = () => {
   const styles = useMemo(() => getMultipleChoiceStyles(theme), [theme]);
   const userProgression = stateStore((s) => s.userProgress);
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
-  const { isPremiumUser } = stateStore((s) => s.userSettings);
+  const { isPremiumUser, displayAnswerTimerMs } = stateStore(
+    (s) => s.userSettings
+  );
   const showAds = !isPremiumUser && isInternetAvailable;
   const { title, gameMode, questions, timeLimit } = route.params;
   const { scoreMultiplier } = userProgression.games.custom.currentGame;
@@ -186,7 +188,7 @@ const MultipleChoice = () => {
         newHighestStreakTotal,
         newTimeTaken
       );
-    }, 500);
+    }, displayAnswerTimerMs);
   };
 
   const handleNextQuestionOrSummary = (

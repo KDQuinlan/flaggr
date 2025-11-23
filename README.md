@@ -1,6 +1,10 @@
-# Welcome to your Expo app 👋
+# Flaggr 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+The next generation of flag/geography quiz app, designed by what we wanted to see in one.
+
+This app uses Expo@52, Google Play Games Services, and RevenueCat as its primary tooling. 
+
+Currently in development for the Play Store, with iOS coming later.
 
 ## Get started
 
@@ -13,38 +17,19 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 2. Start the app
 
    ```bash
-    npx expo start
+    npm run android
    ```
 
-In the output, you'll find options to open the app in a
+## Contributing
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+All new dependencies MUST be installed with
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+   ```bash
+   npx expo install [packagename]
+   ```
 
-## Get a fresh project
+As it lets Expo figure out which version to install it with. We require Expo@52 for our PGS integration.
 
-When you're ready, run:
+For releases, ensure you update the version in the package.json and package-lock.json, and update the versionName and versionCode in app.json and build.gradle. Duplicate version codes cannot be uploaded to the play store.
 
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Queries, problems, or suggestions? Reach out at grimlangames@gmail.com.
