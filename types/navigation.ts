@@ -19,6 +19,7 @@ export type RootStackParamList = {
   home: undefined;
   feedback: undefined;
   settings: undefined;
+  passport: undefined;
   difficulty: { id: DifficultyScreenGameIds; title: string };
   multipleChoice: {
     title: Levels | 'Custom';

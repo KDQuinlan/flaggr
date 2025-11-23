@@ -16,7 +16,7 @@ function RootLayoutContent() {
 
   useEffect(() => {
     NavigationBar.setBackgroundColorAsync(theme.background);
-    NavigationBar.setButtonStyleAsync(isDarkTheme ? 'dark' : 'light');
+    NavigationBar.setButtonStyleAsync(isDarkTheme ? 'light' : 'dark');
   }, [isDarkTheme, theme]);
 
   return (
@@ -62,6 +62,7 @@ function RootLayoutContent() {
         />
         <Stack.Screen name="feedback" options={{ headerShown: true }} />
         <Stack.Screen name="settings" options={{ headerShown: true }} />
+        <Stack.Screen name="passport" options={{ headerShown: true }} />
         <Stack.Screen
           name="difficulty"
           options={{

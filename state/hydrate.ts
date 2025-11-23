@@ -14,6 +14,7 @@ import {
   defaultUserSettings,
 } from './secureStoreStructure';
 import { UserSettingStructure } from '@/types/secureStore';
+import { mmkvStorage } from './mmkv';
 
 // TODO - Implement versioning
 // TODO - add parallel reads?
@@ -27,9 +28,8 @@ export const hydrateStore = async () => {
 
   const userSettingsSecure =
     await SecureStore.getItemAsync(STORAGE_KEY_SETTINGS);
-  const userProgressionSecure = await SecureStore.getItemAsync(
-    STORAGE_KEY_PROGRESSION
-  );
+
+  const userProgression = mmkvStorage.getString(STORAGE_KEY_PROGRESSION);
 
   const cachedUserSettings = userSettingsSecure
     ? JSON.parse(userSettingsSecure)
@@ -64,13 +64,14 @@ export const hydrateStore = async () => {
   }
 
   // Restore progression or initialize default
-  if (userProgressionSecure) {
-    setProgression(JSON.parse(userProgressionSecure));
+  if (userProgression) {
+    setProgression(JSON.parse(userProgression));
   } else {
-    await SecureStore.setItemAsync(
+    mmkvStorage.set(
       STORAGE_KEY_PROGRESSION,
       JSON.stringify(defaultProgressionStructure)
     );
+    setProgression(defaultProgressionStructure);
   }
 
   const { userSettings } = stateStore.getState();
