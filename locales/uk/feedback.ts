@@ -1,0 +1,17 @@
+export default {
+  title: 'Зворотній зв’язок',
+  reason: 'Тип',
+  reasonPlaceholder: 'Виберіть тип зворотного зв’язку',
+  placeholder: 'Введіть ваш відгук тут...',
+  submit: 'Надіслати',
+  successTitle: 'Дякуємо',
+  successMessage: 'Ваш відгук було успішно надіслано',
+  errorTitle: 'Помилка',
+  errorNotAvailable: 'Поштові сервіси недоступні на цьому пристрої',
+  errorMessage: 'Не вдалося надіслати листа. Спробуйте пізніше',
+  bugFeedback: 'Помилка / Проблема',
+  ideaFeedback: 'Ідея / Пропозиція',
+  designFeedback: 'Дизайн / Зовнішній вигляд',
+  premeiumFeedback: 'Преміум',
+  otherFeedback: 'Інше',
+};

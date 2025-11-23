@@ -18,7 +18,7 @@ const rewarded = RewardedAd.createForAdRequest(adUnitId, {
 });
 
 export const useRewardedAd = () => {
-  const { userSettings } = stateStore.getState();
+  const userSettings = stateStore((s) => s.userSettings);
   const [isAdLoaded, setAdLoaded] = useState(false);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export const useRewardedAd = () => {
       unsubscribeEarned();
       unsubscribeClosed();
     };
-  }, []);
+  }, [userSettings]);
 
   const showRewardedAd = () => {
     if (isAdLoaded) {

@@ -1,14 +1,14 @@
 export default {
   titles: {
-    standard: 'Standard',
-    rapid: 'Rapid',
+    standard: 'Standaard',
+    rapid: 'Snel',
   },
   states: {
-    notStarted: 'Not started',
-    inProgress: 'In progress',
-    locked: 'Locked',
-    completed: 'Completed',
-    perfected: 'Perfected',
+    notStarted: 'Niet gestart',
+    inProgress: 'Bezig',
+    locked: 'Vergrendeld',
+    completed: 'Voltooid',
+    perfected: 'Geperfectioneerd',
   },
   levels: {
     levelOne: 'Start {{level}}',

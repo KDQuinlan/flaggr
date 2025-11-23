@@ -134,7 +134,6 @@ export const getCustomStyles = (theme: ThemeColors) => {
     },
     buttonDisabled: {
       backgroundColor: colors.bluePrimary,
-      opacity: 0.5,
       paddingVertical: 10,
       marginVertical: 10,
       borderRadius: 8,
@@ -168,7 +167,6 @@ export const getCustomStyles = (theme: ThemeColors) => {
     },
     accordionContainer: {
       marginTop: 20,
-      marginBottom: 20,
       borderRadius: 8,
       overflow: 'hidden',
       shadowColor: theme.shadow,

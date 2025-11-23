@@ -370,7 +370,7 @@ const CustomScreen = () => {
           <Pressable
             style={({ pressed }) => [
               isDisabled ? styles.buttonDisabled : styles.buttonEnabled,
-              { opacity: pressed ? 0.7 : 1 },
+              { opacity: pressed ? 0.7 : isDisabled ? 0.5 : 1 },
             ]}
             disabled={isDisabled}
             accessibilityLabel={t('start')}

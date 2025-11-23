@@ -52,6 +52,8 @@ export const VALID_REGIONS = [
 export const LANGUAGES = [
   { label: 'English', value: 'en' },
   { label: 'Español', value: 'es' },
+  { label: 'Nederlands', value: 'nl' },
+  { label: 'Українська', value: 'uk' },
 ];
 
 export const NON_INDEPENDENT_COUNTRY_CODES = [
