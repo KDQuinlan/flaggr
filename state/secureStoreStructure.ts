@@ -24,4 +24,5 @@ export const defaultProgressionStructure: ProgressionStructure = {
     custom,
     matchesPlayed: 0,
   },
+  passport: [],
 };

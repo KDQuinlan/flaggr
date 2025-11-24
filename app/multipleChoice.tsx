@@ -27,6 +27,7 @@ import { getMultipleChoiceStyles } from '@/styles/multipleChoice';
 import { colors } from '@/components/colors';
 import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_TEST_ID } from '@/constants/adId';
+import updatePassport from '@/util/updatePassport/updatePassport';
 
 const MultipleChoice = () => {
   const { height } = useWindowDimensions();
@@ -175,6 +176,8 @@ const MultipleChoice = () => {
     setIncorrectTotal(newIncorrectTotal);
     setStreak(newStreakTotal);
     setHighestStreak(newHighestStreakTotal);
+
+    updatePassport(correctAnswer, isCorrect);
 
     gameMode === 'custom' &&
       setCustomScore(

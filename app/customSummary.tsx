@@ -80,6 +80,7 @@ const CustomSummary = () => {
     const newMatchesPlayed = matchesPlayed + 1;
     setProgression({
       games: { ...userProgression.games, matchesPlayed: newMatchesPlayed },
+      passport: userProgression.passport,
     });
     PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
   }, []);
