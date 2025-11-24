@@ -59,6 +59,14 @@ export type CustomData = {
 
 export type GameProgression = Record<LevelKeys, LevelData>;
 
+export type PassportEntry = {
+  countryName: string;
+  correctTotal: number;
+  incorrectTotal: number;
+};
+
+export type Passport = PassportEntry[];
+
 export type ProgressionStructure = {
   games: {
     standard: GameProgression;
@@ -66,6 +74,7 @@ export type ProgressionStructure = {
     custom: CustomData;
     matchesPlayed: number;
   };
+  passport: Passport;
 };
 
 export type UserSettingStructure = {
