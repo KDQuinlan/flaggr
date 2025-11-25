@@ -11,4 +11,8 @@ export default {
     title: 'Custom',
     description: 'Custom Flaggr experience',
   },
+  passport: {
+    title: 'Passport',
+    description: 'Your Flaggr database',
+  },
 };

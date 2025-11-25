@@ -12,6 +12,7 @@ import LevelTen from './resources/levels/level-ten.png';
 import Standard from './resources/gameModes/standard.png';
 import Rapid from './resources/gameModes/rapid.png';
 import Custom from './resources/gameModes/custom.png';
+import Passport from './resources/gameModes/passport.png';
 
 type IconMap = Record<string, any>;
 
@@ -30,6 +31,7 @@ const iconsMap: IconMap = {
   standard: Standard,
   rapid: Rapid,
   custom: Custom,
+  passport: Passport,
 };
 
 export default iconsMap;

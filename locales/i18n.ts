@@ -26,6 +26,7 @@ i18n.use(initReactI18next).init({
       settings: en.settings,
       energy: en.energy,
       feedback: en.feedback,
+      passport: en.passport,
     },
     es: {
       data: es.data,
@@ -79,7 +80,7 @@ i18n.use(initReactI18next).init({
       energy: it.energy,
       feedback: it.feedback,
     },
-      hu: {
+    hu: {
       data: hu.data,
       home: hu.home,
       difficulty: hu.difficulty,
