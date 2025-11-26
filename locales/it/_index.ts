@@ -9,6 +9,7 @@ import setup from './setup';
 import settings from './settings';
 import energy from './energy';
 import feedback from './feedback';
+import passport from './passport';
 
 export default {
   data,
@@ -22,4 +23,5 @@ export default {
   settings,
   energy,
   feedback,
+  passport,
 };

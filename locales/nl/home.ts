@@ -11,4 +11,8 @@ export default {
     title: 'Aangepast',
     description: 'Aangepaste Flaggr-ervaring',
   },
+  passport: {
+    title: 'Paspoort',
+    description: 'Je Flaggr-database',
+  },
 };

@@ -11,4 +11,8 @@ export default {
     title: 'Egyéni',
     description: 'Egyéni Flaggr élmény',
   },
+  passport: {
+    title: 'Útlevél',
+    description: 'A Flaggr adatbázisod',
+  },
 };

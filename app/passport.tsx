@@ -5,6 +5,7 @@ import {
   Text,
   FlatList,
   useWindowDimensions,
+  Pressable,
 } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
@@ -19,6 +20,7 @@ import { BANNER_TEST_ID } from '@/constants/adId';
 import { Passport, PassportEntry } from '@/types/secureStore';
 import { getPassportStyles } from '@/styles/passport';
 import flags from '@/assets/images/flags';
+import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 
 const PassportScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -45,58 +47,43 @@ const PassportScreen = () => {
     );
   }, [userProgression, searchTerm]);
 
-  // Equally divide width - horizontal margin - gap between amount that can be rendered
+  // Equally divide width - horizontal margin - gap / between amount that can be rendered
   const PASSPORT_CARD_WIDTH = (width - 40 - 10) / Math.floor(width / 150);
 
   const PassportCard = (passportEntry: PassportEntry) => (
-    <View
-      style={{
-        backgroundColor: theme.card,
-        padding: 10,
-        width: PASSPORT_CARD_WIDTH,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: theme.accent,
-        borderRadius: 8,
-      }}
+    <Pressable
+      onPress={() =>
+        navigation.navigate('passportEntry', { entry: passportEntry })
+      }
+      style={({ pressed }) => [
+        styles.passportCard,
+        { opacity: pressed ? 0.7 : 1, width: PASSPORT_CARD_WIDTH },
+      ]}
     >
       <Image
         source={flags[passportEntry.countryCode.toLowerCase()]}
         contentFit="contain"
-        style={{
-          width: '100%',
-          alignSelf: 'center',
-          aspectRatio: 16 / 9,
-        }}
+        style={styles.passportCardImage}
       />
-      <Text style={{ color: theme.text }}>{passportEntry.countryName}</Text>
-    </View>
+      <Text style={styles.passportCardText}>
+        {t(`countries.${toJsonKeyFormat(passportEntry.countryName)}`, {
+          ns: 'data',
+        })}
+      </Text>
+    </Pressable>
   );
 
   return (
     <SafeAreaView style={styles.rootContainer}>
       {userProgression.passport.length === 0 ? (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-            paddingBottom: 20,
-            marginHorizontal: 20,
-            marginTop: 20,
-            gap: 20,
-          }}
-        >
-          <Text style={styles.emptyPassportTitleText}>Empty</Text>
-          <Text style={styles.emptyPassportText}>
-            Correctly answer a question to see your first passport entry
-          </Text>
+        <View style={styles.emptyPassportContainer}>
+          <Text style={styles.emptyPassportTitleText}>{t('emptyTitle')}</Text>
+          <Text style={styles.emptyPassportText}>{t('emptyText')}</Text>
         </View>
       ) : (
         <View style={styles.screenContainer}>
           <Searchbar
-            placeholder="Search"
+            placeholder={t('search')}
             placeholderTextColor={theme.text}
             onChangeText={setSearchTerm}
             value={searchTerm}
