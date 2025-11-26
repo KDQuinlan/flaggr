@@ -60,6 +60,7 @@ export type CustomData = {
 export type GameProgression = Record<LevelKeys, LevelData>;
 
 export type PassportEntry = {
+  countryCode: string;
   countryName: string;
   correctTotal: number;
   incorrectTotal: number;

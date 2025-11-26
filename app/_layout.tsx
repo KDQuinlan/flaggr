@@ -62,7 +62,20 @@ function RootLayoutContent() {
         />
         <Stack.Screen name="feedback" options={{ headerShown: true }} />
         <Stack.Screen name="settings" options={{ headerShown: true }} />
-        <Stack.Screen name="passport" options={{ headerShown: true }} />
+        <Stack.Screen
+          name="passport"
+          options={{
+            headerShown: true,
+            ...(!isPremiumUser && { headerRight: () => <EnergyDisplay /> }),
+          }}
+        />
+        <Stack.Screen
+          name="passportEntry"
+          options={{
+            headerShown: true,
+            ...(!isPremiumUser && { headerRight: () => <EnergyDisplay /> }),
+          }}
+        />
         <Stack.Screen
           name="difficulty"
           options={{

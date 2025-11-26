@@ -4,12 +4,12 @@ import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
 
 import iconsMap from '@/assets/images/icons';
-import { PlayableGameModes } from '@/types/navigation';
+import { HomeScreenNavigableScreens } from '@/types/navigation';
 import { useTheme } from '@/context/ThemeContext';
 import { getGameSelectStyles } from './gameSelect.styles';
 
 type GameSelectProps = {
-  id: PlayableGameModes;
+  id: HomeScreenNavigableScreens;
   title: string;
   description: string;
   icon: string;

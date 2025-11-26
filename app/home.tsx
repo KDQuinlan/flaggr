@@ -90,6 +90,14 @@ const HomeScreen = () => {
           icon="custom"
           onPress={() => navigation.navigate('custom')}
         />
+
+        <GameSelect
+          id="passport"
+          title={t('passport.title')}
+          description={t('passport.description')}
+          icon="passport"
+          onPress={() => navigation.navigate('passport')}
+        />
       </ScrollView>
       <View style={styles.anchorContainer}>
         <View style={styles.floatingButtonContainer}>

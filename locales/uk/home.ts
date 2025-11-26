@@ -11,4 +11,8 @@ export default {
     title: 'Користувацький',
     description: 'Індивідуальний досвід Flaggr',
   },
+  passport: {
+    title: 'Паспорт',
+    description: 'Ваша база даних Flaggr',
+  },
 };

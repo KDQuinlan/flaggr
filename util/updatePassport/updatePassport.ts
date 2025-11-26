@@ -1,15 +1,19 @@
 import stateStore from '@/state/store';
-import { PassportEntry } from '@/types/secureStore';
+import { Passport, PassportEntry } from '@/types/secureStore';
 import persistProgression from '../persistState/persistProgression';
 
-const updatePassport = (countryName: string, isCorrect: boolean) => {
+const updatePassport = (
+  countryCode: string,
+  countryName: string,
+  isCorrect: boolean
+) => {
   const { userProgress } = stateStore.getState();
 
   const entryExists = userProgress.passport.some(
     (c: PassportEntry) => c.countryName === countryName
   );
 
-  let newPassport;
+  let newPassport: Passport = userProgress.passport;
 
   if (entryExists) {
     newPassport = userProgress.passport.map((entry: PassportEntry) => {
@@ -22,15 +26,20 @@ const updatePassport = (countryName: string, isCorrect: boolean) => {
       };
     });
   } else {
-    newPassport = [
-      ...userProgress.passport,
-      {
-        countryName: countryName,
-        correctTotal: isCorrect ? 1 : 0,
-        incorrectTotal: isCorrect ? 0 : 1,
-      },
-    ];
+    if (isCorrect) {
+      newPassport = [
+        ...userProgress.passport,
+        {
+          countryCode,
+          countryName,
+          correctTotal: isCorrect ? 1 : 0,
+          incorrectTotal: isCorrect ? 0 : 1,
+        },
+      ];
+    }
   }
+
+  newPassport.sort((a, b) => a.countryName.localeCompare(b.countryName));
 
   persistProgression({
     ...userProgress,
