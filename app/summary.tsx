@@ -56,7 +56,6 @@ const Summary = () => {
   const { theme } = useTheme();
   const styles = useMemo(() => getSummaryStyles(theme), [theme]);
   const userProgression = stateStore((s) => s.userProgress);
-  const setProgression = stateStore((s) => s.setProgression);
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser } = stateStore((s) => s.userSettings);
   const { difficulty, gameMode, gameResult } = route.params;
@@ -152,12 +151,12 @@ const Summary = () => {
 
   useEffect(() => {
     const newMatchesPlayed = matchesPlayed + 1;
-    setProgression({
+    persistProgression({
       games: { ...userProgression.games, matchesPlayed: newMatchesPlayed },
       passport: userProgression.passport,
     });
     PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
-  }, []);
+  }, [navigation, gameResult]);
 
   useEffect(() => {
     const updatedProgression: ProgressionStructure =
@@ -170,7 +169,6 @@ const Summary = () => {
         userNextLevel
       );
 
-    setProgression(updatedProgression);
     persistProgression(updatedProgression);
   }, [
     gameMode,
@@ -178,7 +176,6 @@ const Summary = () => {
     resultPercentage,
     userNextLevel,
     isAdvancementRequirementMet,
-    setProgression,
   ]);
 
   const handleContinue = () =>

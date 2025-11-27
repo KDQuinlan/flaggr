@@ -40,12 +40,21 @@ const PassportScreen = () => {
   }, [navigation]);
 
   useEffect(() => {
+    const localisedOrderedPassport = userProgression.passport
+      .map((entry) => ({
+        ...entry,
+        countryName: t(`countries.${toJsonKeyFormat(entry.countryName)}`, {
+          ns: 'data',
+        }),
+      }))
+      .sort((a, b) => a.countryName.localeCompare(b.countryName));
+
     setPassport(
-      userProgression.passport.filter((search: PassportEntry) =>
-        search.countryName.includes(searchTerm)
+      localisedOrderedPassport.filter((entry: PassportEntry) =>
+        entry.countryName.includes(searchTerm)
       )
     );
-  }, [userProgression, searchTerm]);
+  }, [userProgression, searchTerm, userSettings]);
 
   // Equally divide width - horizontal margin - gap / between amount that can be rendered
   const PASSPORT_CARD_WIDTH = (width - 40 - 10) / Math.floor(width / 150);
@@ -65,11 +74,7 @@ const PassportScreen = () => {
         contentFit="contain"
         style={styles.passportCardImage}
       />
-      <Text style={styles.passportCardText}>
-        {t(`countries.${toJsonKeyFormat(passportEntry.countryName)}`, {
-          ns: 'data',
-        })}
-      </Text>
+      <Text style={styles.passportCardText}>{passportEntry.countryName}</Text>
     </Pressable>
   );
 

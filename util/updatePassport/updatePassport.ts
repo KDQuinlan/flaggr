@@ -39,8 +39,6 @@ const updatePassport = (
     }
   }
 
-  newPassport.sort((a, b) => a.countryName.localeCompare(b.countryName));
-
   persistProgression({
     ...userProgress,
     passport: newPassport,

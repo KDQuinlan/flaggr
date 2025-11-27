@@ -20,6 +20,7 @@ const HomeScreen = () => {
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser } = stateStore((s) => s.userSettings);
   const [showLeaderboard, setShowLeaderboard] = useState<boolean>(false);
+  const [bottomPadding, setBottomPadding] = useState<number>(0);
   const { t } = useTranslation('home');
   const { theme } = useTheme();
   const styles = useMemo(() => getHomeStyles(theme), [theme]);
@@ -99,7 +100,12 @@ const HomeScreen = () => {
           onPress={() => navigation.navigate('passport')}
         />
       </ScrollView>
-      <View style={styles.anchorContainer}>
+      <View
+        style={{
+          ...styles.anchorContainer,
+          bottom: showAds ? bottomPadding : 0,
+        }}
+      >
         <View style={styles.floatingButtonContainer}>
           <Pressable
             style={({ pressed }) => [
@@ -114,22 +120,28 @@ const HomeScreen = () => {
             />
           </Pressable>
 
-          <Pressable
-            style={({ pressed }) => [
-              styles.floatingButton,
-              { opacity: pressed ? 0.7 : 1 },
-            ]}
-            onPress={() => setShowLeaderboard(true)}
-          >
-            <Image
-              style={styles.floatingIcon}
-              source={require('@/assets/images/icons/resources/leaderboard.png')}
-            />
-          </Pressable>
+          {isInternetAvailable && (
+            <Pressable
+              style={({ pressed }) => [
+                styles.floatingButton,
+                { opacity: pressed ? 0.7 : 1 },
+              ]}
+              onPress={() => setShowLeaderboard(true)}
+            >
+              <Image
+                style={styles.floatingIcon}
+                source={require('@/assets/images/icons/resources/leaderboard.png')}
+              />
+            </Pressable>
+          )}
         </View>
-
-        {showAds && <AdBanner adId={BANNER_TEST_ID} />}
       </View>
+      {showAds && (
+        <AdBanner
+          adId={BANNER_TEST_ID}
+          onHeightChange={(height) => setBottomPadding(height)}
+        />
+      )}
     </SafeAreaView>
   );
 };
