@@ -10,10 +10,10 @@ export const getPassportEntryStyles = (theme: ThemeColors) => {
     },
     scrollContainer: {
       flexGrow: 1,
-      justifyContent: 'flex-start',
-      alignItems: 'center',
       paddingBottom: 20,
-      overflow: 'visible',
+      marginHorizontal: 20,
+      marginTop: 20,
+      gap: 20,
     },
   });
 };

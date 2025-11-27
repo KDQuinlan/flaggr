@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { SafeAreaView, ScrollView, View, Text } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
+import { Image } from 'expo-image';
 
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import stateStore from '@/state/store';
@@ -11,6 +12,7 @@ import { BANNER_TEST_ID } from '@/constants/adId';
 import { getPassportEntryStyles } from '@/styles/passportEntry';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
+import flags from '@/assets/images/flags';
 
 const PassportEntryScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -41,7 +43,92 @@ const PassportEntryScreen = () => {
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={{ color: theme.text }}>{localisedCountry}</Text>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Image
+            source={flags[entry.countryCode.toLowerCase()]}
+            contentFit="contain"
+            style={{
+              width: '100%',
+              alignSelf: 'center',
+              aspectRatio: 16 / 9,
+            }}
+          />
+          <Text
+            style={{
+              color: theme.text,
+              fontSize: 16,
+              fontFamily: 'DMSansBold',
+            }}
+          >
+            {localisedCountry}
+          </Text>
+        </View>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Text
+            style={{
+              color: theme.text,
+              fontSize: 14,
+              fontFamily: 'DMSans',
+            }}
+          >
+            Times seen: {entry.correctTotal + entry.incorrectTotal}
+          </Text>
+          <Text
+            style={{
+              color: theme.text,
+              fontSize: 14,
+              fontFamily: 'DMSans',
+            }}
+          >
+            Guess rate:{' '}
+            {(
+              (entry.correctTotal /
+                (entry.incorrectTotal + entry.correctTotal)) *
+              100
+            ).toFixed(1)}
+            %
+          </Text>
+        </View>
+        <View>
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: 'DMSansBold',
+              color: theme.text,
+            }}
+          >
+            Adoption
+          </Text>
+          <Text
+            style={{
+              fontSize: 14,
+              fontFamily: 'DMSans',
+              color: theme.text,
+            }}
+          >
+            TBA
+          </Text>
+        </View>
+        <View>
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: 'DMSansBold',
+              color: theme.text,
+            }}
+          >
+            Design
+          </Text>
+          <Text
+            style={{
+              fontSize: 14,
+              fontFamily: 'DMSans',
+              color: theme.text,
+            }}
+          >
+            TBA
+          </Text>
+        </View>
       </ScrollView>
       {showAds && <AdBanner adId={BANNER_TEST_ID} />}
     </SafeAreaView>

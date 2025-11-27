@@ -49,7 +49,6 @@ const CustomSummary = () => {
   const { theme } = useTheme();
   const styles = useMemo(() => getCustomSummaryStyles(theme), [theme]);
   const userProgression = stateStore((s) => s.userProgress);
-  const setProgression = stateStore((s) => s.setProgression);
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser } = stateStore((s) => s.userSettings);
   const { gameResult, finalScore } = route.params;
@@ -78,12 +77,12 @@ const CustomSummary = () => {
 
   useEffect(() => {
     const newMatchesPlayed = matchesPlayed + 1;
-    setProgression({
+    persistProgression({
       games: { ...userProgression.games, matchesPlayed: newMatchesPlayed },
       passport: userProgression.passport,
     });
     PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
-  }, []);
+  }, [navigation, gameResult]);
 
   useEffect(() => {
     if (isNewHighScore) {
@@ -101,7 +100,6 @@ const CustomSummary = () => {
         }
       );
 
-      setProgression(updatedProgression);
       persistProgression(updatedProgression);
       PlayGames.submitScore(HIGHEST_SCORE_ID, finalScore);
     }
