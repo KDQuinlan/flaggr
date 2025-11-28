@@ -46,7 +46,7 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
 
   const overProgress =
     (score - advancementRequirement) /
-    (LEVELS_TO_FLAG_AMOUNT_MAP[title] - score);
+    (LEVELS_TO_FLAG_AMOUNT_MAP[title] - advancementRequirement);
 
   return (
     <Pressable
