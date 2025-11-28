@@ -1,3 +1,4 @@
+import PlayGames from '@/PlayGames';
 import { STORAGE_KEY_PROGRESSION } from '@/constants/common';
 import { ProgressionStructure } from '@/types/secureStore';
 import { mmkvStorage } from '@/state/mmkv';
@@ -12,8 +13,12 @@ const persistProgression = (updatedProgression: ProgressionStructure) => {
       JSON.stringify(updatedProgression)
     );
     setProgression(updatedProgression);
+    PlayGames.saveGame(
+      STORAGE_KEY_PROGRESSION,
+      JSON.stringify(updatedProgression)
+    );
   } catch (e) {
-    console.error('Error persisting to MMKV:', e);
+    console.error('Error persisting progression:', e);
   }
 };
 

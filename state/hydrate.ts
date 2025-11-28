@@ -4,6 +4,7 @@ import * as Network from 'expo-network';
 import i18n from '@/locales/i18n';
 import Purchases from 'react-native-purchases';
 
+import PlayGames from '@/PlayGames';
 import stateStore from './store';
 import {
   STORAGE_KEY_PROGRESSION,
@@ -23,13 +24,18 @@ export const hydrateStore = async () => {
   const systemScheme = Appearance.getColorScheme();
   const isSystemDark = systemScheme === 'dark';
   const networkState = await Network.getNetworkStateAsync();
+  const isInternetAvailable =
+    networkState.isConnected && networkState.isInternetReachable;
   const { setIsInitialised, setUserSettings, setProgression } =
     stateStore.getState();
 
   const userSettingsSecure =
     await SecureStore.getItemAsync(STORAGE_KEY_SETTINGS);
 
-  const userProgression = mmkvStorage.getString(STORAGE_KEY_PROGRESSION);
+  const localSavedProgression = mmkvStorage.getString(STORAGE_KEY_PROGRESSION);
+  const googleSavedProgression = await PlayGames.loadGame(
+    STORAGE_KEY_PROGRESSION
+  );
 
   const cachedUserSettings = userSettingsSecure
     ? JSON.parse(userSettingsSecure)
@@ -37,6 +43,12 @@ export const hydrateStore = async () => {
         ...defaultUserSettings,
         isDarkTheme: isSystemDark,
       };
+
+  const cachedUserProgression = googleSavedProgression
+    ? JSON.parse(googleSavedProgression)
+    : localSavedProgression
+      ? JSON.parse(localSavedProgression)
+      : defaultProgressionStructure;
 
   const applyUserSettings = async (settings: UserSettingStructure) => {
     setUserSettings(settings);
@@ -47,7 +59,7 @@ export const hydrateStore = async () => {
   };
 
   // Restore user settings or intialise default using server-side
-  if (networkState.isConnected && networkState.isInternetReachable) {
+  if (isInternetAvailable) {
     try {
       const customerInfo = await Purchases.getCustomerInfo();
       const isPremium =
@@ -64,15 +76,7 @@ export const hydrateStore = async () => {
   }
 
   // Restore progression or initialize default
-  if (userProgression) {
-    setProgression(JSON.parse(userProgression));
-  } else {
-    mmkvStorage.set(
-      STORAGE_KEY_PROGRESSION,
-      JSON.stringify(defaultProgressionStructure)
-    );
-    setProgression(defaultProgressionStructure);
-  }
+  setProgression(cachedUserProgression);
 
   const { userSettings } = stateStore.getState();
   i18n.changeLanguage(userSettings.locale);
