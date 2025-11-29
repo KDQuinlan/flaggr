@@ -13,9 +13,6 @@ export const MAXIMUM_DIFFICULTY = 10;
 export const GAME_DIFFICULTIES: Difficulties[] = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
 ];
-export const GAME_CONTINENTS = [
-  'Europe, Asia, Africa, South America, North America, Oceania',
-];
 
 export const MINIMUM_CUSTOM_TIME_LIMIT_SECONDS = 0;
 export const MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS = 240;

@@ -63,6 +63,7 @@ export type PassportEntry = {
   countryCode: string;
   countryName: string;
   continent: string;
+  difficulty: number;
   correctTotal: number;
   incorrectTotal: number;
 };

@@ -6,6 +6,7 @@ const updatePassport = (
   countryCode: string,
   countryName: string,
   continent: string,
+  difficulty: number,
   isCorrect: boolean
 ) => {
   const { userProgress } = stateStore.getState();
@@ -34,6 +35,7 @@ const updatePassport = (
           countryCode,
           countryName,
           continent,
+          difficulty,
           correctTotal: isCorrect ? 1 : 0,
           incorrectTotal: isCorrect ? 0 : 1,
         },

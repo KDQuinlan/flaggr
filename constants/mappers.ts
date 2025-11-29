@@ -39,6 +39,20 @@ export const DIFFICULTY_ID_TO_LEVEL_MAP: Record<Difficulties, Levels> = {
   10: 'Level 10',
 };
 
+export const DIFFICULTY_ID_TO_LEVEL_KEYS_MAP: Record<Difficulties, LevelKeys> =
+  {
+    1: 'levelOne',
+    2: 'levelTwo',
+    3: 'levelThree',
+    4: 'levelFour',
+    5: 'levelFive',
+    6: 'levelSix',
+    7: 'levelSeven',
+    8: 'levelEight',
+    9: 'levelNine',
+    10: 'levelTen',
+  };
+
 export const LEVELS_TO_FLAG_AMOUNT_MAP: Record<Levels, number> = {
   'Level 1': LEVEL_ONE_FLAGS_AMOUNT,
   'Level 2': LEVEL_TWO_FLAGS_AMOUNT,

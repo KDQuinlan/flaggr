@@ -5,6 +5,7 @@ import { VALID_REGIONS } from '@/constants/common';
 import { useTheme } from '@/context/ThemeContext';
 import { useMemo } from 'react';
 import { getModifierMultiSelectStyles } from './modifierMultiSelect.styles';
+import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 
 type ModifierMultiSelectVarients = 'regions' | 'quizType';
 
@@ -41,9 +42,7 @@ export default function ModifierMultiSelect({
     <View style={styles.container}>
       {options.map((item) => {
         const isSelected = value.includes(item);
-        const regionFormattedForLocalisation = item
-          .toLowerCase()
-          .replace(/\s+/g, '');
+
         return (
           <Pressable
             key={item}
@@ -54,7 +53,7 @@ export default function ModifierMultiSelect({
             ]}
             onPress={() => toggleModifier(item)}
             accessibilityLabel={t('regions.buttonAccessibility', {
-              option: regionFormattedForLocalisation,
+              option: toJsonKeyFormat(item),
             })}
             accessibilityRole="button"
           >
@@ -64,7 +63,7 @@ export default function ModifierMultiSelect({
                 isSelected && styles.buttonTextSelected,
               ]}
             >
-              {t(`regions.${regionFormattedForLocalisation}`)}
+              {t(`regions.${toJsonKeyFormat(item)}`)}
             </Text>
           </Pressable>
         );
