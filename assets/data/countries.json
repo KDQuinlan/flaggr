@@ -75,7 +75,7 @@
     "countryCode": "AU",
     "countryName": "Australia",
     "continent": "Oceania",
-    "difficulty": 3
+    "difficulty": 2
   },
   {
     "countryCode": "AT",
@@ -909,7 +909,7 @@
     "countryCode": "NZ",
     "countryName": "New Zealand",
     "continent": "Oceania",
-    "difficulty": 2
+    "difficulty": 3
   },
   {
     "countryCode": "NI",

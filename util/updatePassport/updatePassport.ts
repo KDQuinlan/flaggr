@@ -5,6 +5,7 @@ import persistProgression from '../persistState/persistProgression';
 const updatePassport = (
   countryCode: string,
   countryName: string,
+  continent: string,
   isCorrect: boolean
 ) => {
   const { userProgress } = stateStore.getState();
@@ -32,6 +33,7 @@ const updatePassport = (
         {
           countryCode,
           countryName,
+          continent,
           correctTotal: isCorrect ? 1 : 0,
           incorrectTotal: isCorrect ? 0 : 1,
         },

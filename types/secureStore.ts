@@ -62,6 +62,7 @@ export type GameProgression = Record<LevelKeys, LevelData>;
 export type PassportEntry = {
   countryCode: string;
   countryName: string;
+  continent: string;
   correctTotal: number;
   incorrectTotal: number;
 };
