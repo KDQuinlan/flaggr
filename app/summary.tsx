@@ -151,14 +151,6 @@ const Summary = () => {
 
   useEffect(() => {
     const newMatchesPlayed = matchesPlayed + 1;
-    persistProgression({
-      games: { ...userProgression.games, matchesPlayed: newMatchesPlayed },
-      passport: userProgression.passport,
-    });
-    PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
-  }, [navigation, gameResult]);
-
-  useEffect(() => {
     const updatedProgression: ProgressionStructure =
       createUpdatedProgressionStructure(
         initialProgressionRef.current,
@@ -168,9 +160,13 @@ const Summary = () => {
         resultPercentage,
         userNextLevel
       );
-
-    persistProgression(updatedProgression);
+    persistProgression({
+      games: { ...updatedProgression.games, matchesPlayed: newMatchesPlayed },
+      passport: updatedProgression.passport,
+    });
   }, [
+    navigation,
+    gameResult,
     gameMode,
     difficulty,
     resultPercentage,

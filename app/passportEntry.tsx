@@ -11,29 +11,22 @@ import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_TEST_ID } from '@/constants/adId';
 import { getPassportEntryStyles } from '@/styles/passportEntry';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 import flags from '@/assets/images/flags';
 
 const PassportEntryScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'passportEntry'>>();
-  const { t } = useTranslation('passport');
+  const { t } = useTranslation('passportEntry');
   const { theme } = useTheme();
   const styles = useMemo(() => getPassportEntryStyles(theme), [theme]);
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const showAds = !userSettings.isPremiumUser && isInternetAvailable;
   const { entry } = route.params;
-  const localisedCountry = t(
-    `countries.${toJsonKeyFormat(entry.countryName)}`,
-    {
-      ns: 'data',
-    }
-  );
 
   useEffect(() => {
     navigation.setOptions({
-      title: localisedCountry,
+      title: entry.countryName,
     });
   }, [navigation]);
 
@@ -47,39 +40,15 @@ const PassportEntryScreen = () => {
           <Image
             source={flags[entry.countryCode.toLowerCase()]}
             contentFit="contain"
-            style={{
-              width: '100%',
-              alignSelf: 'center',
-              aspectRatio: 16 / 9,
-            }}
+            style={styles.icon}
           />
-          <Text
-            style={{
-              color: theme.text,
-              fontSize: 16,
-              fontFamily: 'DMSansBold',
-            }}
-          >
-            {localisedCountry}
-          </Text>
+          <Text style={styles.title}>{entry.countryName}</Text>
         </View>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Text
-            style={{
-              color: theme.text,
-              fontSize: 14,
-              fontFamily: 'DMSans',
-            }}
-          >
+          <Text style={styles.text}>
             Times seen: {entry.correctTotal + entry.incorrectTotal}
           </Text>
-          <Text
-            style={{
-              color: theme.text,
-              fontSize: 14,
-              fontFamily: 'DMSans',
-            }}
-          >
+          <Text style={styles.text}>
             Guess rate:{' '}
             {(
               (entry.correctTotal /
@@ -90,43 +59,27 @@ const PassportEntryScreen = () => {
           </Text>
         </View>
         <View>
-          <Text
-            style={{
-              fontSize: 16,
-              fontFamily: 'DMSansBold',
-              color: theme.text,
-            }}
-          >
-            Adoption
+          <Text style={styles.title}>
+            {t(`${entry.countryCode.toLowerCase()}.adoptionTitle`)}
           </Text>
-          <Text
-            style={{
-              fontSize: 14,
-              fontFamily: 'DMSans',
-              color: theme.text,
-            }}
-          >
-            TBA
+          <Text style={styles.text}>
+            {t(`${entry.countryCode.toLowerCase()}.adoption`)}
           </Text>
         </View>
         <View>
-          <Text
-            style={{
-              fontSize: 16,
-              fontFamily: 'DMSansBold',
-              color: theme.text,
-            }}
-          >
-            Design
+          <Text style={styles.title}>
+            {t(`${entry.countryCode.toLowerCase()}.symbolismTitle`)}
           </Text>
-          <Text
-            style={{
-              fontSize: 14,
-              fontFamily: 'DMSans',
-              color: theme.text,
-            }}
-          >
-            TBA
+          <Text style={styles.text}>
+            {t(`${entry.countryCode.toLowerCase()}.symbolism`)}
+          </Text>
+        </View>
+        <View>
+          <Text style={styles.title}>
+            {t(`${entry.countryCode.toLowerCase()}.historyTitle`)}
+          </Text>
+          <Text style={styles.text}>
+            {t(`${entry.countryCode.toLowerCase()}.history`)}
           </Text>
         </View>
       </ScrollView>

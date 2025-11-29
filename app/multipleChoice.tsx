@@ -177,7 +177,7 @@ const MultipleChoice = () => {
     setStreak(newStreakTotal);
     setHighestStreak(newHighestStreakTotal);
 
-    updatePassport(countryCode, correctAnswer, isCorrect);
+    updatePassport(countryCode, correctAnswer, continent, isCorrect);
 
     gameMode === 'custom' &&
       setCustomScore(

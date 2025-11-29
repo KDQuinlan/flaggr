@@ -27,6 +27,7 @@ i18n.use(initReactI18next).init({
       energy: en.energy,
       feedback: en.feedback,
       passport: en.passport,
+      passportEntry: en.passportEntry,
     },
     es: {
       data: es.data,
