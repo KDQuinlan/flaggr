@@ -27,13 +27,16 @@ import { Passport, PassportEntry } from '@/types/secureStore';
 import { getPassportStyles } from '@/styles/passport';
 import flags from '@/assets/images/flags';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
-import {
-  GAME_DIFFICULTIES,
-  TOTAL_FLAGS_AMOUNT,
-  VALID_REGIONS,
-} from '@/constants/common';
+import { GAME_DIFFICULTIES, VALID_REGIONS } from '@/constants/common';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { DIFFICULTY_ID_TO_LEVEL_KEYS_MAP } from '@/constants/mappers';
+import countriesData from '@/assets/data/countries.json';
+
+interface BasicEntry {
+  countryName: string;
+  continent: string;
+  difficulty: number;
+}
 
 const PassportScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -50,6 +53,9 @@ const PassportScreen = () => {
   const [difficultyFilter, setDifficultyFilter] = useState<number[]>([]);
   const [informationModal, setInformationModal] = useState<boolean>(false);
   const [filterModal, setFilterModal] = useState<boolean>(false);
+  const [filteredResultsAmount, setFilteredResultsAmount] = useState<number>(
+    countriesData.length
+  );
   const showAds = !userSettings.isPremiumUser && isInternetAvailable;
 
   const closeInformationModal = () => setInformationModal(false);
@@ -64,13 +70,13 @@ const PassportScreen = () => {
 
   const handleToggleModalPress = useCallback(() => {
     if (filterModal) {
-      bottomSheetModalRef.current?.dismiss(); // Close it
+      bottomSheetModalRef.current?.dismiss();
     } else {
-      bottomSheetModalRef.current?.present(); // Open it
+      bottomSheetModalRef.current?.present();
     }
   }, [filterModal]);
 
-  const matchesFilters = (entry: PassportEntry) => {
+  const matchesFilters = <T extends BasicEntry>(entry: T) => {
     const matchesSearch = entry.countryName.includes(searchTerm);
 
     const matchesContinent =
@@ -97,6 +103,7 @@ const PassportScreen = () => {
       }))
       .sort((a, b) => a.countryName.localeCompare(b.countryName));
 
+    setFilteredResultsAmount(countriesData.filter(matchesFilters).length);
     setPassport(localisedOrderedPassport.filter(matchesFilters));
   }, [
     userProgression,
@@ -166,7 +173,7 @@ const PassportScreen = () => {
       ]}
     >
       <Text style={styles.totalText}>
-        {`${passport.length} / ${TOTAL_FLAGS_AMOUNT}`}
+        {`${passport.length} / ${filteredResultsAmount}`}
       </Text>
       <Image
         style={{ width: 20, height: 20 }}
