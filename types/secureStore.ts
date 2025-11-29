@@ -76,6 +76,8 @@ export type ProgressionStructure = {
     rapid: GameProgression;
     custom: CustomData;
     matchesPlayed: number;
+    totalCorrect: number;
+    totalIncorrect: number;
   };
   passport: Passport;
 };
