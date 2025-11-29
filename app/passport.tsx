@@ -77,7 +77,9 @@ const PassportScreen = () => {
   }, [filterModal]);
 
   const matchesFilters = <T extends BasicEntry>(entry: T) => {
-    const matchesSearch = entry.countryName.includes(searchTerm);
+    const matchesSearch = entry.countryName
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
 
     const matchesContinent =
       continentFilter.length === 0 || continentFilter.includes(entry.continent);
