@@ -25,7 +25,7 @@ export const getEnergyModalStyles = (theme: ThemeColors) => {
     titleText: {
       marginBottom: 20,
       fontWeight: '700',
-      fontSize: 18,
+      fontSize: 20,
       color: theme.headerText,
     },
     bodyText: {
@@ -42,8 +42,6 @@ export const getEnergyModalStyles = (theme: ThemeColors) => {
       width: '100%',
       maxWidth: 240,
       alignItems: 'center',
-      shadowColor: theme.shadow,
-      // elevation: 4,
     },
     primaryButtonText: {
       color: 'white',
@@ -57,13 +55,11 @@ export const getEnergyModalStyles = (theme: ThemeColors) => {
       borderRadius: 8,
       width: '60%',
       alignItems: 'center',
-      shadowColor: theme.shadow,
-      // elevation: 4,
     },
     closeButtonText: {
       color: 'white',
       fontWeight: '500',
-      fontSize: 15,
+      fontSize: 16,
     },
   });
 };

@@ -35,6 +35,17 @@ export const LEVEL_SEVEN_FLAGS_AMOUNT = 26;
 export const LEVEL_EIGHT_FLAGS_AMOUNT = 19;
 export const LEVEL_NINE_FLAGS_AMOUNT = 20;
 export const LEVEL_TEN_FLAGS_AMOUNT = 24;
+export const TOTAL_FLAGS_AMOUNT =
+  LEVEL_ONE_FLAGS_AMOUNT +
+  LEVEL_TWO_FLAGS_AMOUNT +
+  LEVEL_THREE_FLAGS_AMOUNT +
+  LEVEL_FOUR_FLAGS_AMOUNT +
+  LEVEL_FIVE_FLAGS_AMOUNT +
+  LEVEL_SIX_FLAGS_AMOUNT +
+  LEVEL_SEVEN_FLAGS_AMOUNT +
+  LEVEL_EIGHT_FLAGS_AMOUNT +
+  LEVEL_NINE_FLAGS_AMOUNT +
+  LEVEL_TEN_FLAGS_AMOUNT;
 
 export const TO_PERCENTAGE_MULTIPLIER = 100;
 export const ANSWER_LETTERS = ['A.', 'B.', 'C.', 'D.'];
@@ -56,7 +67,6 @@ export const LANGUAGES = [
   { label: 'Українська', value: 'uk' },
   { label: 'Italiano', value: 'it' },
   { label: 'Magyar', value: 'hu' },
-
 ];
 
 export const NON_INDEPENDENT_COUNTRY_CODES = [
