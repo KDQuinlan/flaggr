@@ -2,8 +2,8 @@ export default {
   regions: {
     europe: 'Europa',
     asia: 'Asia',
-    northamerica: 'Nord America',
-    southamerica: 'Sud America',
+    northAmerica: 'Nord America',
+    southAmerica: 'Sud America',
     oceania: 'Oceania',
     africa: 'Africa',
     buttonAccessibility: 'Attiva/Disattiva {{option}}',

@@ -13,9 +13,6 @@ export const MAXIMUM_DIFFICULTY = 10;
 export const GAME_DIFFICULTIES: Difficulties[] = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
 ];
-export const GAME_CONTINENTS = [
-  'Europe, Asia, Africa, South America, North America, Oceania',
-];
 
 export const MINIMUM_CUSTOM_TIME_LIMIT_SECONDS = 0;
 export const MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS = 240;
@@ -35,17 +32,6 @@ export const LEVEL_SEVEN_FLAGS_AMOUNT = 26;
 export const LEVEL_EIGHT_FLAGS_AMOUNT = 19;
 export const LEVEL_NINE_FLAGS_AMOUNT = 20;
 export const LEVEL_TEN_FLAGS_AMOUNT = 24;
-export const TOTAL_FLAGS_AMOUNT =
-  LEVEL_ONE_FLAGS_AMOUNT +
-  LEVEL_TWO_FLAGS_AMOUNT +
-  LEVEL_THREE_FLAGS_AMOUNT +
-  LEVEL_FOUR_FLAGS_AMOUNT +
-  LEVEL_FIVE_FLAGS_AMOUNT +
-  LEVEL_SIX_FLAGS_AMOUNT +
-  LEVEL_SEVEN_FLAGS_AMOUNT +
-  LEVEL_EIGHT_FLAGS_AMOUNT +
-  LEVEL_NINE_FLAGS_AMOUNT +
-  LEVEL_TEN_FLAGS_AMOUNT;
 
 export const TO_PERCENTAGE_MULTIPLIER = 100;
 export const ANSWER_LETTERS = ['A.', 'B.', 'C.', 'D.'];

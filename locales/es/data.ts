@@ -2,8 +2,8 @@ export default {
   regions: {
     europe: 'Europa',
     asia: 'Asia',
-    northamerica: 'América del Norte',
-    southamerica: 'América del Sur',
+    northAmerica: 'América del Norte',
+    southAmerica: 'América del Sur',
     oceania: 'Oceanía',
     africa: 'África',
     buttonAccessibility: 'Alternar {{option}}',

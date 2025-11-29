@@ -28,6 +28,7 @@ import { colors } from '@/components/colors';
 import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_TEST_ID } from '@/constants/adId';
 import updatePassport from '@/util/updatePassport/updatePassport';
+import persistProgression from '@/util/persistState/persistProgression';
 
 const MultipleChoice = () => {
   const { height } = useWindowDimensions();
@@ -177,7 +178,26 @@ const MultipleChoice = () => {
     setStreak(newStreakTotal);
     setHighestStreak(newHighestStreakTotal);
 
-    updatePassport(countryCode, correctAnswer, continent, isCorrect);
+    persistProgression({
+      ...userProgression,
+      games: {
+        ...userProgression.games,
+        totalCorrect: isCorrect
+          ? userProgression.games.totalCorrect + 1
+          : userProgression.games.totalCorrect,
+        totalIncorrect: isCorrect
+          ? userProgression.games.totalIncorrect
+          : userProgression.games.totalIncorrect + 1,
+      },
+    });
+
+    updatePassport(
+      countryCode,
+      correctAnswer,
+      continent,
+      difficulty,
+      isCorrect
+    );
 
     gameMode === 'custom' &&
       setCustomScore(
