@@ -66,14 +66,12 @@ function RootLayoutContent() {
           name="passport"
           options={{
             headerShown: true,
-            ...(!isPremiumUser && { headerRight: () => <EnergyDisplay /> }),
           }}
         />
         <Stack.Screen
           name="passportEntry"
           options={{
             headerShown: true,
-            ...(!isPremiumUser && { headerRight: () => <EnergyDisplay /> }),
           }}
         />
         <Stack.Screen
