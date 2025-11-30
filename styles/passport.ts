@@ -130,6 +130,11 @@ export const getPassportStyles = (theme: ThemeColors) => {
       alignItems: 'center',
       borderColor: colors.bluePrimary,
     },
+    filterModalContentContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingBottom: 15,
+    },
     noResultsContainer: {
       justifyContent: 'center',
       alignItems: 'center',
