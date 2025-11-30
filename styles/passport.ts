@@ -130,5 +130,11 @@ export const getPassportStyles = (theme: ThemeColors) => {
       alignItems: 'center',
       borderColor: colors.bluePrimary,
     },
+    noResultsContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 10,
+      marginTop: 10,
+    },
   });
 };

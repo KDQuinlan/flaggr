@@ -390,6 +390,30 @@
     "difficulty": 6
   },
   {
+    "countryCode": "GB-ENG",
+    "countryName": "England",
+    "continent": "Europe",
+    "difficulty": 2
+  },
+  {
+    "countryCode": "GB-NIR",
+    "countryName": "Northern Ireland",
+    "continent": "Europe",
+    "difficulty": 5
+  },
+  {
+    "countryCode": "GB-SCT",
+    "countryName": "Scotland",
+    "continent": "Europe",
+    "difficulty": 3
+  },
+  {
+    "countryCode": "GB-WLS",
+    "countryName": "Wales",
+    "continent": "Europe",
+    "difficulty": 4
+  },
+  {
     "countryCode": "GQ",
     "countryName": "Equatorial Guinea",
     "continent": "Africa",

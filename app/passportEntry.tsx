@@ -12,6 +12,7 @@ import { BANNER_TEST_ID } from '@/constants/adId';
 import { getPassportEntryStyles } from '@/styles/passportEntry';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import flags from '@/assets/images/flags';
+import { MAXIMUM_DIFFICULTY } from '@/constants/common';
 
 const PassportEntryScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -46,10 +47,13 @@ const PassportEntryScreen = () => {
         </View>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <Text style={styles.text}>
-            Times seen: {entry.correctTotal + entry.incorrectTotal}
+            Difficulty: {`${entry.difficulty} / ${MAXIMUM_DIFFICULTY}`}
           </Text>
           <Text style={styles.text}>
-            Guess rate:{' '}
+            Times Answered: {entry.correctTotal + entry.incorrectTotal}
+          </Text>
+          <Text style={styles.text}>
+            Guess Rate:{' '}
             {(
               (entry.correctTotal /
                 (entry.incorrectTotal + entry.correctTotal)) *

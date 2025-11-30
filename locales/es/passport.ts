@@ -11,4 +11,7 @@ export default {
   close: 'Cerrar',
   continents: 'Continentes',
   difficulty: 'Dificultad',
+  noResultsTitle: 'Sin resultados',
+  noResultsText:
+    'No has desbloqueado ningún resultado con los filtros aplicados. Hay {{value}} ocultos. ¡Sigue jugando para encontrarlos!',
 };

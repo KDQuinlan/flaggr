@@ -11,4 +11,7 @@ export default {
   close: 'Sluiten',
   continents: 'Continenten',
   difficulty: 'Moeilijkheid',
+  noResultsTitle: 'Geen resultaten',
+  noResultsText:
+    'Je hebt geen resultaten ontgrendeld met de toegepaste filters. Er zijn {{value}} verborgen. Blijf spelen om ze te vinden!',
 };

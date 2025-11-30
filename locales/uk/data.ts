@@ -263,5 +263,9 @@ export default {
     yemen: 'Ємен',
     zambia: 'Замбія',
     zimbabwe: 'Зімбабве',
+    england: 'Англія',
+    scotland: 'Шотландія',
+    northernIreland: 'Північна Ірландія',
+    wales: 'Уельс',
   },
 };

@@ -77,6 +77,10 @@ import FoFlag from './resources/fo.png';
 import FrFlag from './resources/fr.png';
 import GaFlag from './resources/ga.png';
 import GbFlag from './resources/gb.png';
+import GbEngFlag from './resources/gb-eng.png';
+import GbNirFlag from './resources/gb-nir.png';
+import GbSctFlag from './resources/gb-sct.png';
+import GbWlsFlag from './resources/gb-wls.png';
 import GdFlag from './resources/gd.png';
 import GeFlag from './resources/ge.png';
 import GfFlag from './resources/gf.png';
@@ -330,6 +334,10 @@ const flags: FlagMap = {
   fr: FrFlag,
   ga: GaFlag,
   gb: GbFlag,
+  'gb-eng': GbEngFlag,
+  'gb-nir': GbNirFlag,
+  'gb-sct': GbSctFlag,
+  'gb-wls': GbWlsFlag,
   gd: GdFlag,
   ge: GeFlag,
   gf: GfFlag,

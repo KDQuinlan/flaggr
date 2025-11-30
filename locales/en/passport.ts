@@ -10,4 +10,7 @@ export default {
   close: 'Close',
   continents: 'Continents',
   difficulty: 'Difficulty',
+  noResultsTitle: 'No Results',
+  noResultsText:
+    'You have not unlocked any results with applied filters. There are {{value}} hidden. Keep playing to find them!',
 };

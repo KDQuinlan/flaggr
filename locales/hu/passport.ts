@@ -11,4 +11,7 @@ export default {
   close: 'Bezárás',
   continents: 'Kontinensek',
   difficulty: 'Nehézség',
+  noResultsTitle: 'Nincs találat',
+  noResultsText:
+    'Nem nyitottál fel egyetlen eredményt sem az alkalmazott szűrőkkel. {{value}} van elrejtve. Játssz tovább, hogy megtaláld őket!',
 };

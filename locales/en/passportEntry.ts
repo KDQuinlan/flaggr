@@ -2418,4 +2418,44 @@ export default {
     history:
       'The Zimbabwe Bird is based on soapstone carvings found at the Great Zimbabwe ruins, an ancient city that flourished between the 11th and 15th centuries. The flag replaced the Zimbabwe Rhodesia flag (1979) and the Union Jack upon full independence.',
   },
+  'gb-eng': {
+    adoptionTitle: 'Adoption',
+    adoption: 'Late Middle Ages (Associated with St George c. 1348)',
+    symbolismTitle: 'Symbolism',
+    symbolism:
+      'The red cross of Saint George on a white field. The red represents the blood of Christian martyrs and military courage, while the white background historically symbolizes peace and purity.',
+    historyTitle: 'History',
+    history:
+      "The St George's Cross traces its origins to the Crusades. Originally the standard of the Republic of Genoa, English ships flew it to benefit from Genoese protection. It became officially associated with England in 1348 when Edward III adopted St George as the patron saint. It was later combined with the Scottish Saltire to form the first Union Flag in 1606.",
+  },
+  'gb-nir': {
+    adoptionTitle: 'Adoption',
+    adoption: '1953 (Abolished as official flag 1973)',
+    symbolismTitle: 'Symbolism',
+    symbolism:
+      'A red cross on white (English heritage) with a six-pointed star (the six counties of Northern Ireland). The Red Hand of Ulster is an ancient Gaelic symbol of the province. The Crown represents loyalty to the British Monarchy.',
+    historyTitle: 'History',
+    history:
+      'Known as the "Ulster Banner," this was the official flag of the Government of Northern Ireland from 1953 until the parliament was suspended in 1972 and abolished in 1973. Since then, the only official flag is the Union Jack. However, the Ulster Banner is still widely used to represent Northern Ireland in international sports like the Commonwealth Games and football.',
+  },
+  'gb-sct': {
+    adoptionTitle: 'Adoption',
+    adoption: '1542 (Official) / 832 AD (Legendary)',
+    symbolismTitle: 'Symbolism',
+    symbolism:
+      'A white saltire (diagonal cross) on a blue field. It represents the cross of Saint Andrew, the patron saint of Scotland, who was crucified on an X-shaped cross.',
+    historyTitle: 'History',
+    history:
+      'The "Saltire" is one of the oldest flags in Europe. Legend says King Angus II saw a white cross in the blue sky before a battle in 832 AD, promising victory. It was officially used as a national symbol by 1385, and the blue field was standardized in 2003 to Pantone 300 (lighter than the Union Jack\'s blue).',
+  },
+  'gb-wls': {
+    adoptionTitle: 'Adoption',
+    adoption: '1959',
+    symbolismTitle: 'Symbolism',
+    symbolism:
+      'The Red Dragon (Y Ddraig Goch) symbolizes the Welsh people and their defense of the land. The green and white stripes are the livery colours of the House of Tudor, the Welsh dynasty that ruled England from 1485 to 1603.',
+    historyTitle: 'History',
+    history:
+      'The Red Dragon has been a symbol of the Welsh people since the fall of the Roman Empire, famously appearing in the prophecies of Merlin. It was the battle standard of Henry VII (Henry Tudor) at the Battle of Bosworth Field in 1485. Despite its ancient roots, it was not officially recognized as the national flag until 1959, following a campaign by the Gorsedd of Bards.',
+  },
 };

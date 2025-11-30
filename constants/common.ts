@@ -23,10 +23,10 @@ export const DEFAULT_SCORE_MULTIPLIER = 1;
 export const INDEPENDENT_COUNTRIES_PENALTY = 0.9;
 
 export const LEVEL_ONE_FLAGS_AMOUNT = 19;
-export const LEVEL_TWO_FLAGS_AMOUNT = 17;
-export const LEVEL_THREE_FLAGS_AMOUNT = 22;
-export const LEVEL_FOUR_FLAGS_AMOUNT = 29;
-export const LEVEL_FIVE_FLAGS_AMOUNT = 41;
+export const LEVEL_TWO_FLAGS_AMOUNT = 18;
+export const LEVEL_THREE_FLAGS_AMOUNT = 23;
+export const LEVEL_FOUR_FLAGS_AMOUNT = 39;
+export const LEVEL_FIVE_FLAGS_AMOUNT = 42;
 export const LEVEL_SIX_FLAGS_AMOUNT = 25;
 export const LEVEL_SEVEN_FLAGS_AMOUNT = 26;
 export const LEVEL_EIGHT_FLAGS_AMOUNT = 19;
@@ -72,6 +72,10 @@ export const NON_INDEPENDENT_COUNTRY_CODES = [
   'EH',
   'FK',
   'FO',
+  'GB-ENG',
+  'GB-NIR',
+  'GB-SCT',
+  'GB-WLS',
   'GF',
   'GG',
   'GI',

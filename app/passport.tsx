@@ -58,6 +58,11 @@ const PassportScreen = () => {
   );
   const showAds = !userSettings.isPremiumUser && isInternetAvailable;
 
+  const passportCardAmountWithoutSpacing = Math.floor((width - 40) / 150);
+  const passportCardAllowance = Math.floor(
+    (width - passportCardAmountWithoutSpacing * 20) / 150
+  );
+
   const closeInformationModal = () => setInformationModal(false);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -167,21 +172,32 @@ const PassportScreen = () => {
   );
 
   const InformationButton = () => (
-    <Pressable
-      onPress={() => setInformationModal(!informationModal)}
-      style={({ pressed }) => [
-        styles.totalInformationButton,
-        { opacity: pressed ? 0.7 : 1 },
-      ]}
-    >
-      <Text style={styles.totalText}>
-        {`${passport.length} / ${filteredResultsAmount}`}
-      </Text>
-      <Image
-        style={{ width: 20, height: 20 }}
-        source={require('@/assets/images/icons/resources/information.png')}
-      />
-    </Pressable>
+    <View>
+      <Pressable
+        onPress={() => setInformationModal(!informationModal)}
+        style={({ pressed }) => [
+          styles.totalInformationButton,
+          { opacity: pressed ? 0.7 : 1 },
+        ]}
+      >
+        <Text style={styles.totalText}>
+          {`${passport.length} / ${filteredResultsAmount}`}
+        </Text>
+        <Image
+          style={{ width: 20, height: 20 }}
+          source={require('@/assets/images/icons/resources/information.png')}
+        />
+      </Pressable>
+
+      {passport.length === 0 && (
+        <View style={styles.noResultsContainer}>
+          <Text style={styles.titleText}>{t('noResultsTitle')}</Text>
+          <Text style={styles.text}>
+            {t('noResultsText', { value: filteredResultsAmount })}
+          </Text>
+        </View>
+      )}
+    </View>
   );
 
   return (
@@ -222,7 +238,7 @@ const PassportScreen = () => {
                 data={passport}
                 keyExtractor={(item) => item.countryName}
                 renderItem={({ item }) => <PassportCard {...item} />}
-                numColumns={Math.floor(width / 150)}
+                numColumns={passportCardAllowance}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.flatlistContainer}
                 columnWrapperStyle={{ gap: 10 }}
