@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
+import { colors } from '@/components/colors';
 
 export const getPassportStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -116,6 +117,24 @@ export const getPassportStyles = (theme: ThemeColors) => {
       justifyContent: 'center',
       alignItems: 'center',
       gap: 10,
+    },
+    filterModalTitleRoot: {
+      flexDirection: 'row',
+      borderBottomWidth: 1,
+      borderColor: theme.accent,
+      height: 40,
+    },
+    filterModalTitleContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderColor: colors.bluePrimary,
+    },
+    noResultsContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 10,
+      marginTop: 10,
     },
   });
 };

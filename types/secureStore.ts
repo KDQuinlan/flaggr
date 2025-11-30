@@ -63,6 +63,7 @@ export type PassportEntry = {
   countryCode: string;
   countryName: string;
   continent: string;
+  difficulty: number;
   correctTotal: number;
   incorrectTotal: number;
 };
@@ -75,6 +76,8 @@ export type ProgressionStructure = {
     rapid: GameProgression;
     custom: CustomData;
     matchesPlayed: number;
+    totalCorrect: number;
+    totalIncorrect: number;
   };
   passport: Passport;
 };

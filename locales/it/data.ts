@@ -2,8 +2,8 @@ export default {
   regions: {
     europe: 'Europa',
     asia: 'Asia',
-    northamerica: 'Nord America',
-    southamerica: 'Sud America',
+    northAmerica: 'Nord America',
+    southAmerica: 'Sud America',
     oceania: 'Oceania',
     africa: 'Africa',
     buttonAccessibility: 'Attiva/Disattiva {{option}}',
@@ -263,5 +263,9 @@ export default {
     yemen: 'Yemen',
     zambia: 'Zambia',
     zimbabwe: 'Zimbabwe',
+    england: 'Inghilterra',
+    scotland: 'Scozia',
+    northernIreland: 'Irlanda del Nord',
+    wales: 'Galles',
   },
 };

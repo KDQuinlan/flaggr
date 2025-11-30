@@ -20,12 +20,17 @@ import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDiffi
 import formatTime from '@/util/formatTime/formatTime';
 import setBestGameData from '@/util/updatedProgressionStructure/setBestGameData';
 import { ProgressionStructure } from '@/types/secureStore';
-import { HIGHEST_SCORE_ID, MATCHES_PLAYED_ID } from '@/constants/leaderboard';
+import {
+  ACCURACY_ID,
+  HIGHEST_SCORE_ID,
+  MATCHES_PLAYED_ID,
+} from '@/constants/leaderboard';
 import PlayGames from '@/PlayGames';
 import { useTheme } from '@/context/ThemeContext';
 import { getCustomSummaryStyles } from '@/styles/customSummary';
 import { BANNER_TEST_ID } from '@/constants/adId';
 import AdBanner from '@/components/AdBanner/AdBanner';
+import calculateLeaderboardScore from '@/util/calculateLeaderboardScore/calculateLeaderboardScore';
 
 const CustomSummary = () => {
   useFocusEffect(
@@ -53,7 +58,6 @@ const CustomSummary = () => {
   const { isPremiumUser } = stateStore((s) => s.userSettings);
   const { gameResult, finalScore } = route.params;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;
-  const matchesPlayed = userProgression.games.matchesPlayed;
   const { regions, independentCountriesOnly, timeLimit, gameLength } =
     userProgression.games.custom.currentGame;
 
@@ -76,12 +80,19 @@ const CustomSummary = () => {
   }, [navigation]);
 
   useEffect(() => {
-    const newMatchesPlayed = matchesPlayed + 1;
+    const newMatchesPlayed =
+      initialProgressionRef.current.games.matchesPlayed + 1;
+    const totalCorrect = initialProgressionRef.current.games.totalCorrect;
+    const totalIncorrect = initialProgressionRef.current.games.totalIncorrect;
     persistProgression({
       games: { ...userProgression.games, matchesPlayed: newMatchesPlayed },
       passport: userProgression.passport,
     });
     PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
+    PlayGames.submitScore(
+      ACCURACY_ID,
+      calculateLeaderboardScore(totalCorrect, totalCorrect + totalIncorrect)
+    );
   }, [navigation, gameResult]);
 
   useEffect(() => {
@@ -103,7 +114,7 @@ const CustomSummary = () => {
       persistProgression(updatedProgression);
       PlayGames.submitScore(HIGHEST_SCORE_ID, finalScore);
     }
-  }, [finalScore]);
+  }, [navigation, finalScore]);
 
   const handleContinue = () => resetToDifficultyScreen(navigation, 'custom');
 

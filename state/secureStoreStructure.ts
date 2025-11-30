@@ -23,6 +23,8 @@ export const defaultProgressionStructure: ProgressionStructure = {
     rapid,
     custom,
     matchesPlayed: 0,
+    totalCorrect: 0,
+    totalIncorrect: 0,
   },
   passport: [],
 };

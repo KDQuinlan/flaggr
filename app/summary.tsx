@@ -26,13 +26,14 @@ import getNextLevelKey from '@/util/getNextLevelKey/getNextLevelKey';
 import persistProgression from '@/util/persistState/persistProgression';
 import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import { ProgressionStructure } from '@/types/secureStore';
-import { MATCHES_PLAYED_ID } from '@/constants/leaderboard';
+import { ACCURACY_ID, MATCHES_PLAYED_ID } from '@/constants/leaderboard';
 import PlayGames from '@/PlayGames';
 import determineSummaryIcons from '@/util/determineSummaryIcons';
 import { getSummaryStyles } from '@/styles/summary';
 import { useTheme } from '@/context/ThemeContext';
 import { BANNER_TEST_ID } from '@/constants/adId';
 import AdBanner from '@/components/AdBanner/AdBanner';
+import calculateLeaderboardScore from '@/util/calculateLeaderboardScore/calculateLeaderboardScore';
 
 const Summary = () => {
   useFocusEffect(
@@ -59,7 +60,6 @@ const Summary = () => {
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser } = stateStore((s) => s.userSettings);
   const { difficulty, gameMode, gameResult } = route.params;
-  const matchesPlayed = userProgression.games.matchesPlayed;
   const { correct, incorrect, highestStreak, timeTaken } = gameResult;
   const numberSuffix = gameMode === 'rapid' ? '' : '%';
   const translatedDifficulty = t(`levels.${LEVEL_MAP[difficulty]}`, {
@@ -150,7 +150,10 @@ const Summary = () => {
   }, [navigation, difficulty]);
 
   useEffect(() => {
-    const newMatchesPlayed = matchesPlayed + 1;
+    const newMatchesPlayed =
+      initialProgressionRef.current.games.matchesPlayed + 1;
+    const totalCorrect = initialProgressionRef.current.games.totalCorrect;
+    const totalIncorrect = initialProgressionRef.current.games.totalIncorrect;
     const updatedProgression: ProgressionStructure =
       createUpdatedProgressionStructure(
         initialProgressionRef.current,
@@ -164,6 +167,11 @@ const Summary = () => {
       games: { ...updatedProgression.games, matchesPlayed: newMatchesPlayed },
       passport: updatedProgression.passport,
     });
+    PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
+    PlayGames.submitScore(
+      ACCURACY_ID,
+      calculateLeaderboardScore(totalCorrect, totalCorrect + totalIncorrect)
+    );
   }, [
     navigation,
     gameResult,
