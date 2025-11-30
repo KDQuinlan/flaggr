@@ -23,14 +23,17 @@ import stateStore from '@/state/store';
 import { useTheme } from '@/context/ThemeContext';
 import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_TEST_ID } from '@/constants/adId';
-import { Passport, PassportEntry } from '@/types/secureStore';
+import { Passport } from '@/types/secureStore';
 import { getPassportStyles } from '@/styles/passport';
-import flags from '@/assets/images/flags';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 import { GAME_DIFFICULTIES, VALID_REGIONS } from '@/constants/common';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { DIFFICULTY_ID_TO_LEVEL_KEYS_MAP } from '@/constants/mappers';
 import countriesData from '@/assets/data/countries.json';
+import InformationButton from '@/components/passport/informationButton';
+import PassportCard from '@/components/passport/passportCard';
+import InformationModal from '@/components/passport/informationModal';
+import { colors } from '@/components/colors';
 
 interface BasicEntry {
   countryName: string;
@@ -47,6 +50,7 @@ const PassportScreen = () => {
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userProgression = stateStore((s) => s.userProgress);
   const userSettings = stateStore((s) => s.userSettings);
+  const showAds = !userSettings.isPremiumUser && isInternetAvailable;
   const [passport, setPassport] = useState<Passport>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [continentFilter, setContinentFilter] = useState<string[]>([]);
@@ -56,18 +60,19 @@ const PassportScreen = () => {
   const [filteredResultsAmount, setFilteredResultsAmount] = useState<number>(
     countriesData.length
   );
-  const showAds = !userSettings.isPremiumUser && isInternetAvailable;
 
   const passportCardAmountWithoutSpacing = Math.floor((width - 40) / 150);
   const passportCardAllowance = Math.floor(
     (width - passportCardAmountWithoutSpacing * 20) / 150
   );
 
-  const closeInformationModal = () => setInformationModal(false);
-
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['50%', '80%'], []);
   const [activeTab, setActiveTab] = useState(0);
+
+  const handleInfoPress = useCallback(() => {
+    setInformationModal((prev) => !prev);
+  }, []);
 
   const handleSheetChanges = useCallback((index: number) => {
     setFilterModal(index >= 0);
@@ -123,83 +128,6 @@ const PassportScreen = () => {
   // Equally divide width - horizontal margin - gap / between amount that can be rendered
   const PASSPORT_CARD_WIDTH = (width - 40 - 10) / Math.floor(width / 150);
 
-  const PassportCard = (passportEntry: PassportEntry) => (
-    <Pressable
-      onPress={() =>
-        navigation.navigate('passportEntry', { entry: passportEntry })
-      }
-      style={({ pressed }) => [
-        styles.passportCard,
-        { opacity: pressed ? 0.7 : 1, width: PASSPORT_CARD_WIDTH },
-      ]}
-    >
-      <Image
-        source={flags[passportEntry.countryCode.toLowerCase()]}
-        contentFit="contain"
-        style={styles.passportCardImage}
-      />
-      <Text style={styles.passportCardText}>{passportEntry.countryName}</Text>
-    </Pressable>
-  );
-
-  const InformationModal = () => (
-    <Modal
-      transparent
-      animationType="fade"
-      visible={informationModal}
-      onRequestClose={closeInformationModal}
-    >
-      <Pressable onPress={closeInformationModal} style={styles.modalBackdrop}>
-        <Pressable
-          onPress={(e) => e.stopPropagation()}
-          style={styles.modalContainer}
-        >
-          <Text style={styles.titleText}>{t('title')}</Text>
-          <Text style={styles.text}>{t('informationModalUnlock')}</Text>
-          <Text style={styles.text}>{t('informationModalFilter')}</Text>
-          <Pressable
-            onPress={closeInformationModal}
-            style={({ pressed }) => [
-              styles.closeButton,
-              { opacity: pressed ? 0.7 : 1 },
-            ]}
-          >
-            <Text style={styles.closeButtonText}>{t('close')}</Text>
-          </Pressable>
-        </Pressable>
-      </Pressable>
-    </Modal>
-  );
-
-  const InformationButton = () => (
-    <View>
-      <Pressable
-        onPress={() => setInformationModal(!informationModal)}
-        style={({ pressed }) => [
-          styles.totalInformationButton,
-          { opacity: pressed ? 0.7 : 1 },
-        ]}
-      >
-        <Text style={styles.totalText}>
-          {`${passport.length} / ${filteredResultsAmount}`}
-        </Text>
-        <Image
-          style={{ width: 20, height: 20 }}
-          source={require('@/assets/images/icons/resources/information.png')}
-        />
-      </Pressable>
-
-      {passport.length === 0 && (
-        <View style={styles.noResultsContainer}>
-          <Text style={styles.titleText}>{t('noResultsTitle')}</Text>
-          <Text style={styles.text}>
-            {t('noResultsText', { value: filteredResultsAmount })}
-          </Text>
-        </View>
-      )}
-    </View>
-  );
-
   return (
     <GestureHandlerRootView>
       <BottomSheetModalProvider>
@@ -237,21 +165,36 @@ const PassportScreen = () => {
               <FlatList
                 data={passport}
                 keyExtractor={(item) => item.countryName}
-                renderItem={({ item }) => <PassportCard {...item} />}
+                renderItem={({ item }) => (
+                  <PassportCard
+                    passportEntry={item}
+                    width={PASSPORT_CARD_WIDTH}
+                  />
+                )}
                 numColumns={passportCardAllowance}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.flatlistContainer}
                 columnWrapperStyle={{ gap: 10 }}
-                ListHeaderComponent={<InformationButton />}
+                ListHeaderComponent={
+                  <InformationButton
+                    onPress={handleInfoPress}
+                    passportLength={passport.length}
+                    filteredResultsAmount={filteredResultsAmount}
+                  />
+                }
               />
 
-              <InformationModal />
+              <InformationModal
+                informationModal={informationModal}
+                closeInformationModal={handleInfoPress}
+              />
 
               <BottomSheetModal
                 ref={bottomSheetModalRef}
                 index={0}
                 snapPoints={snapPoints}
                 backgroundStyle={{ backgroundColor: theme.background }}
+                handleIndicatorStyle={{ backgroundColor: colors.bluePrimary }}
                 onChange={handleSheetChanges}
               >
                 <View style={{ flex: 1 }}>
@@ -305,11 +248,9 @@ const PassportScreen = () => {
                         <Pressable
                           key={region}
                           style={({ pressed }) => [
+                            styles.filterModalContentContainer,
                             {
                               opacity: pressed ? 0.7 : 1,
-                              flexDirection: 'row',
-                              alignItems: 'center',
-                              paddingBottom: 15,
                             },
                           ]}
                           onPress={() =>
@@ -326,6 +267,7 @@ const PassportScreen = () => {
                                 ? 'checked'
                                 : 'unchecked'
                             }
+                            color={colors.bluePrimary}
                           />
                           <Text style={styles.text}>
                             {t(
@@ -346,11 +288,9 @@ const PassportScreen = () => {
                         <Pressable
                           key={difficulty}
                           style={({ pressed }) => [
+                            styles.filterModalContentContainer,
                             {
                               opacity: pressed ? 0.7 : 1,
-                              flexDirection: 'row',
-                              alignItems: 'center',
-                              paddingBottom: 15,
                             },
                           ]}
                           onPress={() =>
@@ -367,6 +307,7 @@ const PassportScreen = () => {
                                 ? 'checked'
                                 : 'unchecked'
                             }
+                            color={colors.bluePrimary}
                           />
                           <Text style={styles.text}>
                             {t(
