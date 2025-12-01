@@ -16,8 +16,6 @@ export const getCustomStyles = (theme: ThemeColors) => {
     modifierContainer: {
       backgroundColor: theme.card,
       borderRadius: 8,
-      shadowColor: theme.shadow,
-      // elevation: 4,
       marginTop: 20,
       paddingBottom: 5,
       width: '100%',
@@ -150,7 +148,6 @@ export const getCustomStyles = (theme: ThemeColors) => {
     divider: {
       height: 1,
       backgroundColor: theme.accent,
-      marginVertical: 5,
     },
     resetButton: {
       flexDirection: 'row',
@@ -166,11 +163,38 @@ export const getCustomStyles = (theme: ThemeColors) => {
       paddingTop: 10,
     },
     accordionContainer: {
-      marginTop: 20,
+      backgroundColor: theme.card,
+      padding: 20,
       borderRadius: 8,
-      overflow: 'hidden',
-      shadowColor: theme.shadow,
-      // elevation: 2,
+      gap: 20,
+      marginTop: 20,
+    },
+    accordionRowContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    accordionTitleText: {
+      color: colors.blueSecondary,
+      fontFamily: 'DMSansBold',
+      fontSize: 18,
+    },
+    accordionSubtitleText: {
+      fontFamily: 'DMSansBold',
+      fontSize: 16,
+      color: theme.text,
+    },
+    accordionText: {
+      flex: 1,
+      fontFamily: 'DMSans',
+      fontSize: 16,
+      color: theme.text,
+    },
+    accordionBoldText: {
+      flex: 1,
+      fontFamily: 'DMSansBold',
+      fontSize: 16,
+      color: theme.text,
     },
   });
 };
