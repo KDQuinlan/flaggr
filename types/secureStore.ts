@@ -1,3 +1,5 @@
+import { TimeLimits } from './screens';
+
 export type Levels =
   | 'Level 1'
   | 'Level 2'
@@ -45,7 +47,7 @@ export type CustomBestData = {
   score: number;
   regions: string[];
   independentCountriesOnly: boolean;
-  timeLimit: number;
+  timeLimit: TimeLimits;
   gameLength: number;
   correct: number;
   incorrect: number;

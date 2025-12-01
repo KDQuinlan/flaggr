@@ -4,7 +4,7 @@ import Slider from '@react-native-community/slider';
 import { Image } from 'expo-image';
 import * as Haptics from 'expo-haptics';
 import { useNavigation } from 'expo-router';
-import { Divider, List, Switch } from 'react-native-paper';
+import { Divider, Switch } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useTranslation } from 'react-i18next';
 
@@ -32,6 +32,13 @@ import { getCustomStyles } from '@/styles/custom';
 import { useTheme } from '@/context/ThemeContext';
 import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_TEST_ID } from '@/constants/adId';
+import { Feather } from '@expo/vector-icons';
+import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
+
+interface IStatsAccordionRow {
+  title: string;
+  value: string | number | boolean;
+}
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -47,9 +54,7 @@ const CustomScreen = () => {
 
   const showAds = !isPremiumUser && isInternetAvailable;
 
-  const [isScoreAccordionExpanded, setIsScoreAccordionExpanded] =
-    useState<boolean>(false);
-  const [isStatsAccordionExpanded, setIsStatsAccordionExpanded] =
+  const [isStatsAccordionOpen, setIsStatsAccordionOpen] =
     useState<boolean>(false);
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const [isIndependentOnly, setIsIndependentOnly] = useState<boolean>(false);
@@ -76,14 +81,25 @@ const CustomScreen = () => {
     streak,
   } = userProgression.games.custom.bestGame;
 
+  const localisedRegionArray = regions
+    .map((region) => t(`regions.${toJsonKeyFormat(region)}`, { ns: 'data' }))
+    .join(', ');
+
   const handleReset = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    setIsScoreAccordionExpanded(false);
-    setIsStatsAccordionExpanded(false);
+    setIsStatsAccordionOpen(false);
     setSelectedRegions([]);
     setIsIndependentOnly(false);
     setGameLengthSlider(DEFAULT_GAME_LENGTH);
     setTimeLimitSlider(MINIMUM_CUSTOM_TIME_LIMIT_SECONDS);
+  };
+
+  const handleUseSetup = () => {
+    setIsStatsAccordionOpen(false);
+    setSelectedRegions(regions);
+    setIsIndependentOnly(independentCountriesOnly);
+    setGameLengthSlider(gameLength);
+    setTimeLimitSlider(timeLimit);
   };
 
   const isDisabled = selectedRegions.length === 0;
@@ -134,80 +150,106 @@ const CustomScreen = () => {
     }
   };
 
+  const StatsAccordionRow = ({ title, value }: IStatsAccordionRow) => (
+    <View style={styles.accordionRowContainer}>
+      <Text style={styles.accordionText}>{title}</Text>
+      <Text style={styles.accordionBoldText}>{value}</Text>
+    </View>
+  );
+
+  const HighScoreAccordion = () => (
+    <Pressable
+      onPress={() => setIsStatsAccordionOpen(!isStatsAccordionOpen)}
+      style={({ pressed }) => [
+        styles.accordionContainer,
+        {
+          opacity: pressed ? 0.7 : 1,
+        },
+      ]}
+    >
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Text style={styles.accordionTitleText}>
+          {t('highScoreAccordion.title')}
+        </Text>
+        <Feather
+          name={isStatsAccordionOpen ? 'chevron-up' : 'chevron-down'}
+          size={24}
+          color={theme.text}
+        />
+      </View>
+      {isStatsAccordionOpen && (
+        <View style={{ gap: 20 }}>
+          <Text style={styles.accordionSubtitleText}>
+            {t('highScoreAccordion.statsTitle')}
+          </Text>
+          <View style={{ gap: 10 }}>
+            <StatsAccordionRow
+              title={t('highScoreAccordion.highScore')}
+              value={score}
+            />
+            <StatsAccordionRow
+              title={t('highScoreAccordion.correct')}
+              value={correct}
+            />
+            <StatsAccordionRow
+              title={t('highScoreAccordion.incorrect')}
+              value={incorrect}
+            />
+            <StatsAccordionRow
+              title={t('highScoreAccordion.bestStreak')}
+              value={streak}
+            />
+          </View>
+
+          <Divider style={styles.divider} />
+
+          <Text style={styles.accordionSubtitleText}>
+            {t('highScoreAccordion.setupTitle')}
+          </Text>
+          <View style={{ gap: 10 }}>
+            <StatsAccordionRow title="Regions" value={localisedRegionArray} />
+            <StatsAccordionRow
+              title={t('highScoreAccordion.independentOnly')}
+              value={
+                independentCountriesOnly
+                  ? t('highScoreAccordion.independentOnlyEnabled')
+                  : t('highScoreAccordion.independentOnlyDisabled')
+              }
+            />
+            <StatsAccordionRow
+              title={t('highScoreAccordion.timeLimit')}
+              value={timeLimit === 0 ? t('gameRules.unlimited') : timeLimit}
+            />
+            <StatsAccordionRow
+              title={t('highScoreAccordion.gameLength')}
+              value={gameLength}
+            />
+          </View>
+          <Pressable
+            style={({ pressed }) => [
+              styles.buttonEnabled,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}
+            accessibilityLabel={t('highScoreAccordion.useSetup')}
+            accessibilityRole="button"
+            onPress={handleUseSetup}
+          >
+            <Text style={styles.buttonText}>
+              {t('highScoreAccordion.useSetup')}
+            </Text>
+          </Pressable>
+        </View>
+      )}
+    </Pressable>
+  );
+
   return (
     <SafeAreaView style={styles.rootContainer}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
       >
-        {!!score && (
-          <View style={styles.accordionContainer}>
-            <List.Accordion
-              title={t('highScoreAccordion.title', { score })}
-              left={(props) => (
-                <List.Icon
-                  {...props}
-                  icon="trophy"
-                  color={colors.bluePrimary}
-                />
-              )}
-              expanded={isScoreAccordionExpanded}
-              style={{ backgroundColor: theme.card }}
-              titleStyle={{ color: theme.text }}
-              onPress={() =>
-                setIsScoreAccordionExpanded(!isScoreAccordionExpanded)
-              }
-            >
-              <List.Item
-                title={t('highScoreAccordion.regions', {
-                  regions: regions.join(', '),
-                })}
-                titleStyle={{ color: theme.text }}
-                style={{ backgroundColor: theme.card }}
-              />
-
-              <List.Item
-                title={
-                  independentCountriesOnly
-                    ? t('highScoreAccordion.independentCountriesOnlyEnabled')
-                    : t('highScoreAccordion.independentCountriesOnlyDisabled')
-                }
-                titleStyle={{ color: theme.text }}
-                style={{ backgroundColor: theme.card }}
-              />
-
-              <List.Item
-                title={t('highScoreAccordion.timeLimit', { timeLimit })}
-                titleStyle={{ color: theme.text }}
-                style={{ backgroundColor: theme.card }}
-              />
-
-              <List.Item
-                title={t('highScoreAccordion.gameLength', { gameLength })}
-                titleStyle={{ color: theme.text }}
-                style={{ backgroundColor: theme.card }}
-              />
-
-              <List.Item
-                title={t('highScoreAccordion.correct', { correct })}
-                titleStyle={{ color: theme.text }}
-                style={{ backgroundColor: theme.card }}
-              />
-
-              <List.Item
-                title={t('highScoreAccordion.incorrect', { incorrect })}
-                titleStyle={{ color: theme.text }}
-                style={{ backgroundColor: theme.card }}
-              />
-
-              <List.Item
-                title={t('highScoreAccordion.bestStreak', { streak })}
-                titleStyle={{ color: theme.text }}
-                style={{ backgroundColor: theme.card }}
-              />
-            </List.Accordion>
-          </View>
-        )}
+        {!!score && <HighScoreAccordion />}
 
         {/* Regions */}
         <View style={styles.modifierContainer}>
@@ -240,7 +282,6 @@ const CustomScreen = () => {
             value={selectedRegions}
             onChange={setSelectedRegions}
           />
-          <Divider style={styles.divider} />
           <View style={styles.independentCountriesContainer}>
             <View style={styles.independentCountriesTextContainer}>
               <Text style={styles.independentCountriesText}>
