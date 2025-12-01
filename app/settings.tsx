@@ -44,22 +44,15 @@ const SettingsScreen = () => {
   const showAds = !userSettings.isPremiumUser && isInternetAvailable;
 
   useEffect(() => {
-    if (userSettings.locale !== language) {
-      i18n.changeLanguage(language);
-    }
+    i18n.changeLanguage(language);
   }, [language]);
 
   useEffect(() => {
-    if (
-      userSettings.isDarkTheme !== isDarkTheme ||
-      userSettings.locale !== language
-    ) {
-      persistUserSettings({
-        ...userSettings,
-        locale: language,
-        isDarkTheme,
-      });
-    }
+    persistUserSettings({
+      ...userSettings,
+      locale: language,
+      isDarkTheme,
+    });
   }, [language, isDarkTheme]);
 
   useEffect(() => {
@@ -76,34 +69,6 @@ const SettingsScreen = () => {
       }, 3000);
     }
   }, [hasResetProgress]);
-
-  const LanguageDropdown = () => (
-    <View>
-      <Text style={styles.label}>{t('language')}</Text>
-      <Dropdown
-        style={styles.dropdown}
-        data={LANGUAGES}
-        labelField="label"
-        valueField="value"
-        value={language}
-        placeholder={t('selectLanguage')}
-        selectedTextStyle={{ color: theme.text }}
-        itemTextStyle={{ color: theme.text }}
-        containerStyle={{
-          backgroundColor: theme.card,
-          borderRadius: 8,
-          borderWidth: 1,
-          borderColor: theme.accent,
-        }}
-        itemContainerStyle={{
-          backgroundColor: theme.card,
-          borderRadius: 8,
-        }}
-        activeColor={theme.accent}
-        onChange={(item) => setLanguage(item.value)}
-      />
-    </View>
-  );
 
   const ThemeToggle = () => (
     <View style={styles.sectionRow}>
@@ -205,7 +170,31 @@ const SettingsScreen = () => {
         keyboardShouldPersistTaps="handled"
       >
         <PurchasePremiumButton />
-        <LanguageDropdown />
+        <View>
+          <Text style={styles.label}>{t('language')}</Text>
+          <Dropdown
+            style={styles.dropdown}
+            data={LANGUAGES}
+            labelField="label"
+            valueField="value"
+            value={language}
+            placeholder={t('selectLanguage')}
+            selectedTextStyle={{ color: theme.text }}
+            itemTextStyle={{ color: theme.text }}
+            containerStyle={{
+              backgroundColor: theme.card,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: theme.accent,
+            }}
+            itemContainerStyle={{
+              backgroundColor: theme.card,
+              borderRadius: 8,
+            }}
+            activeColor={theme.accent}
+            onChange={(item) => setLanguage(item.value)}
+          />
+        </View>
         <ThemeToggle />
         <ResetProgress />
         <PrivacyPolicy />

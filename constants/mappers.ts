@@ -115,9 +115,9 @@ export const DIFFICULTY_TO_SCORE_MAP: Record<Difficulties, number> = {
 
 export const STREAK_TIER_TO_MULTIPLIER_MAP: Record<StreakTiers, number> = {
   0: 1,
-  1: 1.1,
-  2: 1.2,
-  3: 1.3,
-  4: 1.4,
-  5: 1.5,
+  1: 1.15,
+  2: 1.18,
+  3: 1.23,
+  4: 1.27,
+  5: 1.3,
 };
