@@ -13,24 +13,21 @@ export const getSettingsStyles = (theme: ThemeColors) => {
       justifyContent: 'flex-start',
       paddingHorizontal: 20,
       paddingVertical: 20,
+      gap: 20,
     },
-    dropdownSection: {
-      marginTop: 20,
-    },
-    section: {
+    sectionRow: {
       alignItems: 'center',
       flexDirection: 'row',
-      marginTop: 20,
     },
     label: {
       fontSize: 16,
       fontFamily: 'DMSansBold',
       color: theme.text,
     },
-    optional: {
-      fontWeight: '400',
+    text: {
       fontSize: 14,
-      color: '#666',
+      fontFamily: 'DMSans',
+      color: theme.text,
     },
     dropdown: {
       height: 50,
@@ -44,15 +41,12 @@ export const getSettingsStyles = (theme: ThemeColors) => {
     button: {
       backgroundColor: theme.button,
       paddingVertical: 10,
-      marginTop: 20,
       borderRadius: 8,
       width: '100%',
       maxWidth: 240,
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf: 'center',
-      shadowColor: theme.shadow,
-      // elevation: 4,
     },
     buttonText: {
       fontSize: 16,
@@ -63,6 +57,16 @@ export const getSettingsStyles = (theme: ThemeColors) => {
       fontFamily: 'DMSans',
       textDecorationLine: 'underline',
       color: theme.linkText,
+    },
+    resetProgressContainer: {
+      backgroundColor: theme.card,
+      padding: 20,
+      borderRadius: 8,
+      gap: 20,
+    },
+    resetProgressTitleContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
     },
   });
 };
