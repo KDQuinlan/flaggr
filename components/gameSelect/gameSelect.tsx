@@ -14,6 +14,7 @@ type GameSelectProps = {
   description: string;
   icon: string;
   onPress: (event: GestureResponderEvent) => void;
+  elevation?: number;
 };
 
 const GameSelect: React.FC<GameSelectProps> = ({
@@ -22,6 +23,7 @@ const GameSelect: React.FC<GameSelectProps> = ({
   description,
   icon,
   onPress,
+  elevation,
 }) => {
   const { t } = useTranslation('home');
   const { theme } = useTheme();
@@ -31,7 +33,7 @@ const GameSelect: React.FC<GameSelectProps> = ({
     <Pressable
       style={({ pressed }) => [
         styles.gameModeContainer,
-        { opacity: pressed ? 0.7 : 1 },
+        { opacity: pressed ? 0.7 : 1, elevation },
       ]}
       onPress={onPress}
       accessibilityRole="button"

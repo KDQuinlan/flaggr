@@ -4,12 +4,10 @@ import { useTranslation } from 'react-i18next';
 
 import { colors } from '@/components/colors';
 import { getLoadingStyles } from '@/styles/loading';
-import { useTheme } from '@/context/ThemeContext';
 
 const Loading = () => {
   const { t } = useTranslation('loading');
-  const { theme } = useTheme();
-  const styles = useMemo(() => getLoadingStyles(theme), [theme]);
+  const styles = useMemo(() => getLoadingStyles(), []);
 
   return (
     <View style={styles.container}>

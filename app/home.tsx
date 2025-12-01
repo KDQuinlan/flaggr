@@ -69,6 +69,7 @@ const HomeScreen = () => {
               title: 'Standard',
             })
           }
+          elevation={4}
         />
 
         <GameSelect
@@ -82,6 +83,7 @@ const HomeScreen = () => {
               title: 'Rapid',
             })
           }
+          elevation={3}
         />
 
         <GameSelect
@@ -90,6 +92,7 @@ const HomeScreen = () => {
           description={t('custom.description')}
           icon="custom"
           onPress={() => navigation.navigate('custom')}
+          elevation={2.5}
         />
 
         <GameSelect
@@ -98,6 +101,7 @@ const HomeScreen = () => {
           description={t('passport.description')}
           icon="passport"
           onPress={() => navigation.navigate('passport')}
+          elevation={2}
         />
       </ScrollView>
       <View
