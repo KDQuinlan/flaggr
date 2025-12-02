@@ -15,8 +15,6 @@ export const getCustomSummaryStyles = (theme: ThemeColors) => {
     sectionContainer: {
       backgroundColor: theme.card,
       borderRadius: 8,
-      shadowColor: theme.shadow,
-      // elevation: 4,
       width: '100%',
       justifyContent: 'center',
       alignItems: 'center',
@@ -41,8 +39,6 @@ export const getCustomSummaryStyles = (theme: ThemeColors) => {
       width: '50%',
       justifyContent: 'center',
       alignItems: 'center',
-      shadowColor: theme.shadow,
-      // elevation: 4,
     },
     title: {
       fontFamily: 'DMSansBold',

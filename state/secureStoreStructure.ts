@@ -34,7 +34,7 @@ export const examplePassportEntry: PassportEntry = {
   countryCode: '',
   countryName: '',
   continent: '',
-  difficulty: 0,
+  difficulty: 1,
   correctTotal: 0,
   incorrectTotal: 0,
 };
