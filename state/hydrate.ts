@@ -16,6 +16,7 @@ import {
 } from './secureStoreStructure';
 import { UserSettingStructure } from '@/types/secureStore';
 import { mmkvStorage } from './mmkv';
+import { sanitizeProgression } from '@/util/normaliseProgressionStructure/normaliseProgressionStructure';
 
 // TODO - Implement versioning
 // TODO - add parallel reads?
@@ -76,7 +77,7 @@ export const hydrateStore = async () => {
   }
 
   // Restore progression or initialize default
-  setProgression(cachedUserProgression);
+  setProgression(sanitizeProgression(cachedUserProgression));
 
   const { userSettings } = stateStore.getState();
   i18n.changeLanguage(userSettings.locale);
