@@ -29,7 +29,7 @@ const HomeScreen = () => {
 
   useEffect(() => {
     showLeaderboard && PlayGames.showAllLeaderboards();
-    setTimeout(() => setShowLeaderboard(false), 250);
+    setTimeout(() => setShowLeaderboard(false), 500);
   }, [showLeaderboard]);
 
   return (
@@ -130,6 +130,7 @@ const HomeScreen = () => {
                 styles.floatingButton,
                 { opacity: pressed ? 0.7 : 1 },
               ]}
+              disabled={showLeaderboard}
               onPress={() => setShowLeaderboard(true)}
             >
               <Image

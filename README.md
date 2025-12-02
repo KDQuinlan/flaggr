@@ -11,7 +11,7 @@ Currently in development for the Play Store, with iOS coming later.
 1. Install dependencies
 
    ```bash
-   npm install
+   npm install --legacy-peer-deps
    ```
 
 2. Start the app
