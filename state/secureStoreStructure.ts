@@ -1,4 +1,5 @@
 import {
+  PassportEntry,
   ProgressionStructure,
   UserSettingStructure,
 } from '@/types/secureStore';
@@ -27,4 +28,13 @@ export const defaultProgressionStructure: ProgressionStructure = {
     totalIncorrect: 0,
   },
   passport: [],
+};
+
+export const examplePassportEntry: PassportEntry = {
+  countryCode: '',
+  countryName: '',
+  continent: '',
+  difficulty: 0,
+  correctTotal: 0,
+  incorrectTotal: 0,
 };
