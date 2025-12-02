@@ -38,7 +38,7 @@ export type LevelData = {
 export type CustomCurrentData = {
   regions: string[];
   independentCountriesOnly: boolean;
-  timeLimit: number;
+  timeLimit: TimeLimits;
   gameLength: number;
   scoreMultiplier: number;
 };

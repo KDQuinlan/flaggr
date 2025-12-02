@@ -22,7 +22,7 @@ import setBestGameData from '@/util/updatedProgressionStructure/setBestGameData'
 import { ProgressionStructure } from '@/types/secureStore';
 import {
   ACCURACY_ID,
-  HIGHEST_SCORE_ID,
+  HIGH_SCORE_ID,
   MATCHES_PLAYED_ID,
 } from '@/constants/leaderboard';
 import PlayGames from '@/PlayGames';
@@ -112,7 +112,7 @@ const CustomSummary = () => {
       );
 
       persistProgression(updatedProgression);
-      PlayGames.submitScore(HIGHEST_SCORE_ID, finalScore);
+      PlayGames.submitScore(HIGH_SCORE_ID, finalScore);
     }
   }, [navigation, finalScore]);
 
