@@ -1,5 +1,3 @@
-import { TimeLimits } from './screens';
-
 export type Levels =
   | 'Level 1'
   | 'Level 2'
@@ -11,7 +9,7 @@ export type Levels =
   | 'Level 8'
   | 'Level 9'
   | 'Level 10';
-export type Difficulties = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+
 export type LevelKeys =
   | 'levelOne'
   | 'levelTwo'
@@ -23,6 +21,41 @@ export type LevelKeys =
   | 'levelEight'
   | 'levelNine'
   | 'levelTen';
+
+export type Difficulties = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+export type DifficultiesScores =
+  | 10
+  | 12
+  | 14
+  | 16
+  | 18
+  | 20
+  | 22
+  | 24
+  | 26
+  | 28;
+
+export type StreakTiers = 0 | 1 | 2 | 3 | 4 | 5;
+export type StreakMultipliers = 1 | 1.15 | 1.18 | 1.23 | 1.27 | 1.3;
+
+export type TimeLimits =
+  | 0
+  | 15
+  | 30
+  | 45
+  | 60
+  | 75
+  | 90
+  | 105
+  | 120
+  | 135
+  | 150
+  | 165
+  | 180
+  | 195
+  | 210
+  | 225
+  | 240;
 
 export type LevelData = {
   id: Difficulties;
@@ -65,7 +98,7 @@ export type PassportEntry = {
   countryCode: string;
   countryName: string;
   continent: string;
-  difficulty: number;
+  difficulty: Difficulties;
   correctTotal: number;
   incorrectTotal: number;
 };

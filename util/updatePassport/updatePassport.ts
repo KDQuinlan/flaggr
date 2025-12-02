@@ -1,12 +1,12 @@
 import stateStore from '@/state/store';
-import { Passport, PassportEntry } from '@/types/secureStore';
+import { Difficulties, Passport, PassportEntry } from '@/types/secureStore';
 import persistProgression from '../persistState/persistProgression';
 
 const updatePassport = (
   countryCode: string,
   countryName: string,
   continent: string,
-  difficulty: number,
+  difficulty: Difficulties,
   isCorrect: boolean
 ) => {
   const { userProgress } = stateStore.getState();

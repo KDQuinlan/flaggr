@@ -25,7 +25,6 @@ import {
 } from '@/constants/common';
 import stateStore from '@/state/store';
 import setCurrentCustomGame from '@/util/updatedProgressionStructure/setCurrentCustomGame';
-import { TimeLimits } from '@/types/screens';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import determineSetTimestamp from '@/util/determineSetTimestamp/determineSetTimestamp';
 import { getCustomStyles } from '@/styles/custom';
@@ -34,6 +33,7 @@ import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_TEST_ID } from '@/constants/adId';
 import { Feather } from '@expo/vector-icons';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
+import { TimeLimits } from '@/types/secureStore';
 
 interface IStatsAccordionRow {
   title: string;

@@ -2,8 +2,7 @@ import {
   DIFFICULTY_TO_SCORE_MAP,
   STREAK_TIER_TO_MULTIPLIER_MAP,
 } from '@/constants/mappers';
-import { StreakTiers } from '@/types/screens';
-import { Difficulties } from '@/types/secureStore';
+import { Difficulties, StreakTiers } from '@/types/secureStore';
 
 const determineScoreToAdd = (
   isCorrect: boolean,

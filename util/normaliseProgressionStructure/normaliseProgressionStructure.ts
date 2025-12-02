@@ -52,7 +52,6 @@ function normaliseStructure<T>(
 
         continue; // Skip the rest of the loop for this key
       }
-      // ----------------------------------------------------
 
       // Case A: Key is missing in input
       if (inputValue === undefined) {

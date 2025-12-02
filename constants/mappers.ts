@@ -1,4 +1,12 @@
-import { Difficulties, LevelKeys, Levels } from '@/types/secureStore';
+import {
+  Difficulties,
+  DifficultiesScores,
+  LevelKeys,
+  Levels,
+  StreakMultipliers,
+  StreakTiers,
+  TimeLimits,
+} from '@/types/secureStore';
 import {
   LEVEL_EIGHT_FLAGS_AMOUNT,
   LEVEL_FIVE_FLAGS_AMOUNT,
@@ -11,7 +19,6 @@ import {
   LEVEL_THREE_FLAGS_AMOUNT,
   LEVEL_TWO_FLAGS_AMOUNT,
 } from './common';
-import { StreakTiers, TimeLimits } from '@/types/screens';
 
 export const LEVEL_MAP: Record<Levels, LevelKeys> = {
   'Level 1': 'levelOne',
@@ -66,7 +73,6 @@ export const LEVELS_TO_FLAG_AMOUNT_MAP: Record<Levels, number> = {
   'Level 10': LEVEL_TEN_FLAGS_AMOUNT,
 };
 
-// I hate that you make me do this, react native...
 export const LEVELS_TO_SHADOW_ELEVATION_MAP: Record<Levels, number> = {
   'Level 1': 4,
   'Level 2': 3.3,
@@ -100,20 +106,24 @@ export const TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP: Record<TimeLimits, number> = {
   240: 3.0,
 };
 
-export const DIFFICULTY_TO_SCORE_MAP: Record<Difficulties, number> = {
-  1: 10,
-  2: 12,
-  3: 14,
-  4: 16,
-  5: 18,
-  6: 20,
-  7: 22,
-  8: 24,
-  9: 26,
-  10: 28,
-};
+export const DIFFICULTY_TO_SCORE_MAP: Record<Difficulties, DifficultiesScores> =
+  {
+    1: 10,
+    2: 12,
+    3: 14,
+    4: 16,
+    5: 18,
+    6: 20,
+    7: 22,
+    8: 24,
+    9: 26,
+    10: 28,
+  };
 
-export const STREAK_TIER_TO_MULTIPLIER_MAP: Record<StreakTiers, number> = {
+export const STREAK_TIER_TO_MULTIPLIER_MAP: Record<
+  StreakTiers,
+  StreakMultipliers
+> = {
   0: 1,
   1: 1.15,
   2: 1.18,
