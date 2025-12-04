@@ -222,7 +222,7 @@ const CustomScreen = () => {
             />
             <StatsAccordionRow
               title={t('highScoreAccordion.gameLength')}
-              value={gameLength}
+              value={gameLength === 0 ? t('gameRules.unlimited') : gameLength}
             />
           </View>
           <Pressable
@@ -401,7 +401,9 @@ const CustomScreen = () => {
             )}
           </View>
         </View>
-        <View style={styles.modifierContainer}>
+
+        {/* TODO - Remove marginBottom on screen styling refactor*/}
+        <View style={{ ...styles.modifierContainer, marginBottom: 20 }}>
           <Text style={styles.finalScoreMultiplierText}>
             {t('scoreMultiplier', {
               value: finalScoreMultiplier,

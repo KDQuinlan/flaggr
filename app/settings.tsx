@@ -31,6 +31,7 @@ const SettingsScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
+  const userProgress = stateStore((s) => s.userProgress);
   const { t } = useTranslation('settings');
   const [hasResetProgress, setHasResetProgress] = useState<boolean>(false);
   const [isResetAccordionOpen, setIsResetAccordionOpen] =
@@ -113,7 +114,15 @@ const SettingsScreen = () => {
           <Text style={styles.text}>{t('holdToResetText')}</Text>
           <Pressable
             onLongPress={() => {
-              persistProgression(defaultProgressionStructure);
+              persistProgression({
+                ...defaultProgressionStructure,
+                games: {
+                  ...defaultProgressionStructure.games,
+                  matchesPlayed: userProgress.games.matchesPlayed,
+                  totalCorrect: userProgress.games.totalCorrect,
+                  totalIncorrect: userProgress.games.totalIncorrect,
+                },
+              });
               setHasResetProgress(true);
             }}
             delayLongPress={5000}

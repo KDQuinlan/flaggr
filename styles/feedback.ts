@@ -14,6 +14,8 @@ export const getFeedbackStyles = (theme: ThemeColors) => {
       justifyContent: 'flex-start',
       paddingHorizontal: 20,
       paddingBottom: 20,
+      marginTop: 20,
+      gap: 20,
     },
     titleContainer: {
       flexDirection: 'row',
@@ -24,7 +26,6 @@ export const getFeedbackStyles = (theme: ThemeColors) => {
       paddingHorizontal: 20,
     },
     textBox: {
-      marginTop: 20,
       height: 150,
       borderWidth: 1,
       borderColor: theme.accent,
@@ -38,9 +39,6 @@ export const getFeedbackStyles = (theme: ThemeColors) => {
       fontWeight: 'bold',
       fontSize: 40,
       color: colors.bluePrimary,
-    },
-    section: {
-      marginTop: 20,
     },
     label: {
       fontSize: 16,
@@ -64,7 +62,6 @@ export const getFeedbackStyles = (theme: ThemeColors) => {
     buttonEnabled: {
       backgroundColor: theme.button,
       paddingVertical: 10,
-      marginTop: 20,
       borderRadius: 8,
       width: '100%',
       maxWidth: 240,
@@ -77,7 +74,6 @@ export const getFeedbackStyles = (theme: ThemeColors) => {
     buttonDisabled: {
       backgroundColor: theme.button,
       paddingVertical: 10,
-      marginTop: 20,
       borderRadius: 8,
       width: '100%',
       maxWidth: 240,
@@ -89,6 +85,12 @@ export const getFeedbackStyles = (theme: ThemeColors) => {
       fontSize: 16,
       color: theme.buttonText,
       fontFamily: 'DMSansBold',
+    },
+    howItWorksText: {
+      fontSize: 16,
+      color: theme.text,
+      fontFamily: 'DMSansBold',
+      alignSelf: 'center',
     },
   });
 };

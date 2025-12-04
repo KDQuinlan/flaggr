@@ -55,7 +55,6 @@ const FeedbackScreen = () => {
         body: message,
       });
 
-      Alert.alert(t('successTitle'), t('successMessage'));
       setType(null);
       setMessage('');
     } catch (error) {
@@ -70,7 +69,7 @@ const FeedbackScreen = () => {
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
       >
-        <View style={styles.section}>
+        <View>
           <Text style={styles.label}>{t('reason')}</Text>
           <Dropdown
             style={styles.dropdown}
@@ -107,6 +106,8 @@ const FeedbackScreen = () => {
           numberOfLines={6}
           textAlignVertical="top"
         />
+
+        <Text style={styles.howItWorksText}>{t('howItWorks')}</Text>
 
         <Pressable
           onPress={handleSubmit}
