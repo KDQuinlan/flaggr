@@ -18,9 +18,6 @@ import { UserSettingStructure } from '@/types/secureStore';
 import { mmkvStorage } from './mmkv';
 import { sanitizeProgression } from '@/util/normaliseProgressionStructure/normaliseProgressionStructure';
 
-// TODO - Implement versioning
-// TODO - add parallel reads?
-
 export const hydrateStore = async () => {
   const systemScheme = Appearance.getColorScheme();
   const isSystemDark = systemScheme === 'dark';

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { View } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import * as NavigationBar from 'expo-navigation-bar';
+import * as SystemUI from 'expo-system-ui';
 
 import '@/locales/i18n';
 import EnergyModal from '@/components/energyDisplay/energyModal';
@@ -15,8 +15,7 @@ function RootLayoutContent() {
   const { isPremiumUser, isDarkTheme } = stateStore((s) => s.userSettings);
 
   useEffect(() => {
-    NavigationBar.setBackgroundColorAsync(theme.background);
-    NavigationBar.setButtonStyleAsync(isDarkTheme ? 'light' : 'dark');
+    SystemUI.setBackgroundColorAsync(theme.background);
   }, [isDarkTheme, theme]);
 
   return (

@@ -84,37 +84,33 @@ const CustomSummary = () => {
       initialProgressionRef.current.games.matchesPlayed + 1;
     const totalCorrect = initialProgressionRef.current.games.totalCorrect;
     const totalIncorrect = initialProgressionRef.current.games.totalIncorrect;
+
+    const updatedProgression: ProgressionStructure = setBestGameData(
+      initialProgressionRef.current,
+      {
+        score: finalScore,
+        regions,
+        independentCountriesOnly,
+        timeLimit,
+        gameLength,
+        correct,
+        incorrect,
+        streak: highestStreak,
+      }
+    );
+
     persistProgression({
-      games: { ...userProgression.games, matchesPlayed: newMatchesPlayed },
-      passport: userProgression.passport,
+      games: { ...updatedProgression.games, matchesPlayed: newMatchesPlayed },
+      passport: updatedProgression.passport,
     });
+
     PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
+    PlayGames.submitScore(HIGH_SCORE_ID, finalScore);
     PlayGames.submitScore(
       ACCURACY_ID,
       calculateLeaderboardScore(totalCorrect, totalCorrect + totalIncorrect)
     );
-  }, [navigation, gameResult]);
-
-  useEffect(() => {
-    if (isNewHighScore) {
-      const updatedProgression: ProgressionStructure = setBestGameData(
-        initialProgressionRef.current,
-        {
-          score: finalScore,
-          regions,
-          independentCountriesOnly,
-          timeLimit,
-          gameLength,
-          correct,
-          incorrect,
-          streak: highestStreak,
-        }
-      );
-
-      persistProgression(updatedProgression);
-      PlayGames.submitScore(HIGH_SCORE_ID, finalScore);
-    }
-  }, [navigation, finalScore]);
+  }, [navigation, gameResult, finalScore]);
 
   const handleContinue = () => resetToDifficultyScreen(navigation, 'custom');
 

@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import MobileAds from 'react-native-google-mobile-ads';
 import { useFonts } from 'expo-font';
 import Purchases, { LOG_LEVEL } from 'react-native-purchases';
+import * as NavigationBar from 'expo-navigation-bar';
 
 import HomeScreen from './home';
 import SetupScreen from './setup';
@@ -16,8 +17,12 @@ import {
   REVENUE_CAT_TEST_API_KEY,
 } from '@/constants/adId';
 import useNetworkStatus from '@/hooks/useNetworkStatus/useNetworkStatus';
+import { Appearance } from 'react-native';
+import { colors } from '@/components/colors';
 
 const IndexScreen = () => {
+  const systemScheme = Appearance.getColorScheme();
+  const isSystemDark = systemScheme === 'dark';
   const isInitialised = stateStore((s) => s.isInitialised);
   const userSettings = stateStore((s) => s.userSettings);
   const [hasStoreHydrated, setHasStoreHydrated] = useState<boolean>(false);
@@ -41,21 +46,21 @@ const IndexScreen = () => {
   }, []);
 
   useEffect(() => {
-    hasStoreHydrated &&
-      !userSettings.isGoogleConnected &&
-      (async () => {
-        try {
-          await PlayGames.signIn();
-          persistUserSettings({ ...userSettings, isGoogleConnected: true });
-        } catch (e) {
-          console.error('Sign-in error:', e);
-        }
-      })();
-  }, [hasStoreHydrated]);
+    if (hasStoreHydrated) {
+      restoreEnergyOnLoad();
 
-  useEffect(() => {
-    if (hasStoreHydrated) restoreEnergyOnLoad();
-  }, [hasStoreHydrated]);
+      if (!userSettings.isGoogleConnected) {
+        (async () => {
+          try {
+            await PlayGames.signIn();
+            persistUserSettings({ ...userSettings, isGoogleConnected: true });
+          } catch (e) {
+            console.error('Sign-in error:', e);
+          }
+        })();
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (!userSettings.isPremiumUser) {
@@ -63,9 +68,16 @@ const IndexScreen = () => {
     }
   }, []);
 
+  useLayoutEffect(() => {
+    NavigationBar.setBackgroundColorAsync(
+      isSystemDark ? colors.black : colors.offWhite
+    );
+    NavigationBar.setButtonStyleAsync(isSystemDark ? 'light' : 'dark');
+  }, []);
+
   useEffect(() => {
     if (!userSettings.isPremiumUser) {
-      Purchases.setLogLevel(LOG_LEVEL.VERBOSE);
+      Purchases.setLogLevel(LOG_LEVEL.INFO);
       Purchases.configure({
         apiKey: __DEV__ ? REVENUE_CAT_TEST_API_KEY : REVENUE_CAT_API_KEY,
       });
