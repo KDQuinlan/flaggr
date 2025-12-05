@@ -80,14 +80,16 @@ const CustomSummary = () => {
   }, [navigation]);
 
   useEffect(() => {
+    let updatedProgression: ProgressionStructure =
+      initialProgressionRef.current;
+
     const newMatchesPlayed =
       initialProgressionRef.current.games.matchesPlayed + 1;
     const totalCorrect = initialProgressionRef.current.games.totalCorrect;
     const totalIncorrect = initialProgressionRef.current.games.totalIncorrect;
 
-    const updatedProgression: ProgressionStructure = setBestGameData(
-      initialProgressionRef.current,
-      {
+    if (isNewHighScore) {
+      updatedProgression = setBestGameData(initialProgressionRef.current, {
         score: finalScore,
         regions,
         independentCountriesOnly,
@@ -96,8 +98,8 @@ const CustomSummary = () => {
         correct,
         incorrect,
         streak: highestStreak,
-      }
-    );
+      });
+    }
 
     persistProgression({
       games: { ...updatedProgression.games, matchesPlayed: newMatchesPlayed },
