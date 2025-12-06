@@ -3,6 +3,10 @@ export default {
   language: 'Idioma',
   privacy: 'Ver nuestra política de privacidad',
   darkTheme: 'Tema oscuro',
+  answersShownDuration: 'Duración de respuestas mostradas',
+  unlimited: 'Ilimitado',
+  secondsSingular: '1 segundo',
+  secondsPlural: '{{value}} segundos',
   resetProgress: 'Restablecer progreso',
   holdToReset: 'Mantén pulsado para restablecer',
   holdToResetText:

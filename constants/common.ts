@@ -22,6 +22,19 @@ export const DEFAULT_GAME_LENGTH = 10;
 export const DEFAULT_SCORE_MULTIPLIER = 1;
 export const INDEPENDENT_COUNTRIES_PENALTY = 0.9;
 
+export const TO_PERCENTAGE_MULTIPLIER = 100;
+export const ANSWER_LETTERS = ['A.', 'B.', 'C.', 'D.'];
+export const RAPID_TIME_ALLOWANCE_IN_S = 60;
+
+export const LANGUAGES = [
+  { label: 'English', value: 'en' },
+  { label: 'Español', value: 'es' },
+  { label: 'Nederlands', value: 'nl' },
+  { label: 'Українська', value: 'uk' },
+  { label: 'Italiano', value: 'it' },
+  { label: 'Magyar', value: 'hu' },
+];
+
 export const LEVEL_ONE_FLAGS_AMOUNT = 19;
 export const LEVEL_TWO_FLAGS_AMOUNT = 18;
 export const LEVEL_THREE_FLAGS_AMOUNT = 23;
@@ -33,10 +46,6 @@ export const LEVEL_EIGHT_FLAGS_AMOUNT = 19;
 export const LEVEL_NINE_FLAGS_AMOUNT = 20;
 export const LEVEL_TEN_FLAGS_AMOUNT = 24;
 
-export const TO_PERCENTAGE_MULTIPLIER = 100;
-export const ANSWER_LETTERS = ['A.', 'B.', 'C.', 'D.'];
-export const RAPID_TIME_ALLOWANCE_IN_S = 60;
-
 export const VALID_REGIONS = [
   'Europe',
   'Asia',
@@ -44,15 +53,6 @@ export const VALID_REGIONS = [
   'South America',
   'Oceania',
   'Africa',
-];
-
-export const LANGUAGES = [
-  { label: 'English', value: 'en' },
-  { label: 'Español', value: 'es' },
-  { label: 'Nederlands', value: 'nl' },
-  { label: 'Українська', value: 'uk' },
-  { label: 'Italiano', value: 'it' },
-  { label: 'Magyar', value: 'hu' },
 ];
 
 export const NON_INDEPENDENT_COUNTRY_CODES = [

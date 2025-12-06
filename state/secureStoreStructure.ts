@@ -6,6 +6,8 @@ import {
 import custom from './data/games/custom';
 import rapid from './data/games/rapid';
 import standard from './data/games/standard';
+import { ANSWERS_SHOWN_DURATION_DEFAULT_MS } from '@/constants/settings';
+import { MAXIMUM_ENERGY } from '@/constants/common';
 
 export const defaultUserSettings: UserSettingStructure = {
   isSetUp: false,
@@ -13,9 +15,9 @@ export const defaultUserSettings: UserSettingStructure = {
   isPremiumUser: false,
   locale: 'en',
   isDarkTheme: false,
-  energyAmount: 10,
+  energyAmount: MAXIMUM_ENERGY,
   lastEnergyTimestamp: null,
-  displayAnswerTimerMs: 500,
+  displayAnswerTimerMs: ANSWERS_SHOWN_DURATION_DEFAULT_MS,
 };
 
 export const defaultProgressionStructure: ProgressionStructure = {
