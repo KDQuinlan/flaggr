@@ -68,5 +68,16 @@ export const getSettingsStyles = (theme: ThemeColors) => {
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
+    sliderTitle: {
+      alignSelf: 'center',
+      fontFamily: 'DMSansBold',
+      fontSize: 14,
+      color: theme.text,
+    },
+    sliderValuesContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      paddingHorizontal: 10,
+    },
   });
 };
