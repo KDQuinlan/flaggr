@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {
   Pressable,
   SafeAreaView,
@@ -19,7 +25,11 @@ import determineButtonColor from '@/util/determineButtonColor/determineButtonCol
 import formatTime from '@/util/formatTime/formatTime';
 import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/generateMultipleChoiceAnswers';
 import flags from '@/assets/images/flags';
-import { NavigationProps, RootStackParamList } from '@/types/navigation';
+import {
+  NavigationProps,
+  PlayableGameModes,
+  RootStackParamList,
+} from '@/types/navigation';
 import determineScoreToAdd from '@/util/determineScoreToAdd/determineScoreToAdd';
 import stateStore from '@/state/store';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
@@ -30,6 +40,51 @@ import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_TEST_ID } from '@/constants/adId';
 import updatePassport from '@/util/updatePassport/updatePassport';
 import persistProgression from '@/util/persistState/persistProgression';
+
+interface IStatsRowProps {
+  gameMode: PlayableGameModes;
+  timeElapsedInSeconds: number;
+  streak: number;
+  customScore: number;
+  scoreMultiplier: number;
+}
+
+const StatsRow = React.memo(
+  ({
+    gameMode,
+    timeElapsedInSeconds,
+    streak,
+    customScore,
+    scoreMultiplier,
+  }: IStatsRowProps) => {
+    const { theme } = useTheme();
+    const styles = useMemo(() => getMultipleChoiceStyles(theme), [theme]);
+
+    return (
+      <View style={styles.statsRowContainer}>
+        <View style={styles.statsRowStreakContainer}>
+          <Text style={{ ...styles.statsText, paddingRight: 5 }}>{streak}</Text>
+          <Image
+            style={styles.statsIcon}
+            source={require('@/assets/images/icons/resources/flame.png')}
+          />
+        </View>
+        <View style={styles.statsRowAlignmentContainer}>
+          <Text style={styles.statsText}>
+            {formatTime(timeElapsedInSeconds)}
+          </Text>
+        </View>
+        {gameMode === 'custom' && (
+          <View style={styles.statsRowAlignmentContainer}>
+            <Text style={styles.statsText}>
+              {Math.round(customScore * scoreMultiplier)}
+            </Text>
+          </View>
+        )}
+      </View>
+    );
+  }
+);
 
 const MultipleChoice = () => {
   const { height } = useWindowDimensions();
@@ -107,13 +162,8 @@ const MultipleChoice = () => {
         title === 'Custom'
           ? t('title', { ns: 'custom' })
           : t(`levels.${LEVEL_MAP[title]}`),
-      headerRight: () => (
-        <Text style={{ fontFamily: 'DMSansBold', color: theme.text }}>
-          {formatTime(timeElapsedInSeconds)}
-        </Text>
-      ),
     });
-  }, [navigation, timeElapsedInSeconds, title]);
+  }, [navigation, timeElapsedInSeconds, title, streak]);
 
   useFocusEffect(
     useCallback(() => {
@@ -253,7 +303,7 @@ const MultipleChoice = () => {
             highestStreak: highestStreakRef.current,
             timeTaken: isGameCountingUp ? newTimeTaken : undefined,
           },
-          finalScore: Math.round(customScoreRef.current * scoreMultiplier!),
+          finalScore: Math.round(customScoreRef.current * scoreMultiplier),
         });
       }
     } else {
@@ -270,6 +320,14 @@ const MultipleChoice = () => {
         progress={questionNumberIndex / questions.length}
         color={colors.bluePrimary}
         style={styles.progressBar}
+      />
+
+      <StatsRow
+        gameMode={gameMode}
+        timeElapsedInSeconds={timeElapsedInSeconds}
+        streak={streak}
+        customScore={customScore}
+        scoreMultiplier={scoreMultiplier}
       />
 
       <View style={styles.flagContainer}>
