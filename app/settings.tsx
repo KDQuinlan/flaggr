@@ -122,7 +122,7 @@ const AnswersShownDurationSlider = React.memo(
       return () => clearTimeout(timeout);
     }, [value]);
 
-    const timerValueToShow = () => {
+    const sliderValueToShow = () => {
       const valueToS = value / 1000;
 
       if (valueToS === 0) return t('unlimited');
@@ -134,7 +134,7 @@ const AnswersShownDurationSlider = React.memo(
       <View style={{ gap: 10 }}>
         <Text style={styles.label}>{t('answersShownDuration')}</Text>
         <View>
-          <Text style={styles.sliderTitle}>{timerValueToShow()}</Text>
+          <Text style={styles.sliderTitle}>{sliderValueToShow()}</Text>
           <Slider
             value={value}
             onValueChange={onValueChange}
