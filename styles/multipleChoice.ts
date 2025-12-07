@@ -21,10 +21,13 @@ export const getMultipleChoiceStyles = (theme: ThemeColors) => {
     answerBox: {
       flexDirection: 'row',
       alignItems: 'center',
+      justifyContent: 'space-between',
       marginHorizontal: 20,
       borderRadius: 8,
       flexShrink: 1,
       minHeight: 50,
+      paddingLeft: 20,
+      paddingRight: 10,
     },
     progressBar: {
       marginBottom: 25,
@@ -37,7 +40,6 @@ export const getMultipleChoiceStyles = (theme: ThemeColors) => {
       color: colors.bluePrimary,
       fontFamily: 'DMSansBold',
       fontSize: 20,
-      paddingLeft: 20,
       paddingRight: 10,
     },
     answerText: {

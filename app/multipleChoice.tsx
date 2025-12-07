@@ -11,6 +11,7 @@ import { useFocusEffect, useNavigation } from 'expo-router';
 import { Image } from 'expo-image';
 import { ProgressBar } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+import { Feather } from '@expo/vector-icons';
 
 import { ANSWER_LETTERS } from '@/constants/common';
 import { DIFFICULTY_ID_TO_LEVEL_MAP, LEVEL_MAP } from '@/constants/mappers';
@@ -61,6 +62,9 @@ const MultipleChoice = () => {
   const [timeElapsedInSeconds, setTimeElapsedInSeconds] =
     useState<number>(timeLimit);
   const [customScore, setCustomScore] = useState<number>(0);
+  const [tapToAdvance, setTapToAdvance] = useState<boolean>(false);
+
+  const isUserTapToAdvance = displayAnswerTimerMs === 0;
 
   const startTimeRef = useRef<number>(Date.now());
   const correctTotalRef = useRef<number>(correctTotal);
@@ -161,66 +165,72 @@ const MultipleChoice = () => {
   );
 
   const handleAnswerPress = (answer: string) => {
-    setIsButtonDisabled(true);
-    setUserAnswer(answer);
+    if (!isUserTapToAdvance) setIsButtonDisabled(true);
 
-    const isCorrect = answer === correctAnswer;
-    const newCorrectTotal = isCorrect ? correctTotal + 1 : correctTotal;
-    const newIncorrectTotal = isCorrect ? incorrectTotal : incorrectTotal + 1;
-    const newStreakTotal = isCorrect ? streak + 1 : 0;
-    const newHighestStreakTotal = Math.max(highestStreak, newStreakTotal);
+    if (tapToAdvance) {
+      handleNextQuestionOrSummary(correctTotal, incorrectTotal, highestStreak);
+      setTapToAdvance(false);
+    } else {
+      setTapToAdvance(isUserTapToAdvance);
+      setUserAnswer(answer);
 
-    const elapsed = Math.floor((Date.now() - startTimeRef.current) / 1000);
-    const newTimeTaken = isGameCountingUp ? elapsed : timeLimit - elapsed;
+      const isCorrect = answer === correctAnswer;
+      const newCorrectTotal = isCorrect ? correctTotal + 1 : correctTotal;
+      const newIncorrectTotal = isCorrect ? incorrectTotal : incorrectTotal + 1;
+      const newStreakTotal = isCorrect ? streak + 1 : 0;
+      const newHighestStreakTotal = Math.max(highestStreak, newStreakTotal);
 
-    setCorrectTotal(newCorrectTotal);
-    setIncorrectTotal(newIncorrectTotal);
-    setStreak(newStreakTotal);
-    setHighestStreak(newHighestStreakTotal);
+      setCorrectTotal(newCorrectTotal);
+      setIncorrectTotal(newIncorrectTotal);
+      setStreak(newStreakTotal);
+      setHighestStreak(newHighestStreakTotal);
 
-    persistProgression({
-      ...userProgression,
-      games: {
-        ...userProgression.games,
-        totalCorrect: isCorrect
-          ? userProgression.games.totalCorrect + 1
-          : userProgression.games.totalCorrect,
-        totalIncorrect: isCorrect
-          ? userProgression.games.totalIncorrect
-          : userProgression.games.totalIncorrect + 1,
-      },
-    });
+      persistProgression({
+        ...userProgression,
+        games: {
+          ...userProgression.games,
+          totalCorrect: isCorrect
+            ? userProgression.games.totalCorrect + 1
+            : userProgression.games.totalCorrect,
+          totalIncorrect: isCorrect
+            ? userProgression.games.totalIncorrect
+            : userProgression.games.totalIncorrect + 1,
+        },
+      });
 
-    updatePassport(
-      countryCode,
-      correctAnswer,
-      continent,
-      difficulty,
-      isCorrect
-    );
-
-    gameMode === 'custom' &&
-      setCustomScore(
-        customScore + determineScoreToAdd(isCorrect, difficulty, streak)
+      updatePassport(
+        countryCode,
+        correctAnswer,
+        continent,
+        difficulty,
+        isCorrect
       );
 
-    setTimeout(() => {
-      handleNextQuestionOrSummary(
-        newCorrectTotal,
-        newIncorrectTotal,
-        newHighestStreakTotal,
-        newTimeTaken
-      );
-    }, displayAnswerTimerMs);
+      gameMode === 'custom' &&
+        setCustomScore(
+          customScore + determineScoreToAdd(isCorrect, difficulty, streak)
+        );
+
+      if (!isUserTapToAdvance) {
+        setTimeout(() => {
+          handleNextQuestionOrSummary(
+            newCorrectTotal,
+            newIncorrectTotal,
+            newHighestStreakTotal
+          );
+        }, displayAnswerTimerMs);
+      }
+    }
   };
 
   const handleNextQuestionOrSummary = (
     correct: number,
     incorrect: number,
-    highest: number,
-    timeTaken: number
+    highest: number
   ) => {
     setUserAnswer(null);
+    const elapsed = Math.floor((Date.now() - startTimeRef.current) / 1000);
+    const newTimeTaken = isGameCountingUp ? elapsed : timeLimit - elapsed;
 
     if (isFinalQuestion) {
       setIsButtonDisabled(true);
@@ -232,7 +242,7 @@ const MultipleChoice = () => {
             correct,
             incorrect,
             highestStreak: highest,
-            timeTaken: isGameCountingUp ? timeTaken : undefined,
+            timeTaken: isGameCountingUp ? newTimeTaken : undefined,
           },
         });
       } else {
@@ -241,7 +251,7 @@ const MultipleChoice = () => {
             correct: correctTotalRef.current,
             incorrect: incorrectTotalRef.current,
             highestStreak: highestStreakRef.current,
-            timeTaken: isGameCountingUp ? timeTaken : undefined,
+            timeTaken: isGameCountingUp ? newTimeTaken : undefined,
           },
           finalScore: Math.round(customScoreRef.current * scoreMultiplier!),
         });
@@ -296,14 +306,21 @@ const MultipleChoice = () => {
             ]}
             onPress={() => handleAnswerPress(item)}
           >
-            <Text style={styles.answerOrderText}>{ANSWER_LETTERS[index]}</Text>
-            <Text
-              style={styles.answerText}
-              adjustsFontSizeToFit
-              numberOfLines={2}
-            >
-              {t(`countries.${toJsonKeyFormat(item)}`)}
-            </Text>
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={styles.answerOrderText}>
+                {ANSWER_LETTERS[index]}
+              </Text>
+              <Text
+                style={styles.answerText}
+                adjustsFontSizeToFit
+                numberOfLines={2}
+              >
+                {t(`countries.${toJsonKeyFormat(item)}`)}
+              </Text>
+            </View>
+            {item === correctAnswer && tapToAdvance && (
+              <Feather name={'arrow-right'} size={24} color={theme.text} />
+            )}
           </Pressable>
         ))}
       </View>
