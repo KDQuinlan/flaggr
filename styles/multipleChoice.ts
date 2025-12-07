@@ -10,10 +10,10 @@ export const getMultipleChoiceStyles = (theme: ThemeColors) => {
       backgroundColor: theme.background,
     },
     flagContainer: {
-      flex: 2,
+      flex: 4,
     },
     answersContainer: {
-      flex: 4,
+      flex: 8,
       maxWidth: 500,
       alignSelf: 'center',
       width: '100%',
@@ -30,7 +30,6 @@ export const getMultipleChoiceStyles = (theme: ThemeColors) => {
       paddingRight: 10,
     },
     progressBar: {
-      marginBottom: 25,
       borderRadius: 8,
       backgroundColor: colors.white,
       height: 5,
@@ -49,8 +48,32 @@ export const getMultipleChoiceStyles = (theme: ThemeColors) => {
       flexShrink: 1,
     },
     adContainer: {
-      flex: 0.5,
+      flex: 1,
       justifyContent: 'flex-end',
     },
+    statsRowContainer: {
+      flex: 0.75,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 5,
+      backgroundColor: theme.card,
+    },
+    statsRowStreakContainer: {
+      flexDirection: 'row',
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    statsRowAlignmentContainer: {
+      flex: 1,
+      alignItems: 'center',
+    },
+    statsText: {
+      color: theme.text,
+      fontFamily: 'DMSansBold',
+      fontSize: 16,
+    },
+    statsIcon: { height: 20, width: 20 },
   });
 };
