@@ -2,7 +2,6 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import MobileAds from 'react-native-google-mobile-ads';
 import { useFonts } from 'expo-font';
 import Purchases, { LOG_LEVEL } from 'react-native-purchases';
-import * as NavigationBar from 'expo-navigation-bar';
 
 import HomeScreen from './home';
 import SetupScreen from './setup';
@@ -66,13 +65,6 @@ const IndexScreen = () => {
     if (!userSettings.isPremiumUser) {
       MobileAds().initialize();
     }
-  }, []);
-
-  useLayoutEffect(() => {
-    NavigationBar.setBackgroundColorAsync(
-      isSystemDark ? colors.black : colors.offWhite
-    );
-    NavigationBar.setButtonStyleAsync(isSystemDark ? 'light' : 'dark');
   }, []);
 
   useEffect(() => {

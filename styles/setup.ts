@@ -14,6 +14,7 @@ export const getSetupStyles = (theme: ThemeColors) => {
       justifyContent: 'flex-start',
       paddingHorizontal: 20,
       paddingBottom: 20,
+      gap: 20,
     },
     titleContainer: {
       flexDirection: 'row',
@@ -28,49 +29,19 @@ export const getSetupStyles = (theme: ThemeColors) => {
       color: theme.headerText,
       fontFamily: 'Chewy',
     },
-    dropdownSection: {
-      marginTop: 20,
-    },
     section: {
       alignItems: 'center',
       flexDirection: 'row',
       marginTop: 20,
     },
-    label: {
-      fontFamily: 'DMSansBold',
-      fontSize: 16,
-      color: theme.text,
-    },
-    optional: {
-      fontFamily: 'DMSans',
-      fontSize: 14,
-      color: theme.helperText,
-    },
-    dropdown: {
-      height: 50,
-      borderColor: theme.accent,
-      borderWidth: 1,
-      borderRadius: 8,
-      paddingHorizontal: 10,
-      backgroundColor: theme.card,
-      marginTop: 10,
-    },
-    helperText: {
-      fontFamily: 'DMSans',
-      fontSize: 12,
-      color: theme.helperText,
-    },
     button: {
       backgroundColor: theme.button,
       paddingVertical: 10,
-      marginTop: 20,
       borderRadius: 8,
       width: '50%',
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf: 'center',
-      shadowColor: theme.shadow,
-      // elevation: 4,
     },
     buttonText: {
       fontSize: 16,

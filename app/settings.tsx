@@ -10,8 +10,6 @@ import {
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/locales/i18n';
-import { Dropdown } from 'react-native-element-dropdown';
-import { Switch } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
 
 import { colors } from '@/components/colors';
@@ -32,72 +30,8 @@ import {
   ANSWERS_SHOWN_DURATION_MAXIMUM_MS,
   ANSWERS_SHOWN_DURATION_STEP,
 } from '@/constants/settings';
-
-interface ILanguageDropdownProps {
-  language: string;
-  setLanguage: (setLanguage: string) => void;
-}
-
-const LanguageDropdown = React.memo(
-  ({ language, setLanguage }: ILanguageDropdownProps) => {
-    const { t } = useTranslation('settings');
-    const { theme } = useTheme();
-    const styles = useMemo(() => getSettingsStyles(theme), [theme]);
-
-    return (
-      <View>
-        <Text style={styles.label}>{t('language')}</Text>
-        <Dropdown
-          style={styles.dropdown}
-          data={LANGUAGES}
-          labelField="label"
-          valueField="value"
-          value={language}
-          placeholder={t('selectLanguage')}
-          selectedTextStyle={{ color: theme.text }}
-          itemTextStyle={{ color: theme.text }}
-          containerStyle={{
-            backgroundColor: theme.card,
-            borderRadius: 8,
-            borderWidth: 1,
-            borderColor: theme.accent,
-          }}
-          itemContainerStyle={{
-            backgroundColor: theme.card,
-            borderRadius: 8,
-          }}
-          activeColor={theme.accent}
-          onChange={(item) => setLanguage(item.value)}
-        />
-      </View>
-    );
-  }
-);
-
-interface IThemeToggleProps {
-  isDarkTheme: boolean;
-  setIsDarkTheme: (isDarkTheme: boolean) => void;
-}
-
-const ThemeToggle = React.memo(
-  ({ isDarkTheme, setIsDarkTheme }: IThemeToggleProps) => {
-    const { t } = useTranslation('settings');
-    const { theme } = useTheme();
-    const styles = useMemo(() => getSettingsStyles(theme), [theme]);
-    const userSettings = stateStore((s) => s.userSettings);
-
-    return (
-      <View style={styles.sectionRow}>
-        <Text style={styles.label}>{t('darkTheme')}</Text>
-        <Switch
-          color={colors.blueSecondary}
-          value={userSettings.isDarkTheme}
-          onValueChange={() => setIsDarkTheme(!isDarkTheme)}
-        />
-      </View>
-    );
-  }
-);
+import ThemeToggle from '@/components/settings/themeToggle';
+import DropdownSelector from '@/components/settings/dropdown';
 
 interface IAnswersShownDurationSliderProps {
   value: number;
@@ -335,7 +269,16 @@ const SettingsScreen = () => {
         keyboardShouldPersistTaps="handled"
       >
         <PurchasePremiumButton />
-        <LanguageDropdown language={language} setLanguage={setLanguage} />
+        <DropdownSelector
+          value={language}
+          setValue={setLanguage}
+          data={LANGUAGES}
+          text={{
+            namespace: 'settings',
+            label: 'language',
+            placeholder: 'selectLanguage',
+          }}
+        />
         <ThemeToggle
           isDarkTheme={isDarkTheme}
           setIsDarkTheme={setIsDarkTheme}

@@ -3,17 +3,18 @@ import { useNavigation } from 'expo-router';
 import { Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/locales/i18n';
-import { Dropdown } from 'react-native-element-dropdown';
 import * as Localization from 'expo-localization';
-import { Switch } from 'react-native-paper';
 
-import { colors } from '@/components/colors';
 import { NavigationProps } from '@/types/navigation';
 import { APP_NAME, LANGUAGES, SUPPORTED_LANGUAGES } from '@/constants/common';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import stateStore from '@/state/store';
 import { getSetupStyles } from '@/styles/setup';
 import { useTheme } from '@/context/ThemeContext';
+import ThemeToggle from '@/components/settings/themeToggle';
+import DropdownSelector from '@/components/settings/dropdown';
+
+// TODO - refactor continue button into reusable component
 
 const locales = Localization.getLocales();
 const locale = locales[0]?.languageCode;
@@ -27,7 +28,7 @@ const SetupScreen = () => {
   const [language, setLanguage] = useState<string>(
     locale && SUPPORTED_LANGUAGES.includes(locale) ? locale : 'en'
   );
-  const [ageRange, setAgeRange] = useState(null);
+  const [ageRange, setAgeRange] = useState<string | null>(null);
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(
     userSettings.isDarkTheme
   );
@@ -58,71 +59,34 @@ const SetupScreen = () => {
           <Text style={styles.title}>{APP_NAME}</Text>
         </View>
 
-        <View style={styles.dropdownSection}>
-          <Text style={styles.label}>{t('language')}</Text>
-          <Dropdown
-            style={styles.dropdown}
-            data={LANGUAGES}
-            labelField="label"
-            valueField="value"
-            value={language}
-            placeholder={t('selectLanguage')}
-            selectedTextStyle={{ color: theme.text }}
-            itemTextStyle={{ color: theme.text }}
-            containerStyle={{
-              backgroundColor: theme.card,
-              borderRadius: 8,
-              borderWidth: 1,
-              borderColor: theme.accent,
-            }}
-            itemContainerStyle={{
-              backgroundColor: theme.card,
-              borderRadius: 8,
-            }}
-            activeColor={theme.accent}
-            onChange={(item) => setLanguage(item.value)}
-          />
-        </View>
+        <DropdownSelector
+          value={language}
+          setValue={setLanguage}
+          data={LANGUAGES}
+          text={{
+            namespace: 'setup',
+            label: 'language',
+            placeholder: 'selectLanguage',
+          }}
+        />
 
-        <View style={styles.dropdownSection}>
-          <Text style={styles.label}>
-            {t('ageRange')}{' '}
-            <Text style={styles.optional}>({t('optional')})</Text>
-          </Text>
-          <Dropdown
-            style={styles.dropdown}
-            data={ageRanges}
-            labelField="label"
-            valueField="value"
-            value={ageRange}
-            placeholder={t('selectAgeRange')}
-            placeholderStyle={{ color: theme.text }}
-            selectedTextStyle={{ color: theme.text }}
-            itemTextStyle={{ color: theme.text }}
-            containerStyle={{
-              backgroundColor: theme.card,
-              borderRadius: 8,
-              borderWidth: 1,
-              borderColor: theme.accent,
-            }}
-            itemContainerStyle={{
-              backgroundColor: theme.card,
-              borderRadius: 8,
-            }}
-            activeColor={theme.accent}
-            onChange={(item) => setAgeRange(item.value)}
-          />
-          <Text style={styles.helperText}>{t('adHelpText')}</Text>
-        </View>
+        <DropdownSelector
+          value={ageRange}
+          setValue={setAgeRange}
+          data={ageRanges}
+          text={{
+            namespace: 'setup',
+            label: 'ageRange',
+            labelSubtext: 'optional',
+            helperText: 'adHelpText',
+            placeholder: 'selectAgeRange',
+          }}
+        />
 
-        <View style={styles.section}>
-          <Text style={styles.label}>{t('darkTheme')}</Text>
-          <Switch
-            color={colors.blueSecondary}
-            value={userSettings.isDarkTheme}
-            onValueChange={() => setIsDarkTheme(!isDarkTheme)}
-          />
-        </View>
+        <ThemeToggle
+          isDarkTheme={isDarkTheme}
+          setIsDarkTheme={setIsDarkTheme}
+        />
 
         <Pressable
           onPress={() => {
