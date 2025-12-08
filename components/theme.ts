@@ -17,6 +17,7 @@ export const light = {
   linkText: colors.blueSecondary,
   helperText: colors.darkBrown,
   descriptionText: colors.lightBlack,
+  warningText: colors.warningOrange,
 
   // Surfaces
   accent: colors.lightGrey,
@@ -40,6 +41,7 @@ export const dark = {
   linkText: colors.blueSecondary,
   helperText: colors.lightBrown,
   descriptionText: colors.lightGrey,
+  warningText: colors.warningOrange,
 
   // Surfaces
   accent: colors.lightBlack,

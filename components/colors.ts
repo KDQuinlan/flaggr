@@ -23,6 +23,7 @@ export const colors = {
 
   // Reds
   incorrectRed: '#E74C3C',
+  warningOrange: '#e69a4e',
 
   // Greens
   correctRed: '#2ECC71',

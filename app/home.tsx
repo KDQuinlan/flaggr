@@ -3,6 +3,7 @@ import { useNavigation } from 'expo-router';
 import { Image } from 'expo-image';
 import { Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import * as Device from 'expo-device';
 
 import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
@@ -26,6 +27,7 @@ const HomeScreen = () => {
   const styles = useMemo(() => getHomeStyles(theme), [theme]);
 
   const showAds = !isPremiumUser && isInternetAvailable;
+  const isOnPhone = Device.deviceType === Device.DeviceType.PHONE;
 
   useEffect(() => {
     showLeaderboard && PlayGames.showAllLeaderboards();
@@ -124,7 +126,7 @@ const HomeScreen = () => {
             />
           </Pressable>
 
-          {isInternetAvailable && (
+          {isInternetAvailable && isOnPhone && (
             <Pressable
               style={({ pressed }) => [
                 styles.floatingButton,
