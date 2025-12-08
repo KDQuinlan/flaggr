@@ -29,15 +29,6 @@ export const getSettingsStyles = (theme: ThemeColors) => {
       fontFamily: 'DMSans',
       color: theme.text,
     },
-    dropdown: {
-      height: 50,
-      borderColor: theme.accent,
-      borderWidth: 1,
-      borderRadius: 8,
-      paddingHorizontal: 10,
-      backgroundColor: theme.card,
-      marginTop: 10,
-    },
     button: {
       backgroundColor: theme.button,
       paddingVertical: 10,

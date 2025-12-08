@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { View } from 'react-native';
+import { useLayoutEffect } from 'react';
+import { Appearance, View } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SystemUI from 'expo-system-ui';
@@ -10,17 +10,30 @@ import EnergyModal from '@/components/energyDisplay/energyModal';
 import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
 import stateStore from '@/state/store';
 import { ThemeProvider, useTheme } from '@/context/ThemeContext';
+import { colors } from '@/components/colors';
 
 function RootLayoutContent() {
   const { theme } = useTheme();
   const { isPremiumUser, isDarkTheme } = stateStore((s) => s.userSettings);
   const isInitialised = stateStore((s) => s.isInitialised);
+  const systemScheme = Appearance.getColorScheme();
+  const isSystemDark = systemScheme === 'dark';
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isInitialised) {
       SystemUI.setBackgroundColorAsync(theme.background);
-      NavigationBar.setBackgroundColorAsync(theme.background);
+      NavigationBar.setBackgroundColorAsync(
+        isDarkTheme ? colors.black : colors.offWhite
+      );
       NavigationBar.setButtonStyleAsync(isDarkTheme ? 'light' : 'dark');
+    } else {
+      SystemUI.setBackgroundColorAsync(
+        isSystemDark ? colors.black : colors.offWhite
+      );
+      NavigationBar.setBackgroundColorAsync(
+        isSystemDark ? colors.black : colors.offWhite
+      );
+      NavigationBar.setButtonStyleAsync(isSystemDark ? 'light' : 'dark');
     }
   }, [isDarkTheme, isInitialised]);
 
