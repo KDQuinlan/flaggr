@@ -43,6 +43,7 @@ import persistProgression from '@/util/persistState/persistProgression';
 
 interface IStatsRowProps {
   gameMode: PlayableGameModes;
+  isGameCountingUp: boolean;
   timeElapsedInSeconds: number;
   streak: number;
   customScore: number;
@@ -52,6 +53,7 @@ interface IStatsRowProps {
 const StatsRow = React.memo(
   ({
     gameMode,
+    isGameCountingUp,
     timeElapsedInSeconds,
     streak,
     customScore,
@@ -59,6 +61,13 @@ const StatsRow = React.memo(
   }: IStatsRowProps) => {
     const { theme } = useTheme();
     const styles = useMemo(() => getMultipleChoiceStyles(theme), [theme]);
+
+    const getTimerColor = () => {
+      if (isGameCountingUp) return colors.white;
+      if (timeElapsedInSeconds <= 10) return colors.incorrectRed;
+      if (timeElapsedInSeconds <= 30) return colors.warningOrange;
+      return colors.white;
+    };
 
     return (
       <View style={styles.statsRowContainer}>
@@ -70,7 +79,7 @@ const StatsRow = React.memo(
           />
         </View>
         <View style={styles.statsRowAlignmentContainer}>
-          <Text style={styles.statsText}>
+          <Text style={{ ...styles.statsText, color: getTimerColor() }}>
             {formatTime(timeElapsedInSeconds)}
           </Text>
         </View>
@@ -324,6 +333,7 @@ const MultipleChoice = () => {
 
       <StatsRow
         gameMode={gameMode}
+        isGameCountingUp={isGameCountingUp}
         timeElapsedInSeconds={timeElapsedInSeconds}
         streak={streak}
         customScore={customScore}

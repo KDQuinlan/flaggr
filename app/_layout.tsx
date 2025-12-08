@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SystemUI from 'expo-system-ui';
+import * as NavigationBar from 'expo-navigation-bar';
 
 import '@/locales/i18n';
 import EnergyModal from '@/components/energyDisplay/energyModal';
@@ -13,10 +14,15 @@ import { ThemeProvider, useTheme } from '@/context/ThemeContext';
 function RootLayoutContent() {
   const { theme } = useTheme();
   const { isPremiumUser, isDarkTheme } = stateStore((s) => s.userSettings);
+  const isInitialised = stateStore((s) => s.isInitialised);
 
   useEffect(() => {
-    SystemUI.setBackgroundColorAsync(theme.background);
-  }, [isDarkTheme, theme]);
+    if (isInitialised) {
+      SystemUI.setBackgroundColorAsync(theme.background);
+      NavigationBar.setBackgroundColorAsync(theme.background);
+      NavigationBar.setButtonStyleAsync(isDarkTheme ? 'light' : 'dark');
+    }
+  }, [isDarkTheme, isInitialised]);
 
   return (
     <View style={{ flex: 1 }}>
