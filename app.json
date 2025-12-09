@@ -10,11 +10,21 @@
     "splash": {
       "backgroundColor": "#121212"
     },
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#121212",
+      "translucent": false
+    },
+    "androidNavigationBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#121212"
+    },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "versionCode": 11,
+      "backgroundColor": "#121212",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#011f3e"
