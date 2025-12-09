@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import { Appearance, View } from 'react-native';
+import { View } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SystemUI from 'expo-system-ui';
@@ -16,8 +16,6 @@ function RootLayoutContent() {
   const { theme } = useTheme();
   const { isPremiumUser, isDarkTheme } = stateStore((s) => s.userSettings);
   const isInitialised = stateStore((s) => s.isInitialised);
-  const systemScheme = Appearance.getColorScheme();
-  const isSystemDark = systemScheme === 'dark';
 
   useLayoutEffect(() => {
     if (isInitialised) {
@@ -26,14 +24,6 @@ function RootLayoutContent() {
         isDarkTheme ? colors.black : colors.offWhite
       );
       NavigationBar.setButtonStyleAsync(isDarkTheme ? 'light' : 'dark');
-    } else {
-      SystemUI.setBackgroundColorAsync(
-        isSystemDark ? colors.black : colors.offWhite
-      );
-      NavigationBar.setBackgroundColorAsync(
-        isSystemDark ? colors.black : colors.offWhite
-      );
-      NavigationBar.setButtonStyleAsync(isSystemDark ? 'light' : 'dark');
     }
   }, [isDarkTheme, isInitialised]);
 
