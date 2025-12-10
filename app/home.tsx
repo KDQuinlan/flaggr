@@ -41,22 +41,32 @@ const HomeScreen = () => {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.headerContainer}>
-          <Pressable
-            onPress={() => navigation.navigate('settings')}
-            accessibilityRole="button"
-            accessibilityLabel={t('title', { ns: 'settings' })}
-            hitSlop={10}
-            style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
           >
-            <Image
-              style={styles.settingsIcon}
-              source={require('@/assets/images/icons/resources/custom/cog.png')}
-            />
-          </Pressable>
+            <Pressable
+              onPress={() => navigation.navigate('settings')}
+              accessibilityRole="button"
+              accessibilityLabel={t('title', { ns: 'settings' })}
+              hitSlop={10}
+              style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+            >
+              <Image
+                style={styles.settingsIcon}
+                source={require('@/assets/images/icons/resources/custom/cog.png')}
+              />
+            </Pressable>
+          </View>
 
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{APP_NAME}</Text>
           </View>
+
           {!isPremiumUser && <EnergyDisplay />}
         </View>
 

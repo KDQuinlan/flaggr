@@ -268,7 +268,7 @@ const SettingsScreen = () => {
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
       >
-        <PurchasePremiumButton />
+        {!userSettings.isPremiumUser && <PurchasePremiumButton />}
         <DropdownSelector
           value={language}
           setValue={setLanguage}
