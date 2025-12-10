@@ -46,15 +46,9 @@ const PurchasePremiumButton = () => {
     }
   };
 
-  const handleRevokePurchase = () => {
-    persistUserSettings({ ...userSettings, isPremiumUser: false });
-  };
-
   return (
     <Pressable
-      onPress={
-        !userSettings.isPremiumUser ? handlePurchase : handleRevokePurchase
-      }
+      onPress={handlePurchase}
       style={({ pressed }) => [
         styles.button,
         {
@@ -64,9 +58,7 @@ const PurchasePremiumButton = () => {
       accessibilityLabel={t('continue', { ns: 'settings' })}
       accessibilityRole="button"
     >
-      <Text style={styles.buttonText}>
-        {!userSettings.isPremiumUser ? t('purchase') : t('revoke')}
-      </Text>
+      <Text style={styles.buttonText}>{t('purchase')}</Text>
     </Pressable>
   );
 };
