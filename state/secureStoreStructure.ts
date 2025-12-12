@@ -12,6 +12,7 @@ import { MAXIMUM_ENERGY } from '@/constants/common';
 export const defaultUserSettings: UserSettingStructure = {
   isSetUp: false,
   isGoogleConnected: false,
+  userAgeForPersonalisation: null,
   isPremiumUser: false,
   locale: 'en',
   isDarkTheme: false,

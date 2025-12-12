@@ -1,7 +1,7 @@
 export default {
   language: 'Lingua',
   ageRange: 'Fascia d’età',
-  underAge: 'Meno di 13',
+  underThirteen: 'Meno di 13',
   selectAgeRange: 'Seleziona fascia d’età',
   preferNotToSay: 'Preferisco non rispondere',
   optional: 'facoltativo',

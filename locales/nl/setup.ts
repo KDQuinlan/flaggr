@@ -1,7 +1,7 @@
 export default {
   language: 'Taal',
   ageRange: 'Leeftijdsgroep',
-  underAge: 'Onder 13',
+  underThirteen: 'Onder 13',
   selectAgeRange: 'Selecteer leeftijdsgroep',
   preferNotToSay: 'Zeg ik liever niet',
   optional: 'optioneel',

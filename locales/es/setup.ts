@@ -1,7 +1,7 @@
 export default {
   language: 'Idioma',
   ageRange: 'Rango de edad',
-  underAge: 'Menos de 13',
+  underThirteen: 'Menos de 13',
   selectAgeRange: 'Selecciona un rango de edad',
   preferNotToSay: 'Prefiero no decirlo',
   optional: 'opcional',

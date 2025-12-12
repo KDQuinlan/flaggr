@@ -7,6 +7,10 @@ export default {
   secondsSingular: '1 секунда',
   secondsPlural: '{{value}} секунд',
   privacy: 'Переглянути нашу політику конфіденційності',
+  managePrivacySettings: 'Керування налаштуваннями конфіденційності',
+  unavailable: 'Недоступно',
+  unavailableReason:
+    'Налаштування конфіденційності недоступні у вашому регіоні',
   resetProgress: 'Скинути прогрес',
   holdToReset: 'Утримуйте, щоб скинути',
   holdToResetText:

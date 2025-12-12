@@ -7,10 +7,12 @@ import {
   ScrollView,
   Text,
   View,
+  Alert,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/locales/i18n';
 import { Feather } from '@expo/vector-icons';
+import { AdsConsent } from 'react-native-google-mobile-ads';
 
 import { colors } from '@/components/colors';
 import { NavigationProps } from '@/types/navigation';
@@ -21,7 +23,7 @@ import PurchasePremiumButton from '@/components/PurchasePremiumButton/PurchasePr
 import { useTheme } from '@/context/ThemeContext';
 import { getSettingsStyles } from '@/styles/settings';
 import AdBanner from '@/components/AdBanner/AdBanner';
-import { BANNER_TEST_ID } from '@/constants/adId';
+import { BANNER_HOME_AND_SETTINGS_ID, BANNER_TEST_ID } from '@/constants/adId';
 import persistProgression from '@/util/persistState/persistProgression';
 import { defaultProgressionStructure } from '@/state/secureStoreStructure';
 import Slider from '@react-native-community/slider';
@@ -198,6 +200,34 @@ const PrivacyPolicy = () => {
   );
 };
 
+const PrivacyConsent = () => {
+  const { t } = useTranslation('settings');
+  const { theme } = useTheme();
+  const styles = useMemo(() => getSettingsStyles(theme), [theme]);
+
+  const openPrivacySettings = async () => {
+    try {
+      await AdsConsent.showPrivacyOptionsForm();
+    } catch {
+      Alert.alert(t('unavailable'), t('unavailableReason'));
+    }
+  };
+
+  return (
+    <Pressable
+      onPress={() => openPrivacySettings()}
+      style={({ pressed }) => [
+        styles.sectionRow,
+        {
+          opacity: pressed ? 0.7 : 1,
+        },
+      ]}
+    >
+      <Text style={styles.privacyPolicyText}>{t('managePrivacySettings')}</Text>
+    </Pressable>
+  );
+};
+
 const ContinueButton = () => {
   const navigation = useNavigation<NavigationProps>();
   const { t } = useTranslation('settings');
@@ -234,6 +264,7 @@ const SettingsScreen = () => {
     userSettings.displayAnswerTimerMs
   );
   const showAds = !userSettings.isPremiumUser && isInternetAvailable;
+  const isUserAMinor = userSettings.userAgeForPersonalisation !== 18;
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -294,10 +325,15 @@ const SettingsScreen = () => {
           setHasResetProgress={setHasResetProgress}
         />
         <PrivacyPolicy />
+        {!isUserAMinor && <PrivacyConsent />}
         <ContinueButton />
       </ScrollView>
 
-      {showAds && <AdBanner adId={BANNER_TEST_ID} />}
+      {showAds && (
+        <AdBanner
+          adId={__DEV__ ? BANNER_TEST_ID : BANNER_HOME_AND_SETTINGS_ID}
+        />
+      )}
     </SafeAreaView>
   );
 };

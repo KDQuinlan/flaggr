@@ -7,6 +7,9 @@ export default {
   secondsSingular: '1 second',
   secondsPlural: '{{value}} seconds',
   privacy: 'View our privacy policy',
+  managePrivacySettings: 'Manage privacy settings',
+  unavailable: 'Unavailable',
+  unavailableReason: 'Privacy settings are not available in your region',
   resetProgress: 'Reset Progress',
   holdToReset: 'Hold To Reset',
   holdToResetText:

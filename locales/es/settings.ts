@@ -1,12 +1,16 @@
 export default {
   title: 'Configuración',
   language: 'Idioma',
-  privacy: 'Ver nuestra política de privacidad',
   darkTheme: 'Tema oscuro',
   answersShownDuration: 'Duración de respuestas mostradas',
   unlimited: 'Ilimitado',
   secondsSingular: '1 segundo',
   secondsPlural: '{{value}} segundos',
+  privacy: 'Ver nuestra política de privacidad',
+  managePrivacySettings: 'Administrar configuración de privacidad',
+  unavailable: 'No disponible',
+  unavailableReason:
+    'La configuración de privacidad no está disponible en tu región',
   resetProgress: 'Restablecer progreso',
   holdToReset: 'Mantén pulsado para restablecer',
   holdToResetText:

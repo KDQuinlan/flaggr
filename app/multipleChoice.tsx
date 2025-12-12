@@ -37,7 +37,7 @@ import { useTheme } from '@/context/ThemeContext';
 import { getMultipleChoiceStyles } from '@/styles/multipleChoice';
 import { colors } from '@/components/colors';
 import AdBanner from '@/components/AdBanner/AdBanner';
-import { BANNER_TEST_ID } from '@/constants/adId';
+import { BANNER_MULTIPLE_CHOICE_ID, BANNER_TEST_ID } from '@/constants/adId';
 import updatePassport from '@/util/updatePassport/updatePassport';
 import persistProgression from '@/util/persistState/persistProgression';
 
@@ -394,7 +394,9 @@ const MultipleChoice = () => {
       </View>
       {showAds && (
         <View style={styles.adContainer}>
-          <AdBanner adId={BANNER_TEST_ID} />
+          <AdBanner
+            adId={__DEV__ ? BANNER_TEST_ID : BANNER_MULTIPLE_CHOICE_ID}
+          />
         </View>
       )}
     </SafeAreaView>
