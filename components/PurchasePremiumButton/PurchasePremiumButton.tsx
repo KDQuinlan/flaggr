@@ -11,8 +11,6 @@ import persistUserSettings from '@/util/persistState/persistUserSettings';
 import { getPurchasePremiumButtonStyles } from './purchasePremiumButton.styles';
 import { useTheme } from '@/context/ThemeContext';
 
-// TODO - Remove revoke premium when going to PROD
-
 const PurchasePremiumButton = () => {
   const userSettings = stateStore((s) => s.userSettings);
   const { setEnergyModalVisible } = stateStore.getState();

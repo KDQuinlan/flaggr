@@ -22,7 +22,7 @@ import { NavigationProps } from '@/types/navigation';
 import stateStore from '@/state/store';
 import { useTheme } from '@/context/ThemeContext';
 import AdBanner from '@/components/AdBanner/AdBanner';
-import { BANNER_TEST_ID } from '@/constants/adId';
+import { BANNER_PASSPORT_ID, BANNER_TEST_ID } from '@/constants/adId';
 import { Passport } from '@/types/secureStore';
 import { getPassportStyles } from '@/styles/passport';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
@@ -324,7 +324,9 @@ const PassportScreen = () => {
             </View>
           )}
 
-          {showAds && <AdBanner adId={BANNER_TEST_ID} />}
+          {showAds && (
+            <AdBanner adId={__DEV__ ? BANNER_TEST_ID : BANNER_PASSPORT_ID} />
+          )}
         </SafeAreaView>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>

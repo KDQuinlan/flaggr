@@ -1,4 +1,4 @@
-export const mockCorruptData = {
+export const mockCorruptProgressionData = {
   games: {
     standard: {
       levelOne: {
@@ -81,7 +81,7 @@ export const mockCorruptData = {
   ],
 };
 
-export const mockGoodData = {
+export const mockGoodProgressionData = {
   games: {
     standard: {
       levelOne: {
@@ -320,4 +320,27 @@ export const mockGoodData = {
       incorrectTotal: 0,
     },
   ],
+};
+
+export const mockCorruptUserSettingsData = {
+  isSetUp: false,
+  isGoogleConnected: false,
+  isPremiumUser: false,
+  locale: 'en',
+  isDarkTheme: false,
+  energyAmount: 5,
+  lastEnergyTimestamp: null,
+  displayAnswerTimerMs: 500,
+};
+
+export const mockGoodUserSettingsData = {
+  isSetUp: false,
+  isGoogleConnected: false,
+  userAgeForPersonalisation: null,
+  isPremiumUser: false,
+  locale: 'en',
+  isDarkTheme: false,
+  energyAmount: 5,
+  lastEnergyTimestamp: null,
+  displayAnswerTimerMs: 500,
 };

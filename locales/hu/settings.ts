@@ -7,6 +7,9 @@ export default {
   secondsSingular: '1 másodperc',
   secondsPlural: '{{value}} másodperc',
   privacy: 'Adatvédelmi szabályzat megtekintése',
+  managePrivacySettings: 'Adatvédelmi beállítások kezelése',
+  unavailable: 'Nem elérhető',
+  unavailableReason: 'Az adatvédelmi beállítások nem érhetők el a régiójában',
   resetProgress: 'Előrehaladás visszaállítása',
   holdToReset: 'Tartsd lenyomva a visszaállításhoz',
   holdToResetText:

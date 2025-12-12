@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import MobileAds from 'react-native-google-mobile-ads';
 import { useFonts } from 'expo-font';
 import Purchases, { LOG_LEVEL } from 'react-native-purchases';
@@ -12,16 +12,13 @@ import PlayGames from '@/PlayGames';
 import restoreEnergyOnLoad from '@/util/restoreEnergyOnLoad/restoreEnergyOnLoad';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import {
+  AGE_GROUP_TO_RATING,
   REVENUE_CAT_API_KEY,
   REVENUE_CAT_TEST_API_KEY,
 } from '@/constants/adId';
 import useNetworkStatus from '@/hooks/useNetworkStatus/useNetworkStatus';
-import { Appearance } from 'react-native';
-import { colors } from '@/components/colors';
 
 const IndexScreen = () => {
-  const systemScheme = Appearance.getColorScheme();
-  const isSystemDark = systemScheme === 'dark';
   const isInitialised = stateStore((s) => s.isInitialised);
   const userSettings = stateStore((s) => s.userSettings);
   const [hasStoreHydrated, setHasStoreHydrated] = useState<boolean>(false);
@@ -62,10 +59,27 @@ const IndexScreen = () => {
   }, []);
 
   useEffect(() => {
-    if (!userSettings.isPremiumUser) {
-      MobileAds().initialize();
-    }
-  }, []);
+    const initAds = async () => {
+      if (
+        userSettings.isPremiumUser ||
+        !userSettings.userAgeForPersonalisation
+      ) {
+        return;
+      }
+
+      await MobileAds().setRequestConfiguration({
+        tagForChildDirectedTreatment:
+          userSettings.userAgeForPersonalisation < 13,
+        tagForUnderAgeOfConsent: userSettings.userAgeForPersonalisation < 18,
+        maxAdContentRating:
+          AGE_GROUP_TO_RATING[userSettings.userAgeForPersonalisation],
+      });
+
+      await MobileAds().initialize();
+    };
+
+    initAds();
+  }, [userSettings.userAgeForPersonalisation]);
 
   useEffect(() => {
     if (!userSettings.isPremiumUser) {

@@ -7,6 +7,9 @@ export default {
   secondsSingular: '1 seconde',
   secondsPlural: '{{value}} seconden',
   privacy: 'Bekijk ons privacybeleid',
+  managePrivacySettings: 'Privacy-instellingen beheren',
+  unavailable: 'Niet beschikbaar',
+  unavailableReason: 'Privacy-instellingen zijn niet beschikbaar in jouw regio',
   resetProgress: 'Voortgang resetten',
   holdToReset: 'Ingedrukt houden om te resetten',
   holdToResetText:

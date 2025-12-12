@@ -8,7 +8,7 @@ import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import stateStore from '@/state/store';
 import { useTheme } from '@/context/ThemeContext';
 import AdBanner from '@/components/AdBanner/AdBanner';
-import { BANNER_TEST_ID } from '@/constants/adId';
+import { BANNER_PASSPORT_ID, BANNER_TEST_ID } from '@/constants/adId';
 import { getPassportEntryStyles } from '@/styles/passportEntry';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import flags from '@/assets/images/flags';
@@ -87,7 +87,9 @@ const PassportEntryScreen = () => {
           </Text>
         </View>
       </ScrollView>
-      {showAds && <AdBanner adId={BANNER_TEST_ID} />}
+      {showAds && (
+        <AdBanner adId={__DEV__ ? BANNER_TEST_ID : BANNER_PASSPORT_ID} />
+      )}
     </SafeAreaView>
   );
 };

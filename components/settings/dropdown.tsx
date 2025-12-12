@@ -6,9 +6,11 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { useTheme } from '@/context/ThemeContext';
 import { getDropdownStyles } from './dropdown.styles';
 
+// TODO - find more appropriate type than 'any' for setValue e.g. generic or enum
+
 interface ILanguageDropdownProps {
-  value: string | null;
-  setValue: (value: string) => void;
+  value: string | number | null;
+  setValue: (value: any) => void;
   text: {
     namespace: string;
     label: string;
@@ -18,7 +20,7 @@ interface ILanguageDropdownProps {
   };
   data: {
     label: string;
-    value: string;
+    value: string | number;
   }[];
 }
 

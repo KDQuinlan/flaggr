@@ -1,7 +1,7 @@
 export default {
   language: 'Мова',
   ageRange: 'Віковий діапазон',
-  underAge: 'Молодше 13 років',
+  underThirteen: 'Молодше 13 років',
   selectAgeRange: 'Виберіть віковий діапазон',
   preferNotToSay: 'Віддаю перевагу не відповідати',
   optional: 'необов’язково',

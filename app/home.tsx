@@ -3,13 +3,14 @@ import { useNavigation } from 'expo-router';
 import { Image } from 'expo-image';
 import { Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { AdsConsent, AdsConsentStatus } from 'react-native-google-mobile-ads';
 import * as Device from 'expo-device';
 
 import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
 import { APP_NAME } from '@/constants/common';
 import AdBanner from '@/components/AdBanner/AdBanner';
-import { BANNER_TEST_ID } from '@/constants/adId';
+import { BANNER_HOME_AND_SETTINGS_ID, BANNER_TEST_ID } from '@/constants/adId';
 import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
 import PlayGames from '@/PlayGames';
 import stateStore from '@/state/store';
@@ -19,12 +20,15 @@ import { useTheme } from '@/context/ThemeContext';
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
-  const { isPremiumUser } = stateStore((s) => s.userSettings);
+  const { isPremiumUser, userAgeForPersonalisation } = stateStore(
+    (s) => s.userSettings
+  );
   const [showLeaderboard, setShowLeaderboard] = useState<boolean>(false);
   const [bottomPadding, setBottomPadding] = useState<number>(0);
   const { t } = useTranslation('home');
   const { theme } = useTheme();
   const styles = useMemo(() => getHomeStyles(theme), [theme]);
+  const isUserAMinor = userAgeForPersonalisation !== 18;
 
   const showAds = !isPremiumUser && isInternetAvailable;
   const isOnPhone = Device.deviceType === Device.DeviceType.PHONE;
@@ -33,6 +37,27 @@ const HomeScreen = () => {
     showLeaderboard && PlayGames.showAllLeaderboards();
     setTimeout(() => setShowLeaderboard(false), 500);
   }, [showLeaderboard]);
+
+  useEffect(() => {
+    const showConsent = async () => {
+      if (isUserAMinor) return;
+
+      try {
+        const consentInfo = await AdsConsent.requestInfoUpdate();
+
+        if (
+          consentInfo.isConsentFormAvailable &&
+          consentInfo.status === AdsConsentStatus.REQUIRED
+        ) {
+          await AdsConsent.loadAndShowConsentFormIfRequired();
+        }
+      } catch (error) {
+        console.log('Consent error:', error);
+      }
+    };
+
+    showConsent();
+  }, [isUserAMinor]);
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -155,7 +180,7 @@ const HomeScreen = () => {
       </View>
       {showAds && (
         <AdBanner
-          adId={BANNER_TEST_ID}
+          adId={__DEV__ ? BANNER_TEST_ID : BANNER_HOME_AND_SETTINGS_ID}
           onHeightChange={(height) => setBottomPadding(height)}
         />
       )}

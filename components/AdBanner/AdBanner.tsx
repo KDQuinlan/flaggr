@@ -32,9 +32,6 @@ const AdBanner = ({ adId, onHeightChange }: AdBannerProps) => {
       <BannerAd
         unitId={adToShow}
         size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
-        requestOptions={{
-          requestNonPersonalizedAdsOnly: true,
-        }}
         onAdFailedToLoad={(error) => {
           if (error.message.includes('no-fill')) {
             console.error('Banner ad failed to load:', error);

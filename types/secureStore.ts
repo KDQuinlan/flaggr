@@ -57,6 +57,8 @@ export type TimeLimits =
   | 225
   | 240;
 
+export type UserAgesForPersonalisation = 0 | 12 | 13 | 16 | 18;
+
 export type LevelData = {
   id: Difficulties;
   name: Levels;
@@ -120,6 +122,7 @@ export type ProgressionStructure = {
 export type UserSettingStructure = {
   isSetUp: boolean;
   isGoogleConnected: boolean;
+  userAgeForPersonalisation: UserAgesForPersonalisation | null;
   isPremiumUser: boolean;
   locale: string;
   isDarkTheme: boolean;

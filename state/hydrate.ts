@@ -16,7 +16,10 @@ import {
 } from './secureStoreStructure';
 import { UserSettingStructure } from '@/types/secureStore';
 import { mmkvStorage } from './mmkv';
-import { sanitizeProgression } from '@/util/normaliseProgressionStructure/normaliseProgressionStructure';
+import {
+  sanitizeProgression,
+  sanitizeUserSettings,
+} from '@/util/normaliseStructure/normaliseStructure';
 
 export const hydrateStore = async () => {
   const systemScheme = Appearance.getColorScheme();
@@ -49,10 +52,11 @@ export const hydrateStore = async () => {
       : defaultProgressionStructure;
 
   const applyUserSettings = async (settings: UserSettingStructure) => {
-    setUserSettings(settings);
+    const sanitisedUserSettings = sanitizeUserSettings(settings);
+    setUserSettings(sanitisedUserSettings);
     await SecureStore.setItemAsync(
       STORAGE_KEY_SETTINGS,
-      JSON.stringify(settings)
+      JSON.stringify(sanitisedUserSettings)
     );
   };
 

@@ -13,6 +13,7 @@ import { getSetupStyles } from '@/styles/setup';
 import { useTheme } from '@/context/ThemeContext';
 import ThemeToggle from '@/components/settings/themeToggle';
 import DropdownSelector from '@/components/settings/dropdown';
+import { UserAgesForPersonalisation } from '@/types/secureStore';
 
 // TODO - refactor continue button into reusable component
 
@@ -28,7 +29,9 @@ const SetupScreen = () => {
   const [language, setLanguage] = useState<string>(
     locale && SUPPORTED_LANGUAGES.includes(locale) ? locale : 'en'
   );
-  const [ageRange, setAgeRange] = useState<string | null>(null);
+  const [ageRange, setAgeRange] = useState<UserAgesForPersonalisation | null>(
+    null
+  );
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(
     userSettings.isDarkTheme
   );
@@ -42,11 +45,11 @@ const SetupScreen = () => {
   }, [isDarkTheme]);
 
   const ageRanges = [
-    { label: t('underAge'), value: '12' },
-    { label: '13-15', value: '13-15' },
-    { label: '16-17', value: '16-17' },
-    { label: '18+', value: '18' },
-    { label: t('preferNotToSay'), value: '0' },
+    { label: t('underThirteen'), value: 12 },
+    { label: '13-15', value: 13 },
+    { label: '16-17', value: 16 },
+    { label: '18+', value: 18 },
+    { label: t('preferNotToSay'), value: 0 },
   ];
 
   return (
@@ -93,6 +96,7 @@ const SetupScreen = () => {
             persistUserSettings({
               ...userSettings,
               isSetUp: true,
+              userAgeForPersonalisation: ageRange === null ? 0 : ageRange,
               locale: language,
               isDarkTheme,
             });
