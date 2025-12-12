@@ -34,6 +34,7 @@ import {
 } from '@/constants/settings';
 import ThemeToggle from '@/components/settings/themeToggle';
 import DropdownSelector from '@/components/settings/dropdown';
+import { UserAgesForPersonalisation } from '@/types/secureStore';
 
 interface IAnswersShownDurationSliderProps {
   value: number;
@@ -263,8 +264,19 @@ const SettingsScreen = () => {
   const [answerShownDuration, setAnswerShownDuration] = useState<number>(
     userSettings.displayAnswerTimerMs
   );
+  const [ageRange, setAgeRange] = useState<UserAgesForPersonalisation | null>(
+    userSettings.userAgeForPersonalisation
+  );
   const showAds = !userSettings.isPremiumUser && isInternetAvailable;
   const isUserAMinor = userSettings.userAgeForPersonalisation !== 18;
+
+  const ageRanges = [
+    { label: t('underThirteen', { ns: 'setup' }), value: 12 },
+    { label: '13-15', value: 13 },
+    { label: '16-17', value: 16 },
+    { label: '18+', value: 18 },
+    { label: t('preferNotToSay', { ns: 'setup' }), value: 0 },
+  ];
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -273,10 +285,11 @@ const SettingsScreen = () => {
   useEffect(() => {
     persistUserSettings({
       ...userSettings,
+      userAgeForPersonalisation: ageRange,
       locale: language,
       isDarkTheme,
     });
-  }, [language, isDarkTheme]);
+  }, [language, isDarkTheme, ageRange]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -307,7 +320,16 @@ const SettingsScreen = () => {
           text={{
             namespace: 'settings',
             label: 'language',
-            placeholder: 'selectLanguage',
+          }}
+        />
+        <DropdownSelector
+          value={ageRange}
+          setValue={setAgeRange}
+          data={ageRanges}
+          text={{
+            namespace: 'setup',
+            label: 'ageRange',
+            helperText: 'adHelpText',
           }}
         />
         <ThemeToggle
