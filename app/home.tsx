@@ -14,6 +14,8 @@ import PlayGames from '@/PlayGames';
 import stateStore from '@/state/store';
 import { getHomeStyles } from '@/styles/home';
 import { useTheme } from '@/context/ThemeContext';
+import { useUMP } from '@/hooks/userDataConsent/useUMP';
+import { MobileAds, AdsConsent, AdsConsentStatus } from 'react-native-google-mobile-ads';
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -25,7 +27,29 @@ const HomeScreen = () => {
   const { theme } = useTheme();
   const styles = useMemo(() => getHomeStyles(theme), [theme]);
 
-  const showAds = !isPremiumUser && isInternetAvailable;
+  const [adsInitialized, setAdsInitialized] = useState(false);
+  const showAds = !isPremiumUser && isInternetAvailable && adsInitialized;
+
+  useEffect(() => {
+    const initAds = async () => {
+      try {
+        const consentInfo = await AdsConsent.requestInfoUpdate();
+        if (
+          consentInfo.isConsentFormAvailable &&
+          consentInfo.status === AdsConsentStatus.REQUIRED
+        ) {
+          await AdsConsent.loadAndShowConsentFormIfRequired();
+        }
+      } catch (error) {
+        // Log error (optional)
+      } finally {
+        await MobileAds().initialize();
+        setAdsInitialized(true);
+      }
+    };
+
+    initAds();
+  }, []);
 
   useEffect(() => {
     showLeaderboard && PlayGames.showAllLeaderboards();
