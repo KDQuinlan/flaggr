@@ -1,6 +1,7 @@
 import { StyleSheet, PixelRatio } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
+import { colors } from '../colors';
 
 const fontScale = PixelRatio.getFontScale();
 
@@ -31,6 +32,7 @@ export const getEnergyDisplayStyles = (theme: ThemeColors) => {
     energy: {
       fontWeight: '600',
       fontFamily: 'DMSansBold',
+      color: colors.black,
     },
     timer: {
       color: theme.text,

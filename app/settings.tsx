@@ -49,14 +49,16 @@ const AnswersShownDurationSlider = React.memo(
     const userSettings = stateStore((s) => s.userSettings);
 
     useEffect(() => {
-      const timeout = setTimeout(() => {
-        persistUserSettings({
-          ...userSettings,
-          displayAnswerTimerMs: value,
-        });
-      }, 300);
+      if (value !== userSettings.displayAnswerTimerMs) {
+        const timeout = setTimeout(() => {
+          persistUserSettings({
+            ...userSettings,
+            displayAnswerTimerMs: value,
+          });
+        }, 300);
 
-      return () => clearTimeout(timeout);
+        return () => clearTimeout(timeout);
+      }
     }, [value]);
 
     const sliderValueToShow = () => {
@@ -283,12 +285,18 @@ const SettingsScreen = () => {
   }, [language]);
 
   useEffect(() => {
-    persistUserSettings({
-      ...userSettings,
-      userAgeForPersonalisation: ageRange,
-      locale: language,
-      isDarkTheme,
-    });
+    if (
+      isDarkTheme !== userSettings.isDarkTheme ||
+      ageRange !== userSettings.userAgeForPersonalisation ||
+      language !== userSettings.locale
+    ) {
+      persistUserSettings({
+        ...userSettings,
+        userAgeForPersonalisation: ageRange,
+        locale: language,
+        isDarkTheme,
+      });
+    }
   }, [language, isDarkTheme, ageRange]);
 
   useEffect(() => {
