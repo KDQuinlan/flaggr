@@ -7,18 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "backgroundColor": "#121212"
-    },
-    "androidStatusBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#121212",
-      "translucent": false
-    },
-    "androidNavigationBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#121212"
-    },
     "ios": {
       "supportsTablet": true
     },

@@ -19,7 +19,10 @@ function RootLayoutContent() {
 
   useLayoutEffect(() => {
     if (isInitialised) {
-      SystemUI.setBackgroundColorAsync(theme.background);
+      SystemUI.setBackgroundColorAsync(
+        isDarkTheme ? colors.black : colors.offWhite
+      );
+
       NavigationBar.setBackgroundColorAsync(
         isDarkTheme ? colors.black : colors.offWhite
       );
