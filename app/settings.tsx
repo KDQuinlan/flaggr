@@ -330,16 +330,18 @@ const SettingsScreen = () => {
             label: 'language',
           }}
         />
-        <DropdownSelector
-          value={ageRange}
-          setValue={setAgeRange}
-          data={ageRanges}
-          text={{
-            namespace: 'setup',
-            label: 'ageRange',
-            helperText: 'adHelpText',
-          }}
-        />
+        {!userSettings.isPremiumUser && (
+          <DropdownSelector
+            value={ageRange}
+            setValue={setAgeRange}
+            data={ageRanges}
+            text={{
+              namespace: 'setup',
+              label: 'ageRange',
+              helperText: 'adHelpText',
+            }}
+          />
+        )}
         <ThemeToggle
           isDarkTheme={isDarkTheme}
           setIsDarkTheme={setIsDarkTheme}
@@ -355,7 +357,7 @@ const SettingsScreen = () => {
           setHasResetProgress={setHasResetProgress}
         />
         <PrivacyPolicy />
-        {!isUserAMinor && <PrivacyConsent />}
+        {!isUserAMinor && !userSettings.isPremiumUser && <PrivacyConsent />}
         <ContinueButton />
       </ScrollView>
 
