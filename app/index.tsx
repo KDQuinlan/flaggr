@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
-import MobileAds from 'react-native-google-mobile-ads';
+import MobileAds, {
+  AdsConsent,
+  AdsConsentStatus,
+} from 'react-native-google-mobile-ads';
 import { useFonts } from 'expo-font';
 import Purchases, { LOG_LEVEL } from 'react-native-purchases';
 
@@ -21,6 +24,7 @@ import useNetworkStatus from '@/hooks/useNetworkStatus/useNetworkStatus';
 const IndexScreen = () => {
   const isInitialised = stateStore((s) => s.isInitialised);
   const userSettings = stateStore((s) => s.userSettings);
+  const { setCanShowAds } = stateStore.getState();
   const [hasStoreHydrated, setHasStoreHydrated] = useState<boolean>(false);
 
   const [fontsLoaded] = useFonts({
@@ -59,27 +63,52 @@ const IndexScreen = () => {
   }, []);
 
   useEffect(() => {
-    const initAds = async () => {
+    const initAdSequence = async () => {
       if (
+        !userSettings.isSetUp ||
         userSettings.isPremiumUser ||
         !userSettings.userAgeForPersonalisation
       ) {
         return;
       }
 
-      await MobileAds().setRequestConfiguration({
-        tagForChildDirectedTreatment:
-          userSettings.userAgeForPersonalisation < 13,
-        tagForUnderAgeOfConsent: userSettings.userAgeForPersonalisation < 18,
-        maxAdContentRating:
-          AGE_GROUP_TO_RATING[userSettings.userAgeForPersonalisation],
-      });
+      const age = userSettings.userAgeForPersonalisation;
+      const isMinor = age < 18;
 
-      await MobileAds().initialize();
+      try {
+        await MobileAds().setRequestConfiguration({
+          tagForChildDirectedTreatment: age < 13,
+          tagForUnderAgeOfConsent: isMinor,
+          maxAdContentRating: AGE_GROUP_TO_RATING[age],
+        });
+
+        if (!isMinor) {
+          try {
+            const consentInfo = await AdsConsent.requestInfoUpdate();
+            if (
+              consentInfo.isConsentFormAvailable &&
+              consentInfo.status === AdsConsentStatus.REQUIRED
+            ) {
+              await AdsConsent.loadAndShowConsentFormIfRequired();
+            }
+          } catch (consentError) {
+            console.log('Consent flow error:', consentError);
+          }
+        }
+
+        await MobileAds().initialize();
+        setCanShowAds();
+      } catch (e) {
+        console.error('Ad sequence failed', e);
+      }
     };
 
-    initAds();
-  }, [userSettings.userAgeForPersonalisation]);
+    initAdSequence();
+  }, [
+    userSettings.isSetUp,
+    userSettings.isPremiumUser,
+    userSettings.userAgeForPersonalisation,
+  ]);
 
   useEffect(() => {
     if (!userSettings.isPremiumUser) {

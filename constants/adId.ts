@@ -24,9 +24,9 @@ export const AGE_GROUP_TO_RATING: Record<
   UserAgesForPersonalisation,
   MaxAdContentRating
 > = {
-  0: MaxAdContentRating.G,
+  1: MaxAdContentRating.G,
   12: MaxAdContentRating.G,
   13: MaxAdContentRating.PG,
   16: MaxAdContentRating.T,
-  18: MaxAdContentRating.MA,
+  18: MaxAdContentRating.T,
 };

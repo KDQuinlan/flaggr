@@ -1,3 +1,4 @@
+import stateStore from '@/state/store';
 import { useRef } from 'react';
 import { LayoutChangeEvent, View } from 'react-native';
 import {
@@ -12,6 +13,7 @@ interface AdBannerProps {
 }
 
 const AdBanner = ({ adId, onHeightChange }: AdBannerProps) => {
+  const canShowAds = stateStore((s) => s.canShowAds);
   const adToShow = __DEV__ ? TestIds.BANNER : adId;
 
   const lastHeightRef = useRef<number | null>(null);
@@ -26,6 +28,8 @@ const AdBanner = ({ adId, onHeightChange }: AdBannerProps) => {
       }
     }
   };
+
+  if (!canShowAds) return null;
 
   return (
     <View onLayout={handleLayout}>
