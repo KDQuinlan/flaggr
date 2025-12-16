@@ -11,6 +11,7 @@ import {
 
 type State = {
   isInitialised: boolean;
+  canShowAds: boolean;
   energyModalVisible: boolean;
   isInternetAvailable: boolean | null;
   userSettings: UserSettingStructure;
@@ -19,6 +20,7 @@ type State = {
 
 type Actions = {
   setIsInitialised: () => void;
+  setCanShowAds: () => void;
   setEnergyModalVisible: (energyModalVisible: boolean) => void;
   setIsInternetAvailable: (isInternetAvailable: boolean) => void;
   setUserSettings: (userSettings: UserSettingStructure) => void;
@@ -27,12 +29,14 @@ type Actions = {
 
 const stateStore = create<State & Actions>((set) => ({
   isInitialised: false,
+  canShowAds: false,
   energyModalVisible: false,
   isInternetAvailable: null,
   userSettings: defaultUserSettings,
   userProgress: defaultProgressionStructure,
 
   setIsInitialised: () => set(() => ({ isInitialised: true })),
+  setCanShowAds: () => set(() => ({ canShowAds: true })),
   setEnergyModalVisible: (energyModalVisible: boolean) =>
     set(() => ({ energyModalVisible })),
   setIsInternetAvailable: (isInternetAvailable: boolean) =>

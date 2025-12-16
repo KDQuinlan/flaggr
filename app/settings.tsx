@@ -34,7 +34,10 @@ import {
 } from '@/constants/settings';
 import ThemeToggle from '@/components/settings/themeToggle';
 import DropdownSelector from '@/components/settings/dropdown';
-import { UserAgesForPersonalisation } from '@/types/secureStore';
+import {
+  UserAgesDropdownProps,
+  UserAgesForPersonalisation,
+} from '@/types/secureStore';
 
 interface IAnswersShownDurationSliderProps {
   value: number;
@@ -272,12 +275,12 @@ const SettingsScreen = () => {
   const showAds = !userSettings.isPremiumUser && isInternetAvailable;
   const isUserAMinor = userSettings.userAgeForPersonalisation !== 18;
 
-  const ageRanges = [
+  const ageRanges: UserAgesDropdownProps = [
     { label: t('underThirteen', { ns: 'setup' }), value: 12 },
     { label: '13-15', value: 13 },
     { label: '16-17', value: 16 },
     { label: '18+', value: 18 },
-    { label: t('preferNotToSay', { ns: 'setup' }), value: 0 },
+    { label: t('preferNotToSay', { ns: 'setup' }), value: 12 },
   ];
 
   useEffect(() => {

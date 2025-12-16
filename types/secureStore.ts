@@ -57,7 +57,14 @@ export type TimeLimits =
   | 225
   | 240;
 
-export type UserAgesForPersonalisation = 0 | 12 | 13 | 16 | 18;
+export type UserAgesForPersonalisation = 12 | 13 | 16 | 18;
+
+export interface IUserAgesDropdownProps {
+  label: string;
+  value: UserAgesForPersonalisation;
+}
+
+export type UserAgesDropdownProps = IUserAgesDropdownProps[];
 
 export type LevelData = {
   id: Difficulties;
