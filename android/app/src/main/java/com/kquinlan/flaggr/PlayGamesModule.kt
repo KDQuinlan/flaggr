@@ -79,8 +79,6 @@ class PlayGamesModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
         }
     }
 
-    // --- NEW FUNCTIONS BELOW ---
-
     @ReactMethod
     fun saveGame(key: String, data: String, promise: Promise) {
         val activity = currentActivity ?: run {
@@ -106,11 +104,8 @@ class PlayGamesModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
                 }
 
                 try {
-                    // Write the data string to the snapshot
                     val bytes = data.toByteArray(Charsets.UTF_8)
                     snapshot.snapshotContents.writeBytes(bytes)
-
-                    // Commit the changes to Google Cloud
                     val metadataChange = SnapshotMetadataChange.Builder()
                         .setDescription("Game Data for $key")
                         .build()
@@ -138,11 +133,9 @@ class PlayGamesModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
 
         val snapshotsClient = PlayGames.getSnapshotsClient(activity)
 
-        // Open the snapshot (createIfNotFound = false because we are loading)
         snapshotsClient.open(key, false, SnapshotsClient.RESOLUTION_POLICY_MOST_RECENTLY_MODIFIED)
             .addOnCompleteListener { task ->
                 if (!task.isSuccessful) {
-                    // If opening fails (e.g., file not found), resolve null so JS knows to use local data
                     promise.resolve(null)
                     return@addOnCompleteListener
                 }
@@ -154,7 +147,6 @@ class PlayGamesModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
                 }
 
                 try {
-                    // Read the bytes and convert back to String
                     val contents = snapshot.snapshotContents
                     if (contents.isClosed) {
                         promise.resolve(null)
