@@ -11,6 +11,7 @@ import { APP_NAME } from '@/constants/common';
 import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_HOME_AND_SETTINGS_ID, BANNER_TEST_ID } from '@/constants/adId';
 import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
+import PlayGames from '@/PlayGames';
 import stateStore from '@/state/store';
 import { getHomeStyles } from '@/styles/home';
 import { useTheme } from '@/context/ThemeContext';
@@ -18,12 +19,19 @@ import { useTheme } from '@/context/ThemeContext';
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
-  const { isPremiumUser } = stateStore((s) => s.userSettings);
+  const { isPremiumUser, isGoogleConnected } = stateStore(
+    (s) => s.userSettings
+  );
   const [showLeaderboard, setShowLeaderboard] = useState<boolean>(false);
   const [bottomPadding, setBottomPadding] = useState<number>(0);
   const { t } = useTranslation('home');
   const { theme } = useTheme();
   const styles = useMemo(() => getHomeStyles(theme), [theme]);
+
+  const handleShowLeaderboard = async () => {
+    await PlayGames.showAllLeaderboards();
+    setShowLeaderboard(false);
+  };
 
   const showAds = !isPremiumUser && isInternetAvailable;
   const isOnPhone = Device.deviceType === Device.DeviceType.PHONE;
@@ -130,14 +138,14 @@ const HomeScreen = () => {
             />
           </Pressable>
 
-          {isInternetAvailable && isOnPhone && (
+          {isInternetAvailable && isOnPhone && isGoogleConnected && (
             <Pressable
               style={({ pressed }) => [
                 styles.floatingButton,
                 { opacity: pressed ? 0.7 : 1 },
               ]}
               disabled={showLeaderboard}
-              onPress={() => setShowLeaderboard(true)}
+              onPress={handleShowLeaderboard}
             >
               <Image
                 style={styles.floatingIcon}
