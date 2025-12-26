@@ -60,7 +60,7 @@ const IndexScreen = () => {
         })();
       }
     }
-  }, []);
+  }, [hasStoreHydrated]);
 
   useEffect(() => {
     const initAdSequence = async () => {
