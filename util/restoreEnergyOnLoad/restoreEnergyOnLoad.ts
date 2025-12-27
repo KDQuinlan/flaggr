@@ -9,8 +9,7 @@ const restoreEnergyOnLoad = () => {
     const energyOnLoad =
       (Date.now() - userSettings.lastEnergyTimestamp) / ENERGY_COOLDOWN_MS;
 
-    const newTimestamp =
-      Date.now() - (1 - (energyOnLoad % 1)) * ENERGY_COOLDOWN_MS;
+    const newTimestamp = Date.now() - (energyOnLoad % 1) * ENERGY_COOLDOWN_MS;
     const energyToRestore = Math.floor(energyOnLoad);
     const newEnergyAmount = Math.min(
       userSettings.energyAmount + energyToRestore,

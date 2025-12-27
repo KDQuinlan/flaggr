@@ -1,11 +1,8 @@
 export default {
   language: 'Lingua',
-  ageRange: 'Fascia d’età',
-  underThirteen: 'Meno di 13',
-  selectAgeRange: 'Seleziona fascia d’età',
-  preferNotToSay: 'Preferisco non rispondere',
-  optional: 'facoltativo',
-  adHelpText: 'Usato solo per la personalizzazione degli annunci',
-  darkTheme: 'Tema Scuro',
+  yearOfBirth: 'Anno di nascita',
+  yearOfBirthAccessibilityLabel: 'Campo anno di nascita',
+  yearOfBirthAccessibilityHint:
+    'Inserisci l’anno di nascita a 4 cifre. Deve essere un anno valido.',
   continue: 'Continua',
 };

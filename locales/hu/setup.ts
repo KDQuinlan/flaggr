@@ -1,11 +1,8 @@
 export default {
   language: 'Nyelv',
-  ageRange: 'Korcsoport',
-  underThirteen: '13 év alatt',
-  selectAgeRange: 'Válassz korcsoportot',
-  preferNotToSay: 'Inkább nem válaszolok',
-  optional: 'opcionális',
-  adHelpText: 'Kizárólag a hirdetések személyre szabásához',
-  darkTheme: 'Sötét téma',
+  yearOfBirth: 'Születési év',
+  yearOfBirthAccessibilityLabel: 'Születési év mező',
+  yearOfBirthAccessibilityHint:
+    'Add meg a születési évedet 4 számjeggyel. Érvényes évnek kell lennie.',
   continue: 'Tovább',
 };

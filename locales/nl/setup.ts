@@ -1,11 +1,8 @@
 export default {
   language: 'Taal',
-  ageRange: 'Leeftijdsgroep',
-  underThirteen: 'Onder 13',
-  selectAgeRange: 'Selecteer leeftijdsgroep',
-  preferNotToSay: 'Zeg ik liever niet',
-  optional: 'optioneel',
-  adHelpText: 'Alleen gebruikt voor advertentiepersonalisatie',
-  darkTheme: 'Donker thema',
+  yearOfBirth: 'Geboortejaar',
+  yearOfBirthAccessibilityLabel: 'Invoerveld geboortejaar',
+  yearOfBirthAccessibilityHint:
+    'Voer het 4-cijferige geboortejaar in. Dit moet een geldig jaar zijn.',
   continue: 'Doorgaan',
 };

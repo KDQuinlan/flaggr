@@ -15,11 +15,11 @@ import PlayGames from '@/PlayGames';
 import restoreEnergyOnLoad from '@/util/restoreEnergyOnLoad/restoreEnergyOnLoad';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import {
-  AGE_GROUP_TO_RATING,
   REVENUE_CAT_API_KEY,
   REVENUE_CAT_TEST_API_KEY,
 } from '@/constants/adId';
 import useNetworkStatus from '@/hooks/useNetworkStatus/useNetworkStatus';
+import determineAdRating from '@/util/determineAdRating/determineAdRating';
 
 const IndexScreen = () => {
   const isInitialised = stateStore((s) => s.isInitialised);
@@ -73,13 +73,15 @@ const IndexScreen = () => {
       }
 
       const age = userSettings.userAgeForPersonalisation;
+      const isChild = age < 13;
       const isMinor = age < 18;
+      const rating = determineAdRating(age);
 
       try {
         await MobileAds().setRequestConfiguration({
-          tagForChildDirectedTreatment: age < 13,
+          tagForChildDirectedTreatment: isChild,
           tagForUnderAgeOfConsent: isMinor,
-          maxAdContentRating: AGE_GROUP_TO_RATING[age],
+          maxAdContentRating: rating,
         });
 
         if (!isMinor) {
