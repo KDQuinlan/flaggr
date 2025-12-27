@@ -1,11 +1,8 @@
 export default {
   language: 'Idioma',
-  ageRange: 'Rango de edad',
-  underThirteen: 'Menos de 13',
-  selectAgeRange: 'Selecciona un rango de edad',
-  preferNotToSay: 'Prefiero no decirlo',
-  optional: 'opcional',
-  adHelpText: 'Usado solo para la personalización de anuncios',
-  darkTheme: 'Tema oscuro',
+  yearOfBirth: 'Año de nacimiento',
+  yearOfBirthAccessibilityLabel: 'Campo de año de nacimiento',
+  yearOfBirthAccessibilityHint:
+    'Introduce el año de nacimiento con 4 dígitos. Debe ser un año válido.',
   continue: 'Continuar',
 };

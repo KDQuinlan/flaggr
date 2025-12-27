@@ -1,11 +1,8 @@
 export default {
   language: 'Language',
-  ageRange: 'Age Range',
-  underThirteen: 'Under 13',
-  selectAgeRange: 'Select age range',
-  preferNotToSay: 'Prefer not to say',
-  optional: 'optional',
-  adHelpText: 'Used only for ad personalization',
-  darkTheme: 'Dark Theme',
+  yearOfBirth: 'Year of Birth',
+  yearOfBirthAccessibilityLabel: 'Year of birth input',
+  yearOfBirthAccessibilityHint:
+    'Enter the 4-digit year you were born. Must be a valid year.',
   continue: 'Continue',
 };

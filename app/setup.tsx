@@ -1,6 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigation } from 'expo-router';
-import { Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import {
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+  TextInput,
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/locales/i18n';
 import * as Localization from 'expo-localization';
@@ -13,10 +20,6 @@ import { getSetupStyles } from '@/styles/setup';
 import { useTheme } from '@/context/ThemeContext';
 import ThemeToggle from '@/components/settings/themeToggle';
 import DropdownSelector from '@/components/settings/dropdown';
-import {
-  UserAgesDropdownProps,
-  UserAgesForPersonalisation,
-} from '@/types/secureStore';
 
 // TODO - refactor continue button into reusable component
 
@@ -32,9 +35,7 @@ const SetupScreen = () => {
   const [language, setLanguage] = useState<string>(
     locale && SUPPORTED_LANGUAGES.includes(locale) ? locale : 'en'
   );
-  const [ageRange, setAgeRange] = useState<UserAgesForPersonalisation | null>(
-    null
-  );
+  const [year, setYear] = useState<string>('');
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(
     userSettings.isDarkTheme
   );
@@ -47,13 +48,15 @@ const SetupScreen = () => {
     persistUserSettings({ ...userSettings, isDarkTheme });
   }, [isDarkTheme]);
 
-  const ageRanges: UserAgesDropdownProps = [
-    { label: t('underThirteen'), value: 12 },
-    { label: '13-15', value: 13 },
-    { label: '16-17', value: 16 },
-    { label: '18+', value: 18 },
-    { label: t('preferNotToSay'), value: 12 },
-  ];
+  const isValidYear =
+    year.length === 4 &&
+    parseInt(year) > 1900 &&
+    parseInt(year) <= new Date().getFullYear();
+
+  const handleContinueAgeCalculation = () =>
+    new Date().getFullYear() - parseInt(year);
+
+  const isContinueDisabled = userSettings.isPremiumUser ? false : !isValidYear;
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -76,18 +79,27 @@ const SetupScreen = () => {
           }}
         />
 
-        <DropdownSelector
-          value={ageRange}
-          setValue={setAgeRange}
-          data={ageRanges}
-          text={{
-            namespace: 'setup',
-            label: 'ageRange',
-            labelSubtext: 'optional',
-            helperText: 'adHelpText',
-            placeholder: 'selectAgeRange',
-          }}
-        />
+        {!userSettings.isPremiumUser && (
+          <View style={{ gap: 10 }}>
+            <Text style={styles.header}>{t('yearOfBirth')}</Text>
+            <TextInput
+              style={styles.textBox}
+              inputMode="numeric"
+              placeholderTextColor={theme.text}
+              placeholder="YYYY"
+              keyboardType="number-pad"
+              returnKeyType="done"
+              accessibilityLabel={t('yearOfBirthAccessibilityLabel')}
+              accessibilityHint={t('yearOfBirthAccessibilityHint')}
+              maxLength={4}
+              value={year}
+              onChangeText={(text: string) => {
+                const numericText = text.replace(/[^0-9]/g, '');
+                setYear(numericText);
+              }}
+            />
+          </View>
+        )}
 
         <ThemeToggle
           isDarkTheme={isDarkTheme}
@@ -99,15 +111,16 @@ const SetupScreen = () => {
             persistUserSettings({
               ...userSettings,
               isSetUp: true,
-              userAgeForPersonalisation: ageRange === null ? 12 : ageRange,
+              userAgeForPersonalisation: handleContinueAgeCalculation(),
               locale: language,
               isDarkTheme,
             });
             navigation.navigate('home');
           }}
+          disabled={isContinueDisabled}
           style={({ pressed }) => [
-            styles.button,
-            { opacity: pressed ? 0.7 : 1 },
+            isContinueDisabled ? styles.buttonDisabled : styles.buttonEnabled,
+            { opacity: pressed ? 0.7 : isContinueDisabled ? 0.5 : 1 },
           ]}
           accessibilityLabel={t('continue')}
           accessibilityRole="button"

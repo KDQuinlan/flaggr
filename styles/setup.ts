@@ -1,6 +1,7 @@
 import { StyleSheet, StatusBar } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
+import { colors } from '@/components/colors';
 
 export const getSetupStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -34,8 +35,19 @@ export const getSetupStyles = (theme: ThemeColors) => {
       flexDirection: 'row',
       marginTop: 20,
     },
-    button: {
-      backgroundColor: theme.button,
+    buttonEnabled: {
+      backgroundColor: colors.bluePrimary,
+      paddingVertical: 10,
+      borderRadius: 8,
+      width: '50%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      shadowColor: colors.bluePrimary,
+      elevation: 2,
+    },
+    buttonDisabled: {
+      backgroundColor: colors.bluePrimary,
       paddingVertical: 10,
       borderRadius: 8,
       width: '50%',
@@ -47,6 +59,20 @@ export const getSetupStyles = (theme: ThemeColors) => {
       fontSize: 16,
       fontFamily: 'DMSansBold',
       color: theme.buttonText,
+    },
+    header: {
+      fontSize: 16,
+      fontFamily: 'DMSansBold',
+      color: theme.text,
+    },
+    textBox: {
+      borderWidth: 1,
+      borderColor: theme.accent,
+      borderRadius: 8,
+      padding: 10,
+      fontSize: 16,
+      backgroundColor: theme.card,
+      color: theme.text,
     },
   });
 };
