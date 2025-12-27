@@ -19,8 +19,9 @@ import { useTheme } from '@/context/ThemeContext';
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
-  const { isPremiumUser, isGoogleConnected, userAgeForPersonalisation } =
-    stateStore((s) => s.userSettings);
+  const { isPremiumUser, isGoogleConnected } = stateStore(
+    (s) => s.userSettings
+  );
   const [showLeaderboard, setShowLeaderboard] = useState<boolean>(false);
   const [bottomPadding, setBottomPadding] = useState<number>(0);
   const { t } = useTranslation('home');
