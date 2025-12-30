@@ -1,16 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigation } from 'expo-router';
-import {
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  View,
-  TextInput,
-} from 'react-native';
+import { Pressable, ScrollView, Text, View, TextInput } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/locales/i18n';
 import * as Localization from 'expo-localization';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import { NavigationProps } from '@/types/navigation';
 import { APP_NAME, LANGUAGES, SUPPORTED_LANGUAGES } from '@/constants/common';
@@ -28,6 +25,7 @@ const locale = locales[0]?.languageCode;
 
 const SetupScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  const insets = useSafeAreaInsets();
   const userSettings = stateStore((s) => s.userSettings);
   const { t } = useTranslation('setup');
   const { theme } = useTheme();
@@ -59,7 +57,9 @@ const SetupScreen = () => {
   const isContinueDisabled = userSettings.isPremiumUser ? false : !isValidYear;
 
   return (
-    <SafeAreaView style={styles.rootContainer}>
+    <SafeAreaProvider
+      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+    >
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
@@ -128,7 +128,7 @@ const SetupScreen = () => {
           <Text style={styles.buttonText}>{t('continue')}</Text>
         </Pressable>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 

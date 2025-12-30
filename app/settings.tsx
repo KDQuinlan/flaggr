@@ -3,7 +3,6 @@ import { useNavigation } from 'expo-router';
 import {
   Linking,
   Pressable,
-  SafeAreaView,
   ScrollView,
   Text,
   View,
@@ -13,6 +12,10 @@ import { useTranslation } from 'react-i18next';
 import i18n from '@/locales/i18n';
 import { Feather } from '@expo/vector-icons';
 import { AdsConsent } from 'react-native-google-mobile-ads';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import { colors } from '@/components/colors';
 import { NavigationProps } from '@/types/navigation';
@@ -250,6 +253,7 @@ const ContinueButton = () => {
 
 const SettingsScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const { t } = useTranslation('settings');
@@ -301,7 +305,9 @@ const SettingsScreen = () => {
   }, [hasResetProgress]);
 
   return (
-    <SafeAreaView style={styles.rootContainer}>
+    <SafeAreaProvider
+      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+    >
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
@@ -340,7 +346,7 @@ const SettingsScreen = () => {
           adId={__DEV__ ? BANNER_TEST_ID : BANNER_HOME_AND_SETTINGS_ID}
         />
       )}
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 

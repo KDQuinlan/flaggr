@@ -4,13 +4,16 @@ import {
   Animated,
   BackHandler,
   Pressable,
-  SafeAreaView,
   ScrollView,
   Text,
   View,
 } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import SummaryInfoRow from '@/components/summaryInfoRow/summaryInfoRow';
 import stateStore from '@/state/store';
@@ -49,6 +52,7 @@ const CustomSummary = () => {
   );
 
   const navigation = useNavigation<NavigationProps>();
+  const insets = useSafeAreaInsets();
   const route = useRoute<RouteProp<RootStackParamList, 'customSummary'>>();
   const { t } = useTranslation('customSummary');
   const { theme } = useTheme();
@@ -176,7 +180,9 @@ const CustomSummary = () => {
   };
 
   return (
-    <SafeAreaView style={styles.rootContainer}>
+    <SafeAreaProvider
+      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+    >
       <ScrollView style={styles.summaryContainer}>
         <View style={styles.sectionContainer}>
           <Text style={styles.title}>{t('completed')}</Text>
@@ -203,7 +209,7 @@ const CustomSummary = () => {
       </ScrollView>
 
       {showAds && <AdBanner adId={BANNER_TEST_ID} />}
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 

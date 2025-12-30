@@ -1,9 +1,13 @@
 import { useMemo, useState } from 'react';
 import { useNavigation } from 'expo-router';
 import { Image } from 'expo-image';
-import { Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import * as Device from 'expo-device';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
@@ -18,6 +22,7 @@ import { useTheme } from '@/context/ThemeContext';
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser, isGoogleConnected } = stateStore(
     (s) => s.userSettings
@@ -37,7 +42,9 @@ const HomeScreen = () => {
   const isOnPhone = Device.deviceType === Device.DeviceType.PHONE;
 
   return (
-    <SafeAreaView style={styles.rootContainer}>
+    <SafeAreaProvider
+      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+    >
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
@@ -124,7 +131,12 @@ const HomeScreen = () => {
           bottom: showAds ? bottomPadding : 0,
         }}
       >
-        <View style={styles.floatingButtonContainer}>
+        <View
+          style={{
+            ...styles.floatingButtonContainer,
+            paddingBottom: insets.bottom,
+          }}
+        >
           <Pressable
             style={({ pressed }) => [
               styles.floatingButton,
@@ -161,7 +173,7 @@ const HomeScreen = () => {
           onHeightChange={(height) => setBottomPadding(height)}
         />
       )}
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 

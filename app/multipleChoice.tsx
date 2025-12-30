@@ -5,19 +5,17 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {
-  Pressable,
-  SafeAreaView,
-  Text,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import { Pressable, Text, useWindowDimensions, View } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useFocusEffect, useNavigation } from 'expo-router';
 import { Image } from 'expo-image';
 import { ProgressBar } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { Feather } from '@expo/vector-icons';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import { ANSWER_LETTERS } from '@/constants/common';
 import { DIFFICULTY_ID_TO_LEVEL_MAP, LEVEL_MAP } from '@/constants/mappers';
@@ -102,6 +100,7 @@ const MultipleChoice = () => {
   const dynamicPadding = isSmallScreen ? 5 : 20;
 
   const navigation = useNavigation<NavigationProps>();
+  const insets = useSafeAreaInsets();
   const route = useRoute<RouteProp<RootStackParamList, 'multipleChoice'>>();
   const { t } = useTranslation('data');
   const { theme } = useTheme();
@@ -324,7 +323,9 @@ const MultipleChoice = () => {
   };
 
   return (
-    <SafeAreaView style={styles.rootContainer}>
+    <SafeAreaProvider
+      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+    >
       <ProgressBar
         progress={questionNumberIndex / questions.length}
         color={colors.bluePrimary}
@@ -399,7 +400,7 @@ const MultipleChoice = () => {
           />
         </View>
       )}
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 

@@ -1,12 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
-  SafeAreaView,
   View,
   Text,
   FlatList,
   useWindowDimensions,
   Pressable,
-  Modal,
 } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
@@ -17,6 +15,10 @@ import {
   BottomSheetModalProvider,
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import { NavigationProps } from '@/types/navigation';
 import stateStore from '@/state/store';
@@ -43,6 +45,7 @@ interface BasicEntry {
 
 const PassportScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  const insets = useSafeAreaInsets();
   const { t } = useTranslation('passport');
   const { theme } = useTheme();
   const { width } = useWindowDimensions();
@@ -131,7 +134,9 @@ const PassportScreen = () => {
   return (
     <GestureHandlerRootView>
       <BottomSheetModalProvider>
-        <SafeAreaView style={styles.rootContainer}>
+        <SafeAreaProvider
+          style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+        >
           {userProgression.passport.length === 0 ? (
             <View style={styles.emptyPassportContainer}>
               <Text style={styles.titleText}>{t('emptyTitle')}</Text>
@@ -327,7 +332,7 @@ const PassportScreen = () => {
           {showAds && (
             <AdBanner adId={__DEV__ ? BANNER_TEST_ID : BANNER_PASSPORT_ID} />
           )}
-        </SafeAreaView>
+        </SafeAreaProvider>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>
   );

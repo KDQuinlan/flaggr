@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { SafeAreaView, ScrollView, Text, View, Pressable } from 'react-native';
+import { ScrollView, Text, View, Pressable } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { Image } from 'expo-image';
 import * as Haptics from 'expo-haptics';
@@ -7,6 +7,10 @@ import { useNavigation } from 'expo-router';
 import { Divider, Switch } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useTranslation } from 'react-i18next';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import { colors } from '@/components/colors';
 import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
@@ -42,6 +46,7 @@ interface IStatsAccordionRow {
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  const insets = useSafeAreaInsets();
   const { t } = useTranslation('custom');
   const { theme } = useTheme();
   const styles = useMemo(() => getCustomStyles(theme), [theme]);
@@ -244,7 +249,9 @@ const CustomScreen = () => {
   );
 
   return (
-    <SafeAreaView style={styles.rootContainer}>
+    <SafeAreaProvider
+      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+    >
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
@@ -426,7 +433,7 @@ const CustomScreen = () => {
       </ScrollView>
 
       {showAds && <AdBanner adId={BANNER_TEST_ID} />}
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 

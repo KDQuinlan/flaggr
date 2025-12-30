@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import {
   Animated,
-  SafeAreaView,
   ScrollView,
   Text,
   View,
@@ -13,6 +12,10 @@ import { useTranslation } from 'react-i18next';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import SummaryInfoRow from '@/components/summaryInfoRow/summaryInfoRow';
 import iconsMap from '@/assets/images/icons';
@@ -52,6 +55,7 @@ const Summary = () => {
   );
 
   const navigation = useNavigation<NavigationProps>();
+  const insets = useSafeAreaInsets();
   const route = useRoute<RouteProp<RootStackParamList, 'summary'>>();
   const { t } = useTranslation('summary');
   const { theme } = useTheme();
@@ -289,7 +293,9 @@ const Summary = () => {
   };
 
   return (
-    <SafeAreaView style={styles.rootContainer}>
+    <SafeAreaProvider
+      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+    >
       <ScrollView style={styles.summaryContainer}>
         <View style={styles.sectionContainer}>
           <Text style={styles.title}>
@@ -319,7 +325,7 @@ const Summary = () => {
       </ScrollView>
 
       {showAds && <AdBanner adId={BANNER_TEST_ID} />}
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
