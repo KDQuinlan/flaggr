@@ -3,7 +3,6 @@ import { useNavigation } from 'expo-router';
 import * as MailComposer from 'expo-mail-composer';
 import {
   Pressable,
-  SafeAreaView,
   ScrollView,
   Text,
   View,
@@ -12,6 +11,7 @@ import {
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Dropdown } from 'react-native-element-dropdown';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { NavigationProps } from '@/types/navigation';
 import { useTheme } from '@/context/ThemeContext';
@@ -64,7 +64,7 @@ const FeedbackScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.rootContainer}>
+    <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
@@ -124,7 +124,7 @@ const FeedbackScreen = () => {
           <Text style={styles.buttonText}>{t('submit')}</Text>
         </Pressable>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
