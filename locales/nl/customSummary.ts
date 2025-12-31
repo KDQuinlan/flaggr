@@ -6,6 +6,6 @@ export default {
   incorrect: 'Fout',
   streak: 'Beste reeks',
   time: 'Tijd',
-  newHighScore: 'Nieuwe highscore: {{score}}',
+  newHighScore: 'Nieuwe highscore',
   continue: 'Doorgaan',
 };

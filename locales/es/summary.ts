@@ -6,9 +6,12 @@ export default {
   incorrect: 'Incorrecto',
   streak: 'Mejor Racha',
   time: 'Tiempo',
-  unlockMessage: 'Has desbloqueado {{userNextLevel}}',
-  newHighScore: 'Nuevo Récord {{score}}{{numberSuffix}}',
+  unlockMessage: '{{userNextLevel}} desbloqueado',
+  newHighScore: 'Nuevo récord',
   unlockRequirementMessage:
     'Para desbloquear {{userNextLevel}}, necesitas una puntuación de {{advancementRequirement}}{{numberSuffix}}',
+  history: 'Historial',
+  historyDescription:
+    'Cuadrícula que muestra el historial de respuestas. {{correct}} correctas y {{incorrect}} incorrectas.',
   continue: 'Continuar',
 };

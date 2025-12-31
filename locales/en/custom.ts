@@ -10,7 +10,7 @@ export default {
     highScore: 'High Score',
     correct: 'Correct',
     incorrect: 'Incorrect',
-    bestStreak: 'Best Streak',
+    highestStreak: 'Highest Streak',
     regions: 'Regions',
     independentOnly: 'Independent Only',
     independentOnlyEnabled: 'Enabled',

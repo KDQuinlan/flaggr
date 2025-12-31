@@ -6,9 +6,12 @@ export default {
   incorrect: 'Неправильно',
   streak: 'Найкраща серія',
   time: 'Час',
-  unlockMessage: 'Ви відкрили {{userNextLevel}}',
-  newHighScore: 'Новий рекорд {{score}}{{numberSuffix}}',
+  unlockMessage: '{{userNextLevel}} розблоковано',
+  newHighScore: 'Новий рекорд',
   unlockRequirementMessage:
     'Щоб відкрити {{userNextLevel}}, вам потрібен бал {{advancementRequirement}}{{numberSuffix}}',
+  history: 'Історія',
+  historyDescription:
+    'Сітка, що показує історію відповідей. {{correct}} правильних і {{incorrect}} неправильних.',
   continue: 'Продовжити',
 };

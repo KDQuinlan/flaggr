@@ -6,9 +6,12 @@ export default {
   incorrect: 'Incorrect',
   streak: 'Beste reeks',
   time: 'Tijd',
-  unlockMessage: 'Je hebt {{userNextLevel}} ontgrendeld',
-  newHighScore: 'Nieuwe hoogste score {{score}}{{numberSuffix}}',
+  unlockMessage: '{{userNextLevel}} ontgrendeld',
+  newHighScore: 'Nieuwe highscore',
   unlockRequirementMessage:
     'Om {{userNextLevel}} te ontgrendelen, heb je een score van {{advancementRequirement}}{{numberSuffix}} nodig',
+  history: 'Geschiedenis',
+  historyDescription:
+    'Raster met antwoordgeschiedenis. {{correct}} correct en {{incorrect}} onjuist.',
   continue: 'Doorgaan',
 };

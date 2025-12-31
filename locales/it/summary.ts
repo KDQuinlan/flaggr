@@ -6,9 +6,12 @@ export default {
   incorrect: 'Errate',
   streak: 'Miglior Serie',
   time: 'Tempo',
-  unlockMessage: 'Hai sbloccato {{userNextLevel}}',
-  newHighScore: 'Nuovo Record {{score}}{{numberSuffix}}',
+  unlockMessage: '{{userNextLevel}} sbloccato',
+  newHighScore: 'Nuovo record',
   unlockRequirementMessage:
     'Per sbloccare {{userNextLevel}}, ti serve un punteggio di {{advancementRequirement}}{{numberSuffix}}',
+  history: 'Cronologia',
+  historyDescription:
+    'Griglia che mostra la cronologia delle risposte. {{correct}} corrette e {{incorrect}} errate.',
   continue: 'Continua',
 };

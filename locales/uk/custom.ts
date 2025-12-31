@@ -10,7 +10,7 @@ export default {
     highScore: 'Найвищий результат',
     correct: 'Правильні',
     incorrect: 'Неправильні',
-    bestStreak: 'Найкраща серія',
+    highestStreak: 'Найкраща серія',
     regions: 'Регіони',
     independentOnly: 'Лише незалежні',
     independentOnlyEnabled: 'Увімкнено',

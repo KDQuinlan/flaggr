@@ -6,6 +6,6 @@ export default {
   incorrect: 'Неправильно',
   streak: 'Найкраща серія',
   time: 'Час',
-  newHighScore: 'Новий рекорд: {{score}}',
+  newHighScore: 'Новий рекорд',
   continue: 'Продовжити',
 };

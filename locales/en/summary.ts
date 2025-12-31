@@ -4,11 +4,14 @@ export default {
   score: 'Score',
   correct: 'Correct',
   incorrect: 'Incorrect',
-  streak: 'Best Streak',
+  streak: 'Highest Streak',
   time: 'Time',
-  unlockMessage: 'You have unlocked {{userNextLevel}}',
-  newHighScore: 'New High Score {{score}}{{numberSuffix}}',
+  unlockMessage: '{{userNextLevel}} Unlocked',
+  newHighScore: 'New High Score',
   unlockRequirementMessage:
     'To unlock {{userNextLevel}}, you need a score of {{advancementRequirement}}{{numberSuffix}}',
+  history: 'History',
+  historyDescription:
+    'Grid showing answer history. {{correct}} correct and {{incorrect}} incorrect.',
   continue: 'Continue',
 };

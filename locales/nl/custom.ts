@@ -10,7 +10,7 @@ export default {
     highScore: 'Hoogste score',
     correct: 'Correct',
     incorrect: 'Onjuist',
-    bestStreak: 'Beste reeks',
+    highestStreak: 'Beste reeks',
     regions: "Regio's",
     independentOnly: 'Alleen onafhankelijk',
     independentOnlyEnabled: 'Ingeschakeld',

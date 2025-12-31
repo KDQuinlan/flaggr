@@ -7,7 +7,7 @@ export const light = {
   button: colors.bluePrimary,
   premiumButton: colors.legendaryOrange,
   energy: colors.energyOrange,
-  correct: colors.correctRed,
+  correct: colors.correctGreen,
   incorrect: colors.incorrectRed,
 
   // Texts
@@ -31,7 +31,7 @@ export const dark = {
   button: colors.bluePrimary,
   premiumButton: colors.legendaryOrange,
   energy: colors.energyOrange,
-  correct: colors.correctRed,
+  correct: colors.correctGreen,
   incorrect: colors.incorrectRed,
 
   // Texts

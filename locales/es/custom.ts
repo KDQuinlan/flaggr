@@ -10,7 +10,7 @@ export default {
     highScore: 'Puntuación máxima',
     correct: 'Correctas',
     incorrect: 'Incorrectas',
-    bestStreak: 'Mejor racha',
+    highestStreak: 'Mejor racha',
     regions: 'Regiones',
     independentOnly: 'Solo independientes',
     independentOnlyEnabled: 'Activado',
