@@ -11,10 +11,13 @@ export type HomeScreenNavigableScreens =
   | 'custom'
   | 'passport';
 
+export type AnswerResult = 'Correct' | 'Incorrect';
+
 export type GameResult = {
   correct: number;
   incorrect: number;
   highestStreak: number;
+  history: AnswerResult[];
   timeTaken?: number | undefined;
 };
 
@@ -27,6 +30,7 @@ export type RootStackParamList = {
   passport: undefined;
   passportEntry: { entry: PassportEntry };
   difficulty: { id: DifficultyScreenGameIds; title: string };
+  custom: undefined;
   multipleChoice: {
     title: Levels | 'Custom';
     gameMode: PlayableGameModes;
@@ -38,7 +42,6 @@ export type RootStackParamList = {
     gameMode: SummaryScreenAllowedIds;
     gameResult: GameResult;
   };
-  custom: undefined;
   customSummary: {
     gameResult: GameResult;
     finalScore: number;

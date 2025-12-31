@@ -201,7 +201,7 @@ const CustomScreen = () => {
               value={incorrect}
             />
             <StatsAccordionRow
-              title={t('highScoreAccordion.bestStreak')}
+              title={t('highScoreAccordion.highestStreak')}
               value={streak}
             />
           </View>

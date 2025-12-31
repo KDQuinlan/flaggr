@@ -26,5 +26,5 @@ export const colors = {
   warningOrange: '#e69a4e',
 
   // Greens
-  correctRed: '#2ECC71',
+  correctGreen: '#2ECC71',
 };

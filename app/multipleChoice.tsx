@@ -24,6 +24,7 @@ import formatTime from '@/util/formatTime/formatTime';
 import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/generateMultipleChoiceAnswers';
 import flags from '@/assets/images/flags';
 import {
+  GameResult,
   NavigationProps,
   PlayableGameModes,
   RootStackParamList,
@@ -124,6 +125,7 @@ const MultipleChoice = () => {
   const [highestStreak, setHighestStreak] = useState<number>(0);
   const [timeElapsedInSeconds, setTimeElapsedInSeconds] =
     useState<number>(timeLimit);
+  const [answerHistory, setAnswerHistory] = useState<GameResult['history']>([]);
   const [customScore, setCustomScore] = useState<number>(0);
   const [tapToAdvance, setTapToAdvance] = useState<boolean>(false);
 
@@ -134,6 +136,7 @@ const MultipleChoice = () => {
   const incorrectTotalRef = useRef<number>(incorrectTotal);
   const highestStreakRef = useRef<number>(highestStreak);
   const customScoreRef = useRef<number>(customScore);
+  const answerHistoryRef = useRef<GameResult['history']>(answerHistory);
 
   useEffect(() => {
     correctTotalRef.current = correctTotal;
@@ -150,6 +153,10 @@ const MultipleChoice = () => {
   useEffect(() => {
     customScoreRef.current = customScore;
   }, [customScore]);
+
+  useEffect(() => {
+    answerHistoryRef.current = answerHistory;
+  }, [answerHistory]);
 
   const { continent, difficulty, countryName, countryCode } =
     questions[questionNumberIndex]!;
@@ -188,6 +195,7 @@ const MultipleChoice = () => {
             correct: correctTotalRef.current,
             incorrect: incorrectTotalRef.current,
             highestStreak: highestStreakRef.current,
+            history: answerHistory,
           };
 
           if (gameMode !== 'custom') {
@@ -237,11 +245,13 @@ const MultipleChoice = () => {
       const newIncorrectTotal = isCorrect ? incorrectTotal : incorrectTotal + 1;
       const newStreakTotal = isCorrect ? streak + 1 : 0;
       const newHighestStreakTotal = Math.max(highestStreak, newStreakTotal);
+      answerHistoryRef.current.push(isCorrect ? 'Correct' : 'Incorrect');
 
       setCorrectTotal(newCorrectTotal);
       setIncorrectTotal(newIncorrectTotal);
       setStreak(newStreakTotal);
       setHighestStreak(newHighestStreakTotal);
+      setAnswerHistory(answerHistoryRef.current);
 
       persistProgression({
         ...userProgression,
@@ -300,6 +310,7 @@ const MultipleChoice = () => {
             correct,
             incorrect,
             highestStreak: highest,
+            history: answerHistory,
             timeTaken: isGameCountingUp ? newTimeTaken : undefined,
           },
         });
@@ -309,6 +320,7 @@ const MultipleChoice = () => {
             correct: correctTotalRef.current,
             incorrect: incorrectTotalRef.current,
             highestStreak: highestStreakRef.current,
+            history: answerHistory,
             timeTaken: isGameCountingUp ? newTimeTaken : undefined,
           },
           finalScore: Math.round(customScoreRef.current * scoreMultiplier),

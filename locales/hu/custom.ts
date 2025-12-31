@@ -10,7 +10,7 @@ export default {
     highScore: 'Legmagasabb pontszám',
     correct: 'Helyes',
     incorrect: 'Helytelen',
-    bestStreak: 'Legjobb sorozat',
+    highestStreak: 'Legjobb sorozat',
     regions: 'Régiók',
     independentOnly: 'Csak független',
     independentOnlyEnabled: 'Engedélyezve',

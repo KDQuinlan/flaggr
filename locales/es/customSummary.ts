@@ -6,6 +6,6 @@ export default {
   incorrect: 'Incorrectas',
   streak: 'Mejor racha',
   time: 'Tiempo',
-  newHighScore: 'Nueva puntuación más alta: {{score}}',
+  newHighScore: 'Nuevo récord',
   continue: 'Continuar',
 };

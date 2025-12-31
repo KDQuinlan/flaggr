@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 import { colors } from '@/components/colors';
@@ -8,9 +8,7 @@ export const getCustomSummaryStyles = (theme: ThemeColors) => {
     rootContainer: {
       flex: 1,
       backgroundColor: theme.background,
-    },
-    summaryContainer: {
-      paddingHorizontal: 12,
+      paddingTop: StatusBar.currentHeight || 0,
     },
     sectionContainer: {
       backgroundColor: theme.card,
@@ -18,8 +16,8 @@ export const getCustomSummaryStyles = (theme: ThemeColors) => {
       width: '100%',
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: 20,
-      paddingVertical: 10,
+      padding: 10,
+      gap: 20,
     },
     buttonContainer: {
       backgroundColor: theme.background,
@@ -39,6 +37,7 @@ export const getCustomSummaryStyles = (theme: ThemeColors) => {
       width: '50%',
       justifyContent: 'center',
       alignItems: 'center',
+      maxWidth: 200,
     },
     title: {
       fontFamily: 'DMSansBold',
@@ -47,7 +46,41 @@ export const getCustomSummaryStyles = (theme: ThemeColors) => {
       paddingBottom: 10,
       color: theme.text,
     },
-    unlockText: { fontFamily: 'DMSans', color: theme.text },
-    buttonText: { fontFamily: 'DMSansBold', fontSize: 16, color: theme.text },
+    buttonText: { fontFamily: 'DMSansBold', fontSize: 16, color: colors.white },
+    difficultyImageContainer: {
+      flexDirection: 'row',
+    },
+    subtitleText: { fontFamily: 'DMSans', color: theme.text, fontSize: 18 },
+    valueText: { fontFamily: 'DMSansBold', color: theme.text, fontSize: 20 },
+    scoreTitleText: {
+      fontFamily: 'DMSans',
+      color: theme.text,
+      fontSize: 20,
+    },
+    scoreValueText: {
+      fontFamily: 'DMSansBold',
+      color: theme.text,
+      fontSize: 22,
+    },
+    gameResultScoreContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom: -20,
+    },
+    gameResultAdvancedContainer: {
+      width: '100%',
+      flexDirection: 'row',
+      maxWidth: 400,
+    },
+    gameResultAdvancedItem: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    historySectionContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 10,
+    },
   });
 };

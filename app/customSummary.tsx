@@ -1,13 +1,6 @@
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { RouteProp, useFocusEffect, useRoute } from '@react-navigation/native';
-import {
-  Animated,
-  BackHandler,
-  Pressable,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import { BackHandler, Pressable, ScrollView, Text, View } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import {
@@ -15,7 +8,6 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
-import SummaryInfoRow from '@/components/summaryInfoRow/summaryInfoRow';
 import stateStore from '@/state/store';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import persistProgression from '@/util/persistState/persistProgression';
@@ -34,6 +26,8 @@ import { getCustomSummaryStyles } from '@/styles/customSummary';
 import { BANNER_TEST_ID } from '@/constants/adId';
 import AdBanner from '@/components/AdBanner/AdBanner';
 import calculateLeaderboardScore from '@/util/calculateLeaderboardScore/calculateLeaderboardScore';
+import chunkArray from '@/util/chunkArray/chunkArray';
+import SummaryHistory from '@/components/summary/summaryHistory';
 
 const CustomSummary = () => {
   useFocusEffect(
@@ -61,7 +55,7 @@ const CustomSummary = () => {
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser } = stateStore((s) => s.userSettings);
   const { gameResult, finalScore } = route.params;
-  const { correct, incorrect, highestStreak, timeTaken } = gameResult;
+  const { correct, incorrect, highestStreak, history, timeTaken } = gameResult;
   const { regions, independentCountriesOnly, timeLimit, gameLength } =
     userProgression.games.custom.currentGame;
 
@@ -75,9 +69,10 @@ const CustomSummary = () => {
     [progression.bestGame.score, finalScore]
   );
 
-  const newHighScoreMessage = isNewHighScore
-    ? t('newHighScore', { score: finalScore })
-    : null;
+  const newHighScoreMessage = isNewHighScore ? t('newHighScore') : null;
+
+  const [historyItemsToShow, setHistoryItemsToShow] = useState<number>(40);
+  const rows = chunkArray(history.slice(0, historyItemsToShow), 10);
 
   useEffect(() => {
     navigation.setOptions({ title: t('summary') });
@@ -120,79 +115,64 @@ const CustomSummary = () => {
 
   const handleContinue = () => resetToDifficultyScreen(navigation, 'custom');
 
-  const AnimatedSummary = () => {
-    const rows = [
-      {
-        title: t('score'),
-        value: finalScore,
-      },
-      { title: t('correct'), value: correct },
-      { title: t('incorrect'), value: incorrect },
-      { title: t('streak'), value: highestStreak },
-      ...(timeTaken
-        ? [
-            {
-              title: t('time'),
-              value: formatTime(timeTaken, true),
-            },
-          ]
-        : []),
-    ];
-    const animatedValues = useRef(
-      rows.map(() => new Animated.Value(0))
-    ).current;
-
-    useEffect(() => {
-      const animations = animatedValues.map((val, i) =>
-        Animated.timing(val, {
-          toValue: 1,
-          duration: 400,
-          delay: i * 150,
-          useNativeDriver: true,
-        })
-      );
-
-      Animated.stagger(150, animations).start();
-    }, [animatedValues]);
-
-    return (
-      <View style={styles.animationContainer}>
-        {rows.map((row, i) => (
-          <Animated.View
-            key={i}
-            style={{
-              opacity: animatedValues[i],
-              transform: [
-                {
-                  translateY: animatedValues[i]!.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [20, 0],
-                  }),
-                },
-              ],
-            }}
-          >
-            <SummaryInfoRow title={row.title} value={row.value} />
-          </Animated.View>
-        ))}
-      </View>
-    );
-  };
-
   return (
     <SafeAreaProvider
       style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
     >
-      <ScrollView style={styles.summaryContainer}>
+      <ScrollView>
         <View style={styles.sectionContainer}>
           <Text style={styles.title}>{t('completed')}</Text>
-          <AnimatedSummary />
-        </View>
-        {isNewHighScore && (
-          <View style={styles.sectionContainer}>
-            <Text style={styles.unlockText}>{newHighScoreMessage}</Text>
+
+          <View style={styles.gameResultScoreContainer}>
+            <Text style={styles.scoreTitleText}>
+              {newHighScoreMessage ? newHighScoreMessage : t('score')}
+            </Text>
+            <Text style={styles.scoreValueText}>{finalScore}</Text>
           </View>
-        )}
+
+          <View style={styles.gameResultAdvancedContainer}>
+            <View style={styles.gameResultAdvancedItem}>
+              <Text style={styles.subtitleText}>{t('correct')}</Text>
+              <Text style={styles.valueText}>{correct}</Text>
+            </View>
+            <View style={styles.gameResultAdvancedItem}>
+              <Text style={styles.subtitleText}>{t('incorrect')}</Text>
+              <Text style={styles.valueText}>{incorrect}</Text>
+            </View>
+          </View>
+          <View style={styles.gameResultAdvancedContainer}>
+            <View style={styles.gameResultAdvancedItem}>
+              <Text style={styles.subtitleText}>{t('streak')}</Text>
+              <Text style={styles.valueText}>{highestStreak}</Text>
+            </View>
+            <View style={styles.gameResultAdvancedItem}>
+              <Text style={styles.subtitleText}>{t('time')}</Text>
+              <Text style={styles.valueText}>
+                {timeTaken ? formatTime(timeTaken, false) : 'Unlimited'}
+              </Text>
+            </View>
+          </View>
+
+          {history.length > 0 && (
+            <View style={styles.historySectionContainer}>
+              <SummaryHistory
+                rows={rows}
+                correct={correct}
+                incorrect={incorrect}
+              />
+              {historyItemsToShow < history.length && (
+                <Pressable
+                  style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+                  onPress={() => setHistoryItemsToShow(history.length)}
+                  accessible={false}
+                >
+                  <Text style={styles.buttonText}>Show All</Text>
+                </Pressable>
+              )}
+            </View>
+          )}
+        </View>
+
         <View style={styles.buttonContainer}>
           <Pressable
             style={({ pressed }) => [

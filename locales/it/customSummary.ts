@@ -4,8 +4,8 @@ export default {
   score: 'Punteggio',
   correct: 'Corrette',
   incorrect: 'Errate',
-  streak: 'Miglior Serie',
+  streak: 'Serie migliore',
   time: 'Tempo',
-  newHighScore: 'Nuovo Record: {{score}}',
+  newHighScore: 'Nuovo record',
   continue: 'Continua',
 };

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 import { colors } from '@/components/colors';
@@ -8,9 +8,7 @@ export const getSummaryStyles = (theme: ThemeColors) => {
     rootContainer: {
       flex: 1,
       backgroundColor: theme.background,
-    },
-    summaryContainer: {
-      paddingHorizontal: 12,
+      paddingTop: StatusBar.currentHeight || 0,
     },
     sectionContainer: {
       backgroundColor: theme.card,
@@ -18,24 +16,12 @@ export const getSummaryStyles = (theme: ThemeColors) => {
       width: '100%',
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: 20,
-      paddingVertical: 10,
-      paddingHorizontal: 10,
+      padding: 10,
+      gap: 20,
     },
     buttonContainer: {
       backgroundColor: theme.background,
       marginVertical: 20,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    animationContainer: {
-      width: '100%',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    difficultyImageContainer: {
-      flexDirection: 'row',
-      width: '100%',
       justifyContent: 'center',
       alignItems: 'center',
     },
@@ -46,17 +32,60 @@ export const getSummaryStyles = (theme: ThemeColors) => {
       width: '50%',
       justifyContent: 'center',
       alignItems: 'center',
-      shadowColor: theme.shadow,
-      // elevation: 4,
+      maxWidth: 200,
     },
+    buttonText: { fontFamily: 'DMSansBold', fontSize: 16, color: colors.white },
+    titleContainer: { justifyContent: 'center', alignItems: 'center' },
     title: {
       fontFamily: 'DMSansBold',
       textAlign: 'center',
       fontSize: 28,
-      paddingBottom: 10,
       color: theme.text,
     },
-    unlockText: { fontFamily: 'DMSans', color: theme.text },
-    buttonText: { fontFamily: 'DMSansBold', fontSize: 16, color: colors.white },
+    difficultyImageContainer: {
+      flexDirection: 'row',
+    },
+    subtitleText: { fontFamily: 'DMSans', color: theme.text, fontSize: 18 },
+    valueText: { fontFamily: 'DMSansBold', color: theme.text, fontSize: 20 },
+    scoreTitleText: {
+      fontFamily: 'DMSans',
+      color: theme.text,
+      fontSize: 20,
+    },
+    scoreValueText: {
+      fontFamily: 'DMSansBold',
+      color: theme.text,
+      fontSize: 22,
+    },
+    gameResultContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 20,
+    },
+    gameResultScoreContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom: -20,
+    },
+    gameResultAdvancedContainer: {
+      width: '100%',
+      flexDirection: 'row',
+      maxWidth: 400,
+    },
+    gameResultAdvancedItem: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    progressionContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+    },
+    historySectionContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 10,
+    },
   });
 };

@@ -6,6 +6,6 @@ export default {
   incorrect: 'Helytelen',
   streak: 'Legjobb sorozat',
   time: 'Idő',
-  newHighScore: 'Új rekord: {{score}}',
+  newHighScore: 'Új rekord',
   continue: 'Tovább',
 };
