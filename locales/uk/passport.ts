@@ -14,4 +14,9 @@ export default {
   noResultsTitle: 'Немає результатів',
   noResultsText:
     'Ви не відкрили жодного результату з використаними фільтрами. Приховано {{value}}. Продовжуйте грати, щоб знайти їх!',
+  passportEntryAccessibility: 'Запис у паспорті для {{country}}',
+  informationModalAccessibility:
+    '{{number}} з {{total}} прапорів розблоковано для поточного фільтра',
+  informationModalAccessibilityHint:
+    'Торкніться, щоб відкрити інформаційне вікно з поясненням паспорта',
 };

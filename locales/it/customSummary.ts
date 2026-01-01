@@ -7,5 +7,6 @@ export default {
   streak: 'Serie migliore',
   time: 'Tempo',
   newHighScore: 'Nuovo record',
+  showAll: 'Mostra tutto',
   continue: 'Continua',
 };

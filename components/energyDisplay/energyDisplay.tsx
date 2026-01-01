@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Text, View, Pressable } from 'react-native';
 import { usePathname } from 'expo-router';
 import { Image } from 'expo-image';
+import { useTranslation } from 'react-i18next';
 
 import { ENERGY_COOLDOWN_MS, MAXIMUM_ENERGY } from '@/constants/common';
 import stateStore from '@/state/store';
@@ -10,7 +11,10 @@ import persistUserSettings from '@/util/persistState/persistUserSettings';
 import { getEnergyDisplayStyles } from './energyDisplay.styles';
 import { useTheme } from '@/context/ThemeContext';
 
+// TODO - rework accessibility for QoL
+
 const EnergyDisplay = () => {
+  const { t } = useTranslation('energy');
   const energyModalVisible = stateStore((s) => s.energyModalVisible);
   const setEnergyModalVisible = stateStore((s) => s.setEnergyModalVisible);
   const userSettings = stateStore((s) => s.userSettings);
@@ -63,19 +67,30 @@ const EnergyDisplay = () => {
       onPress={() => setEnergyModalVisible(!energyModalVisible)}
       hitSlop={10}
       style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+      accessibilityLabel={t('energyDisplayAccessibility', {
+        energy: energyAmount,
+        maximumEnergy: MAXIMUM_ENERGY,
+      })}
+      accessibilityRole="button"
+      accessibilityHint={t('informationModalAccessibilityHint')}
     >
       <View style={styles.parentContainer}>
         <Image
           source={require('@/assets/images/icons/resources/energy.png')}
           style={styles.image}
+          accessible={false}
         />
         <View style={styles.energyContainer}>
-          <Text style={styles.energy}>{energyText}</Text>
+          <Text style={styles.energy} accessible={false}>
+            {energyText}
+          </Text>
         </View>
       </View>
 
       {timeLeft && (currentPathname === '/' || currentPathname === '/home') && (
-        <Text style={styles.timer}>{timeLeft}</Text>
+        <Text style={styles.timer} accessible={false}>
+          {timeLeft}
+        </Text>
       )}
     </Pressable>
   );

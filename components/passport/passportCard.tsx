@@ -8,6 +8,7 @@ import { getPassportStyles } from '@/styles/passport';
 import flags from '@/assets/images/flags';
 import { PassportEntry } from '@/types/secureStore';
 import { NavigationProps } from '@/types/navigation';
+import { useTranslation } from 'react-i18next';
 
 interface IPassportCard {
   passportEntry: PassportEntry;
@@ -17,6 +18,7 @@ interface IPassportCard {
 const PassportCard = React.memo(
   ({ passportEntry, width }: IPassportCard) => {
     const navigation = useNavigation<NavigationProps>();
+    const { t } = useTranslation('passport');
     const { theme } = useTheme();
 
     const styles = useMemo(() => getPassportStyles(theme), [theme]);
@@ -35,6 +37,10 @@ const PassportCard = React.memo(
             width,
           },
         ]}
+        accessibilityLabel={t('passportEntryAccessibility', {
+          country: passportEntry.countryName,
+        })}
+        accessibilityRole="button"
       >
         <Image
           source={flags[passportEntry.countryCode.toLowerCase()]}

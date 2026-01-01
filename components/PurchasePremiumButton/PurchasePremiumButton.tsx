@@ -53,7 +53,7 @@ const PurchasePremiumButton = () => {
           opacity: pressed ? 0.7 : 1,
         },
       ]}
-      accessibilityLabel={t('continue', { ns: 'settings' })}
+      accessibilityLabel={t('purchase')}
       accessibilityRole="button"
     >
       <Text style={styles.buttonText}>{t('purchase')}</Text>

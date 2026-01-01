@@ -1,3 +1,5 @@
+// TODO - add google leaderboard *100 (to decimal) multiplier
+
 const calculateLeaderboardScore = (correct: number, total: number): number => {
   const z = 1.96;
 

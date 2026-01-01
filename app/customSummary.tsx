@@ -166,7 +166,7 @@ const CustomSummary = () => {
                   onPress={() => setHistoryItemsToShow(history.length)}
                   accessible={false}
                 >
-                  <Text style={styles.buttonText}>Show All</Text>
+                  <Text style={styles.buttonText}>{t('showAll')}</Text>
                 </Pressable>
               )}
             </View>

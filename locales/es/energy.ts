@@ -11,4 +11,8 @@ export default {
   notConnectedDescription:
     'Conéctate a Internet para recargar energía o hazte Premium para jugar en cualquier momento sin anuncios ni energía',
   close: 'Cerrar',
+  energyDisplayAccessibility:
+    'Toca para abrir el modal de energía. Actualmente tienes {{energy}} de {{maximumEnergy}} de energía',
+  energyDisplayAccessibilityHint:
+    'La energía se restaura cada 10 minutos, incluso cuando no usas la aplicación.',
 };

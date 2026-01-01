@@ -14,4 +14,9 @@ export default {
   noResultsTitle: 'Sin resultados',
   noResultsText:
     'No has desbloqueado ningún resultado con los filtros aplicados. Hay {{value}} ocultos. ¡Sigue jugando para encontrarlos!',
+  passportEntryAccessibility: 'Entrada del pasaporte para {{country}}',
+  informationModalAccessibility:
+    '{{number}} de {{total}} banderas desbloqueadas para el filtro actual',
+  informationModalAccessibilityHint:
+    'Toca para abrir el modal de información que explica el pasaporte',
 };

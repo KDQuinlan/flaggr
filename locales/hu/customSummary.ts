@@ -7,5 +7,6 @@ export default {
   streak: 'Legjobb sorozat',
   time: 'Idő',
   newHighScore: 'Új rekord',
+  showAll: 'Összes megjelenítése',
   continue: 'Tovább',
 };

@@ -14,4 +14,9 @@ export default {
   noResultsTitle: 'Nincs találat',
   noResultsText:
     'Nem nyitottál fel egyetlen eredményt sem az alkalmazott szűrőkkel. {{value}} van elrejtve. Játssz tovább, hogy megtaláld őket!',
+  passportEntryAccessibility: '{{country}} útlevélbejegyzése',
+  informationModalAccessibility:
+    '{{number}} / {{total}} zászló feloldva az aktuális szűrőhöz',
+  informationModalAccessibilityHint:
+    'Koppints az útlevelet magyarázó információs ablak megnyitásához',
 };

@@ -14,4 +14,9 @@ export default {
   noResultsTitle: 'Nessun risultato',
   noResultsText:
     'Non hai sbloccato alcun risultato con i filtri applicati. Ce ne sono {{value}} nascosti. Continua a giocare per trovarli!',
+  passportEntryAccessibility: 'Voce del passaporto per {{country}}',
+  informationModalAccessibility:
+    '{{number}} di {{total}} bandiere sbloccate per il filtro corrente',
+  informationModalAccessibilityHint:
+    'Tocca per aprire il riquadro informativo che spiega il passaporto',
 };
