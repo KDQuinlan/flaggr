@@ -25,10 +25,15 @@ const InformationModal = ({
       visible={informationModal}
       onRequestClose={closeInformationModal}
     >
-      <Pressable onPress={closeInformationModal} style={styles.modalBackdrop}>
+      <Pressable
+        onPress={closeInformationModal}
+        style={styles.modalBackdrop}
+        accessible={false}
+      >
         <Pressable
           onPress={(e) => e.stopPropagation()}
           style={styles.modalContainer}
+          accessible={false}
         >
           <Text style={styles.titleText}>{t('title')}</Text>
           <Text style={styles.text}>{t('informationModalUnlock')}</Text>
@@ -39,6 +44,8 @@ const InformationModal = ({
               styles.closeButton,
               { opacity: pressed ? 0.7 : 1 },
             ]}
+            accessibilityLabel={t('close')}
+            accessibilityRole="button"
           >
             <Text style={styles.closeButtonText}>{t('close')}</Text>
           </Pressable>

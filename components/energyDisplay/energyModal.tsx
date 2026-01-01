@@ -34,10 +34,15 @@ const EnergyModal = () => {
       visible={energyModalVisible}
       onRequestClose={closeModal}
     >
-      <Pressable onPress={closeModal} style={styles.modalBackdrop}>
+      <Pressable
+        onPress={closeModal}
+        style={styles.modalBackdrop}
+        accessible={false}
+      >
         <Pressable
           onPress={(e) => e.stopPropagation()}
           style={styles.modalContainer}
+          accessible={false}
         >
           {isInternetAvailable ? (
             <>
@@ -53,6 +58,8 @@ const EnergyModal = () => {
                     opacity: !isAdLoaded ? 0.6 : pressed ? 0.7 : 1,
                   },
                 ]}
+                accessibilityLabel={isAdLoaded ? t('watchAd') : t('loadingAd')}
+                accessibilityRole="button"
               >
                 <Text style={styles.primaryButtonText}>
                   {isAdLoaded ? t('watchAd') : t('loadingAd')}
@@ -76,6 +83,8 @@ const EnergyModal = () => {
               styles.closeButton,
               { opacity: pressed ? 0.7 : 1 },
             ]}
+            accessibilityLabel={t('close')}
+            accessibilityRole="button"
           >
             <Text style={styles.closeButtonText}>{t('close')}</Text>
           </Pressable>

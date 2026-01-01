@@ -7,5 +7,6 @@ export default {
   streak: 'Mejor racha',
   time: 'Tiempo',
   newHighScore: 'Nuevo récord',
+  showAll: 'Mostrar todo',
   continue: 'Continuar',
 };

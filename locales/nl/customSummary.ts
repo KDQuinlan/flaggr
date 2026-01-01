@@ -7,5 +7,6 @@ export default {
   streak: 'Beste reeks',
   time: 'Tijd',
   newHighScore: 'Nieuwe highscore',
+  showAll: 'Alles tonen',
   continue: 'Doorgaan',
 };

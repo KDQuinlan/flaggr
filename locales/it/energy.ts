@@ -10,4 +10,8 @@ export default {
   notConnectedDescription:
     'Connettiti a internet per ricaricare l’energia, oppure passa a Premium per giocare quando vuoi senza pubblicità o energia',
   close: 'Chiudi',
+  energyDisplayAccessibility:
+    'Tocca per aprire la finestra dell’energia. Attualmente hai {{energy}} su {{maximumEnergy}} energia',
+  energyDisplayAccessibilityHint:
+    'L’energia si ricarica ogni 10 minuti, anche quando non utilizzi l’app.',
 };

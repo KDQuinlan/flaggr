@@ -1,8 +1,9 @@
 import { View, Text } from 'react-native';
+import { useTranslation } from 'react-i18next';
+
 import { colors } from '../colors';
 import { AnswerResult } from '@/types/navigation';
 import { useTheme } from '@/context/ThemeContext';
-import { useTranslation } from 'react-i18next';
 import { getSummaryHistoryStyles } from './summaryHistory.styles';
 
 interface ISummaryHistoryProps {

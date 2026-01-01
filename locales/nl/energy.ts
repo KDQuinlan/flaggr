@@ -11,4 +11,8 @@ export default {
   notConnectedDescription:
     'Maak verbinding met het internet om energie aan te vullen, of ga Premium om altijd te spelen zonder advertenties of energie',
   close: 'Sluiten',
+  energyDisplayAccessibility:
+    'Tik om het energiemenu te openen. Je hebt momenteel {{energy}} van {{maximumEnergy}} energie',
+  energyDisplayAccessibilityHint:
+    'Energie wordt elke 10 minuten hersteld, zelfs wanneer je de app niet gebruikt.',
 };

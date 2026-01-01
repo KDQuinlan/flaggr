@@ -10,4 +10,8 @@ export default {
   notConnectedDescription:
     'Connect to the internet to refill energy, or go Premium to play anytime without ads or energy',
   close: 'Close',
+  energyDisplayAccessibility:
+    'Tap to open energy modal. You currently have {{energy}} out of {{maximumEnergy}} energy',
+  energyDisplayAccessibilityHint:
+    'Energy restores every 10 minutes, even when not using the app.',
 };

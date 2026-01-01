@@ -14,4 +14,9 @@ export default {
   noResultsTitle: 'Geen resultaten',
   noResultsText:
     'Je hebt geen resultaten ontgrendeld met de toegepaste filters. Er zijn {{value}} verborgen. Blijf spelen om ze te vinden!',
+  passportEntryAccessibility: 'Paspoortvermelding voor {{country}}',
+  informationModalAccessibility:
+    '{{number}} van {{total}} vlaggen ontgrendeld voor het huidige filter',
+  informationModalAccessibilityHint:
+    'Tik om het informatiemodal te openen dat het paspoort uitlegt',
 };

@@ -7,5 +7,6 @@ export default {
   streak: 'Найкраща серія',
   time: 'Час',
   newHighScore: 'Новий рекорд',
+  showAll: 'Показати все',
   continue: 'Продовжити',
 };

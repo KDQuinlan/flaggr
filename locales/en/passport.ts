@@ -13,4 +13,9 @@ export default {
   noResultsTitle: 'No Results',
   noResultsText:
     'You have not unlocked any results with applied filters. There are {{value}} hidden. Keep playing to find them!',
+  passportEntryAccessibility: 'Passport entry for {{country}}',
+  informationModalAccessibility:
+    '{{number}} out of {{total}} flags unlocked for current filter',
+  informationModalAccessibilityHint:
+    'Tap to open information modal explaining the passport',
 };

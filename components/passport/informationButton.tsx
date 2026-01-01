@@ -25,6 +25,9 @@ const InformationButton = React.memo(
             styles.totalInformationButton,
             { opacity: pressed ? 0.7 : 1 },
           ]}
+          accessibilityLabel={t('informationModalAccessibility')}
+          accessibilityRole="button"
+          accessibilityHint={t('informationModalAccessibilityHint')}
         >
           <Text style={styles.totalText}>
             {`${passportLength} / ${filteredResultsAmount}`}
