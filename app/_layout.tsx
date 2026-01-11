@@ -74,6 +74,14 @@ function RootLayoutContent() {
         <Stack.Screen name="feedback" options={{ headerShown: true }} />
         <Stack.Screen name="settings" options={{ headerShown: true }} />
         <Stack.Screen
+          name="noticeBoard"
+          options={{ headerShown: true, title: 'Notice Board' }}
+        />
+        <Stack.Screen
+          name="noticeBoardEntry"
+          options={{ headerShown: true, title: 'Notice Board' }}
+        />
+        <Stack.Screen
           name="passport"
           options={{
             headerShown: true,

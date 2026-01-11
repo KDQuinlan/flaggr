@@ -126,5 +126,6 @@ export type UserSettingStructure = {
   isDarkTheme: boolean;
   energyAmount: number;
   lastEnergyTimestamp: number | null;
+  noticeBoardLastVisitedDate: number | null;
   displayAnswerTimerMs: number;
 };

@@ -27,6 +27,8 @@ export type RootStackParamList = {
   home: undefined;
   feedback: undefined;
   settings: undefined;
+  noticeBoard: undefined;
+  noticeBoardEntry: undefined;
   passport: undefined;
   passportEntry: { entry: PassportEntry };
   difficulty: { id: DifficultyScreenGameIds; title: string };

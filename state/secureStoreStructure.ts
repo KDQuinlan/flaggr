@@ -18,6 +18,7 @@ export const defaultUserSettings: UserSettingStructure = {
   isDarkTheme: false,
   energyAmount: MAXIMUM_ENERGY,
   lastEnergyTimestamp: null,
+  noticeBoardLastVisitedDate: null,
   displayAnswerTimerMs: ANSWERS_SHOWN_DURATION_DEFAULT_MS,
 };
 
