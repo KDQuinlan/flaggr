@@ -19,14 +19,16 @@ import PlayGames from '@/PlayGames';
 import stateStore from '@/state/store';
 import { getHomeStyles } from '@/styles/home';
 import { useTheme } from '@/context/ThemeContext';
+import { noticeBoardEntryData } from '@/data/noticeBoardEntries';
+import persistUserSettings from '@/util/persistState/persistUserSettings';
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
-  const { isPremiumUser, isGoogleConnected } = stateStore(
-    (s) => s.userSettings
-  );
+  const { isPremiumUser, isGoogleConnected, noticeBoardLastVisitedDate } =
+    stateStore((s) => s.userSettings);
+  const userSettings = stateStore((s) => s.userSettings);
   const [showLeaderboard, setShowLeaderboard] = useState<boolean>(false);
   const [bottomPadding, setBottomPadding] = useState<number>(0);
   const { t } = useTranslation('home');
@@ -36,6 +38,14 @@ const HomeScreen = () => {
   const handleShowLeaderboard = async () => {
     await PlayGames.showAllLeaderboards();
     setShowLeaderboard(false);
+  };
+
+  const userHasUnreadNotices = (): boolean => {
+    if (!noticeBoardEntryData[0]) return false;
+    if (!noticeBoardLastVisitedDate) return true;
+    if (noticeBoardLastVisitedDate < noticeBoardEntryData[0].date) return true;
+
+    return false;
   };
 
   const showAds = !isPremiumUser && isInternetAvailable;
@@ -50,14 +60,7 @@ const HomeScreen = () => {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.headerContainer}>
-          <View
-            style={{
-              flexDirection: 'row',
-              gap: 10,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <View style={styles.iconsContainer}>
             <Pressable
               onPress={() => navigation.navigate('settings')}
               accessibilityRole="button"
@@ -67,7 +70,31 @@ const HomeScreen = () => {
             >
               <Image
                 style={styles.settingsIcon}
-                source={require('@/assets/images/icons/resources/custom/cog.png')}
+                source={require('@/assets/images/icons/resources/settings.png')}
+              />
+            </Pressable>
+
+            <Pressable
+              onPress={() => {
+                navigation.navigate('noticeBoard');
+                userHasUnreadNotices() &&
+                  persistUserSettings({
+                    ...userSettings,
+                    noticeBoardLastVisitedDate: Date.now(),
+                  });
+              }}
+              accessibilityRole="button"
+              accessibilityLabel={t('title', { ns: 'settings' })}
+              hitSlop={10}
+              style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+            >
+              <Image
+                style={styles.settingsIcon}
+                source={
+                  userHasUnreadNotices()
+                    ? require('@/assets/images/icons/resources/notification.png')
+                    : require('@/assets/images/icons/resources/notification-empty.png')
+                }
               />
             </Pressable>
           </View>

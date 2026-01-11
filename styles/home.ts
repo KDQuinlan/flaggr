@@ -65,5 +65,11 @@ export const getHomeStyles = (theme: ThemeColors) => {
       right: 0,
       bottom: 0,
     },
+    iconsContainer: {
+      flexDirection: 'row',
+      gap: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   });
 };
