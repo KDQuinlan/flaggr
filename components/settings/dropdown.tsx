@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { SetStateAction, useMemo } from 'react';
 import { Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -9,8 +9,8 @@ import { getDropdownStyles } from './dropdown.styles';
 // TODO - find more appropriate type than 'any' for setValue e.g. generic or enum
 
 interface ILanguageDropdownProps {
-  value: string | number | null;
-  setValue: (value: any) => void;
+  value: string | null;
+  setValue: (value: SetStateAction<string>) => void;
   text: {
     namespace: string;
     label: string;
