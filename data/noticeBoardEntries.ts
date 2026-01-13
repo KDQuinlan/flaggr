@@ -1,22 +1,19 @@
-export type NoticeBoardUpdateTypes =
-  | 'Major Update'
-  | 'New Feature'
-  | 'Improvement'
-  | 'Upcoming'
-  | 'News';
+import { INoticeBoardEntryProps } from '@/types/noticeBoard';
+import * as post1768142297776 from './1768142297776-noticeBoard';
+import * as post1768237696056 from './1768237696056-whatsNext';
 
-export interface INoticeBoardEntryProps {
-  title: string;
-  date: number;
-  updateType: NoticeBoardUpdateTypes;
-  image: string | undefined;
-}
+/*
+
+--- Posts that appear in the Notice Board screen ---
+
+The order they appear on the screen is a map of the order of the array,
+meaning the final one in the array is at the bottom.
+
+Posts should be in date order and removed over time
+
+*/
 
 export const noticeBoardEntryData: INoticeBoardEntryProps[] = [
-  {
-    title: 'The Notice Board',
-    date: 1768142297776,
-    updateType: 'New Feature',
-    image: require('@/assets/images/notices/test.png'),
-  },
+  post1768237696056.default,
+  post1768142297776.default,
 ];

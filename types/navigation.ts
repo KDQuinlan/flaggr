@@ -1,6 +1,8 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
 import { Levels, PassportEntry } from './secureStore';
 import { Country } from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
+import { INoticeBoardEntryProps } from './noticeBoard';
 
 export type DifficultyScreenGameIds = 'standard' | 'rapid';
 export type SummaryScreenAllowedIds = 'standard' | 'rapid';
@@ -28,7 +30,7 @@ export type RootStackParamList = {
   feedback: undefined;
   settings: undefined;
   noticeBoard: undefined;
-  noticeBoardEntry: undefined;
+  noticeBoardEntry: { entry: INoticeBoardEntryProps };
   passport: undefined;
   passportEntry: { entry: PassportEntry };
   difficulty: { id: DifficultyScreenGameIds; title: string };

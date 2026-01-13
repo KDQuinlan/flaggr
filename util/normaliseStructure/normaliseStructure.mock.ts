@@ -342,5 +342,6 @@ export const mockGoodUserSettingsData = {
   isDarkTheme: false,
   energyAmount: 5,
   lastEnergyTimestamp: null,
+  noticeBoardLastVisitedDate: null,
   displayAnswerTimerMs: 500,
 };

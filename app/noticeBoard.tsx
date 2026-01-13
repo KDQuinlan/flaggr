@@ -12,20 +12,29 @@ import { BANNER_HOME_AND_SETTINGS_ID, BANNER_TEST_ID } from '@/constants/adId';
 import AdBanner from '@/components/AdBanner/AdBanner';
 import stateStore from '@/state/store';
 import { colors } from '@/components/colors';
+import { noticeBoardEntryData } from '@/data/noticeBoardEntries';
+import { useNavigation } from 'expo-router';
+import { NavigationProps } from '@/types/navigation';
 import {
   INoticeBoardEntryProps,
-  noticeBoardEntryData,
   NoticeBoardUpdateTypes,
-} from '@/data/noticeBoardEntries';
+} from '@/types/noticeBoard';
 
 const NoticeBoardEntry = ({
   title,
   date,
   updateType,
   image,
+  content,
 }: INoticeBoardEntryProps) => {
+  const navigation = useNavigation<NavigationProps>();
   const { theme } = useTheme();
   const styles = useMemo(() => getNoticeBoardStyles(theme), [theme]);
+
+  const visualDate = new Intl.DateTimeFormat('en-GB').format(new Date(date));
+  const spokenDate = new Intl.DateTimeFormat('en-GB', {
+    dateStyle: 'long',
+  }).format(new Date(date));
 
   const handleUpdateTypePillColor = (
     updateType: NoticeBoardUpdateTypes
@@ -39,7 +48,13 @@ const NoticeBoardEntry = ({
 
   return (
     <Pressable
-      onPress={() => {}}
+      onPress={() =>
+        navigation.navigate('noticeBoardEntry', {
+          entry: { title, date, updateType, image, content },
+        })
+      }
+      accessibilityRole="button"
+      accessibilityLabel={`Entry titled ${title}`}
       style={({ pressed }) => [
         styles.noticeBoardEntryContainer,
         {
@@ -65,8 +80,11 @@ const NoticeBoardEntry = ({
           >
             <Text style={styles.noticeBoardEntryText}>{updateType}</Text>
           </View>
-          <Text style={styles.noticeBoardEntryText}>
-            {new Intl.DateTimeFormat('en-GB').format(new Date(date))}
+          <Text
+            accessibilityLabel={spokenDate}
+            style={styles.noticeBoardEntryText}
+          >
+            {visualDate}
           </Text>
         </View>
       </View>
