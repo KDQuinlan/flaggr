@@ -14,6 +14,8 @@ export const getDifficultyStyles = (theme: ThemeColors) => {
       alignItems: 'center',
       paddingBottom: 20,
       overflow: 'visible',
+      gap: 20,
+      marginTop: 20,
     },
   });
 };

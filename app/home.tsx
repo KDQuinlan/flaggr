@@ -21,6 +21,7 @@ import { getHomeStyles } from '@/styles/home';
 import { useTheme } from '@/context/ThemeContext';
 import { noticeBoardEntryData } from '@/data/noticeBoardEntries';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
+import SocialMediaLinks from '@/components/socialMedia/socialMedia';
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -151,6 +152,8 @@ const HomeScreen = () => {
           onPress={() => navigation.navigate('passport')}
           elevation={2}
         />
+
+        <SocialMediaLinks />
       </ScrollView>
       <View
         style={{

@@ -7,7 +7,6 @@ export const getGameSelectStyles = (theme: ThemeColors) => {
     gameModeContainer: {
       backgroundColor: theme.card,
       marginHorizontal: 20,
-      marginTop: 20,
       borderRadius: 8,
       alignItems: 'center',
       flexDirection: 'row',

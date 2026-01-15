@@ -15,6 +15,7 @@ export const getHomeStyles = (theme: ThemeColors) => {
       justifyContent: 'flex-start',
       alignItems: 'center',
       paddingBottom: 20,
+      gap: 20,
     },
     headerContainer: {
       flexDirection: 'row',
@@ -70,6 +71,16 @@ export const getHomeStyles = (theme: ThemeColors) => {
       gap: 10,
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    socialMediaContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 20,
+    },
+    socialMediaIcon: {
+      width: 30,
+      height: 30,
     },
   });
 };

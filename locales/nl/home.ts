@@ -15,4 +15,6 @@ export default {
     title: 'Paspoort',
     description: 'Je Flaggr-database',
   },
+  socialMediaPreface: 'Onze sociale media',
+  socialMedia: 'Bezoek ons op {{media}}',
 };
