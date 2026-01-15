@@ -15,4 +15,6 @@ export default {
     title: 'Pasaporte',
     description: 'Tu base de datos de Flaggr',
   },
+  socialMediaPreface: 'Nuestras redes sociales',
+  socialMedia: 'Visítanos en {{media}}',
 };

@@ -15,4 +15,6 @@ export default {
     title: 'Útlevél',
     description: 'A Flaggr adatbázisod',
   },
+  socialMediaPreface: 'Közösségi oldalaink',
+  socialMedia: 'Látogass meg minket a(z) {{media}} oldalon',
 };
