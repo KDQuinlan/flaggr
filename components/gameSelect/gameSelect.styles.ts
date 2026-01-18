@@ -6,7 +6,6 @@ export const getGameSelectStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
     gameModeContainer: {
       backgroundColor: theme.card,
-      marginHorizontal: 20,
       borderRadius: 8,
       alignItems: 'center',
       flexDirection: 'row',

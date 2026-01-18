@@ -1,4 +1,18 @@
 export default {
+  months: {
+    january: '{{date}} januari',
+    february: '{{date}} februari',
+    march: '{{date}} maart',
+    april: '{{date}} april',
+    may: '{{date}} mei',
+    june: '{{date}} juni',
+    july: '{{date}} juli',
+    august: '{{date}} augustus',
+    september: '{{date}} september',
+    october: '{{date}} oktober',
+    november: '{{date}} november',
+    december: '{{date}} december',
+  },
   regions: {
     europe: 'Europa',
     asia: 'Azië',

@@ -1,4 +1,18 @@
 export default {
+  months: {
+    january: 'január {{date}}.',
+    february: 'február {{date}}.',
+    march: 'március {{date}}.',
+    april: 'április {{date}}.',
+    may: 'május {{date}}.',
+    june: 'június {{date}}.',
+    july: 'július {{date}}.',
+    august: 'augusztus {{date}}.',
+    september: 'szeptember {{date}}.',
+    october: 'október {{date}}.',
+    november: 'november {{date}}.',
+    december: 'december {{date}}.',
+  },
   regions: {
     europe: 'Európa',
     asia: 'Ázsia',

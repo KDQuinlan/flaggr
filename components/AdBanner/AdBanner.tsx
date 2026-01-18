@@ -12,6 +12,8 @@ interface AdBannerProps {
   onHeightChange?: (height: number) => void;
 }
 
+// TODO - remove height callback
+
 const AdBanner = ({ adId, onHeightChange }: AdBannerProps) => {
   const canShowAds = stateStore((s) => s.canShowAds);
   const adToShow = __DEV__ ? TestIds.BANNER : adId;

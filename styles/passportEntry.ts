@@ -17,6 +17,14 @@ export const getPassportEntryStyles = (theme: ThemeColors) => {
     },
     title: { fontSize: 16, fontFamily: 'DMSansBold', color: theme.text },
     text: { fontSize: 14, fontFamily: 'DMSans', color: theme.text },
-    icon: { width: '100%', alignSelf: 'center', aspectRatio: 16 / 9 },
+    icon: {
+      width: '100%',
+      aspectRatio: 16 / 9,
+    },
+    flagTitleContainer: {
+      alignItems: 'center',
+      maxWidth: 600,
+      alignSelf: 'center',
+    },
   });
 };

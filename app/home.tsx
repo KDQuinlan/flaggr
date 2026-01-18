@@ -1,9 +1,15 @@
 import { useMemo, useState } from 'react';
 import { useNavigation } from 'expo-router';
 import { Image } from 'expo-image';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import {
+  PixelRatio,
+  Pressable,
+  ScrollView,
+  Text,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
-import * as Device from 'expo-device';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
@@ -11,7 +17,7 @@ import {
 
 import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
-import { APP_NAME } from '@/constants/common';
+import { APP_NAME, MONTHS_FOR_LOCALISATION } from '@/constants/common';
 import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_HOME_AND_SETTINGS_ID, BANNER_TEST_ID } from '@/constants/adId';
 import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
@@ -22,6 +28,11 @@ import { useTheme } from '@/context/ThemeContext';
 import { noticeBoardEntryData } from '@/data/noticeBoardEntries';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import SocialMediaLinks from '@/components/socialMedia/socialMedia';
+import getDateSuffix from '@/util/getDateSuffix/getDateSuffix';
+import flags from '@/assets/images/flags';
+
+// TODO - enforce maxWidth in scrollview rather than children
+// TODO - with above, refactor all screens to have better tablet scaling
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -31,10 +42,15 @@ const HomeScreen = () => {
     stateStore((s) => s.userSettings);
   const userSettings = stateStore((s) => s.userSettings);
   const [showLeaderboard, setShowLeaderboard] = useState<boolean>(false);
-  const [bottomPadding, setBottomPadding] = useState<number>(0);
   const { t } = useTranslation('home');
   const { theme } = useTheme();
   const styles = useMemo(() => getHomeStyles(theme), [theme]);
+
+  const { width } = useWindowDimensions();
+  const fontScale = PixelRatio.getFontScale();
+
+  const shouldRenderUnderHeader =
+    width >= 500 || fontScale <= 1 || (width > 400 && fontScale <= 1.5);
 
   const handleShowLeaderboard = async () => {
     await PlayGames.showAllLeaderboards();
@@ -50,7 +66,14 @@ const HomeScreen = () => {
   };
 
   const showAds = !isPremiumUser && isInternetAvailable;
-  const isOnPhone = Device.deviceType === Device.DeviceType.PHONE;
+
+  const msInOneDay = 60 * 60 * 24 * 1000;
+  const dayOfWeek = new Date().getDay();
+  const unixTimeOfLatestMonday =
+    dayOfWeek === 0
+      ? Date.now() - 6 * msInOneDay
+      : Date.now() - (dayOfWeek - 1) * msInOneDay;
+  const date = new Date(unixTimeOfLatestMonday);
 
   return (
     <SafeAreaProvider
@@ -107,6 +130,67 @@ const HomeScreen = () => {
           {!isPremiumUser && <EnergyDisplay />}
         </View>
 
+        <View style={styles.nonGameContainer}>
+          {shouldRenderUnderHeader && (
+            <Pressable
+              style={({ pressed }) => [
+                styles.floatingButton,
+                { opacity: pressed ? 0.7 : 1, elevation: 5 },
+              ]}
+              onPress={() => navigation.navigate('feedback')}
+            >
+              <Image
+                style={styles.floatingIcon}
+                source={require('@/assets/images/icons/resources/feedback.png')}
+              />
+            </Pressable>
+          )}
+          <Pressable
+            style={({ pressed }) => [
+              styles.flagOfTheWeekContainer,
+              {
+                opacity: pressed ? 0.7 : 1,
+              },
+            ]}
+          >
+            <View>
+              <Text style={styles.flagOfTheWeekTitle}>
+                {t(`months.${MONTHS_FOR_LOCALISATION[date.getMonth()]}`, {
+                  ns: 'data',
+                  date: date.getDate(),
+                  dateSuffix: getDateSuffix(date.getDate()),
+                })}
+              </Text>
+              <Text style={styles.flagOfTheWeekText}>Flag of the Week</Text>
+            </View>
+            <Image
+              source={flags['be']}
+              contentFit="contain"
+              style={{
+                width: 50,
+                height: '100%',
+              }}
+            />
+          </Pressable>
+          {shouldRenderUnderHeader &&
+            isInternetAvailable &&
+            isGoogleConnected && (
+              <Pressable
+                style={({ pressed }) => [
+                  styles.floatingButton,
+                  { opacity: pressed ? 0.7 : 1, elevation: 5 },
+                ]}
+                disabled={showLeaderboard}
+                onPress={handleShowLeaderboard}
+              >
+                <Image
+                  style={styles.floatingIcon}
+                  source={require('@/assets/images/icons/resources/leaderboard.png')}
+                />
+              </Pressable>
+            )}
+        </View>
+
         <GameSelect
           id="standard"
           title={t('standard.title')}
@@ -153,54 +237,52 @@ const HomeScreen = () => {
           elevation={2}
         />
 
-        <SocialMediaLinks />
-      </ScrollView>
-      <View
-        style={{
-          ...styles.anchorContainer,
-          bottom: showAds ? bottomPadding : 0,
-        }}
-      >
         <View
           style={{
-            ...styles.floatingButtonContainer,
-            paddingBottom: insets.bottom,
+            ...styles.nonGameContainerSmallScreen,
+            justifyContent: shouldRenderUnderHeader
+              ? 'center'
+              : 'space-between',
           }}
         >
-          <Pressable
-            style={({ pressed }) => [
-              styles.floatingButton,
-              { opacity: pressed ? 0.7 : 1 },
-            ]}
-            onPress={() => navigation.navigate('feedback')}
-          >
-            <Image
-              style={styles.floatingIcon}
-              source={require('@/assets/images/icons/resources/feedback.png')}
-            />
-          </Pressable>
-
-          {isInternetAvailable && isOnPhone && isGoogleConnected && (
+          {!shouldRenderUnderHeader && (
             <Pressable
               style={({ pressed }) => [
                 styles.floatingButton,
-                { opacity: pressed ? 0.7 : 1 },
+                { opacity: pressed ? 0.7 : 1, elevation: 2 },
               ]}
-              disabled={showLeaderboard}
-              onPress={handleShowLeaderboard}
+              onPress={() => navigation.navigate('feedback')}
             >
               <Image
                 style={styles.floatingIcon}
-                source={require('@/assets/images/icons/resources/leaderboard.png')}
+                source={require('@/assets/images/icons/resources/feedback.png')}
               />
             </Pressable>
           )}
+          <SocialMediaLinks />
+          {!shouldRenderUnderHeader &&
+            isInternetAvailable &&
+            isGoogleConnected && (
+              <Pressable
+                style={({ pressed }) => [
+                  styles.floatingButton,
+                  { opacity: pressed ? 0.7 : 1, elevation: 2 },
+                ]}
+                disabled={showLeaderboard}
+                onPress={handleShowLeaderboard}
+              >
+                <Image
+                  style={styles.floatingIcon}
+                  source={require('@/assets/images/icons/resources/leaderboard.png')}
+                />
+              </Pressable>
+            )}
         </View>
-      </View>
+      </ScrollView>
+
       {showAds && (
         <AdBanner
           adId={__DEV__ ? BANNER_TEST_ID : BANNER_HOME_AND_SETTINGS_ID}
-          onHeightChange={(height) => setBottomPadding(height)}
         />
       )}
     </SafeAreaProvider>
