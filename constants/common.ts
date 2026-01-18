@@ -35,6 +35,21 @@ export const LANGUAGES = [
   { label: 'Magyar', value: 'hu' },
 ];
 
+export const MONTHS_FOR_LOCALISATION = [
+  'january',
+  'february',
+  'march',
+  'april',
+  'may',
+  'june',
+  'july',
+  'august',
+  'september',
+  'october',
+  'november',
+  'december',
+];
+
 export const LEVEL_ONE_FLAGS_AMOUNT = 19;
 export const LEVEL_TWO_FLAGS_AMOUNT = 18;
 export const LEVEL_THREE_FLAGS_AMOUNT = 23;

@@ -1,4 +1,18 @@
 export default {
+  months: {
+    january: '{{date}} січня',
+    february: '{{date}} лютого',
+    march: '{{date}} березня',
+    april: '{{date}} квітня',
+    may: '{{date}} травня',
+    june: '{{date}} червня',
+    july: '{{date}} липня',
+    august: '{{date}} серпня',
+    september: '{{date}} вересня',
+    october: '{{date}} жовтня',
+    november: '{{date}} листопада',
+    december: '{{date}} грудня',
+  },
   regions: {
     europe: 'Європа',
     asia: 'Азія',

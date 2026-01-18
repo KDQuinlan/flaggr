@@ -1,4 +1,18 @@
 export default {
+  months: {
+    january: 'January {{date}}{{dateSuffix}}',
+    february: 'February {{date}}{{dateSuffix}}',
+    march: 'March {{date}}{{dateSuffix}}',
+    april: 'April {{date}}{{dateSuffix}}',
+    may: 'May {{date}}{{dateSuffix}}',
+    june: 'June {{date}}{{dateSuffix}}',
+    july: 'July {{date}}{{dateSuffix}}',
+    august: 'August {{date}}{{dateSuffix}}',
+    september: 'September {{date}}{{dateSuffix}}',
+    october: 'October {{date}}{{dateSuffix}}',
+    november: 'November {{date}}{{dateSuffix}}',
+    december: 'December {{date}}{{dateSuffix}}',
+  },
   regions: {
     europe: 'Europe',
     asia: 'Asia',

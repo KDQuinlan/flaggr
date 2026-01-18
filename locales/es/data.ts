@@ -1,4 +1,18 @@
 export default {
+  months: {
+    january: '{{date}} de enero',
+    february: '{{date}} de febrero',
+    march: '{{date}} de marzo',
+    april: '{{date}} de abril',
+    may: '{{date}} de mayo',
+    june: '{{date}} de junio',
+    july: '{{date}} de julio',
+    august: '{{date}} de agosto',
+    september: '{{date}} de septiembre',
+    october: '{{date}} de octubre',
+    november: '{{date}} de noviembre',
+    december: '{{date}} de diciembre',
+  },
   regions: {
     europe: 'Europa',
     asia: 'Asia',

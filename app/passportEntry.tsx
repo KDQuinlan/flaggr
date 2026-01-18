@@ -44,7 +44,7 @@ const PassportEntryScreen = () => {
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
       >
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <View style={styles.flagTitleContainer}>
           <Image
             source={flags[entry.countryCode.toLowerCase()]}
             contentFit="contain"

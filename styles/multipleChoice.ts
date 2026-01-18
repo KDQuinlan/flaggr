@@ -11,6 +11,7 @@ export const getMultipleChoiceStyles = (theme: ThemeColors) => {
     },
     flagContainer: {
       flex: 4,
+      paddingTop: 20,
     },
     answersContainer: {
       flex: 8,

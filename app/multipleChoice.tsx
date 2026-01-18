@@ -62,10 +62,10 @@ const StatsRow = React.memo(
     const styles = useMemo(() => getMultipleChoiceStyles(theme), [theme]);
 
     const getTimerColor = () => {
-      if (isGameCountingUp) return colors.white;
+      if (isGameCountingUp) return theme.text;
       if (timeElapsedInSeconds <= 10) return colors.incorrectRed;
       if (timeElapsedInSeconds <= 30) return colors.warningOrange;
-      return colors.white;
+      return theme.text;
     };
 
     return (
@@ -360,8 +360,6 @@ const MultipleChoice = () => {
           style={{
             width: '100%',
             height: '100%',
-            alignSelf: 'center',
-            aspectRatio: 4 / 3,
           }}
         />
       </View>
