@@ -3,6 +3,7 @@ import { colors } from './colors';
 export const light = {
   // Backgrounds
   background: colors.offWhite,
+  backgroundHighContrast: colors.coolGrey,
   card: colors.white,
   button: colors.bluePrimary,
   premiumButton: colors.legendaryOrange,
@@ -27,6 +28,7 @@ export const light = {
 export const dark = {
   // Backgrounds
   background: colors.black,
+  backgroundHighContrast: colors.darkGreyBlue,
   card: colors.offBlack,
   button: colors.bluePrimary,
   premiumButton: colors.legendaryOrange,

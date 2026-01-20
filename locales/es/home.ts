@@ -17,4 +17,7 @@ export default {
   },
   socialMediaPreface: 'Nuestras redes sociales',
   socialMedia: 'Visítanos en {{media}}',
+  flagOfTheWeek: 'Bandera de la semana',
+  leaderboard: 'Clasificación',
+  leaderboardHint: 'Abre las clasificaciones de Google',
 };

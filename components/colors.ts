@@ -3,6 +3,7 @@ export const colors = {
   white: '#ffffff',
   offWhite: '#f1f1f1',
   lightGrey: '#e0e0e0',
+  coolGrey: '#e5e9f0',
 
   // Browns
   lightBrown: '#888',
@@ -12,11 +13,12 @@ export const colors = {
   black: '#121212',
   offBlack: '#1f1f1f',
   lightBlack: '#4d4d4d',
+  darkGreyBlue: '#2e3440',
 
   // Blues
   bluePrimary: '#0073E6',
   blueSecondary: '#0082D3',
-  royalBlue: '#2F6FED',
+  royalBlue: '#2f6fed',
 
   // Oranges
   legendaryOrange: '#FCB100',

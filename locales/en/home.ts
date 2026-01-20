@@ -17,4 +17,7 @@ export default {
   },
   socialMediaPreface: 'Our social media',
   socialMedia: 'Visit us on {{media}}',
+  flagOfTheWeek: 'Flag of the Week',
+  leaderboard: 'Leaderboard',
+  leaderboardHint: "Opens Google's leaderboards",
 };

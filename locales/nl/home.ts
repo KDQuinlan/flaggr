@@ -17,4 +17,7 @@ export default {
   },
   socialMediaPreface: 'Onze sociale media',
   socialMedia: 'Bezoek ons op {{media}}',
+  flagOfTheWeek: 'Vlag van de week',
+  leaderboard: 'Ranglijst',
+  leaderboardHint: 'Opent de ranglijsten van Google',
 };
