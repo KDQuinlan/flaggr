@@ -30,6 +30,10 @@ import persistUserSettings from '@/util/persistState/persistUserSettings';
 import SocialMediaLinks from '@/components/socialMedia/socialMedia';
 import getDateSuffix from '@/util/getDateSuffix/getDateSuffix';
 import flags from '@/assets/images/flags';
+import getFlagOfTheWeek from '@/util/getFlagOfTheWeek/getFlagOfTheWeek';
+import { PassportEntry } from '@/types/secureStore';
+import countries from '@/types/countries';
+import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 
 // TODO - enforce maxWidth in scrollview rather than children
 // TODO - with above, refactor all screens to have better tablet scaling
@@ -41,6 +45,7 @@ const HomeScreen = () => {
   const { isPremiumUser, isGoogleConnected, noticeBoardLastVisitedDate } =
     stateStore((s) => s.userSettings);
   const userSettings = stateStore((s) => s.userSettings);
+  const userProgression = stateStore((s) => s.userProgress);
   const [showLeaderboard, setShowLeaderboard] = useState<boolean>(false);
   const { t } = useTranslation('home');
   const { theme } = useTheme();
@@ -50,7 +55,10 @@ const HomeScreen = () => {
   const fontScale = PixelRatio.getFontScale();
 
   const shouldRenderUnderHeader =
-    width >= 500 || fontScale <= 1 || (width > 400 && fontScale <= 1.5);
+    width >= 500 ||
+    fontScale <= 1 ||
+    (width > 400 && fontScale <= 1.3) ||
+    (width > 450 && fontScale <= 1.5);
 
   const handleShowLeaderboard = async () => {
     await PlayGames.showAllLeaderboards();
@@ -74,6 +82,36 @@ const HomeScreen = () => {
       ? Date.now() - 6 * msInOneDay
       : Date.now() - (dayOfWeek - 1) * msInOneDay;
   const date = new Date(unixTimeOfLatestMonday);
+  const flagOfTheWeekCode = getFlagOfTheWeek(date);
+
+  const handleFlagOfTheWeekOnPress = () => {
+    let entryData: PassportEntry;
+
+    const existingEntryData = userProgression.passport.find(
+      (entry) => entry.countryCode === flagOfTheWeekCode
+    );
+
+    if (!existingEntryData) {
+      const flagData = countries.find(
+        (country) => country.countryCode === flagOfTheWeekCode.toUpperCase()
+      );
+
+      entryData = {
+        countryCode: flagData!.countryCode,
+        countryName: t(`countries.${toJsonKeyFormat(flagData!.countryName)}`, {
+          ns: 'data',
+        }),
+        continent: flagData!.continent,
+        difficulty: flagData!.difficulty,
+        correctTotal: 0,
+        incorrectTotal: 0,
+      };
+    } else {
+      entryData = existingEntryData;
+    }
+
+    navigation.navigate('passportEntry', { entry: entryData });
+  };
 
   return (
     <SafeAreaProvider
@@ -133,6 +171,8 @@ const HomeScreen = () => {
         <View style={styles.nonGameContainer}>
           {shouldRenderUnderHeader && (
             <Pressable
+              accessibilityLabel={t('title', { ns: 'feedback' })}
+              accessibilityRole="button"
               style={({ pressed }) => [
                 styles.floatingButton,
                 { opacity: pressed ? 0.7 : 1, elevation: 5 },
@@ -140,12 +180,16 @@ const HomeScreen = () => {
               onPress={() => navigation.navigate('feedback')}
             >
               <Image
+                accessible={false}
                 style={styles.floatingIcon}
                 source={require('@/assets/images/icons/resources/feedback.png')}
               />
             </Pressable>
           )}
           <Pressable
+            accessibilityLabel={t('flagOfTheWeek')}
+            accessibilityRole="button"
+            onPress={handleFlagOfTheWeekOnPress}
             style={({ pressed }) => [
               styles.flagOfTheWeekContainer,
               {
@@ -154,20 +198,23 @@ const HomeScreen = () => {
             ]}
           >
             <View>
-              <Text style={styles.flagOfTheWeekTitle}>
+              <Text style={styles.flagOfTheWeekTitle} accessible={false}>
                 {t(`months.${MONTHS_FOR_LOCALISATION[date.getMonth()]}`, {
                   ns: 'data',
                   date: date.getDate(),
                   dateSuffix: getDateSuffix(date.getDate()),
                 })}
               </Text>
-              <Text style={styles.flagOfTheWeekText}>Flag of the Week</Text>
+              <Text style={styles.flagOfTheWeekText} accessible={false}>
+                {t('flagOfTheWeek')}
+              </Text>
             </View>
             <Image
-              source={flags['be']}
+              accessible={false}
+              source={flags[flagOfTheWeekCode]}
               contentFit="contain"
               style={{
-                width: 50,
+                width: 50 * fontScale,
                 height: '100%',
               }}
             />
@@ -176,6 +223,9 @@ const HomeScreen = () => {
             isInternetAvailable &&
             isGoogleConnected && (
               <Pressable
+                accessibilityLabel={t('leaderboard')}
+                accessibilityRole="button"
+                accessibilityHint={t('leaderboardHint')}
                 style={({ pressed }) => [
                   styles.floatingButton,
                   { opacity: pressed ? 0.7 : 1, elevation: 5 },
@@ -184,6 +234,7 @@ const HomeScreen = () => {
                 onPress={handleShowLeaderboard}
               >
                 <Image
+                  accessible={false}
                   style={styles.floatingIcon}
                   source={require('@/assets/images/icons/resources/leaderboard.png')}
                 />
@@ -247,6 +298,8 @@ const HomeScreen = () => {
         >
           {!shouldRenderUnderHeader && (
             <Pressable
+              accessibilityLabel={t('title', { ns: 'feedback' })}
+              accessibilityRole="button"
               style={({ pressed }) => [
                 styles.floatingButton,
                 { opacity: pressed ? 0.7 : 1, elevation: 2 },
@@ -254,6 +307,7 @@ const HomeScreen = () => {
               onPress={() => navigation.navigate('feedback')}
             >
               <Image
+                accessible={false}
                 style={styles.floatingIcon}
                 source={require('@/assets/images/icons/resources/feedback.png')}
               />
@@ -264,6 +318,9 @@ const HomeScreen = () => {
             isInternetAvailable &&
             isGoogleConnected && (
               <Pressable
+                accessibilityLabel={t('leaderboard')}
+                accessibilityRole="button"
+                accessibilityHint={t('leaderboardHint')}
                 style={({ pressed }) => [
                   styles.floatingButton,
                   { opacity: pressed ? 0.7 : 1, elevation: 2 },
@@ -272,6 +329,7 @@ const HomeScreen = () => {
                 onPress={handleShowLeaderboard}
               >
                 <Image
+                  accessible={false}
                   style={styles.floatingIcon}
                   source={require('@/assets/images/icons/resources/leaderboard.png')}
                 />

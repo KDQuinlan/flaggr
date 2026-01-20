@@ -17,4 +17,7 @@ export default {
   },
   socialMediaPreface: 'Közösségi oldalaink',
   socialMedia: 'Látogass meg minket a(z) {{media}} oldalon',
+  flagOfTheWeek: 'A hét zászlaja',
+  leaderboard: 'Ranglista',
+  leaderboardHint: 'Megnyitja a Google ranglistáit',
 };

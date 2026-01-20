@@ -64,7 +64,7 @@ const PassportEntryScreen = () => {
             {(
               (entry.correctTotal /
                 (entry.incorrectTotal + entry.correctTotal)) *
-              100
+                100 || 0
             ).toFixed(1)}
             %
           </Text>

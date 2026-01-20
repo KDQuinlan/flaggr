@@ -17,4 +17,7 @@ export default {
   },
   socialMediaPreface: 'Наші соціальні мережі',
   socialMedia: 'Відвідайте нас у {{media}}',
+  flagOfTheWeek: 'Прапор тижня',
+  leaderboard: 'Таблиця лідерів',
+  leaderboardHint: 'Відкриває таблиці лідерів Google',
 };
