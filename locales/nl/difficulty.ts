@@ -22,4 +22,6 @@ export default {
     levelNine: 'Start {{level}}',
     levelTen: 'Start {{level}}',
   },
+  practice: 'Oefen fout beantwoorde vragen',
+  practiceHint: 'Een quiz met vlaggen die je het vaakst fout raadt',
 };

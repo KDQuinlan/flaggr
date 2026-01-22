@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Pressable, Text } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
@@ -41,6 +41,16 @@ const Difficulty = () => {
   const { id, title } = route.params;
   const progression = userProgression.games[id];
 
+  const shouldUserSeePractice = userProgression.passport.length >= 5;
+
+  const practiceItems = shouldUserSeePractice
+    ? userProgression.passport.sort(
+        (a, b) =>
+          a.correctTotal / (a.correctTotal + a.incorrectTotal) -
+          b.correctTotal / (b.correctTotal + b.incorrectTotal)
+      )
+    : null;
+
   useEffect(() => {
     navigation.setOptions({ title: t(`titles.${title.toLowerCase()}`) });
   }, [navigation]);
@@ -53,6 +63,32 @@ const Difficulty = () => {
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
       >
+        {id === 'standard' && practiceItems && (
+          <Pressable
+            style={({ pressed }) => [
+              styles.practiceContainer,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}
+            accessibilityLabel={t('practice')}
+            accessibilityHint={t('practiceHint')}
+            accessibilityRole="button"
+            // TODO - add improvement prop to multipleChoice to it doesn't give custom scoring?
+            // TODO - on practice improvement, show old vs. new percentage as progression
+            onPress={() =>
+              navigation.navigate('multipleChoice', {
+                title: 'Custom',
+                gameMode: 'custom',
+                questions:
+                  practiceItems.length > 10
+                    ? practiceItems.slice(0, 10)
+                    : practiceItems,
+                timeLimit: 0,
+              })
+            }
+          >
+            <Text style={styles.practiceText}>{t('practice')}</Text>
+          </Pressable>
+        )}
         {Object.entries(progression).map(([levelKey, levelData]) => (
           <DifficultySelect
             key={levelKey}

@@ -38,6 +38,69 @@ import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 // TODO - enforce maxWidth in scrollview rather than children
 // TODO - with above, refactor all screens to have better tablet scaling
 
+interface IFeedbackButtonProps {
+  elevation: number;
+}
+
+const FeedbackButton = ({ elevation }: IFeedbackButtonProps) => {
+  const navigation = useNavigation<NavigationProps>();
+  const { t } = useTranslation('home');
+  const { theme } = useTheme();
+  const styles = useMemo(() => getHomeStyles(theme), [theme]);
+  return (
+    <Pressable
+      accessibilityLabel={t('title', { ns: 'feedback' })}
+      accessibilityRole="button"
+      style={({ pressed }) => [
+        styles.floatingButton,
+        { opacity: pressed ? 0.7 : 1, elevation },
+      ]}
+      onPress={() => navigation.navigate('feedback')}
+    >
+      <Image
+        accessible={false}
+        style={styles.floatingIcon}
+        source={require('@/assets/images/icons/resources/feedback.png')}
+      />
+    </Pressable>
+  );
+};
+
+interface ILeaderboardButtonProps {
+  showLeaderboard: boolean;
+  handleShowLeaderboard: () => void;
+  elevation: number;
+}
+
+const LeaderboardButton = ({
+  showLeaderboard,
+  handleShowLeaderboard,
+  elevation,
+}: ILeaderboardButtonProps) => {
+  const { t } = useTranslation('home');
+  const { theme } = useTheme();
+  const styles = useMemo(() => getHomeStyles(theme), [theme]);
+  return (
+    <Pressable
+      accessibilityLabel={t('leaderboard')}
+      accessibilityRole="button"
+      accessibilityHint={t('leaderboardHint')}
+      style={({ pressed }) => [
+        styles.floatingButton,
+        { opacity: pressed ? 0.7 : 1, elevation },
+      ]}
+      disabled={showLeaderboard}
+      onPress={handleShowLeaderboard}
+    >
+      <Image
+        accessible={false}
+        style={styles.floatingIcon}
+        source={require('@/assets/images/icons/resources/leaderboard.png')}
+      />
+    </Pressable>
+  );
+};
+
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const insets = useSafeAreaInsets();
@@ -169,23 +232,7 @@ const HomeScreen = () => {
         </View>
 
         <View style={styles.nonGameContainer}>
-          {shouldRenderUnderHeader && (
-            <Pressable
-              accessibilityLabel={t('title', { ns: 'feedback' })}
-              accessibilityRole="button"
-              style={({ pressed }) => [
-                styles.floatingButton,
-                { opacity: pressed ? 0.7 : 1, elevation: 5 },
-              ]}
-              onPress={() => navigation.navigate('feedback')}
-            >
-              <Image
-                accessible={false}
-                style={styles.floatingIcon}
-                source={require('@/assets/images/icons/resources/feedback.png')}
-              />
-            </Pressable>
-          )}
+          {shouldRenderUnderHeader && <FeedbackButton elevation={5} />}
           <Pressable
             accessibilityLabel={t('flagOfTheWeek')}
             accessibilityRole="button"
@@ -222,23 +269,11 @@ const HomeScreen = () => {
           {shouldRenderUnderHeader &&
             isInternetAvailable &&
             isGoogleConnected && (
-              <Pressable
-                accessibilityLabel={t('leaderboard')}
-                accessibilityRole="button"
-                accessibilityHint={t('leaderboardHint')}
-                style={({ pressed }) => [
-                  styles.floatingButton,
-                  { opacity: pressed ? 0.7 : 1, elevation: 5 },
-                ]}
-                disabled={showLeaderboard}
-                onPress={handleShowLeaderboard}
-              >
-                <Image
-                  accessible={false}
-                  style={styles.floatingIcon}
-                  source={require('@/assets/images/icons/resources/leaderboard.png')}
-                />
-              </Pressable>
+              <LeaderboardButton
+                showLeaderboard={showLeaderboard}
+                handleShowLeaderboard={handleShowLeaderboard}
+                elevation={5}
+              />
             )}
         </View>
 
@@ -296,44 +331,16 @@ const HomeScreen = () => {
               : 'space-between',
           }}
         >
-          {!shouldRenderUnderHeader && (
-            <Pressable
-              accessibilityLabel={t('title', { ns: 'feedback' })}
-              accessibilityRole="button"
-              style={({ pressed }) => [
-                styles.floatingButton,
-                { opacity: pressed ? 0.7 : 1, elevation: 2 },
-              ]}
-              onPress={() => navigation.navigate('feedback')}
-            >
-              <Image
-                accessible={false}
-                style={styles.floatingIcon}
-                source={require('@/assets/images/icons/resources/feedback.png')}
-              />
-            </Pressable>
-          )}
+          {!shouldRenderUnderHeader && <FeedbackButton elevation={2} />}
           <SocialMediaLinks />
           {!shouldRenderUnderHeader &&
             isInternetAvailable &&
             isGoogleConnected && (
-              <Pressable
-                accessibilityLabel={t('leaderboard')}
-                accessibilityRole="button"
-                accessibilityHint={t('leaderboardHint')}
-                style={({ pressed }) => [
-                  styles.floatingButton,
-                  { opacity: pressed ? 0.7 : 1, elevation: 2 },
-                ]}
-                disabled={showLeaderboard}
-                onPress={handleShowLeaderboard}
-              >
-                <Image
-                  accessible={false}
-                  style={styles.floatingIcon}
-                  source={require('@/assets/images/icons/resources/leaderboard.png')}
-                />
-              </Pressable>
+              <LeaderboardButton
+                showLeaderboard={showLeaderboard}
+                handleShowLeaderboard={handleShowLeaderboard}
+                elevation={2}
+              />
             )}
         </View>
       </ScrollView>

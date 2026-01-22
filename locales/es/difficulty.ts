@@ -22,4 +22,6 @@ export default {
     levelNine: 'Iniciar {{level}}',
     levelTen: 'Iniciar {{level}}',
   },
+  practice: 'Practicar respuestas incorrectas',
+  practiceHint: 'Un cuestionario con las banderas que menos aciertas',
 };

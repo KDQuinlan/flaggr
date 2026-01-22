@@ -78,7 +78,7 @@ const NoticeBoardEntry = ({
               backgroundColor: handleUpdateTypePillColor(updateType),
             }}
           >
-            <Text style={styles.noticeBoardEntryText}>{updateType}</Text>
+            <Text style={styles.noticeBoardEntryPillText}>{updateType}</Text>
           </View>
           <Text
             accessibilityLabel={spokenDate}

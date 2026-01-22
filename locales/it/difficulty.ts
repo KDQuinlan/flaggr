@@ -22,4 +22,6 @@ export default {
     levelNine: 'Avvia {{level}}',
     levelTen: 'Avvia {{level}}',
   },
+  practice: 'Esercita le risposte sbagliate',
+  practiceHint: 'Un quiz con le bandiere con il tasso di risposta più basso',
 };
