@@ -22,4 +22,6 @@ export default {
     levelNine: 'Start {{level}}',
     levelTen: 'Start {{level}}',
   },
+  practice: 'Practice Incorrect Answers',
+  practiceHint: 'A quiz of your lowest guess rate flags',
 };

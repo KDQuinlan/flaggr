@@ -22,4 +22,6 @@ export default {
     levelNine: '{{level}} indítása',
     levelTen: '{{level}} indítása',
   },
+  practice: 'Hibás válaszok gyakorlása',
+  practiceHint: 'Kvíz a legalacsonyabb találati arányú zászlókból',
 };

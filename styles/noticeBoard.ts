@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
+import { colors } from '@/components/colors';
 
 export const getNoticeBoardStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -59,6 +60,11 @@ export const getNoticeBoardStyles = (theme: ThemeColors) => {
       borderRadius: 8,
       paddingHorizontal: 10,
       paddingVertical: 1,
+    },
+    noticeBoardEntryPillText: {
+      color: colors.white,
+      fontFamily: 'DMSans',
+      fontSize: 14,
     },
     noticeBoardEntrySubtextContainer: {
       flexDirection: 'row',

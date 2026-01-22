@@ -5,7 +5,6 @@ import { ThemeColors } from '@/components/theme';
 export const getDifficultySelectStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
     gameModeContainer: {
-      marginHorizontal: 20,
       borderRadius: 8,
       alignItems: 'center',
       flexDirection: 'row',
