@@ -55,6 +55,31 @@ const Difficulty = () => {
     navigation.setOptions({ title: t(`titles.${title.toLowerCase()}`) });
   }, [navigation]);
 
+  const handleOnPress = (
+    multipleChoiceScreenProps: RootStackParamList['multipleChoice']
+  ) => {
+    const { title, gameMode, questions, timeLimit } = multipleChoiceScreenProps;
+
+    if (energyAmount === 0 && !isPremiumUser) {
+      setEnergyModalVisible(true);
+    } else {
+      navigation.navigate('multipleChoice', {
+        title,
+        gameMode,
+        questions,
+        timeLimit,
+      });
+
+      if (!isPremiumUser) {
+        persistUserSettings({
+          ...userSettings,
+          energyAmount: energyAmount - 1,
+          lastEnergyTimestamp: determineSetTimestamp(),
+        });
+      }
+    }
+  };
+
   return (
     <SafeAreaProvider
       style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
@@ -72,12 +97,10 @@ const Difficulty = () => {
             accessibilityLabel={t('practice')}
             accessibilityHint={t('practiceHint')}
             accessibilityRole="button"
-            // TODO - add improvement prop to multipleChoice to it doesn't give custom scoring?
-            // TODO - on practice improvement, show old vs. new percentage as progression
             onPress={() =>
-              navigation.navigate('multipleChoice', {
-                title: 'Custom',
-                gameMode: 'custom',
+              handleOnPress({
+                title: 'Practice',
+                gameMode: 'practice',
                 questions:
                   practiceItems.length > 10
                     ? practiceItems.slice(0, 10)
@@ -103,29 +126,17 @@ const Difficulty = () => {
                 : levelData.userScore / TO_PERCENTAGE_MULTIPLIER
             }
             score={levelData.userScore}
-            onPress={() => {
-              if (energyAmount === 0 && !isPremiumUser) {
-                setEnergyModalVisible(true);
-              } else {
-                navigation.navigate('multipleChoice', {
-                  title: levelData.name,
-                  gameMode: id,
-                  questions: generateMultipleChoice(
-                    levelData.id,
-                    levelData.length
-                  ),
-                  timeLimit: id === 'rapid' ? RAPID_TIME_ALLOWANCE_IN_S : 0,
-                });
-
-                if (!isPremiumUser) {
-                  persistUserSettings({
-                    ...userSettings,
-                    energyAmount: energyAmount - 1,
-                    lastEnergyTimestamp: determineSetTimestamp(),
-                  });
-                }
-              }
-            }}
+            onPress={() =>
+              handleOnPress({
+                title: levelData.name,
+                gameMode: id,
+                questions: generateMultipleChoice(
+                  levelData.id,
+                  levelData.length
+                ),
+                timeLimit: id === 'rapid' ? RAPID_TIME_ALLOWANCE_IN_S : 0,
+              })
+            }
           />
         ))}
       </ScrollView>

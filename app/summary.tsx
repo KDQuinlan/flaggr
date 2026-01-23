@@ -13,11 +13,7 @@ import {
 import iconsMap from '@/assets/images/icons';
 import { LEVEL_MAP } from '@/constants/mappers';
 import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
-import {
-  AnswerResult,
-  NavigationProps,
-  RootStackParamList,
-} from '@/types/navigation';
+import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import stateStore from '@/state/store';
 import createUpdatedProgressionStructure from '@/util/updatedProgressionStructure/createdUpdatedProgressionStructure';
 import formatTime from '@/util/formatTime/formatTime';
@@ -28,14 +24,14 @@ import { ProgressionStructure } from '@/types/secureStore';
 import { ACCURACY_ID, MATCHES_PLAYED_ID } from '@/constants/leaderboard';
 import PlayGames from '@/PlayGames';
 import determineSummaryIcons from '@/util/determineSummaryIcons';
-import { getSummaryStyles } from '@/styles/summary';
+import { getSummaryStyles } from '@/styles/summary/summary';
 import { useTheme } from '@/context/ThemeContext';
 import { BANNER_TEST_ID } from '@/constants/adId';
 import AdBanner from '@/components/AdBanner/AdBanner';
 import calculateLeaderboardScore from '@/util/calculateLeaderboardScore/calculateLeaderboardScore';
-import { colors } from '@/components/colors';
 import chunkArray from '@/util/chunkArray/chunkArray';
 import SummaryHistory from '@/components/summary/summaryHistory';
+import { getSummarySharedStyles } from '@/styles/summary/summaryShared';
 
 const Summary = () => {
   useFocusEffect(
@@ -58,7 +54,11 @@ const Summary = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'summary'>>();
   const { t } = useTranslation('summary');
   const { theme } = useTheme();
-  const styles = useMemo(() => getSummaryStyles(theme), [theme]);
+  const styles = getSummaryStyles();
+  const sharedSummaryStyles = useMemo(
+    () => getSummarySharedStyles(theme),
+    [theme]
+  );
   const userProgression = stateStore((s) => s.userProgress);
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser } = stateStore((s) => s.userSettings);
@@ -196,7 +196,7 @@ const Summary = () => {
     return (
       <View style={styles.progressionContainer}>
         {unlockedMessage && userNextLevel && (
-          <Text style={styles.valueText}>{unlockedMessage}</Text>
+          <Text style={sharedSummaryStyles.valueText}>{unlockedMessage}</Text>
         )}
 
         {unlockedMessage && userNextLevel && (
@@ -224,12 +224,15 @@ const Summary = () => {
 
   return (
     <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+      style={{
+        ...sharedSummaryStyles.rootContainer,
+        paddingBottom: insets.bottom,
+      }}
     >
       <ScrollView>
-        <View style={styles.sectionContainer}>
+        <View style={sharedSummaryStyles.sectionContainer}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>
+            <Text style={sharedSummaryStyles.title}>
               {t('completed', { difficulty: translatedDifficulty })}
             </Text>
             <Image
@@ -238,31 +241,43 @@ const Summary = () => {
             />
           </View>
           <View style={styles.gameResultContainer}>
-            <View style={styles.gameResultScoreContainer}>
-              <Text style={styles.scoreTitleText}>
+            <View style={sharedSummaryStyles.gameResultScoreContainer}>
+              <Text style={sharedSummaryStyles.scoreTitleText}>
                 {newHighScoreMessage ? newHighScoreMessage : t('score')}
               </Text>
-              <Text style={styles.scoreValueText}>{handleDisplayScore()}</Text>
+              <Text style={sharedSummaryStyles.scoreValueText}>
+                {handleDisplayScore()}
+              </Text>
             </View>
 
-            <View style={styles.gameResultAdvancedContainer}>
-              <View style={styles.gameResultAdvancedItem}>
-                <Text style={styles.subtitleText}>{t('correct')}</Text>
-                <Text style={styles.valueText}>{correct}</Text>
+            <View style={sharedSummaryStyles.gameResultAdvancedContainer}>
+              <View style={sharedSummaryStyles.gameResultAdvancedItem}>
+                <Text style={sharedSummaryStyles.subtitleText}>
+                  {t('correct')}
+                </Text>
+                <Text style={sharedSummaryStyles.valueText}>{correct}</Text>
               </View>
-              <View style={styles.gameResultAdvancedItem}>
-                <Text style={styles.subtitleText}>{t('incorrect')}</Text>
-                <Text style={styles.valueText}>{incorrect}</Text>
+              <View style={sharedSummaryStyles.gameResultAdvancedItem}>
+                <Text style={sharedSummaryStyles.subtitleText}>
+                  {t('incorrect')}
+                </Text>
+                <Text style={sharedSummaryStyles.valueText}>{incorrect}</Text>
               </View>
             </View>
-            <View style={styles.gameResultAdvancedContainer}>
-              <View style={styles.gameResultAdvancedItem}>
-                <Text style={styles.subtitleText}>{t('streak')}</Text>
-                <Text style={styles.valueText}>{highestStreak}</Text>
+            <View style={sharedSummaryStyles.gameResultAdvancedContainer}>
+              <View style={sharedSummaryStyles.gameResultAdvancedItem}>
+                <Text style={sharedSummaryStyles.subtitleText}>
+                  {t('streak')}
+                </Text>
+                <Text style={sharedSummaryStyles.valueText}>
+                  {highestStreak}
+                </Text>
               </View>
-              <View style={styles.gameResultAdvancedItem}>
-                <Text style={styles.subtitleText}>{t('time')}</Text>
-                <Text style={styles.valueText}>
+              <View style={sharedSummaryStyles.gameResultAdvancedItem}>
+                <Text style={sharedSummaryStyles.subtitleText}>
+                  {t('time')}
+                </Text>
+                <Text style={sharedSummaryStyles.valueText}>
                   {timeTaken ? formatTime(timeTaken, false) : 'Unlimited'}
                 </Text>
               </View>
@@ -278,22 +293,24 @@ const Summary = () => {
           )}
 
           {unlockRequirementMessage && (
-            <Text style={styles.subtitleText}>{unlockRequirementMessage}</Text>
+            <Text style={sharedSummaryStyles.subtitleText}>
+              {unlockRequirementMessage}
+            </Text>
           )}
 
           <ProgressionSummary />
         </View>
-        <View style={styles.buttonContainer}>
+        <View style={sharedSummaryStyles.buttonContainer}>
           <Pressable
             style={({ pressed }) => [
-              styles.button,
+              sharedSummaryStyles.button,
               { opacity: pressed ? 0.7 : 1 },
             ]}
             onPress={handleContinue}
             accessibilityLabel={t('continue')}
             accessibilityRole="button"
           >
-            <Text style={styles.buttonText}>{t('continue')}</Text>
+            <Text style={sharedSummaryStyles.buttonText}>{t('continue')}</Text>
           </Pressable>
         </View>
       </ScrollView>

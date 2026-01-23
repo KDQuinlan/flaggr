@@ -1,8 +1,6 @@
 import type { NavigationProps } from '@/types/navigation';
 import { StackActions } from '@react-navigation/native';
 
-// TODO - refactor to just use popTo?
-
 const resetToDifficultyScreen = (
   navigation: NavigationProps,
   screen: 'custom' | 'difficulty'
@@ -15,11 +13,6 @@ const resetToDifficultyScreen = (
     if (popCount > 0) {
       navigation.dispatch(StackActions.pop(popCount));
     }
-  } else {
-    navigation.popTo('difficulty', {
-      id: 'standard',
-      title: 'Standard',
-    });
   }
 };
 

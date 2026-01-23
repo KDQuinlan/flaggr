@@ -6,7 +6,8 @@ import { INoticeBoardEntryProps } from './noticeBoard';
 
 export type DifficultyScreenGameIds = 'standard' | 'rapid';
 export type SummaryScreenAllowedIds = 'standard' | 'rapid';
-export type PlayableGameModes = 'standard' | 'rapid' | 'custom';
+export type PlayableGameModes = 'standard' | 'rapid' | 'custom' | 'practice';
+export type MultipleChoiceScreenTitles = Levels | 'Custom' | 'Practice';
 export type HomeScreenNavigableScreens =
   | 'standard'
   | 'rapid'
@@ -36,7 +37,7 @@ export type RootStackParamList = {
   difficulty: { id: DifficultyScreenGameIds; title: string };
   custom: undefined;
   multipleChoice: {
-    title: Levels | 'Custom';
+    title: MultipleChoiceScreenTitles;
     gameMode: PlayableGameModes;
     questions: Country[];
     timeLimit: number;
@@ -49,6 +50,10 @@ export type RootStackParamList = {
   customSummary: {
     gameResult: GameResult;
     finalScore: number;
+  };
+  practiceSummary: {
+    passportBeforeQuiz: PassportEntry[];
+    gameResult: GameResult;
   };
 };
 

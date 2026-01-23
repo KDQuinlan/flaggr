@@ -190,7 +190,7 @@ const HomeScreen = () => {
               onPress={() => navigation.navigate('settings')}
               accessibilityRole="button"
               accessibilityLabel={t('title', { ns: 'settings' })}
-              hitSlop={10}
+              hitSlop={5}
               style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
             >
               <Image
@@ -210,7 +210,7 @@ const HomeScreen = () => {
               }}
               accessibilityRole="button"
               accessibilityLabel={t('title', { ns: 'settings' })}
-              hitSlop={10}
+              hitSlop={5}
               style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
             >
               <Image

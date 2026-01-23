@@ -6,8 +6,6 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { useTheme } from '@/context/ThemeContext';
 import { getDropdownStyles } from './dropdown.styles';
 
-// TODO - find more appropriate type than 'any' for setValue e.g. generic or enum
-
 interface ILanguageDropdownProps {
   value: string | null;
   setValue: (value: SetStateAction<string>) => void;
