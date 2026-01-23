@@ -38,8 +38,6 @@ type PassportProgression = {
   newPercentage: number;
 };
 
-// TODO - localise percentages?
-
 const PracticeSummary = () => {
   useFocusEffect(
     useCallback(() => {
