@@ -1,14 +1,14 @@
-import { StatusBar, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 import { colors } from '@/components/colors';
 
-export const getCustomSummaryStyles = (theme: ThemeColors) => {
+export const getSummarySharedStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
     rootContainer: {
       flex: 1,
       backgroundColor: theme.background,
-      paddingTop: StatusBar.currentHeight || 0,
+      paddingTop: 20,
     },
     sectionContainer: {
       backgroundColor: theme.card,
@@ -16,7 +16,7 @@ export const getCustomSummaryStyles = (theme: ThemeColors) => {
       width: '100%',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: 10,
+      paddingVertical: 20,
       gap: 20,
     },
     buttonContainer: {
@@ -24,11 +24,6 @@ export const getCustomSummaryStyles = (theme: ThemeColors) => {
       marginVertical: 20,
       justifyContent: 'center',
       alignItems: 'center',
-    },
-    animationContainer: {
-      width: '100%',
-      alignItems: 'center',
-      justifyContent: 'center',
     },
     button: {
       backgroundColor: theme.button,
@@ -43,13 +38,9 @@ export const getCustomSummaryStyles = (theme: ThemeColors) => {
       fontFamily: 'DMSansBold',
       textAlign: 'center',
       fontSize: 28,
-      paddingBottom: 10,
       color: theme.text,
     },
     buttonText: { fontFamily: 'DMSansBold', fontSize: 16, color: colors.white },
-    difficultyImageContainer: {
-      flexDirection: 'row',
-    },
     subtitleText: { fontFamily: 'DMSans', color: theme.text, fontSize: 18 },
     valueText: { fontFamily: 'DMSansBold', color: theme.text, fontSize: 20 },
     scoreTitleText: {
@@ -76,11 +67,6 @@ export const getCustomSummaryStyles = (theme: ThemeColors) => {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-    },
-    historySectionContainer: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      gap: 10,
     },
   });
 };

@@ -18,7 +18,7 @@ const update: INoticeBoardEntryProps = {
   title: 'Flag of the Week',
   date: 1768982622828,
   updateType: 'New Feature',
-  image: require('@/assets/images/notices/1768237696056-whatsNext.png'),
+  image: require('@/assets/images/notices/1768982622828-fotw.png'),
   content,
 } as const;
 

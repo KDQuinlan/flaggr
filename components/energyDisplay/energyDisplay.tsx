@@ -11,8 +11,6 @@ import persistUserSettings from '@/util/persistState/persistUserSettings';
 import { getEnergyDisplayStyles } from './energyDisplay.styles';
 import { useTheme } from '@/context/ThemeContext';
 
-// TODO - rework accessibility for QoL
-
 const EnergyDisplay = () => {
   const { t } = useTranslation('energy');
   const energyModalVisible = stateStore((s) => s.energyModalVisible);

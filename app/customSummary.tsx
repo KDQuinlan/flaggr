@@ -22,12 +22,13 @@ import {
 } from '@/constants/leaderboard';
 import PlayGames from '@/PlayGames';
 import { useTheme } from '@/context/ThemeContext';
-import { getCustomSummaryStyles } from '@/styles/customSummary';
+import { getCustomSummaryStyles } from '@/styles/summary/customSummary';
 import { BANNER_TEST_ID } from '@/constants/adId';
 import AdBanner from '@/components/AdBanner/AdBanner';
 import calculateLeaderboardScore from '@/util/calculateLeaderboardScore/calculateLeaderboardScore';
 import chunkArray from '@/util/chunkArray/chunkArray';
 import SummaryHistory from '@/components/summary/summaryHistory';
+import { getSummarySharedStyles } from '@/styles/summary/summaryShared';
 
 const CustomSummary = () => {
   useFocusEffect(
@@ -50,7 +51,11 @@ const CustomSummary = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'customSummary'>>();
   const { t } = useTranslation('customSummary');
   const { theme } = useTheme();
-  const styles = useMemo(() => getCustomSummaryStyles(theme), [theme]);
+  const styles = getCustomSummaryStyles();
+  const sharedSummaryStyles = useMemo(
+    () => getSummarySharedStyles(theme),
+    [theme]
+  );
   const userProgression = stateStore((s) => s.userProgress);
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser } = stateStore((s) => s.userSettings);
@@ -117,37 +122,46 @@ const CustomSummary = () => {
 
   return (
     <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+      style={{
+        ...sharedSummaryStyles.rootContainer,
+        paddingBottom: insets.bottom,
+      }}
     >
       <ScrollView>
-        <View style={styles.sectionContainer}>
-          <Text style={styles.title}>{t('completed')}</Text>
+        <View style={sharedSummaryStyles.sectionContainer}>
+          <Text style={sharedSummaryStyles.title}>{t('completed')}</Text>
 
-          <View style={styles.gameResultScoreContainer}>
-            <Text style={styles.scoreTitleText}>
+          <View style={sharedSummaryStyles.gameResultScoreContainer}>
+            <Text style={sharedSummaryStyles.scoreTitleText}>
               {newHighScoreMessage ? newHighScoreMessage : t('score')}
             </Text>
-            <Text style={styles.scoreValueText}>{finalScore}</Text>
+            <Text style={sharedSummaryStyles.scoreValueText}>{finalScore}</Text>
           </View>
 
-          <View style={styles.gameResultAdvancedContainer}>
-            <View style={styles.gameResultAdvancedItem}>
-              <Text style={styles.subtitleText}>{t('correct')}</Text>
-              <Text style={styles.valueText}>{correct}</Text>
+          <View style={sharedSummaryStyles.gameResultAdvancedContainer}>
+            <View style={sharedSummaryStyles.gameResultAdvancedItem}>
+              <Text style={sharedSummaryStyles.subtitleText}>
+                {t('correct')}
+              </Text>
+              <Text style={sharedSummaryStyles.valueText}>{correct}</Text>
             </View>
-            <View style={styles.gameResultAdvancedItem}>
-              <Text style={styles.subtitleText}>{t('incorrect')}</Text>
-              <Text style={styles.valueText}>{incorrect}</Text>
+            <View style={sharedSummaryStyles.gameResultAdvancedItem}>
+              <Text style={sharedSummaryStyles.subtitleText}>
+                {t('incorrect')}
+              </Text>
+              <Text style={sharedSummaryStyles.valueText}>{incorrect}</Text>
             </View>
           </View>
-          <View style={styles.gameResultAdvancedContainer}>
-            <View style={styles.gameResultAdvancedItem}>
-              <Text style={styles.subtitleText}>{t('streak')}</Text>
-              <Text style={styles.valueText}>{highestStreak}</Text>
+          <View style={sharedSummaryStyles.gameResultAdvancedContainer}>
+            <View style={sharedSummaryStyles.gameResultAdvancedItem}>
+              <Text style={sharedSummaryStyles.subtitleText}>
+                {t('streak')}
+              </Text>
+              <Text style={sharedSummaryStyles.valueText}>{highestStreak}</Text>
             </View>
-            <View style={styles.gameResultAdvancedItem}>
-              <Text style={styles.subtitleText}>{t('time')}</Text>
-              <Text style={styles.valueText}>
+            <View style={sharedSummaryStyles.gameResultAdvancedItem}>
+              <Text style={sharedSummaryStyles.subtitleText}>{t('time')}</Text>
+              <Text style={sharedSummaryStyles.valueText}>
                 {timeTaken ? formatTime(timeTaken, false) : 'Unlimited'}
               </Text>
             </View>
@@ -166,24 +180,26 @@ const CustomSummary = () => {
                   onPress={() => setHistoryItemsToShow(history.length)}
                   accessible={false}
                 >
-                  <Text style={styles.buttonText}>{t('showAll')}</Text>
+                  <Text style={sharedSummaryStyles.buttonText}>
+                    {t('showAll')}
+                  </Text>
                 </Pressable>
               )}
             </View>
           )}
         </View>
 
-        <View style={styles.buttonContainer}>
+        <View style={sharedSummaryStyles.buttonContainer}>
           <Pressable
             style={({ pressed }) => [
-              styles.button,
+              sharedSummaryStyles.button,
               { opacity: pressed ? 0.7 : 1 },
             ]}
             onPress={handleContinue}
             accessibilityLabel={t('continue')}
             accessibilityRole="button"
           >
-            <Text style={styles.buttonText}>{t('continue')}</Text>
+            <Text style={sharedSummaryStyles.buttonText}>{t('continue')}</Text>
           </Pressable>
         </View>
       </ScrollView>

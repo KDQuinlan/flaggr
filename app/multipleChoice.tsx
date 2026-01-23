@@ -25,6 +25,7 @@ import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/
 import flags from '@/assets/images/flags';
 import {
   GameResult,
+  MultipleChoiceScreenTitles,
   NavigationProps,
   PlayableGameModes,
   RootStackParamList,
@@ -131,6 +132,16 @@ const MultipleChoice = () => {
 
   const isUserTapToAdvance = displayAnswerTimerMs === 0;
 
+  const passportBeforeQuiz = useMemo(
+    () =>
+      userProgression.passport.filter((item) =>
+        questions
+          .map((question) => question.countryCode)
+          .includes(item.countryCode)
+      ),
+    []
+  );
+
   const startTimeRef = useRef<number>(Date.now());
   const correctTotalRef = useRef<number>(correctTotal);
   const incorrectTotalRef = useRef<number>(incorrectTotal);
@@ -172,11 +183,14 @@ const MultipleChoice = () => {
   }, [questionNumberIndex, correctAnswer, difficulty, continent]);
 
   useEffect(() => {
+    const handleTitle = (title: MultipleChoiceScreenTitles) => {
+      if (title === 'Custom') return t('title', { ns: 'custom' });
+      if (title === 'Practice') return t('practice', { ns: 'practiceSummary' });
+      return t(`levels.${LEVEL_MAP[title]}`);
+    };
+
     navigation.setOptions({
-      title:
-        title === 'Custom'
-          ? t('title', { ns: 'custom' })
-          : t(`levels.${LEVEL_MAP[title]}`),
+      title: handleTitle(title),
     });
   }, [navigation, timeElapsedInSeconds, title, streak]);
 
@@ -198,7 +212,7 @@ const MultipleChoice = () => {
             history: answerHistory,
           };
 
-          if (gameMode !== 'custom') {
+          if (gameMode === 'rapid') {
             navigation.navigate('summary', {
               difficulty: DIFFICULTY_ID_TO_LEVEL_MAP[difficulty],
               gameMode,
@@ -210,7 +224,6 @@ const MultipleChoice = () => {
               finalScore: Math.round(customScoreRef.current * scoreMultiplier!),
             });
           }
-
           return;
         }
 
@@ -302,7 +315,7 @@ const MultipleChoice = () => {
 
     if (isFinalQuestion) {
       setIsButtonDisabled(true);
-      if (gameMode !== 'custom') {
+      if (gameMode === 'standard' || gameMode === 'rapid') {
         navigation.navigate('summary', {
           difficulty: DIFFICULTY_ID_TO_LEVEL_MAP[difficulty],
           gameMode,
@@ -312,6 +325,16 @@ const MultipleChoice = () => {
             highestStreak: highest,
             history: answerHistory,
             timeTaken: isGameCountingUp ? newTimeTaken : undefined,
+          },
+        });
+      } else if (gameMode === 'practice') {
+        navigation.navigate('practiceSummary', {
+          passportBeforeQuiz,
+          gameResult: {
+            correct,
+            incorrect,
+            highestStreak: highest,
+            history: answerHistory,
           },
         });
       } else {
