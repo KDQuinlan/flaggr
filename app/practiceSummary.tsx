@@ -155,12 +155,12 @@ const PracticeSummary = () => {
               .sort((a, b) => b.newPercentage - a.newPercentage)
               .map((entry, index) => {
                 const renderSingleColumn =
-                  width < 400 ||
+                  (width < 400 && fontScale > 1.1) ||
                   (width < 500 && fontScale >= 1.8) ||
                   (width < 450 && fontScale >= 1.5);
 
                 const getMargin = () => {
-                  const columns = 2;
+                  const columns = renderSingleColumn ? 1 : 2;
 
                   const itemsInLastRow =
                     passportProgression.length % columns || columns;

@@ -10,7 +10,7 @@ const content: NoticeBoardContentSection[] = [
   },
   {
     header: 'Home Screen Shuffle',
-    text: 'To accommodate for Flag of the Week, and improve the user experience on smaller phones, the floating buttons for Feedback and Leaderboard have been moved.\n\n In addition, number of accessibility improvements have been made to provide much better context.',
+    text: 'To accommodate for Flag of the Week, and improve the user experience on smaller phones, the floating buttons for Feedback and Leaderboard have been moved.\n\nIn addition, number of accessibility improvements have been made to provide much better context.',
   },
 ];
 
