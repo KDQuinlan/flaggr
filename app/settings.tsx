@@ -241,7 +241,7 @@ const ContinueButton = () => {
 
   return (
     <Pressable
-      onPress={() => navigation.navigate('home')}
+      onPress={() => navigation.goBack()}
       style={({ pressed }) => [styles.button, { opacity: pressed ? 0.7 : 1 }]}
       accessibilityLabel={t('continue')}
       accessibilityRole="button"
