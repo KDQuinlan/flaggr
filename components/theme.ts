@@ -23,6 +23,7 @@ export const light = {
   // Surfaces
   accent: colors.lightGrey,
   shadow: colors.black,
+  border: colors.lightGrey,
 };
 
 export const dark = {
@@ -48,6 +49,7 @@ export const dark = {
   // Surfaces
   accent: colors.lightBlack,
   shadow: colors.white,
+  border: colors.offBlack,
 };
 
 export type ThemeColors = typeof light;

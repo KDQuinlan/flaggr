@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigation } from 'expo-router';
+import { router } from 'expo-router';
 import { Pressable, ScrollView, Text, View, TextInput } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/locales/i18n';
@@ -9,7 +9,6 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
-import { NavigationProps } from '@/types/navigation';
 import { APP_NAME, LANGUAGES, SUPPORTED_LANGUAGES } from '@/constants/common';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import stateStore from '@/state/store';
@@ -24,7 +23,6 @@ const locales = Localization.getLocales();
 const locale = locales[0]?.languageCode;
 
 const SetupScreen = () => {
-  const navigation = useNavigation<NavigationProps>();
   const insets = useSafeAreaInsets();
   const userSettings = stateStore((s) => s.userSettings);
   const { t } = useTranslation('setup');
@@ -107,15 +105,15 @@ const SetupScreen = () => {
         />
 
         <Pressable
-          onPress={() => {
-            persistUserSettings({
+          onPress={async () => {
+            await persistUserSettings({
               ...userSettings,
               isSetUp: true,
               userAgeForPersonalisation: handleContinueAgeCalculation(),
               locale: language,
               isDarkTheme,
             });
-            navigation.navigate('home');
+            router.replace('/(tabs)');
           }}
           disabled={isContinueDisabled}
           style={({ pressed }) => [

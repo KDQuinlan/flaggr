@@ -10,10 +10,7 @@ import {
   View,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
@@ -103,7 +100,6 @@ const LeaderboardButton = ({
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProps>();
-  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser, isGoogleConnected, noticeBoardLastVisitedDate } =
     stateStore((s) => s.userSettings);
@@ -177,9 +173,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-    >
+    <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
