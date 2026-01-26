@@ -14,7 +14,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
-import { APP_NAME, MONTHS_FOR_LOCALISATION } from '@/constants/common';
+import {
+  APP_NAME,
+  MONTHS_FOR_LOCALISATION,
+  MS_IN_ONE_DAY,
+} from '@/constants/common';
 import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_HOME_AND_SETTINGS_ID, BANNER_TEST_ID } from '@/constants/adId';
 import EnergyDisplay from '@/components/energyDisplay/energyDisplay';
@@ -134,12 +138,11 @@ const HomeScreen = () => {
 
   const showAds = !isPremiumUser && isInternetAvailable;
 
-  const msInOneDay = 60 * 60 * 24 * 1000;
   const dayOfWeek = new Date().getDay();
   const unixTimeOfLatestMonday =
     dayOfWeek === 0
-      ? Date.now() - 6 * msInOneDay
-      : Date.now() - (dayOfWeek - 1) * msInOneDay;
+      ? Date.now() - 6 * MS_IN_ONE_DAY
+      : Date.now() - (dayOfWeek - 1) * MS_IN_ONE_DAY;
   const date = new Date(unixTimeOfLatestMonday);
   const flagOfTheWeekCode = getFlagOfTheWeek(date);
 

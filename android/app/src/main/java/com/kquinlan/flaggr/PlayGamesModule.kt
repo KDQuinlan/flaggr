@@ -2,6 +2,7 @@ package com.kquinlan.flaggr
 
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.Promise
 import com.google.android.gms.games.PlayGames
@@ -161,5 +162,38 @@ class PlayGamesModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
                     promise.reject("E_READ_FAILED", "Failed to read snapshot data", e)
                 }
             }
+    }
+
+    @ReactMethod
+    fun getCurrentPlayer(promise: Promise) {
+        val activity = currentActivity
+        if (activity == null) {
+            promise.reject("NO_ACTIVITY", "Activity doesn't exist")
+            return
+        }
+
+        val playersClient = PlayGames.getPlayersClient(activity)
+
+        playersClient.currentPlayer.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val player = task.result
+                if (player == null) {
+                    promise.reject("NO_PLAYER", "Player is null")
+                    return@addOnCompleteListener
+                }
+
+                val map = Arguments.createMap()
+                map.putString("displayName", player.displayName)
+                map.putString("playerId", player.playerId)
+
+                promise.resolve(map)
+            } else {
+                promise.reject(
+                    "GET_PLAYER_FAILED",
+                    "Could not retrieve player info",
+                    task.exception
+                )
+            }
+        }
     }
 }

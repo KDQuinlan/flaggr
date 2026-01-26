@@ -6,6 +6,8 @@ export const STORAGE_KEY_SETTINGS = 'flaggr-settings';
 export const SUPPORTED_LANGUAGES = ['en', 'es'];
 export const VERSION_KEY = 1;
 
+export const MS_IN_ONE_DAY = 60 * 60 * 24 * 1000;
+
 export const MAXIMUM_ENERGY = 10;
 export const ENERGY_COOLDOWN_MS = 10 * 60 * 1000;
 export const MINIMUM_DIFFICULTY = 1;

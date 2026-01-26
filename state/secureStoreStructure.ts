@@ -9,6 +9,8 @@ import standard from './data/games/standard';
 import { ANSWERS_SHOWN_DURATION_DEFAULT_MS } from '@/constants/settings';
 import { MAXIMUM_ENERGY } from '@/constants/common';
 
+// TODO - before going live, add version code to to each default object for migration handling
+
 export const defaultUserSettings: UserSettingStructure = {
   isSetUp: false,
   isGoogleConnected: false,
@@ -20,6 +22,14 @@ export const defaultUserSettings: UserSettingStructure = {
   lastEnergyTimestamp: null,
   noticeBoardLastVisitedDate: null,
   displayAnswerTimerMs: ANSWERS_SHOWN_DURATION_DEFAULT_MS,
+  userLevel: {
+    totalExperience: 0,
+    level: 1,
+    currentLevelExperienceRequired: 200,
+    experienceUntilNextLevelUp: 200,
+    lastExperienceGainedDate: null,
+    streak: 0,
+  },
 };
 
 export const defaultProgressionStructure: ProgressionStructure = {
