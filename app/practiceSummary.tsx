@@ -31,6 +31,9 @@ import SummaryHistory from '@/components/summary/summaryHistory';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 import { getSummarySharedStyles } from '@/styles/summary/summaryShared';
 import { getPracticeSummaryStyles } from '@/styles/summary/practiceSummary';
+import calculateExperienceGain from '@/util/leveling/calculateExperienceGain';
+import calculateUserLevelData from '@/util/leveling/calculateUserLevelData';
+import persistUserSettings from '@/util/persistState/persistUserSettings';
 
 type PassportProgression = {
   countryName: string;
@@ -68,12 +71,23 @@ const PracticeSummary = () => {
   );
   const userProgression = stateStore((s) => s.userProgress);
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
-  const { isPremiumUser } = stateStore((s) => s.userSettings);
+  const userSettings = stateStore((s) => s.userSettings);
+  const { isPremiumUser, userLevel } = userSettings;
   const { passportBeforeQuiz, gameResult } = route.params;
   const { correct, incorrect, history } = gameResult;
   const showAds = !isPremiumUser && isInternetAvailable;
   const initialProgressionRef = useRef(userProgression);
+  const initialUserLevelRef = useRef(userLevel);
   const rows = chunkArray(history, 10);
+
+  const experienceGained = calculateExperienceGain({
+    correct: correct,
+  });
+
+  const newUserLevelData = calculateUserLevelData({
+    userLevel: initialUserLevelRef.current,
+    experienceGained,
+  });
 
   useEffect(() => {
     navigation.setOptions({ title: t('summary') });
@@ -85,6 +99,7 @@ const PracticeSummary = () => {
     const totalCorrect = initialProgressionRef.current.games.totalCorrect;
     const totalIncorrect = initialProgressionRef.current.games.totalIncorrect;
 
+    persistUserSettings({ ...userSettings, userLevel: newUserLevelData });
     PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
     PlayGames.submitScore(
       ACCURACY_ID,
@@ -195,17 +210,7 @@ const PracticeSummary = () => {
                     <Text style={sharedSummaryStyles.subtitleText}>
                       {entry.countryName}
                     </Text>
-                    <View style={styles.comparisonNumericContainer}>
-                      <Text style={sharedSummaryStyles.valueText}>
-                        {t('percentage', {
-                          number: formatPercent(entry.previousPercentage),
-                        })}
-                      </Text>
-                      <Feather
-                        name={'arrow-right'}
-                        size={24}
-                        color={theme.text}
-                      />
+                    {entry.newPercentage === entry.previousPercentage ? (
                       <Text
                         style={{
                           ...sharedSummaryStyles.valueText,
@@ -219,7 +224,33 @@ const PracticeSummary = () => {
                           number: formatPercent(entry.newPercentage),
                         })}
                       </Text>
-                    </View>
+                    ) : (
+                      <View style={styles.comparisonNumericContainer}>
+                        <Text style={sharedSummaryStyles.valueText}>
+                          {t('percentage', {
+                            number: formatPercent(entry.previousPercentage),
+                          })}
+                        </Text>
+                        <Feather
+                          name={'arrow-right'}
+                          size={24}
+                          color={theme.text}
+                        />
+                        <Text
+                          style={{
+                            ...sharedSummaryStyles.valueText,
+                            color: getComparisonColor(
+                              entry.newPercentage,
+                              entry.previousPercentage
+                            ),
+                          }}
+                        >
+                          {t('percentage', {
+                            number: formatPercent(entry.newPercentage),
+                          })}
+                        </Text>
+                      </View>
+                    )}
                   </View>
                 );
               })}

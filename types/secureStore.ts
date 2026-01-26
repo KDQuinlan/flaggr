@@ -61,7 +61,6 @@ export type LevelData = {
   id: Difficulties;
   name: Levels;
   isCompleted: boolean;
-  isInProgress: boolean;
   isLocked: boolean;
   userScore: number;
   advancementRequirement: number;
@@ -128,4 +127,12 @@ export type UserSettingStructure = {
   lastEnergyTimestamp: number | null;
   noticeBoardLastVisitedDate: number | null;
   displayAnswerTimerMs: number;
+  userLevel: {
+    totalExperience: number;
+    level: number;
+    currentLevelExperienceRequired: number;
+    experienceUntilNextLevelUp: number;
+    lastExperienceGainedDate: number | null;
+    streak: number;
+  };
 };

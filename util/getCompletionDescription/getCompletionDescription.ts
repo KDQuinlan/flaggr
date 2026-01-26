@@ -5,13 +5,12 @@ import { useTranslation } from 'react-i18next';
 
 const getCompletionDescription = (levelData: LevelData): string => {
   const { t } = useTranslation('difficulty');
-  const { isCompleted, isInProgress, isLocked, userScore, name } = levelData;
+  const { isCompleted, isLocked, userScore, name } = levelData;
 
   const isMaxScore = userScore / LEVELS_TO_FLAG_AMOUNT_MAP[name] === 1;
 
   if (isLocked) return t('states.locked');
-  if (!isLocked && !isInProgress && !isCompleted) return t('states.notStarted');
-  if (isInProgress) return t('states.inProgress');
+  if (!isLocked && !isCompleted) return t('states.notStarted');
   if (isCompleted && userScore === 100) return t('states.perfected');
   if (isCompleted && isMaxScore) return t('states.perfected');
   if (isCompleted) return t('states.completed');

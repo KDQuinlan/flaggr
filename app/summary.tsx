@@ -11,7 +11,7 @@ import {
 } from 'react-native-safe-area-context';
 
 import iconsMap from '@/assets/images/icons';
-import { LEVEL_MAP } from '@/constants/mappers';
+import { LEVEL_MAP, LEVELS_TO_FLAG_AMOUNT_MAP } from '@/constants/mappers';
 import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import stateStore from '@/state/store';
@@ -32,6 +32,9 @@ import calculateLeaderboardScore from '@/util/calculateLeaderboardScore/calculat
 import chunkArray from '@/util/chunkArray/chunkArray';
 import SummaryHistory from '@/components/summary/summaryHistory';
 import { getSummarySharedStyles } from '@/styles/summary/summaryShared';
+import calculateProgressionExperienceGain from '@/util/leveling/calculateProgressionExperienceGain';
+import calculateUserLevelData from '@/util/leveling/calculateUserLevelData';
+import persistUserSettings from '@/util/persistState/persistUserSettings';
 
 const Summary = () => {
   useFocusEffect(
@@ -61,7 +64,8 @@ const Summary = () => {
   );
   const userProgression = stateStore((s) => s.userProgress);
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
-  const { isPremiumUser } = stateStore((s) => s.userSettings);
+  const userSettings = stateStore((s) => s.userSettings);
+  const { isPremiumUser, userLevel } = userSettings;
   const { difficulty, gameMode, gameResult } = route.params;
   const { correct, incorrect, highestStreak, history, timeTaken } = gameResult;
   const numberSuffix = gameMode === 'rapid' ? '' : '%';
@@ -72,6 +76,7 @@ const Summary = () => {
   const showAds = !isPremiumUser && isInternetAvailable;
 
   const initialProgressionRef = useRef(userProgression);
+  const initialUserLevelRef = useRef(userLevel);
 
   const resultPercentage = useMemo(() => {
     if (gameMode !== 'standard') return correct;
@@ -140,6 +145,37 @@ const Summary = () => {
 
   const rows = chunkArray(history, 10);
 
+  const isFirstTimeCompletingLevel =
+    progression.userScore < progression.advancementRequirement &&
+    isAdvancementRequirementMet;
+
+  const isFirstTimePerfectingLevel =
+    (progression.userScore !== 100 ||
+      progression.userScore !== LEVELS_TO_FLAG_AMOUNT_MAP[difficulty]) &&
+    ((correct / (correct + incorrect)) * TO_PERCENTAGE_MULTIPLIER === 100 ||
+      correct / LEVELS_TO_FLAG_AMOUNT_MAP[difficulty] === 1);
+
+  const hasPerfectedAllLevels = Object.values(
+    userProgression.games[gameMode]
+  ).every(
+    (entry) => entry.userScore === entry.length || entry.userScore === 100
+  );
+
+  const experienceGained = calculateProgressionExperienceGain({
+    difficultyLevel: difficulty,
+    correct: correct,
+    levelCompletedFirstTimeBonus: isFirstTimeCompletingLevel,
+    levelPerfectedFirstTimeBonus: isFirstTimePerfectingLevel,
+    allCompletedFirstTimeBonus: !userNextLevel && isFirstTimeCompletingLevel,
+    allPerfectedFirstTimeBonus:
+      isFirstTimePerfectingLevel && hasPerfectedAllLevels,
+  });
+
+  const newUserLevelData = calculateUserLevelData({
+    userLevel: initialUserLevelRef.current,
+    experienceGained,
+  });
+
   useEffect(() => {
     navigation.setOptions({
       title: t('summary', { difficulty: translatedDifficulty }),
@@ -164,6 +200,7 @@ const Summary = () => {
       games: { ...updatedProgression.games, matchesPlayed: newMatchesPlayed },
       passport: updatedProgression.passport,
     });
+    persistUserSettings({ ...userSettings, userLevel: newUserLevelData });
     PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
     PlayGames.submitScore(
       ACCURACY_ID,

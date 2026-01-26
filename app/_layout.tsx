@@ -28,6 +28,7 @@ import {
   REVENUE_CAT_TEST_API_KEY,
 } from '@/constants/adId';
 import determineAdRating from '@/util/determineAdRating/determineAdRating';
+import calculateStreakOnLoad from '@/util/leveling/calculateStreakOnLoad';
 
 function RootLayoutContent() {
   const { theme } = useTheme();
@@ -70,7 +71,9 @@ function RootLayoutContent() {
 
   useEffect(() => {
     if (hasStoreHydrated) {
+      // TODO - refactor into one call (from 3 to one)
       restoreEnergyOnLoad();
+      calculateStreakOnLoad();
 
       if (!userSettings.isGoogleConnected) {
         (async () => {

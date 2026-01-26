@@ -29,6 +29,9 @@ import calculateLeaderboardScore from '@/util/calculateLeaderboardScore/calculat
 import chunkArray from '@/util/chunkArray/chunkArray';
 import SummaryHistory from '@/components/summary/summaryHistory';
 import { getSummarySharedStyles } from '@/styles/summary/summaryShared';
+import calculateExperienceGain from '@/util/leveling/calculateExperienceGain';
+import calculateUserLevelData from '@/util/leveling/calculateUserLevelData';
+import persistUserSettings from '@/util/persistState/persistUserSettings';
 
 const CustomSummary = () => {
   useFocusEffect(
@@ -58,7 +61,8 @@ const CustomSummary = () => {
   );
   const userProgression = stateStore((s) => s.userProgress);
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
-  const { isPremiumUser } = stateStore((s) => s.userSettings);
+  const userSettings = stateStore((s) => s.userSettings);
+  const { isPremiumUser, userLevel } = userSettings;
   const { gameResult, finalScore } = route.params;
   const { correct, incorrect, highestStreak, history, timeTaken } = gameResult;
   const { regions, independentCountriesOnly, timeLimit, gameLength } =
@@ -67,6 +71,7 @@ const CustomSummary = () => {
   const showAds = !isPremiumUser && isInternetAvailable;
 
   const initialProgressionRef = useRef(userProgression);
+  const initialUserLevelRef = useRef(userLevel);
   const progression = initialProgressionRef.current.games.custom;
 
   const isNewHighScore = useMemo(
@@ -78,6 +83,15 @@ const CustomSummary = () => {
 
   const [historyItemsToShow, setHistoryItemsToShow] = useState<number>(40);
   const rows = chunkArray(history.slice(0, historyItemsToShow), 10);
+
+  const experienceGained = calculateExperienceGain({
+    correct: correct,
+  });
+
+  const newUserLevelData = calculateUserLevelData({
+    userLevel: initialUserLevelRef.current,
+    experienceGained,
+  });
 
   useEffect(() => {
     navigation.setOptions({ title: t('summary') });
@@ -109,6 +123,7 @@ const CustomSummary = () => {
       games: { ...updatedProgression.games, matchesPlayed: newMatchesPlayed },
       passport: updatedProgression.passport,
     });
+    persistUserSettings({ ...userSettings, userLevel: newUserLevelData });
 
     PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
     PlayGames.submitScore(HIGH_SCORE_ID, finalScore);
