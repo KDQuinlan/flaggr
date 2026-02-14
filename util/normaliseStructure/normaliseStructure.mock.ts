@@ -329,6 +329,7 @@ export const mockCorruptUserSettingsData = {
 export const mockGoodUserSettingsData = {
   isSetUp: false,
   isGoogleConnected: false,
+  userDisplayName: '',
   userAgeForPersonalisation: null,
   isPremiumUser: false,
   locale: 'en',
@@ -343,6 +344,5 @@ export const mockGoodUserSettingsData = {
     currentLevelExperienceRequired: 200,
     experienceUntilNextLevelUp: 200,
     lastExperienceGainedDate: null,
-    streak: 0,
   },
 };

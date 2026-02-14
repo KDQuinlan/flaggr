@@ -119,6 +119,7 @@ export type ProgressionStructure = {
 export type UserSettingStructure = {
   isSetUp: boolean;
   isGoogleConnected: boolean;
+  userDisplayName: string;
   userAgeForPersonalisation: number | null;
   isPremiumUser: boolean;
   locale: string;
@@ -133,6 +134,5 @@ export type UserSettingStructure = {
     currentLevelExperienceRequired: number;
     experienceUntilNextLevelUp: number;
     lastExperienceGainedDate: number | null;
-    streak: number;
   };
 };

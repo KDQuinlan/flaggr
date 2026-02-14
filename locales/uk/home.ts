@@ -1,4 +1,5 @@
 export default {
+  home: 'Головна',
   standard: {
     title: 'Стандартний',
     description: 'Один прапор, чотири варіанти',

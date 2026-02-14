@@ -20,6 +20,8 @@ import {
   NoticeBoardUpdateTypes,
 } from '@/types/noticeBoard';
 
+// TODO - add 180 visibility period for notices, and include message if there are no notices
+
 const NoticeBoardEntry = ({
   title,
   date,

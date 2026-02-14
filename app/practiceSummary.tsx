@@ -34,6 +34,7 @@ import { getPracticeSummaryStyles } from '@/styles/summary/practiceSummary';
 import calculateExperienceGain from '@/util/leveling/calculateExperienceGain';
 import calculateUserLevelData from '@/util/leveling/calculateUserLevelData';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
+import formatPercent from '@/util/formatPercent/formatPercent';
 
 type PassportProgression = {
   countryName: string;
@@ -192,10 +193,6 @@ const PracticeSummary = () => {
                 ) => {
                   if (value === otherValue) return 'white';
                   return value > otherValue ? 'green' : 'red';
-                };
-
-                const formatPercent = (num: number) => {
-                  return Number(num.toFixed(1)).toString();
                 };
 
                 return (

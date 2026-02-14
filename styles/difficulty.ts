@@ -12,12 +12,9 @@ export const getDifficultyStyles = (theme: ThemeColors) => {
       flexGrow: 1,
       justifyContent: 'flex-start',
       alignItems: 'center',
-      paddingBottom: 20,
-      overflow: 'visible',
       gap: 20,
-      marginTop: 20,
       marginHorizontal: 20,
-      marginBottom: 20,
+      paddingBottom: 20,
     },
     practiceContainer: {
       alignSelf: 'center',
@@ -31,7 +28,7 @@ export const getDifficultyStyles = (theme: ThemeColors) => {
       elevation: 3,
       justifyContent: 'center',
       alignItems: 'center',
-      marginVertical: -10,
+      marginTop: 10,
     },
     practiceText: {
       fontFamily: 'DMSansBold',

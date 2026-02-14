@@ -33,7 +33,7 @@ import calculateStreakOnLoad from '@/util/leveling/calculateStreakOnLoad';
 function RootLayoutContent() {
   const { theme } = useTheme();
   const userSettings = stateStore((s) => s.userSettings);
-  const { setCanShowAds } = stateStore.getState();
+  const { setCanShowAds, setUserDefaultPlatformName } = stateStore.getState();
   const [hasStoreHydrated, setHasStoreHydrated] = useState<boolean>(false);
   const { isPremiumUser, isDarkTheme } = stateStore((s) => s.userSettings);
   const isInitialised = stateStore((s) => s.isInitialised);
@@ -63,6 +63,9 @@ function RootLayoutContent() {
   useEffect(() => {
     const loadData = async () => {
       await hydrateStore();
+      setUserDefaultPlatformName(
+        (await PlayGames.getCurrentPlayer()).displayName
+      );
       setHasStoreHydrated(true);
     };
 

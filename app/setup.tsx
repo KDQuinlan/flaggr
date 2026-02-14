@@ -18,6 +18,7 @@ import ThemeToggle from '@/components/settings/themeToggle';
 import DropdownSelector from '@/components/settings/dropdown';
 
 // TODO - refactor continue button into reusable component
+// TODO - add profanity filter to username
 
 const locales = Localization.getLocales();
 const locale = locales[0]?.languageCode;
@@ -25,16 +26,24 @@ const locale = locales[0]?.languageCode;
 const SetupScreen = () => {
   const insets = useSafeAreaInsets();
   const userSettings = stateStore((s) => s.userSettings);
+  const userDefaultPlatformName = stateStore((s) => s.userDefaultPlatformName);
   const { t } = useTranslation('setup');
   const { theme } = useTheme();
   const styles = useMemo(() => getSetupStyles(theme), [theme]);
   const [language, setLanguage] = useState<string>(
     locale && SUPPORTED_LANGUAGES.includes(locale) ? locale : 'en'
   );
+  const [displayName, setDisplayName] = useState<string>(
+    userDefaultPlatformName
+  );
   const [year, setYear] = useState<string>('');
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(
     userSettings.isDarkTheme
   );
+
+  useEffect(() => {
+    setDisplayName(userDefaultPlatformName);
+  }, [userDefaultPlatformName]);
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -52,7 +61,8 @@ const SetupScreen = () => {
   const handleContinueAgeCalculation = () =>
     new Date().getFullYear() - parseInt(year);
 
-  const isContinueDisabled = userSettings.isPremiumUser ? false : !isValidYear;
+  const isContinueDisabled =
+    displayName && userSettings.isPremiumUser ? false : !isValidYear;
 
   return (
     <SafeAreaProvider
@@ -76,6 +86,20 @@ const SetupScreen = () => {
             placeholder: 'selectLanguage',
           }}
         />
+
+        <View style={{ gap: 10 }}>
+          <Text style={styles.header}>{t('displayName')}</Text>
+          <TextInput
+            style={styles.textBox}
+            inputMode="text"
+            keyboardType="default"
+            returnKeyType="done"
+            accessibilityLabel={t('displayNameAccessibilityLabel')}
+            maxLength={16}
+            value={displayName}
+            onChangeText={(text: string) => setDisplayName(text)}
+          />
+        </View>
 
         {!userSettings.isPremiumUser && (
           <View style={{ gap: 10 }}>
@@ -108,6 +132,7 @@ const SetupScreen = () => {
           onPress={async () => {
             await persistUserSettings({
               ...userSettings,
+              userDisplayName: displayName,
               isSetUp: true,
               userAgeForPersonalisation: handleContinueAgeCalculation(),
               locale: language,

@@ -1,4 +1,5 @@
 export default {
+  home: 'Start',
   standard: {
     title: 'Standaard',
     description: 'Eén vlag, vier keuzes',

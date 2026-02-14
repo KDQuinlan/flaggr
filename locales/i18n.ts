@@ -29,6 +29,7 @@ i18n.use(initReactI18next).init({
       passport: en.passport,
       passportEntry: en.passportEntry,
       practiceSummary: en.practiceSummary,
+      profile: en.profile,
     },
     es: {
       data: es.data,
@@ -44,6 +45,7 @@ i18n.use(initReactI18next).init({
       feedback: es.feedback,
       passport: es.passport,
       practiceSummary: es.practiceSummary,
+      profile: es.profile,
     },
     nl: {
       data: nl.data,
@@ -58,6 +60,7 @@ i18n.use(initReactI18next).init({
       energy: nl.energy,
       feedback: nl.feedback,
       practiceSummary: nl.practiceSummary,
+      profile: nl.profile,
     },
     uk: {
       data: uk.data,
@@ -73,6 +76,7 @@ i18n.use(initReactI18next).init({
       feedback: uk.feedback,
       passport: uk.passport,
       practiceSummary: uk.practiceSummary,
+      profile: uk.profile,
     },
     it: {
       data: it.data,
@@ -88,6 +92,7 @@ i18n.use(initReactI18next).init({
       feedback: it.feedback,
       passport: it.passport,
       practiceSummary: it.practiceSummary,
+      profile: it.profile,
     },
     hu: {
       data: hu.data,
@@ -103,6 +108,7 @@ i18n.use(initReactI18next).init({
       feedback: hu.feedback,
       passport: hu.passport,
       practiceSummary: hu.practiceSummary,
+      profile: hu.profile,
     },
   },
 

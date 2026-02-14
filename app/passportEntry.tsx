@@ -17,6 +17,9 @@ import { getPassportEntryStyles } from '@/styles/passportEntry';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import flags from '@/assets/images/flags';
 import { MAXIMUM_DIFFICULTY } from '@/constants/common';
+import formatPercent from '@/util/formatPercent/formatPercent';
+
+// TODO - add banner text that content is only available in English
 
 const PassportEntryScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -61,11 +64,11 @@ const PassportEntryScreen = () => {
           </Text>
           <Text style={styles.text}>
             Guess Rate:{' '}
-            {(
+            {formatPercent(
               (entry.correctTotal /
                 (entry.incorrectTotal + entry.correctTotal)) *
                 100 || 0
-            ).toFixed(1)}
+            )}
             %
           </Text>
         </View>

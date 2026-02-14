@@ -11,6 +11,7 @@ import energy from './energy';
 import feedback from './feedback';
 import passport from './passport';
 import practiceSummary from './practiceSummary';
+import profile from './profile';
 
 export default {
   data,
@@ -26,4 +27,5 @@ export default {
   feedback,
   passport,
   practiceSummary,
+  profile,
 };

@@ -1,4 +1,5 @@
 export default {
+  home: 'Home',
   standard: {
     title: 'Standard',
     description: 'Una bandiera, quattro opzioni',
