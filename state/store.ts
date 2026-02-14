@@ -16,6 +16,7 @@ type State = {
   isInternetAvailable: boolean | null;
   userSettings: UserSettingStructure;
   userProgress: ProgressionStructure;
+  userDefaultPlatformName: string;
 };
 
 type Actions = {
@@ -25,6 +26,7 @@ type Actions = {
   setIsInternetAvailable: (isInternetAvailable: boolean) => void;
   setUserSettings: (userSettings: UserSettingStructure) => void;
   setProgression: (progression: ProgressionStructure) => void;
+  setUserDefaultPlatformName: (name: string) => void;
 };
 
 const stateStore = create<State & Actions>((set) => ({
@@ -34,6 +36,7 @@ const stateStore = create<State & Actions>((set) => ({
   isInternetAvailable: null,
   userSettings: defaultUserSettings,
   userProgress: defaultProgressionStructure,
+  userDefaultPlatformName: '',
 
   setIsInitialised: () => set(() => ({ isInitialised: true })),
   setCanShowAds: () => set(() => ({ canShowAds: true })),
@@ -45,6 +48,8 @@ const stateStore = create<State & Actions>((set) => ({
     set(() => ({ userSettings })),
   setProgression: (progression: ProgressionStructure) =>
     set(() => ({ userProgress: progression })),
+  setUserDefaultPlatformName: (userDefaultPlatformName: string) =>
+    set(() => ({ userDefaultPlatformName })),
 }));
 
 export default stateStore;

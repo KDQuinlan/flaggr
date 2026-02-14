@@ -9,29 +9,6 @@ const getExperienceMultiplierForLevel = (level: number): number => {
   return 1.05;
 };
 
-const isToday = (unixMs: number): boolean => {
-  const date = new Date(unixMs);
-  const now = new Date();
-
-  return (
-    date.getFullYear() === now.getFullYear() &&
-    date.getMonth() === now.getMonth() &&
-    date.getDate() === now.getDate()
-  );
-};
-
-const updatedStreak = (
-  streak: UserSettingStructure['userLevel']['streak'],
-  lastExperienceGainedDate: number
-): UserSettingStructure['userLevel']['streak'] => {
-  const didUserUpdateStreakToday = isToday(lastExperienceGainedDate);
-  if (streak === 0) return 1;
-  if (didUserUpdateStreakToday) return streak;
-  if (streak === 7) return 1;
-
-  return streak + 1;
-};
-
 interface IUpdatedLevelProps {
   level: UserSettingStructure['userLevel']['level'];
   currentLevelExperienceRequired: UserSettingStructure['userLevel']['currentLevelExperienceRequired'];
@@ -85,10 +62,8 @@ const calculateUserLevelData = ({
     currentLevelExperienceRequired,
     experienceUntilNextLevelUp,
     lastExperienceGainedDate,
-    streak,
   } = userLevel;
   const newLastExperienceGainedDate = lastExperienceGainedDate ?? Date.now();
-  const newStreak = updatedStreak(streak, newLastExperienceGainedDate);
   const newLevelData = updatedLevel({
     level,
     currentLevelExperienceRequired,
@@ -102,7 +77,6 @@ const calculateUserLevelData = ({
     currentLevelExperienceRequired: newLevelData.currentLevelExperienceRequired,
     experienceUntilNextLevelUp: newLevelData.experienceUntilNextLevelUp,
     lastExperienceGainedDate: newLastExperienceGainedDate,
-    streak: newStreak,
   };
 };
 

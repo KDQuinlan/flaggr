@@ -14,6 +14,7 @@ import { MAXIMUM_ENERGY } from '@/constants/common';
 export const defaultUserSettings: UserSettingStructure = {
   isSetUp: false,
   isGoogleConnected: false,
+  userDisplayName: '',
   userAgeForPersonalisation: null,
   isPremiumUser: false,
   locale: 'en',
@@ -28,7 +29,6 @@ export const defaultUserSettings: UserSettingStructure = {
     currentLevelExperienceRequired: 200,
     experienceUntilNextLevelUp: 200,
     lastExperienceGainedDate: null,
-    streak: 0,
   },
 };
 

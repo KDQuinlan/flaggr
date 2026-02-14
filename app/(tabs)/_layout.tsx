@@ -1,11 +1,13 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 
 import { useTheme } from '@/context/ThemeContext';
 import { colors } from '@/components/colors';
 
 export default function TabLayout() {
   const { theme } = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Tabs
@@ -27,7 +29,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: t('home', { ns: 'home' }),
           tabBarIcon: ({ focused }) => (
             <Ionicons
               name="home"
@@ -40,7 +42,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profile',
+          title: t('profile', { ns: 'profile' }),
           tabBarIcon: ({ focused }) => (
             <Ionicons
               name="person"
