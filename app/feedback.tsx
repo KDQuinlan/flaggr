@@ -69,7 +69,7 @@ const FeedbackScreen = () => {
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
       >
-        <View>
+        <View style={{ marginTop: 20 }}>
           <Text style={styles.label}>{t('reason')}</Text>
           <Dropdown
             style={styles.dropdown}
