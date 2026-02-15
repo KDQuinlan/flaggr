@@ -17,6 +17,12 @@ export const getDifficultyStyles = (theme: ThemeColors) => {
       marginHorizontal: 20,
       paddingBottom: 20,
     },
+    parentContainer: {
+      width: '100%',
+      maxWidth: SCREEN_MAX_WIDTH,
+      gap: 20,
+      marginTop: 20,
+    },
     practiceContainer: {
       alignSelf: 'center',
       backgroundColor: theme.card,
@@ -29,7 +35,7 @@ export const getDifficultyStyles = (theme: ThemeColors) => {
       elevation: 3,
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: 10,
+      marginTop: -10,
     },
     practiceText: {
       fontFamily: 'DMSansBold',

@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 import { colors } from '@/components/colors';
+import { SCREEN_MAX_WIDTH } from '@/constants/common';
 
 export const getCustomStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -11,7 +12,10 @@ export const getCustomStyles = (theme: ThemeColors) => {
       justifyContent: 'space-between',
     },
     scrollContainer: {
-      paddingHorizontal: 12,
+      paddingHorizontal: 20,
+      width: '100%',
+      maxWidth: SCREEN_MAX_WIDTH,
+      alignSelf: 'center',
     },
     modifierContainer: {
       backgroundColor: theme.card,

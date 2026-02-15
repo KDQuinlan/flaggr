@@ -13,18 +13,10 @@ export const getFeedbackStyles = (theme: ThemeColors) => {
     scrollContainer: {
       flexGrow: 1,
       justifyContent: 'flex-start',
-      padding: 20,
       gap: 20,
       width: '100%',
       maxWidth: SCREEN_MAX_WIDTH,
       alignSelf: 'center',
-    },
-    titleContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingTop: 10,
-      width: '100%',
       paddingHorizontal: 20,
     },
     textBox: {
@@ -47,11 +39,6 @@ export const getFeedbackStyles = (theme: ThemeColors) => {
       marginBottom: 8,
       fontFamily: 'DMSansBold',
       color: theme.text,
-    },
-    optional: {
-      fontWeight: '400',
-      fontSize: 14,
-      color: '#666',
     },
     dropdown: {
       height: 50,

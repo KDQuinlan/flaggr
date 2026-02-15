@@ -72,7 +72,7 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
       <View style={styles.textContainer}>
         <View style={styles.gameDetailsContainer}>
           <View>
-            <Text style={styles.title} numberOfLines={2} adjustsFontSizeToFit>
+            <Text style={styles.title} numberOfLines={2}>
               {t(`levels.${LEVEL_MAP[title]}`, { ns: 'data' })}
             </Text>
             <Text style={styles.description} numberOfLines={3}>

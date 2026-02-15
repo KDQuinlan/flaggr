@@ -12,7 +12,7 @@ export const getModifierMultiSelectStyles = (theme: ThemeColors) => {
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'space-between',
-      paddingHorizontal: 12,
+      paddingHorizontal: 20,
     },
     button: {
       flexBasis: '48%',
@@ -24,7 +24,7 @@ export const getModifierMultiSelectStyles = (theme: ThemeColors) => {
       marginBottom: 12,
       borderColor: theme.accent,
       borderWidth: 1,
-      shadowColor: colors.blueSecondary,
+      shadowColor: theme.shadow,
       elevation: 2,
     },
     buttonText: {

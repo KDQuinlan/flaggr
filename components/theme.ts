@@ -29,7 +29,7 @@ export const light = {
 export const dark = {
   // Backgrounds
   background: colors.black,
-  backgroundHighContrast: colors.darkGreyBlue,
+  backgroundHighContrast: colors.highContrastBlack,
   card: colors.offBlack,
   button: colors.bluePrimary,
   premiumButton: colors.legendaryOrange,

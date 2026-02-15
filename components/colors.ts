@@ -15,7 +15,7 @@ export const colors = {
   black: '#121212',
   offBlack: '#1f1f1f',
   lightBlack: '#4d4d4d',
-  darkGreyBlue: '#2e3440',
+  highContrastBlack: '#202020',
 
   // Blues
   bluePrimary: '#0073E6',

@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { ScrollView, Pressable, Text } from 'react-native';
+import { ScrollView, Pressable, Text, View } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
@@ -82,57 +82,60 @@ const Difficulty = () => {
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
       >
-        {id === 'standard' && practiceItems && (
-          <Pressable
-            style={({ pressed }) => [
-              styles.practiceContainer,
-              { opacity: pressed ? 0.7 : 1 },
-            ]}
-            accessibilityLabel={t('practice')}
-            accessibilityHint={t('practiceHint')}
-            accessibilityRole="button"
-            onPress={() =>
-              handleOnPress({
-                title: 'Practice',
-                gameMode: 'practice',
-                questions:
-                  practiceItems.length > 10
-                    ? practiceItems.slice(0, 10)
-                    : practiceItems,
-                timeLimit: 0,
-              })
-            }
-          >
-            <Text style={styles.practiceText}>{t('practice')}</Text>
-          </Pressable>
-        )}
-        {Object.entries(progression).map(([levelKey, levelData]) => (
-          <DifficultySelect
-            key={levelKey}
-            title={levelData.name}
-            description={getCompletionDescription(levelData)}
-            icon={levelKey}
-            gameMode={id}
-            advancementRequirement={levelData.advancementRequirement}
-            progress={
-              id === 'rapid'
-                ? levelData.userScore / levelData.advancementRequirement
-                : levelData.userScore / TO_PERCENTAGE_MULTIPLIER
-            }
-            score={levelData.userScore}
-            onPress={() =>
-              handleOnPress({
-                title: levelData.name,
-                gameMode: id,
-                questions: generateMultipleChoice(
-                  levelData.id,
-                  levelData.length
-                ),
-                timeLimit: id === 'rapid' ? RAPID_TIME_ALLOWANCE_IN_S : 0,
-              })
-            }
-          />
-        ))}
+        <View style={styles.parentContainer}>
+          {id === 'standard' && practiceItems && (
+            <Pressable
+              style={({ pressed }) => [
+                styles.practiceContainer,
+                { opacity: pressed ? 0.7 : 1 },
+              ]}
+              accessibilityLabel={t('practice')}
+              accessibilityHint={t('practiceHint')}
+              accessibilityRole="button"
+              onPress={() =>
+                handleOnPress({
+                  title: 'Practice',
+                  gameMode: 'practice',
+                  questions:
+                    practiceItems.length > 10
+                      ? practiceItems.slice(0, 10)
+                      : practiceItems,
+                  timeLimit: 0,
+                })
+              }
+            >
+              <Text style={styles.practiceText}>{t('practice')}</Text>
+            </Pressable>
+          )}
+
+          {Object.entries(progression).map(([levelKey, levelData]) => (
+            <DifficultySelect
+              key={levelKey}
+              title={levelData.name}
+              description={getCompletionDescription(levelData)}
+              icon={levelKey}
+              gameMode={id}
+              advancementRequirement={levelData.advancementRequirement}
+              progress={
+                id === 'rapid'
+                  ? levelData.userScore / levelData.advancementRequirement
+                  : levelData.userScore / TO_PERCENTAGE_MULTIPLIER
+              }
+              score={levelData.userScore}
+              onPress={() =>
+                handleOnPress({
+                  title: levelData.name,
+                  gameMode: id,
+                  questions: generateMultipleChoice(
+                    levelData.id,
+                    levelData.length
+                  ),
+                  timeLimit: id === 'rapid' ? RAPID_TIME_ALLOWANCE_IN_S : 0,
+                })
+              }
+            />
+          ))}
+        </View>
       </ScrollView>
       {showAds && (
         <AdBanner
