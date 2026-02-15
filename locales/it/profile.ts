@@ -17,5 +17,6 @@ export default {
     'Bandiera più risposta: {{country}}, {{percent}}\u00A0% corretto, {{number}} volte risposto',
   categoryAccessibilityHint: 'Apre la schermata statistiche',
   guessRateText: '{{percent}}\u00A0% di correttezza',
-  timesAnsweredText: 'Risposto {{number}} volte',
+  timesAnsweredText: 'Risposto 1 volta',
+  timesAnsweredPluralText: 'Risposto {{number}} volte',
 };

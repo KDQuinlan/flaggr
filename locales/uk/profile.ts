@@ -16,5 +16,6 @@ export default {
     'Найчастіше відповідали на прапор: {{country}}, {{percent}}\u00A0% правильно, {{number}} разів відповіли',
   categoryAccessibilityHint: 'Відкриває екран статистики',
   guessRateText: '{{percent}}\u00A0% вгадування',
-  timesAnsweredText: 'Відповіли {{number}} разів',
+  timesAnsweredText: 'Відповіли 1 раз',
+  timesAnsweredPluralText: 'Відповіли {{number}} разів',
 };

@@ -17,5 +17,6 @@ export default {
     'Most answered flag: {{country}}, {{percent}}% correct, {{number}} times answered',
   categoryAccessibilityHint: 'Opens statistics screen',
   guessRateText: '{{percent}}% Guess Rate',
-  timesAnsweredText: 'Answered {{number}} Times',
+  timesAnsweredText: 'Answered 1 Time',
+  timesAnsweredPluralText: 'Answered {{number}} Times',
 };

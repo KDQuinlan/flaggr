@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
+import { SCREEN_MAX_WIDTH } from '@/constants/common';
 
 export const getSettingsStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -11,9 +12,11 @@ export const getSettingsStyles = (theme: ThemeColors) => {
     scrollContainer: {
       flexGrow: 1,
       justifyContent: 'flex-start',
-      paddingHorizontal: 20,
-      paddingVertical: 20,
+      padding: 20,
       gap: 20,
+      width: '100%',
+      maxWidth: SCREEN_MAX_WIDTH,
+      alignSelf: 'center',
     },
     sectionRow: {
       alignItems: 'center',

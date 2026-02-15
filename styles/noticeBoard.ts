@@ -2,26 +2,25 @@ import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 import { colors } from '@/components/colors';
+import { SCREEN_MAX_WIDTH } from '@/constants/common';
 
 export const getNoticeBoardStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
     rootContainer: {
       flex: 1,
       backgroundColor: theme.background,
-      paddingTop: 20,
     },
     scrollContainer: {
       flexGrow: 1,
       justifyContent: 'flex-start',
       alignItems: 'center',
       gap: 20,
-      paddingBottom: 20,
-      paddingHorizontal: 20,
+      padding: 20,
     },
     noticeBoardEntryContainer: {
       backgroundColor: theme.card,
       width: '100%',
-      maxWidth: 400,
+      maxWidth: SCREEN_MAX_WIDTH,
       borderRadius: 8,
       shadowColor: theme.text,
       elevation: 2,

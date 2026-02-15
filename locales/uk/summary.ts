@@ -2,6 +2,7 @@ export default {
   summary: 'Підсумок: {{difficulty}}',
   completed: '{{difficulty}} завершено!',
   score: 'Бал',
+  scorePercent: '{{number}}\u00A0%',
   correct: 'Правильно',
   incorrect: 'Неправильно',
   streak: 'Найкраща серія',
@@ -13,5 +14,6 @@ export default {
   history: 'Історія',
   historyDescription:
     'Сітка, що показує історію відповідей. {{correct}} правильних і {{incorrect}} неправильних.',
+  levelUp: 'Підвищення рівня!',
   continue: 'Продовжити',
 };

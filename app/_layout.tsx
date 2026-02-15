@@ -249,6 +249,12 @@ function RootLayoutContent() {
             headerBackVisible: false,
           }}
         />
+        <Stack.Screen
+          name="stats"
+          options={{
+            headerShown: true,
+          }}
+        />
       </Stack>
     </View>
   );

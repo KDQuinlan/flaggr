@@ -7,10 +7,7 @@ import { useNavigation } from 'expo-router';
 import { Divider, Switch } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useTranslation } from 'react-i18next';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { colors } from '@/components/colors';
 import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
@@ -46,7 +43,6 @@ interface IStatsAccordionRow {
 
 const CustomScreen = () => {
   const navigation = useNavigation<NavigationProps>();
-  const insets = useSafeAreaInsets();
   const { t } = useTranslation('custom');
   const { theme } = useTheme();
   const styles = useMemo(() => getCustomStyles(theme), [theme]);
@@ -249,9 +245,7 @@ const CustomScreen = () => {
   );
 
   return (
-    <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-    >
+    <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}

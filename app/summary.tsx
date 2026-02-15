@@ -5,10 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import iconsMap from '@/assets/images/icons';
 import { LEVEL_MAP, LEVELS_TO_FLAG_AMOUNT_MAP } from '@/constants/mappers';
@@ -35,6 +32,8 @@ import { getSummarySharedStyles } from '@/styles/summary/summaryShared';
 import calculateProgressionExperienceGain from '@/util/leveling/calculateProgressionExperienceGain';
 import calculateUserLevelData from '@/util/leveling/calculateUserLevelData';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
+import AnimatedXpProgressBar from '@/components/animatedXpProgressBar/animatedXpProgressBar';
+import formatPercent from '@/util/formatPercent/formatPercent';
 
 const Summary = () => {
   useFocusEffect(
@@ -53,7 +52,6 @@ const Summary = () => {
   );
 
   const navigation = useNavigation<NavigationProps>();
-  const insets = useSafeAreaInsets();
   const route = useRoute<RouteProp<RootStackParamList, 'summary'>>();
   const { t } = useTranslation('summary');
   const { theme } = useTheme();
@@ -221,8 +219,7 @@ const Summary = () => {
 
   const handleDisplayScore = () => {
     if (gameMode === 'rapid') return resultPercentage.toString();
-    if (resultPercentage === 100) return `${resultPercentage}%`;
-    return `${resultPercentage.toFixed(1)}%`;
+    return t('scorePercent', { number: formatPercent(resultPercentage) });
   };
 
   const ProgressionSummary = () => {
@@ -260,12 +257,7 @@ const Summary = () => {
   };
 
   return (
-    <SafeAreaProvider
-      style={{
-        ...sharedSummaryStyles.rootContainer,
-        paddingBottom: insets.bottom,
-      }}
-    >
+    <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
       <ScrollView>
         <View style={sharedSummaryStyles.sectionContainer}>
           <View style={styles.titleContainer}>
@@ -277,47 +269,42 @@ const Summary = () => {
               source={iconsMap[LEVEL_MAP[difficulty]]}
             />
           </View>
-          <View style={styles.gameResultContainer}>
-            <View style={sharedSummaryStyles.gameResultScoreContainer}>
-              <Text style={sharedSummaryStyles.scoreTitleText}>
-                {newHighScoreMessage ? newHighScoreMessage : t('score')}
-              </Text>
-              <Text style={sharedSummaryStyles.scoreValueText}>
-                {handleDisplayScore()}
-              </Text>
-            </View>
 
-            <View style={sharedSummaryStyles.gameResultAdvancedContainer}>
-              <View style={sharedSummaryStyles.gameResultAdvancedItem}>
-                <Text style={sharedSummaryStyles.subtitleText}>
-                  {t('correct')}
-                </Text>
-                <Text style={sharedSummaryStyles.valueText}>{correct}</Text>
-              </View>
-              <View style={sharedSummaryStyles.gameResultAdvancedItem}>
-                <Text style={sharedSummaryStyles.subtitleText}>
-                  {t('incorrect')}
-                </Text>
-                <Text style={sharedSummaryStyles.valueText}>{incorrect}</Text>
-              </View>
+          <View style={sharedSummaryStyles.gameResultScoreContainer}>
+            <Text style={sharedSummaryStyles.scoreTitleText}>
+              {newHighScoreMessage ? newHighScoreMessage : t('score')}
+            </Text>
+            <Text style={sharedSummaryStyles.scoreValueText}>
+              {handleDisplayScore()}
+            </Text>
+          </View>
+
+          <View style={sharedSummaryStyles.gameResultAdvancedContainer}>
+            <View style={sharedSummaryStyles.gameResultAdvancedItem}>
+              <Text style={sharedSummaryStyles.subtitleText}>
+                {t('correct')}
+              </Text>
+              <Text style={sharedSummaryStyles.valueText}>{correct}</Text>
             </View>
-            <View style={sharedSummaryStyles.gameResultAdvancedContainer}>
-              <View style={sharedSummaryStyles.gameResultAdvancedItem}>
-                <Text style={sharedSummaryStyles.subtitleText}>
-                  {t('streak')}
-                </Text>
-                <Text style={sharedSummaryStyles.valueText}>
-                  {highestStreak}
-                </Text>
-              </View>
-              <View style={sharedSummaryStyles.gameResultAdvancedItem}>
-                <Text style={sharedSummaryStyles.subtitleText}>
-                  {t('time')}
-                </Text>
-                <Text style={sharedSummaryStyles.valueText}>
-                  {timeTaken ? formatTime(timeTaken, false) : 'Unlimited'}
-                </Text>
-              </View>
+            <View style={sharedSummaryStyles.gameResultAdvancedItem}>
+              <Text style={sharedSummaryStyles.subtitleText}>
+                {t('incorrect')}
+              </Text>
+              <Text style={sharedSummaryStyles.valueText}>{incorrect}</Text>
+            </View>
+          </View>
+          <View style={sharedSummaryStyles.gameResultAdvancedContainer}>
+            <View style={sharedSummaryStyles.gameResultAdvancedItem}>
+              <Text style={sharedSummaryStyles.subtitleText}>
+                {t('streak')}
+              </Text>
+              <Text style={sharedSummaryStyles.valueText}>{highestStreak}</Text>
+            </View>
+            <View style={sharedSummaryStyles.gameResultAdvancedItem}>
+              <Text style={sharedSummaryStyles.subtitleText}>{t('time')}</Text>
+              <Text style={sharedSummaryStyles.valueText}>
+                {timeTaken ? formatTime(timeTaken, false) : 'Unlimited'}
+              </Text>
             </View>
           </View>
 
@@ -336,6 +323,12 @@ const Summary = () => {
           )}
 
           <ProgressionSummary />
+
+          <AnimatedXpProgressBar
+            initialUserLevelData={initialUserLevelRef.current}
+            newUserLevelData={newUserLevelData}
+            experienceGained={experienceGained}
+          />
         </View>
         <View style={sharedSummaryStyles.buttonContainer}>
           <Pressable

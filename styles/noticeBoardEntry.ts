@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 import { colors } from '@/components/colors';
+import { SCREEN_MAX_WIDTH } from '@/constants/common';
 
 export const getNoticeBoardEntryStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -18,7 +19,7 @@ export const getNoticeBoardEntryStyles = (theme: ThemeColors) => {
     },
     image: {
       width: '100%',
-      maxWidth: 400,
+      maxWidth: SCREEN_MAX_WIDTH,
       height: 100,
       borderTopLeftRadius: 8,
       borderTopRightRadius: 8,

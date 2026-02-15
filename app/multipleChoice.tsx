@@ -12,10 +12,7 @@ import { Image } from 'expo-image';
 import { ProgressBar } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { Feather } from '@expo/vector-icons';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { ANSWER_LETTERS } from '@/constants/common';
 import { DIFFICULTY_ID_TO_LEVEL_MAP, LEVEL_MAP } from '@/constants/mappers';
@@ -102,7 +99,6 @@ const MultipleChoice = () => {
   const dynamicPadding = isSmallScreen ? 5 : 20;
 
   const navigation = useNavigation<NavigationProps>();
-  const insets = useSafeAreaInsets();
   const route = useRoute<RouteProp<RootStackParamList, 'multipleChoice'>>();
   const { t } = useTranslation('data');
   const { theme } = useTheme();
@@ -358,9 +354,7 @@ const MultipleChoice = () => {
   };
 
   return (
-    <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-    >
+    <SafeAreaProvider style={styles.rootContainer}>
       <ProgressBar
         progress={questionNumberIndex / questions.length}
         color={colors.bluePrimary}

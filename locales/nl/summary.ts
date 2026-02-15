@@ -2,6 +2,7 @@ export default {
   summary: '{{difficulty}} Samenvatting',
   completed: '{{difficulty}} Voltooid!',
   score: 'Score',
+  scorePercent: '{{number}}\u00A0%',
   correct: 'Correct',
   incorrect: 'Incorrect',
   streak: 'Beste reeks',
@@ -13,5 +14,6 @@ export default {
   history: 'Geschiedenis',
   historyDescription:
     'Raster met antwoordgeschiedenis. {{correct}} correct en {{incorrect}} onjuist.',
+  levelUp: 'Level omhoog!',
   continue: 'Doorgaan',
 };
