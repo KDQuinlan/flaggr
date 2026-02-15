@@ -6,11 +6,6 @@ export const getSummaryStyles = () => {
     difficultyImageContainer: {
       flexDirection: 'row',
     },
-    gameResultContainer: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      gap: 20,
-    },
     progressionContainer: {
       justifyContent: 'center',
       alignItems: 'center',

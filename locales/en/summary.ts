@@ -2,6 +2,7 @@ export default {
   summary: '{{difficulty}} Summary',
   completed: '{{difficulty}} Completed!',
   score: 'Score',
+  scorePercent: '{{number}}%',
   correct: 'Correct',
   incorrect: 'Incorrect',
   streak: 'Highest Streak',
@@ -13,5 +14,6 @@ export default {
   history: 'History',
   historyDescription:
     'Grid showing answer history. {{correct}} correct and {{incorrect}} incorrect.',
+  levelUp: 'Level Up!',
   continue: 'Continue',
 };

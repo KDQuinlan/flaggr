@@ -2,6 +2,7 @@ import { StatusBar, StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 import { colors } from '@/components/colors';
+import { SCREEN_MAX_WIDTH } from '@/constants/common';
 
 export const getProfileStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -62,16 +63,17 @@ export const getProfileStyles = (theme: ThemeColors) => {
       textAlign: 'center',
     },
     progressBarContainer: {
-      height: 20,
       width: 200,
-      borderRadius: 16,
+      height: 16,
+      borderRadius: 8,
+      overflow: 'hidden',
       borderWidth: 1,
       borderColor: theme.accent,
     },
     progressBar: {
       height: '100%',
       backgroundColor: colors.bluePrimary,
-      borderRadius: 100,
+      borderRadius: 8,
     },
     divider: {
       height: 1,
@@ -79,6 +81,9 @@ export const getProfileStyles = (theme: ThemeColors) => {
       backgroundColor: theme.accent,
     },
     statsContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
       gap: 20,
       width: '100%',
     },
@@ -90,6 +95,7 @@ export const getProfileStyles = (theme: ThemeColors) => {
       borderColor: theme.accent,
       borderWidth: 1,
       gap: 10,
+      maxWidth: SCREEN_MAX_WIDTH,
     },
     statsDataContainer: {
       flexDirection: 'row',

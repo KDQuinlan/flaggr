@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
+import { SCREEN_MAX_WIDTH } from '@/constants/common';
 
 export const getPassportEntryStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -10,9 +11,7 @@ export const getPassportEntryStyles = (theme: ThemeColors) => {
     },
     scrollContainer: {
       flexGrow: 1,
-      paddingBottom: 20,
-      marginHorizontal: 20,
-      marginTop: 20,
+      padding: 20,
       gap: 20,
     },
     title: { fontSize: 16, fontFamily: 'DMSansBold', color: theme.text },
@@ -23,7 +22,7 @@ export const getPassportEntryStyles = (theme: ThemeColors) => {
     },
     flagTitleContainer: {
       alignItems: 'center',
-      maxWidth: 600,
+      maxWidth: SCREEN_MAX_WIDTH,
       alignSelf: 'center',
     },
   });

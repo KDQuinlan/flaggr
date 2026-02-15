@@ -16,5 +16,6 @@ export default {
     'Meest beantwoorde vlag: {{country}}, {{percent}}\u00A0% correct, {{number}} keer beantwoord',
   categoryAccessibilityHint: 'Opent statistiekenscherm',
   guessRateText: '{{percent}}\u00A0% gokpercentage',
-  timesAnsweredText: '{{number}} keer beantwoord',
+  timesAnsweredText: '1 keer beantwoord',
+  timesAnsweredPluralText: '{{number}} keer beantwoord',
 };

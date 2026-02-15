@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 import { colors } from '@/components/colors';
+import { SCREEN_MAX_WIDTH } from '@/constants/common';
 
 export const getMultipleChoiceStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -15,7 +16,7 @@ export const getMultipleChoiceStyles = (theme: ThemeColors) => {
     },
     answersContainer: {
       flex: 8,
-      maxWidth: 500,
+      maxWidth: SCREEN_MAX_WIDTH,
       alignSelf: 'center',
       width: '100%',
     },

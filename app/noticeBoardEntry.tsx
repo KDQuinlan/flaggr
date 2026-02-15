@@ -1,10 +1,7 @@
 import { useMemo } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { Image } from 'expo-image';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { useTheme } from '@/context/ThemeContext';
 import { BANNER_HOME_AND_SETTINGS_ID, BANNER_TEST_ID } from '@/constants/adId';
@@ -28,7 +25,6 @@ const ContentSection = (section: NoticeBoardContentSection) => {
 };
 
 const NoticeBoardEntry = () => {
-  const insets = useSafeAreaInsets();
   const route = useRoute<RouteProp<RootStackParamList, 'noticeBoardEntry'>>();
   const { theme } = useTheme();
   const styles = useMemo(() => getNoticeBoardEntryStyles(theme), [theme]);
@@ -43,9 +39,7 @@ const NoticeBoardEntry = () => {
   }).format(new Date(date));
 
   return (
-    <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-    >
+    <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"

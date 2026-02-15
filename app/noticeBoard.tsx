@@ -1,10 +1,7 @@
 import { useMemo } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { Image } from 'expo-image';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { getNoticeBoardStyles } from '@/styles/noticeBoard';
 import { useTheme } from '@/context/ThemeContext';
@@ -95,7 +92,6 @@ const NoticeBoardEntry = ({
 };
 
 const NoticeBoard = () => {
-  const insets = useSafeAreaInsets();
   const { theme } = useTheme();
   const styles = useMemo(() => getNoticeBoardStyles(theme), [theme]);
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
@@ -103,9 +99,7 @@ const NoticeBoard = () => {
   const showAds = !isPremiumUser && isInternetAvailable;
 
   return (
-    <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-    >
+    <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"

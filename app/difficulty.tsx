@@ -3,10 +3,7 @@ import { ScrollView, Pressable, Text } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import DifficultySelect from '@/components/difficultySelect/difficultySelect';
 import {
@@ -26,7 +23,6 @@ import { BANNER_DIFFICULTY_SELECT_ID, BANNER_TEST_ID } from '@/constants/adId';
 
 const Difficulty = () => {
   const navigation = useNavigation<NavigationProps>();
-  const insets = useSafeAreaInsets();
   const route = useRoute<RouteProp<RootStackParamList, 'difficulty'>>();
   const { t } = useTranslation('difficulty');
   const { theme } = useTheme();

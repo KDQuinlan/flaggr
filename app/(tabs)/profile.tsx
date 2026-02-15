@@ -21,21 +21,24 @@ import { getProfileStyles } from '@/styles/profile';
 import { Divider } from 'react-native-paper';
 import formatPercent from '@/util/formatPercent/formatPercent';
 import flags from '@/assets/images/flags';
-import { PassportEntry } from '@/types/secureStore';
+import { Passport, PassportEntry } from '@/types/secureStore';
 import { Feather } from '@expo/vector-icons';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
+import { SCREEN_MAX_WIDTH } from '@/constants/common';
 
 // TODO - refactor xp bar into progress bar component from rn-paper?
 
 interface IStatsCategory {
   title: string;
   entry: PassportEntry;
+  sortedPassport: Passport;
   accessibilityLabel: string;
 }
 
 const StatsCategory = ({
   title,
   entry,
+  sortedPassport,
   accessibilityLabel,
 }: IStatsCategory) => {
   const navigation = useNavigation<NavigationProps>();
@@ -47,16 +50,25 @@ const StatsCategory = ({
   const fontScale = PixelRatio.getFontScale();
   const isCompactMode = width <= 400 && fontScale >= 1.5;
 
+  const columns = width >= SCREEN_MAX_WIDTH * 2.2 ? 2 : 1;
+
+  const answeredTotal = entry.correctTotal + entry.incorrectTotal;
+
   return (
     <Pressable
       style={({ pressed }) => [
         styles.statsCategoryContainer,
-        { opacity: pressed ? 0.7 : 1, paddingBottom: 20, paddingTop: 10 },
+        {
+          opacity: pressed ? 0.7 : 1,
+          paddingBottom: 20,
+          paddingTop: 10,
+          flexBasis: `${100 / columns}%`,
+        },
       ]}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
       accessibilityHint={t('categoryAccessibilityHint')}
-      onPress={() => console.log(entry.countryName)}
+      onPress={() => navigation.navigate('stats', { title, sortedPassport })}
     >
       <Text importantForAccessibility="no" style={styles.statsHeaderText}>
         {title}
@@ -74,18 +86,17 @@ const StatsCategory = ({
           <Text style={styles.statsText}>
             {t('guessRateText', {
               percent: formatPercent(
-                (entry.correctTotal /
-                  (entry.correctTotal + entry.incorrectTotal)) *
-                  100
+                (entry.correctTotal / answeredTotal) * 100
               ),
             })}
           </Text>
           <Text style={styles.statsText}>
-            {t('timesAnsweredText', {
-              number: entry.correctTotal + entry.incorrectTotal,
-            })}
+            {answeredTotal === 1
+              ? t('timesAnsweredText')
+              : t('timesAnsweredPluralText', { number: answeredTotal })}
           </Text>
           <Image
+            contentFit="contain"
             style={styles.statsImageCompact}
             source={flags[entry.countryCode.toLowerCase()]}
           />
@@ -102,12 +113,12 @@ const StatsCategory = ({
           style={styles.statsDataContainer}
         >
           <Image
+            contentFit="contain"
             style={{ ...styles.statsImage, marginLeft: 20 }}
             source={flags[entry.countryCode.toLowerCase()]}
           />
           <View style={styles.statsInfoIconContainer}>
             <Text style={styles.statsSubHeaderText}>
-              {' '}
               {t(`countries.${toJsonKeyFormat(entry.countryName)}`, {
                 ns: 'data',
               })}
@@ -115,16 +126,14 @@ const StatsCategory = ({
             <Text style={styles.statsText}>
               {t('guessRateText', {
                 percent: formatPercent(
-                  (entry.correctTotal /
-                    (entry.correctTotal + entry.incorrectTotal)) *
-                    100
+                  (entry.correctTotal / answeredTotal) * 100
                 ),
               })}
             </Text>
             <Text style={styles.statsText}>
-              {t('timesAnsweredText', {
-                number: entry.correctTotal + entry.incorrectTotal,
-              })}
+              {answeredTotal === 1
+                ? t('timesAnsweredText')
+                : t('timesAnsweredPluralText', { number: answeredTotal })}
             </Text>
           </View>
           <Feather
@@ -174,16 +183,19 @@ const ProfileScreen = () => {
     {
       title: t('highestGuessRatesTitle'),
       entry: passportHighestGuessRate!,
+      sortedPassport: passportSortedByGuessRate,
       accessibilityLabel: t('highestGuessRatesAccessibilityLabel'),
     },
     {
       title: t('lowestGuessRatesTitle'),
       entry: passportLowestGuessRate!,
+      sortedPassport: passportSortedByGuessRate.toReversed(),
       accessibilityLabel: t('lowestGuessRatesAccessibilityLabel'),
     },
     {
       title: t('mostAnsweredTitle'),
       entry: passportSortedByGuessAmount[0]!,
+      sortedPassport: passportSortedByGuessAmount,
       accessibilityLabel: t('mostAnsweredAccessibilityLabel'),
     },
   ];

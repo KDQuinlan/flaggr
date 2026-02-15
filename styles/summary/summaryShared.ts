@@ -2,13 +2,13 @@ import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 import { colors } from '@/components/colors';
+import { SCREEN_MAX_WIDTH } from '@/constants/common';
 
 export const getSummarySharedStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
     rootContainer: {
       flex: 1,
       backgroundColor: theme.background,
-      paddingTop: 20,
     },
     sectionContainer: {
       backgroundColor: theme.card,
@@ -18,6 +18,7 @@ export const getSummarySharedStyles = (theme: ThemeColors) => {
       alignItems: 'center',
       paddingVertical: 20,
       gap: 20,
+      marginTop: 20,
     },
     buttonContainer: {
       backgroundColor: theme.background,
@@ -61,7 +62,7 @@ export const getSummarySharedStyles = (theme: ThemeColors) => {
     gameResultAdvancedContainer: {
       width: '100%',
       flexDirection: 'row',
-      maxWidth: 400,
+      maxWidth: SCREEN_MAX_WIDTH,
     },
     gameResultAdvancedItem: {
       flex: 1,

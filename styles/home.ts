@@ -2,6 +2,7 @@ import { StatusBar, StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 import { colors } from '@/components/colors';
+import { SCREEN_MAX_WIDTH } from '@/constants/common';
 
 export const getHomeStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -25,7 +26,7 @@ export const getHomeStyles = (theme: ThemeColors) => {
       width: '100%',
       marginTop: 20,
       marginBottom: 10,
-      maxWidth: 600,
+      maxWidth: SCREEN_MAX_WIDTH,
     },
     titleContainer: {
       position: 'absolute',
@@ -108,7 +109,7 @@ export const getHomeStyles = (theme: ThemeColors) => {
       marginHorizontal: 20,
       justifyContent: 'space-between',
       width: '100%',
-      maxWidth: 600,
+      maxWidth: SCREEN_MAX_WIDTH,
     },
     nonGameContainerSmallScreen: {
       flexDirection: 'row',

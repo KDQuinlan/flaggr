@@ -4,10 +4,7 @@ import { Pressable, ScrollView, Text, View, TextInput } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/locales/i18n';
 import * as Localization from 'expo-localization';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { APP_NAME, LANGUAGES, SUPPORTED_LANGUAGES } from '@/constants/common';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
@@ -24,7 +21,6 @@ const locales = Localization.getLocales();
 const locale = locales[0]?.languageCode;
 
 const SetupScreen = () => {
-  const insets = useSafeAreaInsets();
   const userSettings = stateStore((s) => s.userSettings);
   const userDefaultPlatformName = stateStore((s) => s.userDefaultPlatformName);
   const { t } = useTranslation('setup');
@@ -65,9 +61,7 @@ const SetupScreen = () => {
     displayName && userSettings.isPremiumUser ? false : !isValidYear;
 
   return (
-    <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-    >
+    <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"

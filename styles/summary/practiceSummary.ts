@@ -1,3 +1,4 @@
+import { SCREEN_MAX_WIDTH } from '@/constants/common';
 import { StyleSheet } from 'react-native';
 
 export const getPracticeSummaryStyles = () => {
@@ -5,7 +6,7 @@ export const getPracticeSummaryStyles = () => {
     comparisonContainer: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      maxWidth: 600,
+      maxWidth: SCREEN_MAX_WIDTH,
     },
     comparisonItemContainer: {
       justifyContent: 'center',

@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 import { colors } from '@/components/colors';
+import { SCREEN_MAX_WIDTH } from '@/constants/common';
 
 export const getFeedbackStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -12,10 +13,11 @@ export const getFeedbackStyles = (theme: ThemeColors) => {
     scrollContainer: {
       flexGrow: 1,
       justifyContent: 'flex-start',
-      paddingHorizontal: 20,
-      paddingBottom: 20,
-      marginTop: 20,
+      padding: 20,
       gap: 20,
+      width: '100%',
+      maxWidth: SCREEN_MAX_WIDTH,
+      alignSelf: 'center',
     },
     titleContainer: {
       flexDirection: 'row',

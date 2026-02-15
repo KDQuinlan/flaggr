@@ -3,10 +3,7 @@ import { RouteProp, useFocusEffect, useRoute } from '@react-navigation/native';
 import { BackHandler, Pressable, ScrollView, Text, View } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import stateStore from '@/state/store';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
@@ -32,6 +29,7 @@ import { getSummarySharedStyles } from '@/styles/summary/summaryShared';
 import calculateExperienceGain from '@/util/leveling/calculateExperienceGain';
 import calculateUserLevelData from '@/util/leveling/calculateUserLevelData';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
+import AnimatedXpProgressBar from '@/components/animatedXpProgressBar/animatedXpProgressBar';
 
 const CustomSummary = () => {
   useFocusEffect(
@@ -50,7 +48,6 @@ const CustomSummary = () => {
   );
 
   const navigation = useNavigation<NavigationProps>();
-  const insets = useSafeAreaInsets();
   const route = useRoute<RouteProp<RootStackParamList, 'customSummary'>>();
   const { t } = useTranslation('customSummary');
   const { theme } = useTheme();
@@ -136,12 +133,7 @@ const CustomSummary = () => {
   const handleContinue = () => resetToDifficultyScreen(navigation, 'custom');
 
   return (
-    <SafeAreaProvider
-      style={{
-        ...sharedSummaryStyles.rootContainer,
-        paddingBottom: insets.bottom,
-      }}
-    >
+    <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
       <ScrollView>
         <View style={sharedSummaryStyles.sectionContainer}>
           <Text style={sharedSummaryStyles.title}>{t('completed')}</Text>
@@ -202,6 +194,12 @@ const CustomSummary = () => {
               )}
             </View>
           )}
+
+          <AnimatedXpProgressBar
+            initialUserLevelData={initialUserLevelRef.current}
+            newUserLevelData={newUserLevelData}
+            experienceGained={experienceGained}
+          />
         </View>
 
         <View style={sharedSummaryStyles.buttonContainer}>

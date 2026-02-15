@@ -11,10 +11,7 @@ import {
 } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 
 import stateStore from '@/state/store';
@@ -35,6 +32,7 @@ import calculateExperienceGain from '@/util/leveling/calculateExperienceGain';
 import calculateUserLevelData from '@/util/leveling/calculateUserLevelData';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import formatPercent from '@/util/formatPercent/formatPercent';
+import AnimatedXpProgressBar from '@/components/animatedXpProgressBar/animatedXpProgressBar';
 
 type PassportProgression = {
   countryName: string;
@@ -59,7 +57,6 @@ const PracticeSummary = () => {
   );
 
   const navigation = useNavigation<NavigationProps>();
-  const insets = useSafeAreaInsets();
   const route = useRoute<RouteProp<RootStackParamList, 'practiceSummary'>>();
   const { t } = useTranslation('practiceSummary');
   const { theme } = useTheme();
@@ -155,12 +152,7 @@ const PracticeSummary = () => {
   };
 
   return (
-    <SafeAreaProvider
-      style={{
-        ...sharedSummaryStyles.rootContainer,
-        paddingBottom: insets.bottom,
-      }}
-    >
+    <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
       <ScrollView>
         <View style={sharedSummaryStyles.sectionContainer}>
           <Text style={sharedSummaryStyles.title}>{t('completed')}</Text>
@@ -260,6 +252,12 @@ const PracticeSummary = () => {
               incorrect={incorrect}
             />
           )}
+
+          <AnimatedXpProgressBar
+            initialUserLevelData={initialUserLevelRef.current}
+            newUserLevelData={newUserLevelData}
+            experienceGained={experienceGained}
+          />
         </View>
 
         <View style={sharedSummaryStyles.buttonContainer}>

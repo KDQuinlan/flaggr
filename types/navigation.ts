@@ -1,6 +1,6 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-import { Levels, PassportEntry } from './secureStore';
+import { Levels, Passport, PassportEntry } from './secureStore';
 import { Country } from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
 import { INoticeBoardEntryProps } from './noticeBoard';
 
@@ -54,6 +54,10 @@ export type RootStackParamList = {
   practiceSummary: {
     passportBeforeQuiz: PassportEntry[];
     gameResult: GameResult;
+  };
+  stats: {
+    title: string;
+    sortedPassport: Passport;
   };
 };
 

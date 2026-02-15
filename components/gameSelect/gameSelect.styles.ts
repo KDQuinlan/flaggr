@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
+import { SCREEN_MAX_WIDTH } from '@/constants/common';
 
 export const getGameSelectStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -12,7 +13,7 @@ export const getGameSelectStyles = (theme: ThemeColors) => {
       paddingVertical: 20,
       paddingHorizontal: 15,
       shadowColor: theme.shadow,
-      maxWidth: 600,
+      maxWidth: SCREEN_MAX_WIDTH,
     },
     gameIcon: {
       marginRight: 15,

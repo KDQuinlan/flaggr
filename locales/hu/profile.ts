@@ -17,5 +17,6 @@ export default {
     'Legtöbbször megválaszolt zászló: {{country}}, {{percent}}\u00A0% helyes, {{number}} alkalommal megválaszolva',
   categoryAccessibilityHint: 'Megnyitja a statisztikák képernyőt',
   guessRateText: '{{percent}}\u00A0% találati arány',
-  timesAnsweredText: '{{number}} alkalommal megválaszolva',
+  timesAnsweredText: '1 alkalommal megválaszolva',
+  timesAnsweredPluralText: '{{number}} alkalommal megválaszolva',
 };
