@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 import { colors } from '@/components/colors';
@@ -9,6 +9,7 @@ export const getSummarySharedStyles = (theme: ThemeColors) => {
     rootContainer: {
       flex: 1,
       backgroundColor: theme.background,
+      paddingTop: StatusBar.currentHeight || 0,
     },
     sectionContainer: {
       backgroundColor: theme.card,
@@ -18,7 +19,6 @@ export const getSummarySharedStyles = (theme: ThemeColors) => {
       alignItems: 'center',
       paddingVertical: 20,
       gap: 20,
-      marginTop: 20,
     },
     buttonContainer: {
       backgroundColor: theme.background,
@@ -42,8 +42,18 @@ export const getSummarySharedStyles = (theme: ThemeColors) => {
       color: theme.text,
     },
     buttonText: { fontFamily: 'DMSansBold', fontSize: 16, color: colors.white },
-    subtitleText: { fontFamily: 'DMSans', color: theme.text, fontSize: 18 },
-    valueText: { fontFamily: 'DMSansBold', color: theme.text, fontSize: 20 },
+    subtitleText: {
+      fontFamily: 'DMSans',
+      color: theme.text,
+      fontSize: 18,
+      textAlign: 'center',
+    },
+    valueText: {
+      fontFamily: 'DMSansBold',
+      color: theme.text,
+      fontSize: 20,
+      textAlign: 'center',
+    },
     scoreTitleText: {
       fontFamily: 'DMSans',
       color: theme.text,
@@ -57,7 +67,6 @@ export const getSummarySharedStyles = (theme: ThemeColors) => {
     gameResultScoreContainer: {
       justifyContent: 'center',
       alignItems: 'center',
-      marginBottom: -20,
     },
     gameResultAdvancedContainer: {
       width: '100%',

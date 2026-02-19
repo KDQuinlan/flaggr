@@ -1,3 +1,5 @@
+import { AchievementId } from '@/data/achievements/achievements.config';
+
 export type Levels =
   | 'Level 1'
   | 'Level 2'
@@ -104,6 +106,13 @@ export type PassportEntry = {
 
 export type Passport = PassportEntry[];
 
+export type AchievementProgressionStructure = {
+  [achievementId in AchievementId]: {
+    currentValue: number;
+    stepIndex: number;
+  };
+};
+
 export type ProgressionStructure = {
   games: {
     standard: GameProgression;
@@ -114,6 +123,7 @@ export type ProgressionStructure = {
     totalIncorrect: number;
   };
   passport: Passport;
+  achievements: AchievementProgressionStructure;
 };
 
 export type UserSettingStructure = {

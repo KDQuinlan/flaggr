@@ -30,6 +30,7 @@ i18n.use(initReactI18next).init({
       passportEntry: en.passportEntry,
       practiceSummary: en.practiceSummary,
       profile: en.profile,
+      achievements: en.achievements,
     },
     es: {
       data: es.data,
@@ -46,6 +47,7 @@ i18n.use(initReactI18next).init({
       passport: es.passport,
       practiceSummary: es.practiceSummary,
       profile: es.profile,
+      achievements: es.achievements,
     },
     nl: {
       data: nl.data,
@@ -61,6 +63,7 @@ i18n.use(initReactI18next).init({
       feedback: nl.feedback,
       practiceSummary: nl.practiceSummary,
       profile: nl.profile,
+      achievements: nl.achievements,
     },
     uk: {
       data: uk.data,
@@ -77,6 +80,7 @@ i18n.use(initReactI18next).init({
       passport: uk.passport,
       practiceSummary: uk.practiceSummary,
       profile: uk.profile,
+      achievements: uk.achievements,
     },
     it: {
       data: it.data,
@@ -93,6 +97,7 @@ i18n.use(initReactI18next).init({
       passport: it.passport,
       practiceSummary: it.practiceSummary,
       profile: it.profile,
+      achievements: it.achievements,
     },
     hu: {
       data: hu.data,
@@ -109,6 +114,7 @@ i18n.use(initReactI18next).init({
       passport: hu.passport,
       practiceSummary: hu.practiceSummary,
       profile: hu.profile,
+      achievements: hu.achievements,
     },
   },
 

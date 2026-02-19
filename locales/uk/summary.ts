@@ -15,5 +15,6 @@ export default {
   historyDescription:
     'Сітка, що показує історію відповідей. {{correct}} правильних і {{incorrect}} неправильних.',
   levelUp: 'Підвищення рівня!',
+  experience: 'Досвід',
   continue: 'Продовжити',
 };

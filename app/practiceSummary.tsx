@@ -33,6 +33,10 @@ import calculateUserLevelData from '@/util/leveling/calculateUserLevelData';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import formatPercent from '@/util/formatPercent/formatPercent';
 import AnimatedXpProgressBar from '@/components/animatedXpProgressBar/animatedXpProgressBar';
+import { AchievementId } from '@/data/achievements/achievements.config';
+import emitAchievementEvent from '@/data/achievements/emitAchievementEvent';
+import persistProgression from '@/util/persistState/persistProgression';
+import AchievementCarousel from '@/components/achievementSummary/achievementCarousel';
 
 type PassportProgression = {
   countryName: string;
@@ -71,12 +75,17 @@ const PracticeSummary = () => {
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const { isPremiumUser, userLevel } = userSettings;
-  const { passportBeforeQuiz, gameResult } = route.params;
+  const { passportBeforeQuiz, gameResult, multipleChoiceAchievementsUnlocked } =
+    route.params;
   const { correct, incorrect, history } = gameResult;
   const showAds = !isPremiumUser && isInternetAvailable;
   const initialProgressionRef = useRef(userProgression);
   const initialUserLevelRef = useRef(userLevel);
   const rows = chunkArray(history, 10);
+
+  const [achievementsUnlocked, setAchievementsUnlocked] = useState<
+    AchievementId[]
+  >(multipleChoiceAchievementsUnlocked);
 
   const experienceGained = calculateExperienceGain({
     correct: correct,
@@ -86,27 +95,6 @@ const PracticeSummary = () => {
     userLevel: initialUserLevelRef.current,
     experienceGained,
   });
-
-  useEffect(() => {
-    navigation.setOptions({ title: t('summary') });
-  }, [navigation]);
-
-  useEffect(() => {
-    const newMatchesPlayed =
-      initialProgressionRef.current.games.matchesPlayed + 1;
-    const totalCorrect = initialProgressionRef.current.games.totalCorrect;
-    const totalIncorrect = initialProgressionRef.current.games.totalIncorrect;
-
-    persistUserSettings({ ...userSettings, userLevel: newUserLevelData });
-    PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
-    PlayGames.submitScore(
-      ACCURACY_ID,
-      calculateLeaderboardScore(totalCorrect, totalCorrect + totalIncorrect)
-    );
-  }, [navigation]);
-
-  const handleContinue = () =>
-    resetToDifficultyScreen(navigation, 'difficulty');
 
   const orderedPassportBeforeQuiz = passportBeforeQuiz.sort((a, b) =>
     a.countryCode.localeCompare(b.countryCode)
@@ -150,6 +138,66 @@ const PracticeSummary = () => {
       return t('improvedPlural', { number: improvedCount });
     return t('improvedNone');
   };
+
+  useEffect(() => {
+    navigation.setOptions({ title: t('summary') });
+  }, [navigation]);
+
+  useEffect(() => {
+    const newMatchesPlayed =
+      initialProgressionRef.current.games.matchesPlayed + 1;
+    const totalCorrect = initialProgressionRef.current.games.totalCorrect;
+    const totalIncorrect = initialProgressionRef.current.games.totalIncorrect;
+
+    const matchesPlayedAchievementEvent = emitAchievementEvent({
+      id: 'matchesPlayed',
+      value: newMatchesPlayed,
+    });
+
+    const practiceMatchesPlayedAchievementEvent = emitAchievementEvent({
+      id: 'practiceMatchesPlayed',
+      value:
+        userProgression.achievements['practiceMatchesPlayed'].currentValue + 1,
+    });
+
+    const practiceFlagsImprovedAchievementEvent = emitAchievementEvent({
+      id: 'practiceFlagsImproved',
+      value:
+        userProgression.achievements['practiceFlagsImproved'].currentValue +
+        improvedCount,
+    });
+
+    matchesPlayedAchievementEvent.hasUpdated &&
+      setAchievementsUnlocked((prev) => [...prev, 'matchesPlayed']);
+
+    practiceMatchesPlayedAchievementEvent.hasUpdated &&
+      setAchievementsUnlocked((prev) => [...prev, 'practiceMatchesPlayed']);
+
+    practiceFlagsImprovedAchievementEvent.hasUpdated &&
+      setAchievementsUnlocked((prev) => [...prev, 'practiceFlagsImproved']);
+
+    persistProgression({
+      ...userProgression,
+      achievements: {
+        ...userProgression.achievements,
+        matchesPlayed: matchesPlayedAchievementEvent.updatedAchievementProgress,
+        practiceMatchesPlayed:
+          practiceMatchesPlayedAchievementEvent.updatedAchievementProgress,
+        practiceFlagsImproved:
+          practiceFlagsImprovedAchievementEvent.updatedAchievementProgress,
+      },
+    });
+
+    persistUserSettings({ ...userSettings, userLevel: newUserLevelData });
+    PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
+    PlayGames.submitScore(
+      ACCURACY_ID,
+      calculateLeaderboardScore(totalCorrect, totalCorrect + totalIncorrect)
+    );
+  }, [navigation]);
+
+  const handleContinue = () =>
+    resetToDifficultyScreen(navigation, 'difficulty');
 
   return (
     <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
@@ -250,6 +298,13 @@ const PracticeSummary = () => {
               rows={rows}
               correct={correct}
               incorrect={incorrect}
+            />
+          )}
+
+          {achievementsUnlocked.length > 0 && (
+            <AchievementCarousel
+              achievements={achievementsUnlocked}
+              userProgression={userProgression}
             />
           )}
 

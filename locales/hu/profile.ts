@@ -4,6 +4,7 @@ export default {
   levelBarAccessibilityLabel:
     'A {{level}} szint {{percent}}\u00A0%-át teljesítetted',
   achievements: 'Eredmények',
+  achievementsEmpty: 'Még nem oldottál fel egyetlen teljesítményt sem',
   stats: 'Statisztikák',
   statsEmpty: 'Játssz le az első játékodat a statisztikák feloldásához',
   highestGuessRatesTitle: 'Legmagasabb találati arány',

@@ -11,7 +11,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { colors } from '@/components/colors';
 import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
-import { TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP } from '@/constants/mappers';
+import { scoreMultiplierByTimeLimit } from '@/constants/lookups';
 import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
 import { NavigationProps } from '@/types/navigation';
 import {
@@ -109,7 +109,7 @@ const CustomScreen = () => {
     (
       DEFAULT_SCORE_MULTIPLIER *
       (timeLimitSlider !== 0
-        ? TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimitSlider]
+        ? scoreMultiplierByTimeLimit[timeLimitSlider]
         : 1) *
       (isIndependentOnly ? INDEPENDENT_COUNTRIES_PENALTY : 1)
     ).toFixed(2)
@@ -334,7 +334,7 @@ const CustomScreen = () => {
                     : t('gameRules.timeLimitQuantity', {
                         timeLimit: timeLimitSlider,
                         scoreMultiplier:
-                          TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP[timeLimitSlider],
+                          scoreMultiplierByTimeLimit[timeLimitSlider],
                       })}
                 </Text>
               </View>

@@ -228,7 +228,7 @@ function RootLayoutContent() {
         <Stack.Screen
           name="customSummary"
           options={{
-            headerShown: true,
+            headerShown: false,
             gestureEnabled: false,
             headerBackVisible: false,
           }}
@@ -236,7 +236,7 @@ function RootLayoutContent() {
         <Stack.Screen
           name="summary"
           options={{
-            headerShown: true,
+            headerShown: false,
             gestureEnabled: false,
             headerBackVisible: false,
           }}
@@ -244,7 +244,7 @@ function RootLayoutContent() {
         <Stack.Screen
           name="practiceSummary"
           options={{
-            headerShown: true,
+            headerShown: false,
             gestureEnabled: false,
             headerBackVisible: false,
           }}

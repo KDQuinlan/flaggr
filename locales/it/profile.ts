@@ -4,6 +4,7 @@ export default {
   levelBarAccessibilityLabel:
     'Hai completato il {{percent}}\u00A0% del livello {{level}}',
   achievements: 'Obiettivi',
+  achievementsEmpty: 'Non hai ancora sbloccato nessun obiettivo',
   stats: 'Statistiche',
   statsEmpty: 'Gioca la tua prima partita per sbloccare le statistiche',
   highestGuessRatesTitle: 'Tassi di risposta più alti',

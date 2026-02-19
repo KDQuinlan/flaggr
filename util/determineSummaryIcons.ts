@@ -1,8 +1,8 @@
-import { LEVEL_MAP } from '@/constants/mappers';
+import { levelKeyByLevelName } from '@/constants/lookups';
 import { LevelKeys, Levels } from '@/types/secureStore';
 
 const determineSummaryIcons = (difficulty: Levels) => {
-  const difficultyAsLevelKey = LEVEL_MAP[difficulty];
+  const difficultyAsLevelKey = levelKeyByLevelName[difficulty];
   const tierOneLevels: LevelKeys[] = [
     'levelOne',
     'levelTwo',

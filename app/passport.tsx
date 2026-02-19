@@ -27,7 +27,7 @@ import { getPassportStyles } from '@/styles/passport';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 import { GAME_DIFFICULTIES, VALID_REGIONS } from '@/constants/common';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { DIFFICULTY_ID_TO_LEVEL_KEYS_MAP } from '@/constants/mappers';
+import { levelKeyByDifficultyId } from '@/constants/lookups';
 import countriesData from '@/assets/data/countries.json';
 import InformationButton from '@/components/passport/informationButton';
 import PassportCard from '@/components/passport/passportCard';
@@ -309,10 +309,9 @@ const PassportScreen = () => {
                             color={colors.bluePrimary}
                           />
                           <Text style={styles.text}>
-                            {t(
-                              `levels.${DIFFICULTY_ID_TO_LEVEL_KEYS_MAP[difficulty]}`,
-                              { ns: 'data' }
-                            )}
+                            {t(`levels.${levelKeyByDifficultyId[difficulty]}`, {
+                              ns: 'data',
+                            })}
                           </Text>
                         </Pressable>
                       ))}

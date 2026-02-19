@@ -8,6 +8,7 @@ import rapid from './data/games/rapid';
 import standard from './data/games/standard';
 import { ANSWERS_SHOWN_DURATION_DEFAULT_MS } from '@/constants/settings';
 import { MAXIMUM_ENERGY } from '@/constants/common';
+import getAchievementDefaults from '@/data/achievements/achievements.defaults';
 
 // TODO - before going live, add version code to to each default object for migration handling
 
@@ -42,6 +43,7 @@ export const defaultProgressionStructure: ProgressionStructure = {
     totalIncorrect: 0,
   },
   passport: [],
+  achievements: getAchievementDefaults(),
 };
 
 export const examplePassportEntry: PassportEntry = {

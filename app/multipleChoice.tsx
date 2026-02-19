@@ -15,7 +15,10 @@ import { Feather } from '@expo/vector-icons';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { ANSWER_LETTERS } from '@/constants/common';
-import { DIFFICULTY_ID_TO_LEVEL_MAP, LEVEL_MAP } from '@/constants/mappers';
+import {
+  levelNameByDifficultyId,
+  levelKeyByLevelName,
+} from '@/constants/lookups';
 import determineButtonColor from '@/util/determineButtonColor/determineButtonColor';
 import formatTime from '@/util/formatTime/formatTime';
 import generateMultipleChoiceAnswers from '@/util/generateMultipleChoiceAnswers/generateMultipleChoiceAnswers';
@@ -37,6 +40,8 @@ import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_MULTIPLE_CHOICE_ID, BANNER_TEST_ID } from '@/constants/adId';
 import updatePassport from '@/util/updatePassport/updatePassport';
 import persistProgression from '@/util/persistState/persistProgression';
+import { AchievementId } from '@/data/achievements/achievements.config';
+import emitAchievementEvent from '@/data/achievements/emitAchievementEvent';
 
 interface IStatsRowProps {
   gameMode: PlayableGameModes;
@@ -125,6 +130,9 @@ const MultipleChoice = () => {
   const [answerHistory, setAnswerHistory] = useState<GameResult['history']>([]);
   const [customScore, setCustomScore] = useState<number>(0);
   const [tapToAdvance, setTapToAdvance] = useState<boolean>(false);
+  const [achievementsUnlocked, setAchievementsUnlocked] = useState<
+    AchievementId[]
+  >([]);
 
   const isUserTapToAdvance = displayAnswerTimerMs === 0;
 
@@ -182,7 +190,7 @@ const MultipleChoice = () => {
     const handleTitle = (title: MultipleChoiceScreenTitles) => {
       if (title === 'Custom') return t('title', { ns: 'custom' });
       if (title === 'Practice') return t('practice', { ns: 'practiceSummary' });
-      return t(`levels.${LEVEL_MAP[title]}`);
+      return t(`levels.${levelKeyByLevelName[title]}`);
     };
 
     navigation.setOptions({
@@ -210,14 +218,16 @@ const MultipleChoice = () => {
 
           if (gameMode === 'rapid') {
             navigation.navigate('summary', {
-              difficulty: DIFFICULTY_ID_TO_LEVEL_MAP[difficulty],
+              difficulty: levelNameByDifficultyId[difficulty],
               gameMode,
               gameResult,
+              multipleChoiceAchievementsUnlocked: achievementsUnlocked,
             });
           } else {
             navigation.navigate('customSummary', {
               gameResult,
               finalScore: Math.round(customScoreRef.current * scoreMultiplier!),
+              multipleChoiceAchievementsUnlocked: achievementsUnlocked,
             });
           }
           return;
@@ -256,11 +266,46 @@ const MultipleChoice = () => {
       const newHighestStreakTotal = Math.max(highestStreak, newStreakTotal);
       answerHistoryRef.current.push(isCorrect ? 'Correct' : 'Incorrect');
 
+      const newPassport = updatePassport(
+        countryCode,
+        correctAnswer,
+        continent,
+        difficulty,
+        isCorrect
+      );
+
       setCorrectTotal(newCorrectTotal);
       setIncorrectTotal(newIncorrectTotal);
       setStreak(newStreakTotal);
       setHighestStreak(newHighestStreakTotal);
       setAnswerHistory(answerHistoryRef.current);
+
+      const totalCorrectAchievementEvent = emitAchievementEvent({
+        id: 'totalCorrect',
+        value: userProgression.games.totalCorrect + (isCorrect ? 1 : 0),
+      });
+
+      const bestStreakAchievementEvent = emitAchievementEvent({
+        id: 'bestStreak',
+        value: Math.max(
+          newStreakTotal,
+          userProgression.achievements['bestStreak'].currentValue
+        ),
+      });
+
+      const passportEntriesAchievementEvent = emitAchievementEvent({
+        id: 'passportEntries',
+        value: newPassport.length,
+      });
+
+      totalCorrectAchievementEvent.hasUpdated &&
+        setAchievementsUnlocked((prev) => [...prev, 'totalCorrect']);
+
+      bestStreakAchievementEvent.hasUpdated &&
+        setAchievementsUnlocked((prev) => [...prev, 'bestStreak']);
+
+      passportEntriesAchievementEvent.hasUpdated &&
+        setAchievementsUnlocked((prev) => [...prev, 'passportEntries']);
 
       persistProgression({
         ...userProgression,
@@ -273,15 +318,15 @@ const MultipleChoice = () => {
             ? userProgression.games.totalIncorrect
             : userProgression.games.totalIncorrect + 1,
         },
+        passport: newPassport,
+        achievements: {
+          ...userProgression.achievements,
+          totalCorrect: totalCorrectAchievementEvent.updatedAchievementProgress,
+          bestStreak: bestStreakAchievementEvent.updatedAchievementProgress,
+          passportEntries:
+            passportEntriesAchievementEvent.updatedAchievementProgress,
+        },
       });
-
-      updatePassport(
-        countryCode,
-        correctAnswer,
-        continent,
-        difficulty,
-        isCorrect
-      );
 
       gameMode === 'custom' &&
         setCustomScore(
@@ -313,7 +358,7 @@ const MultipleChoice = () => {
       setIsButtonDisabled(true);
       if (gameMode === 'standard' || gameMode === 'rapid') {
         navigation.navigate('summary', {
-          difficulty: DIFFICULTY_ID_TO_LEVEL_MAP[difficulty],
+          difficulty: levelNameByDifficultyId[difficulty],
           gameMode,
           gameResult: {
             correct,
@@ -322,6 +367,7 @@ const MultipleChoice = () => {
             history: answerHistory,
             timeTaken: isGameCountingUp ? newTimeTaken : undefined,
           },
+          multipleChoiceAchievementsUnlocked: achievementsUnlocked,
         });
       } else if (gameMode === 'practice') {
         navigation.navigate('practiceSummary', {
@@ -332,6 +378,7 @@ const MultipleChoice = () => {
             highestStreak: highest,
             history: answerHistory,
           },
+          multipleChoiceAchievementsUnlocked: achievementsUnlocked,
         });
       } else {
         navigation.navigate('customSummary', {
@@ -343,6 +390,7 @@ const MultipleChoice = () => {
             timeTaken: isGameCountingUp ? newTimeTaken : undefined,
           },
           finalScore: Math.round(customScoreRef.current * scoreMultiplier),
+          multipleChoiceAchievementsUnlocked: achievementsUnlocked,
         });
       }
     } else {

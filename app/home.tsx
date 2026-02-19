@@ -36,8 +36,7 @@ import { PassportEntry } from '@/types/secureStore';
 import countries from '@/types/countries';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 
-// TODO - enforce maxWidth in scrollview rather than children
-// TODO - with above, refactor all screens to have better tablet scaling
+// TODO - add insets only when user is not premium so ads aren't below navigation bar
 
 interface IFeedbackButtonProps {
   elevation: number;

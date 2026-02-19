@@ -43,10 +43,7 @@ const updatePassport = (
     }
   }
 
-  persistProgression({
-    ...userProgress,
-    passport: newPassport,
-  });
+  return newPassport;
 };
 
 export default updatePassport;
