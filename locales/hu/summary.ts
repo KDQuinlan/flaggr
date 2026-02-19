@@ -15,5 +15,6 @@ export default {
   historyDescription:
     'Griglia che mostra la cronologia delle risposte. {{correct}} corrette e {{incorrect}} errate.',
   levelUp: 'Szintlépés!',
+  experience: 'Tapasztalat',
   continue: 'Tovább',
 };

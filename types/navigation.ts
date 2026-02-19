@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Levels, Passport, PassportEntry } from './secureStore';
 import { Country } from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
 import { INoticeBoardEntryProps } from './noticeBoard';
+import { AchievementId } from '@/data/achievements/achievements.config';
 
 export type DifficultyScreenGameIds = 'standard' | 'rapid';
 export type SummaryScreenAllowedIds = 'standard' | 'rapid';
@@ -46,14 +47,17 @@ export type RootStackParamList = {
     difficulty: Levels;
     gameMode: SummaryScreenAllowedIds;
     gameResult: GameResult;
+    multipleChoiceAchievementsUnlocked: AchievementId[];
   };
   customSummary: {
     gameResult: GameResult;
     finalScore: number;
+    multipleChoiceAchievementsUnlocked: AchievementId[];
   };
   practiceSummary: {
     passportBeforeQuiz: PassportEntry[];
     gameResult: GameResult;
+    multipleChoiceAchievementsUnlocked: AchievementId[];
   };
   stats: {
     title: string;

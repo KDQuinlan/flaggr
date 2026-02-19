@@ -6,10 +6,10 @@ import { useTranslation } from 'react-i18next';
 import { getDifficultySelectStyles } from './difficultySelect.styles';
 import { colors } from '../colors';
 import {
-  LEVEL_MAP,
-  LEVELS_TO_FLAG_AMOUNT_MAP,
-  LEVELS_TO_SHADOW_ELEVATION_MAP,
-} from '@/constants/mappers';
+  levelKeyByLevelName,
+  flagAmountByLevelName,
+  elevationByLevelName,
+} from '@/constants/lookups';
 import iconsMap from '@/assets/images/icons';
 import { Levels } from '@/types/secureStore';
 import { useMemo } from 'react';
@@ -46,7 +46,7 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
 
   const overProgress =
     (score - advancementRequirement) /
-    (LEVELS_TO_FLAG_AMOUNT_MAP[title] - advancementRequirement);
+    (flagAmountByLevelName[title] - advancementRequirement);
 
   return (
     <Pressable
@@ -55,13 +55,13 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
         {
           opacity: pressed ? 0.7 : 1,
           backgroundColor: isLocked ? theme.background : theme.card,
-          elevation: LEVELS_TO_SHADOW_ELEVATION_MAP[title],
+          elevation: elevationByLevelName[title],
         },
       ]}
       onPress={onPress}
       disabled={isLocked}
       accessibilityRole="button"
-      accessibilityLabel={t(`levels.${LEVEL_MAP[title]}`, {
+      accessibilityLabel={t(`levels.${levelKeyByLevelName[title]}`, {
         level: t('title', { ns: 'data' }),
       })}
     >
@@ -73,7 +73,7 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
         <View style={styles.gameDetailsContainer}>
           <View>
             <Text style={styles.title} numberOfLines={2}>
-              {t(`levels.${LEVEL_MAP[title]}`, { ns: 'data' })}
+              {t(`levels.${levelKeyByLevelName[title]}`, { ns: 'data' })}
             </Text>
             <Text style={styles.description} numberOfLines={3}>
               {description}

@@ -1,4 +1,4 @@
-import { LEVEL_MAP } from '@/constants/mappers';
+import { levelKeyByLevelName } from '@/constants/lookups';
 import { DifficultyScreenGameIds } from '@/types/navigation';
 import { Levels, ProgressionStructure } from '@/types/secureStore';
 
@@ -10,8 +10,10 @@ const createUpdatedProgressionStructure = (
   resultPercentage: number,
   nextDifficulty: Levels | null
 ): ProgressionStructure => {
-  const difficultyKey = LEVEL_MAP[difficulty];
-  const nextDifficultyKey = nextDifficulty ? LEVEL_MAP[nextDifficulty] : null;
+  const difficultyKey = levelKeyByLevelName[difficulty];
+  const nextDifficultyKey = nextDifficulty
+    ? levelKeyByLevelName[nextDifficulty]
+    : null;
   const currentLevel = existingProgression.games[gameMode][difficultyKey];
 
   return {

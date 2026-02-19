@@ -26,7 +26,7 @@ export const getProfileStyles = (theme: ThemeColors) => {
     usernameText: {
       fontFamily: 'DMSansBold',
       color: theme.text,
-      fontSize: 20,
+      fontSize: 24,
     },
     icon: {
       height: 72,
@@ -38,12 +38,12 @@ export const getProfileStyles = (theme: ThemeColors) => {
     levelText: {
       fontFamily: 'DMSans',
       color: theme.text,
-      fontSize: 16,
+      fontSize: 18,
     },
     subtitleText: {
       fontFamily: 'DMSansBold',
       color: theme.text,
-      fontSize: 18,
+      fontSize: 20,
     },
     statsHeaderText: {
       fontFamily: 'DMSansBold',
@@ -63,8 +63,9 @@ export const getProfileStyles = (theme: ThemeColors) => {
       textAlign: 'center',
     },
     progressBarContainer: {
-      width: 200,
-      height: 16,
+      width: 300,
+      backgroundColor: theme.card,
+      height: 18,
       borderRadius: 8,
       overflow: 'hidden',
       borderWidth: 1,
@@ -96,6 +97,10 @@ export const getProfileStyles = (theme: ThemeColors) => {
       borderWidth: 1,
       gap: 10,
       maxWidth: SCREEN_MAX_WIDTH,
+      shadowColor: theme.shadow,
+      shadowOpacity: 0.15,
+      shadowRadius: 10,
+      elevation: 2,
     },
     statsDataContainer: {
       flexDirection: 'row',
@@ -121,6 +126,17 @@ export const getProfileStyles = (theme: ThemeColors) => {
       width: '50%',
       aspectRatio: 16 / 9,
       marginTop: 10,
+    },
+    card: {
+      backgroundColor: '#222',
+      borderRadius: 16,
+      padding: 20,
+      alignItems: 'center',
+    },
+    title: {
+      color: '#fff',
+      fontSize: 16,
+      fontWeight: '600',
     },
   });
 };

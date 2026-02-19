@@ -20,7 +20,7 @@ import {
   LEVEL_TWO_FLAGS_AMOUNT,
 } from './common';
 
-export const LEVEL_MAP: Record<Levels, LevelKeys> = {
+export const levelKeyByLevelName: Record<Levels, LevelKeys> = {
   'Level 1': 'levelOne',
   'Level 2': 'levelTwo',
   'Level 3': 'levelThree',
@@ -33,7 +33,7 @@ export const LEVEL_MAP: Record<Levels, LevelKeys> = {
   'Level 10': 'levelTen',
 };
 
-export const DIFFICULTY_ID_TO_LEVEL_MAP: Record<Difficulties, Levels> = {
+export const levelNameByDifficultyId: Record<Difficulties, Levels> = {
   1: 'Level 1',
   2: 'Level 2',
   3: 'Level 3',
@@ -46,21 +46,20 @@ export const DIFFICULTY_ID_TO_LEVEL_MAP: Record<Difficulties, Levels> = {
   10: 'Level 10',
 };
 
-export const DIFFICULTY_ID_TO_LEVEL_KEYS_MAP: Record<Difficulties, LevelKeys> =
-  {
-    1: 'levelOne',
-    2: 'levelTwo',
-    3: 'levelThree',
-    4: 'levelFour',
-    5: 'levelFive',
-    6: 'levelSix',
-    7: 'levelSeven',
-    8: 'levelEight',
-    9: 'levelNine',
-    10: 'levelTen',
-  };
+export const levelKeyByDifficultyId: Record<Difficulties, LevelKeys> = {
+  1: 'levelOne',
+  2: 'levelTwo',
+  3: 'levelThree',
+  4: 'levelFour',
+  5: 'levelFive',
+  6: 'levelSix',
+  7: 'levelSeven',
+  8: 'levelEight',
+  9: 'levelNine',
+  10: 'levelTen',
+};
 
-export const LEVELS_TO_FLAG_AMOUNT_MAP: Record<Levels, number> = {
+export const flagAmountByLevelName: Record<Levels, number> = {
   'Level 1': LEVEL_ONE_FLAGS_AMOUNT,
   'Level 2': LEVEL_TWO_FLAGS_AMOUNT,
   'Level 3': LEVEL_THREE_FLAGS_AMOUNT,
@@ -73,7 +72,7 @@ export const LEVELS_TO_FLAG_AMOUNT_MAP: Record<Levels, number> = {
   'Level 10': LEVEL_TEN_FLAGS_AMOUNT,
 };
 
-export const LEVELS_TO_SHADOW_ELEVATION_MAP: Record<Levels, number> = {
+export const elevationByLevelName: Record<Levels, number> = {
   'Level 1': 4,
   'Level 2': 3.3,
   'Level 3': 2.5,
@@ -86,7 +85,7 @@ export const LEVELS_TO_SHADOW_ELEVATION_MAP: Record<Levels, number> = {
   'Level 10': 1,
 };
 
-export const TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP: Record<TimeLimits, number> = {
+export const scoreMultiplierByTimeLimit: Record<TimeLimits, number> = {
   0: 1.0,
   15: 15.0,
   30: 12.0,
@@ -106,21 +105,20 @@ export const TIME_LIMIT_TO_SCORE_MULTIPLIER_MAP: Record<TimeLimits, number> = {
   240: 3.0,
 };
 
-export const DIFFICULTY_TO_SCORE_MAP: Record<Difficulties, DifficultiesScores> =
-  {
-    1: 10,
-    2: 12,
-    3: 14,
-    4: 16,
-    5: 18,
-    6: 20,
-    7: 22,
-    8: 24,
-    9: 26,
-    10: 28,
-  };
+export const scoreByDifficultyId: Record<Difficulties, DifficultiesScores> = {
+  1: 10,
+  2: 12,
+  3: 14,
+  4: 16,
+  5: 18,
+  6: 20,
+  7: 22,
+  8: 24,
+  9: 26,
+  10: 28,
+};
 
-export const STREAK_TIER_TO_MULTIPLIER_MAP: Record<
+export const streakMultiplierByStreakId: Record<
   StreakTiers,
   StreakMultipliers
 > = {

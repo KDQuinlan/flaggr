@@ -18,13 +18,14 @@ import { BANNER_HOME_AND_SETTINGS_ID, BANNER_TEST_ID } from '@/constants/adId';
 import stateStore from '@/state/store';
 import { useTheme } from '@/context/ThemeContext';
 import { getProfileStyles } from '@/styles/profile';
-import { Divider } from 'react-native-paper';
 import formatPercent from '@/util/formatPercent/formatPercent';
 import flags from '@/assets/images/flags';
 import { Passport, PassportEntry } from '@/types/secureStore';
 import { Feather } from '@expo/vector-icons';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 import { SCREEN_MAX_WIDTH } from '@/constants/common';
+import AchievementCarousel from '@/components/achievementSummary/achievementCarousel';
+import typedKeys from '@/util/typedKeys/typedKeys';
 
 // TODO - refactor xp bar into progress bar component from rn-paper?
 
@@ -200,6 +201,10 @@ const ProfileScreen = () => {
     },
   ];
 
+  const achievements = typedKeys(userProgression.achievements).filter(
+    (id) => userProgression.achievements[id].stepIndex !== -1
+  );
+
   return (
     <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
@@ -207,11 +212,13 @@ const ProfileScreen = () => {
         keyboardShouldPersistTaps="handled"
       >
         <Text style={styles.usernameText}>{userDisplayName}</Text>
+
         <Image
           accessible={false}
           style={styles.icon}
           source={require('@/assets/images/icon.png')}
         />
+
         <View style={{ ...styles.genericContainer, gap: 5 }}>
           <Text style={styles.levelText}>{t('level', { number: level })}</Text>
           <View style={styles.progressBarContainer}>
@@ -225,13 +232,29 @@ const ProfileScreen = () => {
           </View>
         </View>
 
-        <Divider style={styles.divider} />
+        <Text
+          style={{
+            ...styles.subtitleText,
+            marginBottom: achievements.length > 0 ? -20 : -10,
+          }}
+        >
+          {t('achievements')}
+        </Text>
 
-        <Text style={styles.subtitleText}>{t('achievements')}</Text>
+        {achievements.length > 0 ? (
+          <AchievementCarousel
+            achievements={achievements}
+            userProgression={userProgression}
+            showTitle={false}
+            onPress={() => console.log('hi')}
+          />
+        ) : (
+          <Text style={styles.statsText}>{t('achievementsEmpty')}</Text>
+        )}
 
-        <Divider style={styles.divider} />
-
-        <Text style={styles.subtitleText}>{t('stats')}</Text>
+        <Text style={{ ...styles.subtitleText, marginBottom: -10 }}>
+          {t('stats')}
+        </Text>
 
         {userHasPassportStats ? (
           <View style={styles.statsContainer}>

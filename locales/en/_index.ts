@@ -13,6 +13,7 @@ import passport from './passport';
 import passportEntry from './passportEntry';
 import practiceSummary from './practiceSummary';
 import profile from './profile';
+import achievements from './achievements';
 
 export default {
   data,
@@ -30,4 +31,5 @@ export default {
   passportEntry,
   practiceSummary,
   profile,
+  achievements,
 };

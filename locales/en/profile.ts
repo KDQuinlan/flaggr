@@ -4,6 +4,7 @@ export default {
   levelBarAccessibilityLabel:
     'You are {{percent}}% of the way through level {{level}}',
   achievements: 'Achievements',
+  achievementsEmpty: 'You have not unlocked any achievements yet',
   stats: 'Stats',
   statsEmpty: 'Play your first game to unlock stats',
   highestGuessRatesTitle: 'Highest Guess Rates',

@@ -15,5 +15,6 @@ export default {
   historyDescription:
     'Cuadrícula que muestra el historial de respuestas. {{correct}} correctas y {{incorrect}} incorrectas.',
   levelUp: '¡Subes de nivel!',
+  experience: 'Experiencia',
   continue: 'Continuar',
 };

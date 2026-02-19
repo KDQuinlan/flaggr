@@ -1,4 +1,4 @@
-import { LEVELS_TO_FLAG_AMOUNT_MAP } from '@/constants/mappers';
+import { flagAmountByLevelName } from '@/constants/lookups';
 import { LevelData } from '@/types/secureStore';
 
 import { useTranslation } from 'react-i18next';
@@ -7,7 +7,7 @@ const getCompletionDescription = (levelData: LevelData): string => {
   const { t } = useTranslation('difficulty');
   const { isCompleted, isLocked, userScore, name } = levelData;
 
-  const isMaxScore = userScore / LEVELS_TO_FLAG_AMOUNT_MAP[name] === 1;
+  const isMaxScore = userScore / flagAmountByLevelName[name] === 1;
 
   if (isLocked) return t('states.locked');
   if (!isLocked && !isCompleted) return t('states.notStarted');

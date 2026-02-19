@@ -155,6 +155,7 @@ const ResetProgress = React.memo(
                     totalCorrect: userProgress.games.totalCorrect,
                     totalIncorrect: userProgress.games.totalIncorrect,
                   },
+                  achievements: userProgress.achievements,
                 });
                 setHasResetProgress(true);
               }}

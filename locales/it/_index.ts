@@ -12,6 +12,7 @@ import feedback from './feedback';
 import passport from './passport';
 import practiceSummary from './practiceSummary';
 import profile from './profile';
+import achievements from './achievements';
 
 export default {
   data,
@@ -28,4 +29,5 @@ export default {
   passport,
   practiceSummary,
   profile,
+  achievements,
 };

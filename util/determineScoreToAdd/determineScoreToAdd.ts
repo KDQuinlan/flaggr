@@ -1,7 +1,7 @@
 import {
-  DIFFICULTY_TO_SCORE_MAP,
-  STREAK_TIER_TO_MULTIPLIER_MAP,
-} from '@/constants/mappers';
+  scoreByDifficultyId,
+  streakMultiplierByStreakId,
+} from '@/constants/lookups';
 import { Difficulties, StreakTiers } from '@/types/secureStore';
 
 const determineScoreToAdd = (
@@ -12,9 +12,9 @@ const determineScoreToAdd = (
   if (!isCorrect) return 0;
   let scoreToAdd;
 
-  const questionScoreValue = DIFFICULTY_TO_SCORE_MAP[difficulty];
+  const questionScoreValue = scoreByDifficultyId[difficulty];
   const streakMultipler =
-    STREAK_TIER_TO_MULTIPLIER_MAP[
+    streakMultiplierByStreakId[
       Math.min(Math.floor(streak / 5), 5) as StreakTiers
     ];
 

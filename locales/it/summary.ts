@@ -15,5 +15,6 @@ export default {
   historyDescription:
     'Griglia che mostra la cronologia delle risposte. {{correct}} corrette e {{incorrect}} errate.',
   levelUp: 'Salito di livello!',
+  experience: 'Esperienza',
   continue: 'Continua',
 };

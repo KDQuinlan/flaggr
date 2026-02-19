@@ -9,7 +9,7 @@ export const getAnimatedXpProgressBarStyles = (theme: ThemeColors) => {
       alignItems: 'center',
       marginHorizontal: 20,
       maxWidth: 400,
-      gap: 10,
+      gap: 5,
     },
     row: {
       flexDirection: 'row',
@@ -19,7 +19,7 @@ export const getAnimatedXpProgressBarStyles = (theme: ThemeColors) => {
     },
     track: {
       flex: 1,
-      height: 16,
+      height: 18,
       backgroundColor: theme.background,
       borderRadius: 8,
       overflow: 'hidden',

@@ -38,7 +38,7 @@ const AnimatedXpProgress = ({
 
   const [displayLevel, setDisplayLevel] = useState(initialUserLevelData.level);
 
-  const [showLevelUp, setShowLevelUp] = useState(false);
+  const [isLevelUpVisible, setIsLevelUpVisible] = useState(false);
 
   const levelDifference = newUserLevelData.level - initialUserLevelData.level;
 
@@ -76,7 +76,8 @@ const AnimatedXpProgress = ({
       return;
     }
 
-    runOnJS(setShowLevelUp)(true);
+    // Show Level Up text
+    runOnJS(setIsLevelUpVisible)(true);
 
     const sequence = Array.from({ length: levelDifference }).flatMap(() => [
       withTiming(1, { duration: 800 }),
@@ -92,7 +93,18 @@ const AnimatedXpProgress = ({
       ...sequence,
       withTiming(finalProgress, { duration: 800 })
     );
-    levelUpOpacity.value = withTiming(1, { duration: 500 });
+
+    levelUpOpacity.value = withTiming(1, { duration: 400 });
+
+    levelUpOpacity.value = withSequence(
+      withTiming(1, { duration: 400 }),
+      withDelay(
+        1200,
+        withTiming(0, { duration: 400 }, () => {
+          runOnJS(setIsLevelUpVisible)(false);
+        })
+      )
+    );
 
     glow.value = withSequence(
       withTiming(1, { duration: 300 }),
@@ -113,10 +125,12 @@ const AnimatedXpProgress = ({
 
   return (
     <View style={styles.container}>
-      {showLevelUp && (
+      {isLevelUpVisible ? (
         <Animated.Text style={[styles.levelUpText, levelUpStyle]}>
           {t('levelUp')}
         </Animated.Text>
+      ) : (
+        <Text style={styles.levelUpText}>{t('experience')}</Text>
       )}
 
       <View style={styles.row}>

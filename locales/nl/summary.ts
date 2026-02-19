@@ -15,5 +15,6 @@ export default {
   historyDescription:
     'Raster met antwoordgeschiedenis. {{correct}} correct en {{incorrect}} onjuist.',
   levelUp: 'Level omhoog!',
+  experience: 'Ervaring',
   continue: 'Doorgaan',
 };

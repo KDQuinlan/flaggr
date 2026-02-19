@@ -3,6 +3,7 @@ export default {
   level: 'Рівень {{number}}',
   levelBarAccessibilityLabel: 'Ви пройшли {{percent}}\u00A0% рівня {{level}}',
   achievements: 'Досягнення',
+  achievementsEmpty: 'Ви ще не розблокували жодного досягнення',
   stats: 'Статистика',
   statsEmpty: 'Зіграйте свою першу гру, щоб розблокувати статистику',
   highestGuessRatesTitle: 'Найвищий відсоток вгадування',

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ScrollView, Text, View, BackHandler, Pressable } from 'react-native';
 import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +8,10 @@ import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import iconsMap from '@/assets/images/icons';
-import { LEVEL_MAP, LEVELS_TO_FLAG_AMOUNT_MAP } from '@/constants/mappers';
+import {
+  levelKeyByLevelName,
+  flagAmountByLevelName,
+} from '@/constants/lookups';
 import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import stateStore from '@/state/store';
@@ -34,6 +37,9 @@ import calculateUserLevelData from '@/util/leveling/calculateUserLevelData';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import AnimatedXpProgressBar from '@/components/animatedXpProgressBar/animatedXpProgressBar';
 import formatPercent from '@/util/formatPercent/formatPercent';
+import { AchievementId } from '@/data/achievements/achievements.config';
+import emitAchievementEvent from '@/data/achievements/emitAchievementEvent';
+import AchievementCarousel from '@/components/achievementSummary/achievementCarousel';
 
 const Summary = () => {
   useFocusEffect(
@@ -64,14 +70,23 @@ const Summary = () => {
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const { isPremiumUser, userLevel } = userSettings;
-  const { difficulty, gameMode, gameResult } = route.params;
+  const {
+    difficulty,
+    gameMode,
+    gameResult,
+    multipleChoiceAchievementsUnlocked,
+  } = route.params;
   const { correct, incorrect, highestStreak, history, timeTaken } = gameResult;
   const numberSuffix = gameMode === 'rapid' ? '' : '%';
-  const translatedDifficulty = t(`levels.${LEVEL_MAP[difficulty]}`, {
+  const translatedDifficulty = t(`levels.${levelKeyByLevelName[difficulty]}`, {
     ns: 'data',
   });
 
   const showAds = !isPremiumUser && isInternetAvailable;
+
+  const [achievementsUnlocked, setAchievementsUnlocked] = useState<
+    AchievementId[]
+  >(multipleChoiceAchievementsUnlocked);
 
   const initialProgressionRef = useRef(userProgression);
   const initialUserLevelRef = useRef(userLevel);
@@ -84,7 +99,9 @@ const Summary = () => {
   }, [correct, incorrect, gameMode]);
 
   const progression =
-    initialProgressionRef.current.games[gameMode][LEVEL_MAP[difficulty]];
+    initialProgressionRef.current.games[gameMode][
+      levelKeyByLevelName[difficulty]
+    ];
 
   const isAdvancementRequirementMet = useMemo(
     () => resultPercentage >= progression.advancementRequirement,
@@ -99,13 +116,15 @@ const Summary = () => {
 
   const userNextLevelProgression =
     userNextLevel &&
-    initialProgressionRef.current.games[gameMode][LEVEL_MAP[userNextLevel]];
+    initialProgressionRef.current.games[gameMode][
+      levelKeyByLevelName[userNextLevel]
+    ];
 
   const initialIsNextLevelLocked = useMemo(
     () =>
       userNextLevel
         ? initialProgressionRef.current.games[gameMode][
-            LEVEL_MAP[userNextLevel]
+            levelKeyByLevelName[userNextLevel]
           ].isLocked
         : false,
     [gameMode, userNextLevel]
@@ -119,7 +138,7 @@ const Summary = () => {
   const unlockedMessage =
     initialIsNextLevelLocked && isAdvancementRequirementMet && userNextLevel
       ? t('unlockMessage', {
-          userNextLevel: t(`levels.${LEVEL_MAP[userNextLevel]}`, {
+          userNextLevel: t(`levels.${levelKeyByLevelName[userNextLevel]}`, {
             ns: 'data',
           }),
         })
@@ -132,7 +151,7 @@ const Summary = () => {
     userNextLevelProgression.isLocked &&
     !isAdvancementRequirementMet
       ? t('unlockRequirementMessage', {
-          userNextLevel: t(`levels.${LEVEL_MAP[userNextLevel]}`, {
+          userNextLevel: t(`levels.${levelKeyByLevelName[userNextLevel]}`, {
             ns: 'data',
           }),
           advancementRequirement:
@@ -149,9 +168,9 @@ const Summary = () => {
 
   const isFirstTimePerfectingLevel =
     (progression.userScore !== 100 ||
-      progression.userScore !== LEVELS_TO_FLAG_AMOUNT_MAP[difficulty]) &&
+      progression.userScore !== flagAmountByLevelName[difficulty]) &&
     ((correct / (correct + incorrect)) * TO_PERCENTAGE_MULTIPLIER === 100 ||
-      correct / LEVELS_TO_FLAG_AMOUNT_MAP[difficulty] === 1);
+      correct / flagAmountByLevelName[difficulty] === 1);
 
   const hasPerfectedAllLevels = Object.values(
     userProgression.games[gameMode]
@@ -185,6 +204,7 @@ const Summary = () => {
       initialProgressionRef.current.games.matchesPlayed + 1;
     const totalCorrect = initialProgressionRef.current.games.totalCorrect;
     const totalIncorrect = initialProgressionRef.current.games.totalIncorrect;
+
     const updatedProgression: ProgressionStructure =
       createUpdatedProgressionStructure(
         initialProgressionRef.current,
@@ -194,10 +214,55 @@ const Summary = () => {
         resultPercentage,
         userNextLevel
       );
+
+    const achievementProgressionId: AchievementId =
+      gameMode === 'standard' ? 'standardProgression' : 'rapidProgression';
+
+    const achievementPerfectionId: AchievementId =
+      gameMode === 'standard' ? 'standardPerfection' : 'rapidPerfection';
+
+    const matchesPlayedAchievementEvent = emitAchievementEvent({
+      id: 'matchesPlayed',
+      value: newMatchesPlayed,
+    });
+
+    const progressionAchievementEvent = emitAchievementEvent({
+      id: achievementProgressionId,
+      value: isFirstTimeCompletingLevel
+        ? userProgression.achievements[achievementProgressionId].currentValue +
+          1
+        : userProgression.achievements[achievementProgressionId].currentValue,
+    });
+
+    const perfectionAchievementEvent = emitAchievementEvent({
+      id: achievementPerfectionId,
+      value: isFirstTimePerfectingLevel
+        ? userProgression.achievements[achievementPerfectionId].currentValue + 1
+        : userProgression.achievements[achievementPerfectionId].currentValue,
+    });
+
+    matchesPlayedAchievementEvent.hasUpdated &&
+      setAchievementsUnlocked((prev) => [...prev, 'matchesPlayed']);
+
+    progressionAchievementEvent.hasUpdated &&
+      setAchievementsUnlocked((prev) => [...prev, achievementProgressionId]);
+
+    perfectionAchievementEvent.hasUpdated &&
+      setAchievementsUnlocked((prev) => [...prev, achievementPerfectionId]);
+
     persistProgression({
       games: { ...updatedProgression.games, matchesPlayed: newMatchesPlayed },
       passport: updatedProgression.passport,
+      achievements: {
+        ...userProgression.achievements,
+        matchesPlayed: matchesPlayedAchievementEvent.updatedAchievementProgress,
+        [achievementProgressionId]:
+          progressionAchievementEvent.updatedAchievementProgress,
+        [achievementPerfectionId]:
+          perfectionAchievementEvent.updatedAchievementProgress,
+      },
     });
+
     persistUserSettings({ ...userSettings, userLevel: newUserLevelData });
     PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
     PlayGames.submitScore(
@@ -256,6 +321,8 @@ const Summary = () => {
     );
   };
 
+  const achievements: AchievementId[] = ['matchesPlayed', 'bestStreak'];
+
   return (
     <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
       <ScrollView>
@@ -265,8 +332,8 @@ const Summary = () => {
               {t('completed', { difficulty: translatedDifficulty })}
             </Text>
             <Image
-              style={{ height: 56, width: 56 }}
-              source={iconsMap[LEVEL_MAP[difficulty]]}
+              style={styles.icon}
+              source={iconsMap[levelKeyByLevelName[difficulty]]}
             />
           </View>
 
@@ -323,6 +390,13 @@ const Summary = () => {
           )}
 
           <ProgressionSummary />
+
+          {achievements.length > 0 && (
+            <AchievementCarousel
+              achievements={achievements}
+              userProgression={userProgression}
+            />
+          )}
 
           <AnimatedXpProgressBar
             initialUserLevelData={initialUserLevelRef.current}

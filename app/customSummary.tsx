@@ -30,6 +30,9 @@ import calculateExperienceGain from '@/util/leveling/calculateExperienceGain';
 import calculateUserLevelData from '@/util/leveling/calculateUserLevelData';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import AnimatedXpProgressBar from '@/components/animatedXpProgressBar/animatedXpProgressBar';
+import { AchievementId } from '@/data/achievements/achievements.config';
+import emitAchievementEvent from '@/data/achievements/emitAchievementEvent';
+import AchievementCarousel from '@/components/achievementSummary/achievementCarousel';
 
 const CustomSummary = () => {
   useFocusEffect(
@@ -60,12 +63,17 @@ const CustomSummary = () => {
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const { isPremiumUser, userLevel } = userSettings;
-  const { gameResult, finalScore } = route.params;
+  const { gameResult, finalScore, multipleChoiceAchievementsUnlocked } =
+    route.params;
   const { correct, incorrect, highestStreak, history, timeTaken } = gameResult;
   const { regions, independentCountriesOnly, timeLimit, gameLength } =
     userProgression.games.custom.currentGame;
 
   const showAds = !isPremiumUser && isInternetAvailable;
+
+  const [achievementsUnlocked, setAchievementsUnlocked] = useState<
+    AchievementId[]
+  >(multipleChoiceAchievementsUnlocked);
 
   const initialProgressionRef = useRef(userProgression);
   const initialUserLevelRef = useRef(userLevel);
@@ -116,10 +124,43 @@ const CustomSummary = () => {
       });
     }
 
+    const matchesPlayedAchievementEvent = emitAchievementEvent({
+      id: 'matchesPlayed',
+      value: newMatchesPlayed,
+    });
+
+    const customMatchesPlayedAchievementEvent = emitAchievementEvent({
+      id: 'customMatchesPlayed',
+      value:
+        userProgression.achievements['customMatchesPlayed'].currentValue + 1,
+    });
+
+    const customScoreAchievementEvent = emitAchievementEvent({
+      id: 'customScore',
+      value: finalScore,
+    });
+
+    matchesPlayedAchievementEvent.hasUpdated &&
+      setAchievementsUnlocked((prev) => [...prev, 'matchesPlayed']);
+
+    customMatchesPlayedAchievementEvent.hasUpdated &&
+      setAchievementsUnlocked((prev) => [...prev, 'customMatchesPlayed']);
+
+    customScoreAchievementEvent.hasUpdated &&
+      setAchievementsUnlocked((prev) => [...prev, 'customScore']);
+
     persistProgression({
       games: { ...updatedProgression.games, matchesPlayed: newMatchesPlayed },
       passport: updatedProgression.passport,
+      achievements: {
+        ...userProgression.achievements,
+        matchesPlayed: matchesPlayedAchievementEvent.updatedAchievementProgress,
+        customMatchesPlayed:
+          customMatchesPlayedAchievementEvent.updatedAchievementProgress,
+        customScore: customScoreAchievementEvent.updatedAchievementProgress,
+      },
     });
+
     persistUserSettings({ ...userSettings, userLevel: newUserLevelData });
 
     PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
@@ -193,6 +234,13 @@ const CustomSummary = () => {
                 </Pressable>
               )}
             </View>
+          )}
+
+          {achievementsUnlocked.length > 0 && (
+            <AchievementCarousel
+              achievements={achievementsUnlocked}
+              userProgression={userProgression}
+            />
           )}
 
           <AnimatedXpProgressBar

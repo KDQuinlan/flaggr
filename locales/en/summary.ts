@@ -15,5 +15,6 @@ export default {
   historyDescription:
     'Grid showing answer history. {{correct}} correct and {{incorrect}} incorrect.',
   levelUp: 'Level Up!',
+  experience: 'Experience',
   continue: 'Continue',
 };

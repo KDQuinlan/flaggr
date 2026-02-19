@@ -3,6 +3,7 @@ export default {
   levelBarAccessibilityLabel:
     'Je hebt {{percent}}\u00A0% van level {{level}} voltooid',
   achievements: 'Prestaties',
+  achievementsEmpty: 'Je hebt nog geen prestaties ontgrendeld',
   stats: 'Statistieken',
   statsEmpty: 'Speel je eerste spel om statistieken te ontgrendelen',
   highestGuessRatesTitle: 'Hoogste gokpercentages',
