@@ -1,8 +1,13 @@
 # OSX
+#
 .DS_Store
 
 # Android/IntelliJ
-.idea/
+#
+build/
+.idea
+.gradle
+local.properties
 *.iml
 *.hprof
 .cxx/
