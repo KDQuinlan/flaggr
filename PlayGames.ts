@@ -1,4 +1,4 @@
-import { NativeModules } from 'react-native';
+import { requireNativeModule } from 'expo-modules-core';
 
 export interface GooglePlayPlayer {
   displayName: string;
@@ -14,6 +14,6 @@ interface IPlayGamesModule {
   getCurrentPlayer(): Promise<GooglePlayPlayer>;
 }
 
-const { PlayGamesModule } = NativeModules;
+const PlayGames = requireNativeModule<IPlayGamesModule>('ExpoPlayGames');
 
-export default PlayGamesModule as IPlayGamesModule;
+export default PlayGames;

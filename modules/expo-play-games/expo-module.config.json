@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android", "web"],
+  "apple": {
+    "modules": ["PlayGamesModule"]
+  },
+  "android": {
+    "modules": ["com.kquinlan.playgames.PlayGamesModule"]
+  }
+}

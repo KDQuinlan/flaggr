@@ -1,0 +1,22 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'com.kquinlan.playgames'
+version = '0.7.9'
+
+android {
+  namespace "com.kquinlan.playgames"
+  defaultConfig {
+    versionCode 1
+    versionName "0.7.9"
+  }
+  lintOptions {
+    abortOnError false
+  }
+
+  dependencies {
+    implementation 'com.google.android.gms:play-services-games-v2:19.0.0'
+  }
+}
