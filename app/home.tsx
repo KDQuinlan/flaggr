@@ -38,6 +38,12 @@ import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 
 // TODO - improve flag of the week scaling on smallest screens
 
+/* 
+Last TODO bits to change:
+- remove insets when ads are not showing
+- Decide if leaderboard should use 2 decimal places
+*/
+
 interface IFeedbackButtonProps {
   elevation: number;
 }

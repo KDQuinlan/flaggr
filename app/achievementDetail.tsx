@@ -51,6 +51,8 @@ const AchievementDetail = () => {
   const achievementUnlockTimestamps = achievementData.unlockedTimestamps;
 
   const renderItem = ({ item }: { item: number }) => {
+    // @ts-ignore
+    // TODO - resolve error "Argument of type 'number' is not assignable to parameter of type 'never'."
     const thresholdIndex = achievementConfig.thresholds.indexOf(item);
     const isUnlocked = achievementStep >= thresholdIndex;
 

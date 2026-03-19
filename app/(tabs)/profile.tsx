@@ -209,7 +209,9 @@ const ProfileScreen = () => {
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
       >
-        <Text style={styles.usernameText}>{userDisplayName}</Text>
+        {userDisplayName && (
+          <Text style={styles.usernameText}>{userDisplayName}</Text>
+        )}
 
         <Image
           accessible={false}
@@ -230,13 +232,7 @@ const ProfileScreen = () => {
           </View>
         </View>
 
-        <Text
-          style={{
-            ...styles.subtitleText,
-          }}
-        >
-          {t('achievements')}
-        </Text>
+        <Text style={styles.subtitleText}>{t('achievements')}</Text>
 
         {achievements.length > 0 ? (
           <AchievementCarousel
