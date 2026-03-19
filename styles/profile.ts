@@ -85,7 +85,7 @@ export const getProfileStyles = (theme: ThemeColors) => {
       flexWrap: 'wrap',
       justifyContent: 'center',
       gap: 20,
-      width: '100%',
+      marginHorizontal: 20,
     },
     statsCategoryContainer: {
       backgroundColor: theme.backgroundHighContrast,
@@ -106,11 +106,13 @@ export const getProfileStyles = (theme: ThemeColors) => {
       alignItems: 'center',
       gap: 10,
       width: '100%',
+      marginHorizontal: 20,
     },
     statsDataContainerCompact: {
       justifyContent: 'center',
       alignItems: 'center',
       width: '100%',
+      marginHorizontal: 20,
     },
     statsInfoIconContainer: {
       flex: 1,

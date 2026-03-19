@@ -15,6 +15,7 @@ export default {
   holdToReset: 'Утримуйте, щоб скинути',
   holdToResetText:
     'Утримуйте кнопку підтвердження нижче протягом 5 секунд, щоб скинути ваш прогрес',
+  holdToResetProgressionText: 'Це не скине ваші досягнення або рівень акаунта',
   resetWarning: 'Увага! Цю дію неможливо скасувати',
   resetSuccess: 'Ваш прогрес було скинуто',
   resetSuccessButton: 'Успіх',

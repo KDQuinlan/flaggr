@@ -1,7 +1,10 @@
 import { useMemo } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { Image } from 'expo-image';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import { useTheme } from '@/context/ThemeContext';
 import { BANNER_HOME_AND_SETTINGS_ID, BANNER_TEST_ID } from '@/constants/adId';
@@ -28,6 +31,7 @@ const NoticeBoardEntry = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'noticeBoardEntry'>>();
   const { theme } = useTheme();
   const styles = useMemo(() => getNoticeBoardEntryStyles(theme), [theme]);
+  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser } = stateStore((s) => s.userSettings);
   const showAds = !isPremiumUser && isInternetAvailable;
@@ -39,7 +43,9 @@ const NoticeBoardEntry = () => {
   }).format(new Date(date));
 
   return (
-    <SafeAreaProvider style={styles.rootContainer}>
+    <SafeAreaProvider
+      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+    >
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"

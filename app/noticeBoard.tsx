@@ -1,7 +1,10 @@
 import { useMemo } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { Image } from 'expo-image';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import { getNoticeBoardStyles } from '@/styles/noticeBoard';
 import { useTheme } from '@/context/ThemeContext';
@@ -16,8 +19,7 @@ import {
   INoticeBoardEntryProps,
   NoticeBoardUpdateTypes,
 } from '@/types/noticeBoard';
-
-// TODO - add 180 visibility period for notices, and include message if there are no notices
+import { useTranslation } from 'react-i18next';
 
 const NoticeBoardEntry = ({
   title,
@@ -94,19 +96,32 @@ const NoticeBoardEntry = ({
 const NoticeBoard = () => {
   const { theme } = useTheme();
   const styles = useMemo(() => getNoticeBoardStyles(theme), [theme]);
+  const { t } = useTranslation('home');
+  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser } = stateStore((s) => s.userSettings);
   const showAds = !isPremiumUser && isInternetAvailable;
 
+  const NINETY_DAYS_MS = 90 * 24 * 60 * 60 * 1000;
+  const dateAdjustedNoticeBoardData = noticeBoardEntryData.filter(
+    (entry) => Date.now() - entry.date < NINETY_DAYS_MS
+  );
+
   return (
-    <SafeAreaProvider style={styles.rootContainer}>
+    <SafeAreaProvider
+      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+    >
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
       >
-        {noticeBoardEntryData.map((entry, index) => (
-          <NoticeBoardEntry key={index} {...entry} />
-        ))}
+        {dateAdjustedNoticeBoardData.length === 0 ? (
+          <Text style={styles.noticeBoardEmpty}>{t('noticeBoardEmpty')}</Text>
+        ) : (
+          dateAdjustedNoticeBoardData.map((entry, index) => (
+            <NoticeBoardEntry key={index} {...entry} />
+          ))
+        )}
       </ScrollView>
 
       {showAds && (

@@ -13,6 +13,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@2toad/profanity": "^3.2.0",
     "@expo/vector-icons": "~14.0.4",
     "@gorhom/bottom-sheet": "^5.2.7",
     "@react-native-community/slider": "4.5.5",

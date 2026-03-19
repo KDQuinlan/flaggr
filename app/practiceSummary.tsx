@@ -132,6 +132,12 @@ const PracticeSummary = () => {
     (entry) => entry.newPercentage > entry.previousPercentage
   ).length;
 
+  const unchangedCount = passportProgression.filter(
+    (entry) => entry.previousPercentage === entry.newPercentage
+  ).length;
+
+  console.log(unchangedCount, history.length);
+
   const getSubtitle = () => {
     if (improvedCount === 1) return t('improvedSingular');
     if (improvedCount > 1)
@@ -205,7 +211,11 @@ const PracticeSummary = () => {
         <View style={sharedSummaryStyles.sectionContainer}>
           <Text style={sharedSummaryStyles.title}>{t('completed')}</Text>
 
-          <Text style={sharedSummaryStyles.subtitleText}>{getSubtitle()}</Text>
+          {unchangedCount !== history.length && (
+            <Text style={sharedSummaryStyles.subtitleText}>
+              {getSubtitle()}
+            </Text>
+          )}
           <View style={styles.comparisonContainer}>
             {passportProgression
               .sort((a, b) => b.newPercentage - a.newPercentage)
@@ -299,6 +309,14 @@ const PracticeSummary = () => {
               correct={correct}
               incorrect={incorrect}
             />
+          )}
+
+          {achievementsUnlocked.length > 0 && (
+            <Text
+              style={{ ...sharedSummaryStyles.valueText, marginBottom: -15 }}
+            >
+              {t('achievements', { ns: 'profile' })}
+            </Text>
           )}
 
           {achievementsUnlocked.length > 0 && (

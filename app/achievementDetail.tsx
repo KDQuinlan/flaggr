@@ -3,7 +3,10 @@ import { useNavigation } from 'expo-router';
 import { Dimensions, FlatList, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import AdBanner from '@/components/AdBanner/AdBanner';
@@ -24,6 +27,7 @@ const SIDE_PADDING = (CONTAINER_WIDTH - ITEM_WIDTH) / 2;
 const AchievementDetail = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'achievementDetail'>>();
+  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const userProgression = stateStore((s) => s.userProgress);
@@ -45,8 +49,6 @@ const AchievementDetail = () => {
   )!;
   const achievementStep = achievementData.stepIndex;
   const achievementUnlockTimestamps = achievementData.unlockedTimestamps;
-  const isUserAchievementMaxLevel =
-    achievementStep + 1 === achievementConfig.thresholds.length;
 
   const renderItem = ({ item }: { item: number }) => {
     const thresholdIndex = achievementConfig.thresholds.indexOf(item);
@@ -65,7 +67,9 @@ const AchievementDetail = () => {
 
     return (
       <View style={[styles.carouselCard, { width: ITEM_WIDTH }]}>
-        <Text style={styles.tabText}>{isUnlocked ? 'Unlocked' : 'Locked'}</Text>
+        <Text style={styles.tabText}>
+          {isUnlocked ? t('unlocked') : t('locked')}
+        </Text>
         <View style={styles.contentContainer}>
           <Image
             style={{
@@ -81,7 +85,7 @@ const AchievementDetail = () => {
           </Text>
           {isUnlocked ? (
             <Text style={styles.progressText}>
-              Unlocked {formattedUnlockedTime}
+              {t('dateUnlocked', { date: formattedUnlockedTime })}
             </Text>
           ) : (
             <View style={styles.progressContainer}>
@@ -102,14 +106,19 @@ const AchievementDetail = () => {
           )}
         </View>
         <Text style={styles.tabText}>
-          {thresholdIndex + 1} of {achievementConfig.thresholds.length}
+          {t('page', {
+            page: thresholdIndex + 1,
+            maximumPage: achievementConfig.thresholds.length,
+          })}
         </Text>
       </View>
     );
   };
 
   return (
-    <SafeAreaProvider style={styles.rootContainer}>
+    <SafeAreaProvider
+      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+    >
       <FlatList
         horizontal
         data={achievementConfig.thresholds}

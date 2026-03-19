@@ -1,5 +1,3 @@
-// TODO - handle APK banner IDs and integrate into EAS JSON
-
 export const REVENUE_CAT_API_KEY = 'goog_nXoZnLsPXVQlpCEiYlQixTGLdnH';
 export const REVENUE_CAT_TEST_API_KEY = 'test_MIAKmRxfkWUBnCGQnXSmSPSeejF';
 

@@ -3,7 +3,10 @@ import { ScrollView, Pressable, Text, View } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import DifficultySelect from '@/components/difficultySelect/difficultySelect';
 import {
@@ -27,6 +30,7 @@ const Difficulty = () => {
   const { t } = useTranslation('difficulty');
   const { theme } = useTheme();
   const styles = useMemo(() => getDifficultyStyles(theme), [theme]);
+  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userProgression = stateStore((s) => s.userProgress);
   const userSettings = stateStore((s) => s.userSettings);
@@ -77,7 +81,9 @@ const Difficulty = () => {
   };
 
   return (
-    <SafeAreaProvider style={styles.rootContainer}>
+    <SafeAreaProvider
+      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+    >
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}

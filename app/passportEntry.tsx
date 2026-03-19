@@ -3,7 +3,10 @@ import { ScrollView, View, Text } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import stateStore from '@/state/store';
@@ -16,14 +19,13 @@ import flags from '@/assets/images/flags';
 import { MAXIMUM_DIFFICULTY } from '@/constants/common';
 import formatPercent from '@/util/formatPercent/formatPercent';
 
-// TODO - add banner text that content is only available in English
-
 const PassportEntryScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'passportEntry'>>();
   const { t } = useTranslation('passportEntry');
   const { theme } = useTheme();
   const styles = useMemo(() => getPassportEntryStyles(theme), [theme]);
+  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const showAds = !userSettings.isPremiumUser && isInternetAvailable;
@@ -36,7 +38,9 @@ const PassportEntryScreen = () => {
   }, [navigation]);
 
   return (
-    <SafeAreaProvider style={styles.rootContainer}>
+    <SafeAreaProvider
+      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+    >
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}

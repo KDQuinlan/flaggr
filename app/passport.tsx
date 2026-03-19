@@ -15,7 +15,10 @@ import {
   BottomSheetModalProvider,
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import { NavigationProps } from '@/types/navigation';
 import stateStore from '@/state/store';
@@ -46,6 +49,7 @@ const PassportScreen = () => {
   const { theme } = useTheme();
   const { width } = useWindowDimensions();
   const styles = useMemo(() => getPassportStyles(theme), [theme]);
+  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userProgression = stateStore((s) => s.userProgress);
   const userSettings = stateStore((s) => s.userSettings);
@@ -130,7 +134,9 @@ const PassportScreen = () => {
   return (
     <GestureHandlerRootView>
       <BottomSheetModalProvider>
-        <SafeAreaProvider style={styles.rootContainer}>
+        <SafeAreaProvider
+          style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+        >
           {userProgression.passport.length === 0 ? (
             <View style={styles.emptyPassportContainer}>
               <Text style={styles.titleText}>{t('emptyTitle')}</Text>

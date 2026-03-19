@@ -1,5 +1,9 @@
 export default {
   title: 'Logros Desbloqueados',
+  unlocked: 'Desbloqueado',
+  locked: 'Bloqueado',
+  dateUnlocked: 'Desbloqueado el {{date}}',
+  page: '{{page}} de {{maximumPage}}',
 
   // Quiz Achievements
   totalCorrect: {

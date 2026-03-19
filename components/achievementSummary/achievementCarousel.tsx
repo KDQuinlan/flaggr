@@ -10,8 +10,6 @@ import { getAchievementCarouselStyles } from './achievementCarousel.styles';
 import { useNavigation } from 'expo-router';
 import { NavigationProps } from '@/types/navigation';
 
-// TODO - lower font size due to previous carousel implementation
-
 interface IAchievementCarousel {
   achievements: AchievementId[];
   userProgression: ProgressionStructure;

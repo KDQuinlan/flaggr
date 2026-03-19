@@ -3,7 +3,10 @@ import { useNavigation } from 'expo-router';
 import { Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 import { RouteProp, useRoute } from '@react-navigation/native';
 
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
@@ -20,6 +23,7 @@ import { getStatsStyles } from '@/styles/stats';
 
 const StatsScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const { isPremiumUser } = userSettings;
@@ -40,7 +44,9 @@ const StatsScreen = () => {
   return (
     <GestureHandlerRootView>
       <BottomSheetModalProvider>
-        <SafeAreaProvider style={styles.rootContainer}>
+        <SafeAreaProvider
+          style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+        >
           <FlatList
             data={sortedPassport}
             keyExtractor={(item) => item.countryName}
