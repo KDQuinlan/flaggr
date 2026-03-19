@@ -37,6 +37,8 @@ import countries from '@/types/countries';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 
 // TODO - add insets only when user is not premium so ads aren't below navigation bar
+// TODO - center align text in settings screen and check other places that need the same
+// TODO - improve flag of the week scaling on smallest screens
 
 interface IFeedbackButtonProps {
   elevation: number;

@@ -35,6 +35,8 @@ import {
 import ThemeToggle from '@/components/settings/themeToggle';
 import DropdownSelector from '@/components/settings/dropdown';
 
+// TODO - update reset progress wording so they know it doesn't reset achievements or xp
+
 interface IAnswersShownDurationSliderProps {
   value: number;
   onValueChange: (answerShownDuration: number) => void;

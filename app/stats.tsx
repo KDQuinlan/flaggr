@@ -51,13 +51,11 @@ const StatsScreen = () => {
 
               return (
                 <View style={styles.statsContainer}>
-                  <View style={{ flex: 1 }}>
-                    <Image
-                      contentFit="contain"
-                      style={styles.statsImage}
-                      source={flags[item.countryCode.toLowerCase()]}
-                    />
-                  </View>
+                  <Image
+                    contentFit="contain"
+                    style={styles.statsImage}
+                    source={flags[item.countryCode.toLowerCase()]}
+                  />
                   <View style={{ flex: 2 }}>
                     <Text style={styles.statsSubHeaderText}>
                       {t(`countries.${toJsonKeyFormat(item.countryName)}`, {

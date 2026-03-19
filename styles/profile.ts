@@ -12,16 +12,15 @@ export const getProfileStyles = (theme: ThemeColors) => {
       paddingTop: StatusBar.currentHeight || 0,
     },
     scrollContainer: {
-      flexGrow: 1,
       justifyContent: 'flex-start',
       alignItems: 'center',
       paddingBottom: 20,
       gap: 20,
-      marginHorizontal: 20,
     },
-    genericContainer: {
+    progressContainer: {
       justifyContent: 'center',
       alignItems: 'center',
+      gap: 5,
     },
     usernameText: {
       fontFamily: 'DMSansBold',

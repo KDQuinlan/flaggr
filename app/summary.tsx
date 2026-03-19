@@ -321,7 +321,7 @@ const Summary = () => {
     );
   };
 
-  const achievements: AchievementId[] = ['matchesPlayed', 'bestStreak'];
+  const achievements: AchievementId[] = achievementsUnlocked;
 
   return (
     <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>

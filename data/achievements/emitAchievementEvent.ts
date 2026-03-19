@@ -17,18 +17,21 @@ const emitAchievementEvent = ({
   const { userProgress } = stateStore.getState();
   const achievementProgress = userProgress.achievements[id];
   const userIndex = achievementProgress.stepIndex;
+  const unlockedTimestamps = achievementProgress.unlockedTimestamps;
 
   const achievementInformation = ACHIEVEMENTS.find(
     (achievement) => achievement.id === id
   )!;
 
   let newIndex = userIndex;
+  let newUnlockedTimestamps = unlockedTimestamps;
 
   while (
     newIndex + 1 < achievementInformation.thresholds.length &&
     value >= achievementInformation.thresholds[newIndex + 1]!
   ) {
     newIndex++;
+    newUnlockedTimestamps.push(new Date().toISOString());
   }
 
   return {

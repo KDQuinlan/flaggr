@@ -110,6 +110,7 @@ export type AchievementProgressionStructure = {
   [achievementId in AchievementId]: {
     currentValue: number;
     stepIndex: number;
+    unlockedTimestamps: string[];
   };
 };
 

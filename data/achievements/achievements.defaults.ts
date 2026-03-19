@@ -8,6 +8,7 @@ const getAchievementDefaults = (): AchievementProgressionStructure => {
     defaultAchievements[achievement.id] = {
       currentValue: 0,
       stepIndex: -1,
+      unlockedTimestamps: [],
     };
   });
 
