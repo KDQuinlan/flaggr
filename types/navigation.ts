@@ -63,6 +63,9 @@ export type RootStackParamList = {
     title: string;
     sortedPassport: Passport;
   };
+  achievementDetail: {
+    achievementId: AchievementId;
+  };
 };
 
 export type NavigationProps = NativeStackNavigationProp<RootStackParamList>;

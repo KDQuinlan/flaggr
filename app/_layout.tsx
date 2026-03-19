@@ -255,6 +255,12 @@ function RootLayoutContent() {
             headerShown: true,
           }}
         />
+        <Stack.Screen
+          name="achievementDetail"
+          options={{
+            headerShown: true,
+          }}
+        />
       </Stack>
     </View>
   );

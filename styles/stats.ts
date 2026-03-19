@@ -22,6 +22,7 @@ export const getStatsStyles = (theme: ThemeColors) => {
       borderWidth: 1,
       gap: 10,
       maxWidth: SCREEN_MAX_WIDTH,
+      alignSelf: 'center',
     },
     statsSubHeaderText: {
       color: theme.text,
