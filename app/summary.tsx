@@ -392,6 +392,14 @@ const Summary = () => {
           <ProgressionSummary />
 
           {achievements.length > 0 && (
+            <Text
+              style={{ ...sharedSummaryStyles.valueText, marginBottom: -15 }}
+            >
+              {t('achievements', { ns: 'profile' })}
+            </Text>
+          )}
+
+          {achievements.length > 0 && (
             <AchievementCarousel
               achievements={achievements}
               userProgression={userProgression}

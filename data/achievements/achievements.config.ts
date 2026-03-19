@@ -57,4 +57,5 @@ export const ACHIEVEMENTS = [
 ] as const;
 
 export type AchievementId = (typeof ACHIEVEMENTS)[number]['id'];
+export type AchievementThresholds = (typeof ACHIEVEMENTS)[number]['thresholds'];
 export type AchievementStructure = (typeof ACHIEVEMENTS)[number];

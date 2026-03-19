@@ -1,5 +1,9 @@
 export default {
   title: 'Prestaties Ontgrendeld',
+  unlocked: 'Ontgrendeld',
+  locked: 'Vergrendeld',
+  dateUnlocked: 'Ontgrendeld op {{date}}',
+  page: '{{page}} van {{maximumPage}}',
 
   // Quiz Achievements
   totalCorrect: {

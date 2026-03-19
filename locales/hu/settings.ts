@@ -14,6 +14,8 @@ export default {
   holdToReset: 'Tartsd lenyomva a visszaállításhoz',
   holdToResetText:
     'Tartsd lenyomva az alábbi megerősítő gombot 5 másodpercig a folyamat visszaállításához',
+  holdToResetProgressionText:
+    'Ez nem állítja vissza a teljesítményeidet vagy a fiókod szintjét',
   resetWarning: 'Figyelem! Ez a művelet visszafordíthatatlan',
   resetSuccess: 'A fejlődésed vissza lett állítva',
   resetSuccessButton: 'Siker',

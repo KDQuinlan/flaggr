@@ -14,6 +14,8 @@ export default {
   holdToReset: 'Hold To Reset',
   holdToResetText:
     'Hold the confirmation button below for 5 seconds to reset your progress',
+  holdToResetProgressionText:
+    'This will not reset your achievements or account level',
   resetWarning: 'Warning! This action is irreversible',
   resetSuccess: 'Your progress has been reset',
   resetSuccessButton: 'Success',

@@ -3,7 +3,10 @@ import { RouteProp, useFocusEffect, useRoute } from '@react-navigation/native';
 import { BackHandler, Pressable, ScrollView, Text, View } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import stateStore from '@/state/store';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
@@ -55,6 +58,7 @@ const CustomSummary = () => {
   const { t } = useTranslation('customSummary');
   const { theme } = useTheme();
   const styles = getCustomSummaryStyles();
+  const insets = useSafeAreaInsets();
   const sharedSummaryStyles = useMemo(
     () => getSummarySharedStyles(theme),
     [theme]
@@ -174,7 +178,12 @@ const CustomSummary = () => {
   const handleContinue = () => resetToDifficultyScreen(navigation, 'custom');
 
   return (
-    <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
+    <SafeAreaProvider
+      style={{
+        ...sharedSummaryStyles.rootContainer,
+        paddingBottom: insets.bottom,
+      }}
+    >
       <ScrollView>
         <View style={sharedSummaryStyles.sectionContainer}>
           <Text style={sharedSummaryStyles.title}>{t('completed')}</Text>
@@ -234,6 +243,14 @@ const CustomSummary = () => {
                 </Pressable>
               )}
             </View>
+          )}
+
+          {achievementsUnlocked.length > 0 && (
+            <Text
+              style={{ ...sharedSummaryStyles.valueText, marginBottom: -15 }}
+            >
+              {t('achievements', { ns: 'profile' })}
+            </Text>
           )}
 
           {achievementsUnlocked.length > 0 && (

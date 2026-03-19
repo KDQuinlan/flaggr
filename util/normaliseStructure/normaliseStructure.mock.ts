@@ -10,6 +10,7 @@ import {
   LEVEL_THREE_FLAGS_AMOUNT,
   LEVEL_TWO_FLAGS_AMOUNT,
 } from '@/constants/common';
+import getAchievementDefaults from '@/data/achievements/achievements.defaults';
 
 export const mockCorruptProgressionData = {
   games: {
@@ -92,6 +93,11 @@ export const mockCorruptProgressionData = {
       badKey: '',
     },
   ],
+  achievements: {
+    fakeAchievement: {
+      fakeStep: 999,
+    },
+  },
 };
 
 export const mockGoodProgressionData = {
@@ -313,6 +319,7 @@ export const mockGoodProgressionData = {
       incorrectTotal: 0,
     },
   ],
+  achievements: getAchievementDefaults(),
 };
 
 export const mockCorruptUserSettingsData = {
@@ -327,6 +334,7 @@ export const mockCorruptUserSettingsData = {
 };
 
 export const mockGoodUserSettingsData = {
+  version: 1,
   isSetUp: false,
   isGoogleConnected: false,
   userDisplayName: '',

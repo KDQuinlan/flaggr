@@ -1,5 +1,9 @@
 export default {
   title: 'Achievements Unlocked',
+  unlocked: 'Unlocked',
+  locked: 'Locked',
+  dateUnlocked: 'Unlocked {{date}}',
+  page: '{{page}} of {{maximumPage}}',
 
   // Quiz Achievements
   totalCorrect: {

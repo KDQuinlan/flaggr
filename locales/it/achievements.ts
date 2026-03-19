@@ -1,5 +1,9 @@
 export default {
   title: 'Obiettivi Sbloccati',
+  unlocked: 'Sbloccato',
+  locked: 'Bloccato',
+  dateUnlocked: 'Sbloccato il {{date}}',
+  page: '{{page}} di {{maximumPage}}',
 
   // Quiz Achievements
   totalCorrect: {

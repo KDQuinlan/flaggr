@@ -12,7 +12,10 @@ import { useTranslation } from 'react-i18next';
 import i18n from '@/locales/i18n';
 import { Feather } from '@expo/vector-icons';
 import { AdsConsent } from 'react-native-google-mobile-ads';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import { colors } from '@/components/colors';
 import { NavigationProps } from '@/types/navigation';
@@ -34,8 +37,6 @@ import {
 } from '@/constants/settings';
 import ThemeToggle from '@/components/settings/themeToggle';
 import DropdownSelector from '@/components/settings/dropdown';
-
-// TODO - update reset progress wording so they know it doesn't reset achievements or xp
 
 interface IAnswersShownDurationSliderProps {
   value: number;
@@ -147,6 +148,7 @@ const ResetProgress = React.memo(
               {hasResetProgress ? t('resetSuccess') : t('resetWarning')}
             </Text>
             <Text style={styles.text}>{t('holdToResetText')}</Text>
+            <Text style={styles.text}>{t('holdToResetProgressionText')}</Text>
             <Pressable
               onLongPress={() => {
                 persistProgression({
@@ -256,6 +258,7 @@ const SettingsScreen = () => {
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const { t } = useTranslation('settings');
+  const insets = useSafeAreaInsets();
   const [hasResetProgress, setHasResetProgress] = useState<boolean>(false);
   const [isResetAccordionOpen, setIsResetAccordionOpen] =
     useState<boolean>(false);
@@ -304,7 +307,9 @@ const SettingsScreen = () => {
   }, [hasResetProgress]);
 
   return (
-    <SafeAreaProvider style={styles.rootContainer}>
+    <SafeAreaProvider
+      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
+    >
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"

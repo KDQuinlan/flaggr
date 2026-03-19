@@ -128,6 +128,7 @@ export type ProgressionStructure = {
 };
 
 export type UserSettingStructure = {
+  version: 1;
   isSetUp: boolean;
   isGoogleConnected: boolean;
   userDisplayName: string;

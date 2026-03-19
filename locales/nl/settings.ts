@@ -14,6 +14,8 @@ export default {
   holdToReset: 'Ingedrukt houden om te resetten',
   holdToResetText:
     'Houd de bevestigingsknop hieronder 5 seconden ingedrukt om je voortgang te resetten',
+  holdToResetProgressionText:
+    'Dit zet je prestaties of accountniveau niet terug',
   resetWarning: 'Waarschuwing! Deze actie is onomkeerbaar',
   resetSuccess: 'Je voortgang is gereset',
   resetSuccessButton: 'Succes',

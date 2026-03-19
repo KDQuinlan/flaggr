@@ -3,7 +3,6 @@ import { Difficulties } from '@/types/secureStore';
 export const APP_NAME = 'Flaggr';
 export const STORAGE_KEY_PROGRESSION = 'flaggr-progression';
 export const STORAGE_KEY_SETTINGS = 'flaggr-settings';
-export const SUPPORTED_LANGUAGES = ['en', 'es'];
 export const VERSION_KEY = 1;
 
 export const MS_IN_ONE_DAY = 60 * 60 * 24 * 1000;
@@ -30,6 +29,7 @@ export const TO_PERCENTAGE_MULTIPLIER = 100;
 export const ANSWER_LETTERS = ['A.', 'B.', 'C.', 'D.'];
 export const RAPID_TIME_ALLOWANCE_IN_S = 60;
 
+export const SUPPORTED_LANGUAGES = ['en', 'es', 'nl', 'uk', 'it', 'hu'];
 export const LANGUAGES = [
   { label: 'English', value: 'en' },
   { label: 'Español', value: 'es' },

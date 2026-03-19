@@ -10,9 +10,8 @@ import { ANSWERS_SHOWN_DURATION_DEFAULT_MS } from '@/constants/settings';
 import { MAXIMUM_ENERGY } from '@/constants/common';
 import getAchievementDefaults from '@/data/achievements/achievements.defaults';
 
-// TODO - before going live, add version code to to each default object for migration handling
-
 export const defaultUserSettings: UserSettingStructure = {
+  version: 1,
   isSetUp: false,
   isGoogleConnected: false,
   userDisplayName: '',

@@ -20,4 +20,5 @@ export default {
   flagOfTheWeek: 'A hét zászlaja',
   leaderboard: 'Ranglista',
   leaderboardHint: 'Megnyitja a Google ranglistáit',
+  noticeBoardEmpty: 'Jelenleg nincsenek értesítések. Nézz vissza később!',
 };
