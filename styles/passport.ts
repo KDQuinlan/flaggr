@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 import { colors } from '@/components/colors';
+import { SCREEN_MAX_WIDTH } from '@/constants/common';
 
 export const getPassportStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -117,6 +118,7 @@ export const getPassportStyles = (theme: ThemeColors) => {
       justifyContent: 'center',
       alignItems: 'center',
       gap: 10,
+      maxWidth: SCREEN_MAX_WIDTH,
     },
     filterModalTitleRoot: {
       flexDirection: 'row',

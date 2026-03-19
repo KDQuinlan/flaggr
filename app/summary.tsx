@@ -393,7 +393,11 @@ const Summary = () => {
 
           {achievements.length > 0 && (
             <Text
-              style={{ ...sharedSummaryStyles.valueText, marginBottom: -15 }}
+              style={{
+                ...sharedSummaryStyles.valueText,
+                marginBottom: -15,
+                marginTop: -5,
+              }}
             >
               {t('achievements', { ns: 'profile' })}
             </Text>

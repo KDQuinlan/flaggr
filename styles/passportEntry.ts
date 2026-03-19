@@ -11,8 +11,12 @@ export const getPassportEntryStyles = (theme: ThemeColors) => {
     },
     scrollContainer: {
       flexGrow: 1,
+      justifyContent: 'flex-start',
       padding: 20,
       gap: 20,
+      width: '100%',
+      maxWidth: SCREEN_MAX_WIDTH,
+      alignSelf: 'center',
     },
     title: { fontSize: 16, fontFamily: 'DMSansBold', color: theme.text },
     text: { fontSize: 14, fontFamily: 'DMSans', color: theme.text },
