@@ -28,7 +28,11 @@ import { BANNER_PASSPORT_ID, BANNER_TEST_ID } from '@/constants/adId';
 import { Passport } from '@/types/secureStore';
 import { getPassportStyles } from '@/styles/passport';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
-import { GAME_DIFFICULTIES, VALID_REGIONS } from '@/constants/common';
+import {
+  BOTTOM_SPACING,
+  GAME_DIFFICULTIES,
+  VALID_REGIONS,
+} from '@/constants/common';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { levelKeyByDifficultyId } from '@/constants/lookups';
 import countriesData from '@/assets/data/countries.json';
@@ -134,9 +138,7 @@ const PassportScreen = () => {
   return (
     <GestureHandlerRootView>
       <BottomSheetModalProvider>
-        <SafeAreaProvider
-          style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-        >
+        <SafeAreaProvider style={styles.rootContainer}>
           {userProgression.passport.length === 0 ? (
             <View style={styles.emptyPassportContainer}>
               <Text style={styles.titleText}>{t('emptyTitle')}</Text>
@@ -178,7 +180,10 @@ const PassportScreen = () => {
                 )}
                 numColumns={passportCardAllowance}
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.flatlistContainer}
+                contentContainerStyle={[
+                  styles.flatlistContainer,
+                  { paddingBottom: insets.bottom + BOTTOM_SPACING },
+                ]}
                 columnWrapperStyle={{ gap: 10 }}
                 ListHeaderComponent={
                   <InformationButton

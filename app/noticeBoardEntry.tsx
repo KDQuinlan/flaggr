@@ -14,6 +14,7 @@ import { getNoticeBoardEntryStyles } from '@/styles/noticeBoardEntry';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '@/types/navigation';
 import { NoticeBoardContentSection } from '@/types/noticeBoard';
+import { BOTTOM_SPACING } from '@/constants/common';
 
 const ContentSection = (section: NoticeBoardContentSection) => {
   const { theme } = useTheme();
@@ -43,11 +44,12 @@ const NoticeBoardEntry = () => {
   }).format(new Date(date));
 
   return (
-    <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-    >
+    <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
-        contentContainerStyle={styles.scrollContainer}
+        contentContainerStyle={[
+          styles.scrollContainer,
+          { paddingBottom: insets.bottom + BOTTOM_SPACING },
+        ]}
         keyboardShouldPersistTaps="handled"
       >
         <View

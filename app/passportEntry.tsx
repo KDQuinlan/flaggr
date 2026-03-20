@@ -16,7 +16,7 @@ import { BANNER_PASSPORT_ID, BANNER_TEST_ID } from '@/constants/adId';
 import { getPassportEntryStyles } from '@/styles/passportEntry';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import flags from '@/assets/images/flags';
-import { MAXIMUM_DIFFICULTY } from '@/constants/common';
+import { BOTTOM_SPACING, MAXIMUM_DIFFICULTY } from '@/constants/common';
 import formatPercent from '@/util/formatPercent/formatPercent';
 
 const PassportEntryScreen = () => {
@@ -38,11 +38,12 @@ const PassportEntryScreen = () => {
   }, [navigation]);
 
   return (
-    <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-    >
+    <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
-        contentContainerStyle={styles.scrollContainer}
+        contentContainerStyle={[
+          styles.scrollContainer,
+          { paddingBottom: insets.bottom + BOTTOM_SPACING },
+        ]}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.flagTitleContainer}>

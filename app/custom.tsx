@@ -18,6 +18,7 @@ import { scoreMultiplierByTimeLimit } from '@/constants/lookups';
 import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
 import { NavigationProps } from '@/types/navigation';
 import {
+  BOTTOM_SPACING,
   DEFAULT_GAME_LENGTH,
   DEFAULT_SCORE_MULTIPLIER,
   GAME_DIFFICULTIES,
@@ -249,11 +250,12 @@ const CustomScreen = () => {
   );
 
   return (
-    <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-    >
+    <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
-        contentContainerStyle={styles.scrollContainer}
+        contentContainerStyle={[
+          styles.scrollContainer,
+          { paddingBottom: insets.bottom + BOTTOM_SPACING },
+        ]}
         showsVerticalScrollIndicator={false}
       >
         {!!score && <HighScoreAccordion />}

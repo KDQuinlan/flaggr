@@ -20,6 +20,7 @@ import {
   NoticeBoardUpdateTypes,
 } from '@/types/noticeBoard';
 import { useTranslation } from 'react-i18next';
+import { BOTTOM_SPACING } from '@/constants/common';
 
 const NoticeBoardEntry = ({
   title,
@@ -108,11 +109,12 @@ const NoticeBoard = () => {
   );
 
   return (
-    <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-    >
+    <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
-        contentContainerStyle={styles.scrollContainer}
+        contentContainerStyle={[
+          styles.scrollContainer,
+          { paddingBottom: insets.bottom + BOTTOM_SPACING },
+        ]}
         keyboardShouldPersistTaps="handled"
       >
         {dateAdjustedNoticeBoardData.length === 0 ? (

@@ -20,6 +20,9 @@ import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { getStatsStyles } from '@/styles/stats';
+import { BOTTOM_SPACING } from '@/constants/common';
+
+// TODO - add 2 per row on tablet
 
 const StatsScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -44,14 +47,14 @@ const StatsScreen = () => {
   return (
     <GestureHandlerRootView>
       <BottomSheetModalProvider>
-        <SafeAreaProvider
-          style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-        >
+        <SafeAreaProvider style={styles.rootContainer}>
           <FlatList
             data={sortedPassport}
             keyExtractor={(item) => item.countryName}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingBottom: 20 }}
+            contentContainerStyle={{
+              paddingBottom: insets.bottom + BOTTOM_SPACING,
+            }}
             renderItem={({ item }) => {
               const answeredTotal = item.correctTotal + item.incorrectTotal;
 
