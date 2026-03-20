@@ -11,7 +11,10 @@ import {
 } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 
 import stateStore from '@/state/store';
@@ -37,6 +40,7 @@ import { AchievementId } from '@/data/achievements/achievements.config';
 import emitAchievementEvent from '@/data/achievements/emitAchievementEvent';
 import persistProgression from '@/util/persistState/persistProgression';
 import AchievementCarousel from '@/components/achievementSummary/achievementCarousel';
+import { BOTTOM_SPACING } from '@/constants/common';
 
 type PassportProgression = {
   countryName: string;
@@ -66,6 +70,7 @@ const PracticeSummary = () => {
   const { theme } = useTheme();
   const { width } = useWindowDimensions();
   const fontScale = PixelRatio.getFontScale();
+  const insets = useSafeAreaInsets();
   const styles = getPracticeSummaryStyles();
   const sharedSummaryStyles = useMemo(
     () => getSummarySharedStyles(theme),
@@ -207,7 +212,12 @@ const PracticeSummary = () => {
 
   return (
     <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
-      <ScrollView>
+      <ScrollView
+        contentContainerStyle={{
+          paddingBottom: insets.bottom + BOTTOM_SPACING,
+        }}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={sharedSummaryStyles.sectionContainer}>
           <Text style={sharedSummaryStyles.title}>{t('completed')}</Text>
 

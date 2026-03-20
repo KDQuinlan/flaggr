@@ -42,6 +42,7 @@ import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 Last TODO bits to change:
 - remove insets when ads are not showing
 - Decide if leaderboard should use 2 decimal places
+- screen tabs overlap with device navigation bar
 */
 
 interface IFeedbackButtonProps {

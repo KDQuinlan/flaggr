@@ -18,6 +18,8 @@ import { getAchievementDetailStyles } from '@/styles/achievementDetail';
 import { ACHIEVEMENTS } from '@/data/achievements/achievements.config';
 import achievementIconsById from '@/data/achievements/achievements.lookup';
 
+// TODO - create more elegant scaling solution for content on smaller devices
+
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CONTAINER_WIDTH = SCREEN_WIDTH;
 const SPACING = 20;
@@ -118,9 +120,7 @@ const AchievementDetail = () => {
   };
 
   return (
-    <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-    >
+    <SafeAreaProvider style={styles.rootContainer}>
       <FlatList
         horizontal
         data={achievementConfig.thresholds}
@@ -130,6 +130,7 @@ const AchievementDetail = () => {
         contentContainerStyle={{
           gap: SPACING,
           paddingHorizontal: SIDE_PADDING,
+          paddingBottom: insets.bottom,
         }}
         snapToInterval={ITEM_WIDTH + SPACING}
         decelerationRate="fast"

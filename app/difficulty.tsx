@@ -10,6 +10,7 @@ import {
 
 import DifficultySelect from '@/components/difficultySelect/difficultySelect';
 import {
+  BOTTOM_SPACING,
   RAPID_TIME_ALLOWANCE_IN_S,
   TO_PERCENTAGE_MULTIPLIER,
 } from '@/constants/common';
@@ -81,11 +82,12 @@ const Difficulty = () => {
   };
 
   return (
-    <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-    >
+    <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
-        contentContainerStyle={styles.scrollContainer}
+        contentContainerStyle={[
+          styles.scrollContainer,
+          { paddingBottom: insets.bottom + BOTTOM_SPACING },
+        ]}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.parentContainer}>

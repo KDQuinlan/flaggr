@@ -36,6 +36,7 @@ import AnimatedXpProgressBar from '@/components/animatedXpProgressBar/animatedXp
 import { AchievementId } from '@/data/achievements/achievements.config';
 import emitAchievementEvent from '@/data/achievements/emitAchievementEvent';
 import AchievementCarousel from '@/components/achievementSummary/achievementCarousel';
+import { BOTTOM_SPACING } from '@/constants/common';
 
 const CustomSummary = () => {
   useFocusEffect(
@@ -178,13 +179,13 @@ const CustomSummary = () => {
   const handleContinue = () => resetToDifficultyScreen(navigation, 'custom');
 
   return (
-    <SafeAreaProvider
-      style={{
-        ...sharedSummaryStyles.rootContainer,
-        paddingBottom: insets.bottom,
-      }}
-    >
-      <ScrollView>
+    <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
+      <ScrollView
+        contentContainerStyle={{
+          paddingBottom: insets.bottom + BOTTOM_SPACING,
+        }}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={sharedSummaryStyles.sectionContainer}>
           <Text style={sharedSummaryStyles.title}>{t('completed')}</Text>
 

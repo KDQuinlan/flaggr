@@ -12,10 +12,7 @@ import { Image } from 'expo-image';
 import { ProgressBar } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { Feather } from '@expo/vector-icons';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { ANSWER_LETTERS } from '@/constants/common';
 import {
@@ -111,7 +108,6 @@ const MultipleChoice = () => {
   const { t } = useTranslation('data');
   const { theme } = useTheme();
   const styles = useMemo(() => getMultipleChoiceStyles(theme), [theme]);
-  const insets = useSafeAreaInsets();
   const userProgression = stateStore((s) => s.userProgress);
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser, displayAnswerTimerMs } = stateStore(
@@ -406,9 +402,7 @@ const MultipleChoice = () => {
   };
 
   return (
-    <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-    >
+    <SafeAreaProvider style={styles.rootContainer}>
       <ProgressBar
         progress={questionNumberIndex / questions.length}
         color={colors.bluePrimary}

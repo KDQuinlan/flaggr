@@ -16,6 +16,7 @@ export const GAME_DIFFICULTIES: Difficulties[] = [
 ];
 
 export const SCREEN_MAX_WIDTH = 600;
+export const BOTTOM_SPACING = 20;
 
 export const MINIMUM_CUSTOM_TIME_LIMIT_SECONDS = 0;
 export const MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS = 240;

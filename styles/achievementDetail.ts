@@ -17,8 +17,8 @@ export const getAchievementDetailStyles = (theme: ThemeColors) => {
       justifyContent: 'flex-start',
       alignItems: 'center',
       flex: 1,
-      marginTop: 20,
-      gap: 20,
+      marginTop: 10,
+      gap: 10,
     },
     progressContainer: {
       justifyContent: 'center',

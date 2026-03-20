@@ -5,14 +5,17 @@ import { useTranslation } from 'react-i18next';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import iconsMap from '@/assets/images/icons';
 import {
   levelKeyByLevelName,
   flagAmountByLevelName,
 } from '@/constants/lookups';
-import { TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
+import { BOTTOM_SPACING, TO_PERCENTAGE_MULTIPLIER } from '@/constants/common';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import stateStore from '@/state/store';
 import createUpdatedProgressionStructure from '@/util/updatedProgressionStructure/createdUpdatedProgressionStructure';
@@ -62,6 +65,7 @@ const Summary = () => {
   const { t } = useTranslation('summary');
   const { theme } = useTheme();
   const styles = getSummaryStyles();
+  const insets = useSafeAreaInsets();
   const sharedSummaryStyles = useMemo(
     () => getSummarySharedStyles(theme),
     [theme]
@@ -325,7 +329,12 @@ const Summary = () => {
 
   return (
     <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
-      <ScrollView>
+      <ScrollView
+        contentContainerStyle={{
+          paddingBottom: insets.bottom + BOTTOM_SPACING,
+        }}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={sharedSummaryStyles.sectionContainer}>
           <View style={styles.titleContainer}>
             <Text style={sharedSummaryStyles.title}>

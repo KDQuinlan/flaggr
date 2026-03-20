@@ -19,7 +19,7 @@ import {
 
 import { colors } from '@/components/colors';
 import { NavigationProps } from '@/types/navigation';
-import { LANGUAGES } from '@/constants/common';
+import { BOTTOM_SPACING, LANGUAGES } from '@/constants/common';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
 import stateStore from '@/state/store';
 import PurchasePremiumButton from '@/components/PurchasePremiumButton/PurchasePremiumButton';
@@ -307,12 +307,13 @@ const SettingsScreen = () => {
   }, [hasResetProgress]);
 
   return (
-    <SafeAreaProvider
-      style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}
-    >
+    <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
-        contentContainerStyle={styles.scrollContainer}
-        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={[
+          styles.scrollContainer,
+          { paddingBottom: insets.bottom + BOTTOM_SPACING },
+        ]}
+        showsVerticalScrollIndicator={false}
       >
         {!userSettings.isPremiumUser && <PurchasePremiumButton />}
         <DropdownSelector

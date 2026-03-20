@@ -35,7 +35,6 @@ export const getDifficultyStyles = (theme: ThemeColors) => {
       elevation: 3,
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: -10,
     },
     practiceText: {
       fontFamily: 'DMSansBold',
