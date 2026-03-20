@@ -24,10 +24,8 @@ import { Passport, PassportEntry } from '@/types/secureStore';
 import { Feather } from '@expo/vector-icons';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 import { SCREEN_MAX_WIDTH } from '@/constants/common';
-import AchievementCarousel from '@/components/achievementSummary/achievementCarousel';
 import typedKeys from '@/util/typedKeys/typedKeys';
-
-// TODO - refactor xp bar into progress bar component from rn-paper?
+import AchievementCarousel from '@/components/achievementSummary/achievementCarousel';
 
 interface IStatsCategory {
   title: string;
@@ -211,7 +209,9 @@ const ProfileScreen = () => {
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
       >
-        <Text style={styles.usernameText}>{userDisplayName}</Text>
+        {userDisplayName && (
+          <Text style={styles.usernameText}>{userDisplayName}</Text>
+        )}
 
         <Image
           accessible={false}
@@ -219,7 +219,7 @@ const ProfileScreen = () => {
           source={require('@/assets/images/icon.png')}
         />
 
-        <View style={{ ...styles.genericContainer, gap: 5 }}>
+        <View style={styles.progressContainer}>
           <Text style={styles.levelText}>{t('level', { number: level })}</Text>
           <View style={styles.progressBarContainer}>
             <View
@@ -232,29 +232,19 @@ const ProfileScreen = () => {
           </View>
         </View>
 
-        <Text
-          style={{
-            ...styles.subtitleText,
-            marginBottom: achievements.length > 0 ? -20 : -10,
-          }}
-        >
-          {t('achievements')}
-        </Text>
+        <Text style={styles.subtitleText}>{t('achievements')}</Text>
 
         {achievements.length > 0 ? (
           <AchievementCarousel
             achievements={achievements}
             userProgression={userProgression}
-            showTitle={false}
-            onPress={() => console.log('hi')}
+            navigate
           />
         ) : (
           <Text style={styles.statsText}>{t('achievementsEmpty')}</Text>
         )}
 
-        <Text style={{ ...styles.subtitleText, marginBottom: -10 }}>
-          {t('stats')}
-        </Text>
+        <Text style={styles.subtitleText}>{t('stats')}</Text>
 
         {userHasPassportStats ? (
           <View style={styles.statsContainer}>

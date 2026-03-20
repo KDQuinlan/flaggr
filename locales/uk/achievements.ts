@@ -1,5 +1,9 @@
 export default {
   title: 'Досягнення Розблоковано',
+  unlocked: 'Розблоковано',
+  locked: 'Заблоковано',
+  dateUnlocked: 'Розблоковано {{date}}',
+  page: '{{page}} з {{maximumPage}}',
 
   // Quiz Achievements
   totalCorrect: {

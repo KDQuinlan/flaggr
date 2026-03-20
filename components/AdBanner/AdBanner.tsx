@@ -1,6 +1,6 @@
 import stateStore from '@/state/store';
-import { useRef } from 'react';
-import { LayoutChangeEvent, View } from 'react-native';
+
+import { View } from 'react-native';
 import {
   BannerAd,
   BannerAdSize,
@@ -9,32 +9,16 @@ import {
 
 interface AdBannerProps {
   adId: string;
-  onHeightChange?: (height: number) => void;
 }
 
-// TODO - remove height callback
-
-const AdBanner = ({ adId, onHeightChange }: AdBannerProps) => {
+const AdBanner = ({ adId }: AdBannerProps) => {
   const canShowAds = stateStore((s) => s.canShowAds);
   const adToShow = __DEV__ ? TestIds.BANNER : adId;
-
-  const lastHeightRef = useRef<number | null>(null);
-
-  const handleLayout = (event: LayoutChangeEvent) => {
-    const { height } = event.nativeEvent.layout;
-
-    if (height !== lastHeightRef.current) {
-      lastHeightRef.current = height;
-      if (onHeightChange) {
-        onHeightChange(height);
-      }
-    }
-  };
 
   if (!canShowAds) return null;
 
   return (
-    <View onLayout={handleLayout}>
+    <View>
       <BannerAd
         unitId={adToShow}
         size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}

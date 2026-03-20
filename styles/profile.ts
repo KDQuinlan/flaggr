@@ -12,16 +12,15 @@ export const getProfileStyles = (theme: ThemeColors) => {
       paddingTop: StatusBar.currentHeight || 0,
     },
     scrollContainer: {
-      flexGrow: 1,
       justifyContent: 'flex-start',
       alignItems: 'center',
       paddingBottom: 20,
       gap: 20,
-      marginHorizontal: 20,
     },
-    genericContainer: {
+    progressContainer: {
       justifyContent: 'center',
       alignItems: 'center',
+      gap: 5,
     },
     usernameText: {
       fontFamily: 'DMSansBold',
@@ -86,7 +85,7 @@ export const getProfileStyles = (theme: ThemeColors) => {
       flexWrap: 'wrap',
       justifyContent: 'center',
       gap: 20,
-      width: '100%',
+      marginHorizontal: 20,
     },
     statsCategoryContainer: {
       backgroundColor: theme.backgroundHighContrast,
@@ -107,11 +106,13 @@ export const getProfileStyles = (theme: ThemeColors) => {
       alignItems: 'center',
       gap: 10,
       width: '100%',
+      marginHorizontal: 20,
     },
     statsDataContainerCompact: {
       justifyContent: 'center',
       alignItems: 'center',
       width: '100%',
+      marginHorizontal: 20,
     },
     statsInfoIconContainer: {
       flex: 1,

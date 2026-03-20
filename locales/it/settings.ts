@@ -15,6 +15,8 @@ export default {
   holdToReset: 'Tieni premuto per reimpostare',
   holdToResetText:
     'Tieni premuto il pulsante di conferma qui sotto per 5 secondi per reimpostare i tuoi progressi',
+  holdToResetProgressionText:
+    'Questo non reimposterà i tuoi obiettivi né il livello del tuo account',
   resetWarning: 'Attenzione! Questa azione è irreversibile',
   resetSuccess: 'I tuoi progressi sono stati reimpostati',
   resetSuccessButton: 'Successo',

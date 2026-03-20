@@ -110,6 +110,7 @@ export type AchievementProgressionStructure = {
   [achievementId in AchievementId]: {
     currentValue: number;
     stepIndex: number;
+    unlockedTimestamps: string[];
   };
 };
 
@@ -127,6 +128,7 @@ export type ProgressionStructure = {
 };
 
 export type UserSettingStructure = {
+  version: 1;
   isSetUp: boolean;
   isGoogleConnected: boolean;
   userDisplayName: string;

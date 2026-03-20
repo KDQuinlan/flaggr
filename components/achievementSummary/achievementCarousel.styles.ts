@@ -7,13 +7,13 @@ export const getAchievementCarouselStyles = (theme: ThemeColors) => {
     achievementText: {
       fontFamily: 'DMSans',
       color: theme.text,
-      fontSize: 18,
+      fontSize: 14,
       textAlign: 'center',
     },
     achievementHeaderText: {
       fontFamily: 'DMSansBold',
       color: theme.text,
-      fontSize: 20,
+      fontSize: 16,
       textAlign: 'center',
     },
     carouselCard: {
@@ -25,7 +25,6 @@ export const getAchievementCarouselStyles = (theme: ThemeColors) => {
       shadowRadius: 10,
       elevation: 3,
       alignItems: 'center',
-      marginTop: -10,
       borderWidth: 1,
       borderColor: theme.accent,
     },

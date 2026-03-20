@@ -3,7 +3,10 @@ import { ScrollView, View, Text } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import stateStore from '@/state/store';
@@ -13,10 +16,8 @@ import { BANNER_PASSPORT_ID, BANNER_TEST_ID } from '@/constants/adId';
 import { getPassportEntryStyles } from '@/styles/passportEntry';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import flags from '@/assets/images/flags';
-import { MAXIMUM_DIFFICULTY } from '@/constants/common';
+import { BOTTOM_SPACING, MAXIMUM_DIFFICULTY } from '@/constants/common';
 import formatPercent from '@/util/formatPercent/formatPercent';
-
-// TODO - add banner text that content is only available in English
 
 const PassportEntryScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -24,6 +25,7 @@ const PassportEntryScreen = () => {
   const { t } = useTranslation('passportEntry');
   const { theme } = useTheme();
   const styles = useMemo(() => getPassportEntryStyles(theme), [theme]);
+  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const showAds = !userSettings.isPremiumUser && isInternetAvailable;
@@ -38,7 +40,10 @@ const PassportEntryScreen = () => {
   return (
     <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
-        contentContainerStyle={styles.scrollContainer}
+        contentContainerStyle={[
+          styles.scrollContainer,
+          { paddingBottom: insets.bottom + BOTTOM_SPACING },
+        ]}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.flagTitleContainer}>

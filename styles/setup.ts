@@ -2,6 +2,7 @@ import { StyleSheet, StatusBar } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 import { colors } from '@/components/colors';
+import { SCREEN_MAX_WIDTH } from '@/constants/common';
 
 export const getSetupStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
@@ -13,9 +14,11 @@ export const getSetupStyles = (theme: ThemeColors) => {
     scrollContainer: {
       flexGrow: 1,
       justifyContent: 'flex-start',
-      paddingHorizontal: 20,
-      paddingBottom: 20,
       gap: 20,
+      width: '100%',
+      maxWidth: SCREEN_MAX_WIDTH,
+      alignSelf: 'center',
+      paddingHorizontal: 20,
     },
     titleContainer: {
       flexDirection: 'row',
@@ -64,6 +67,11 @@ export const getSetupStyles = (theme: ThemeColors) => {
       fontSize: 16,
       fontFamily: 'DMSansBold',
       color: theme.text,
+    },
+    inappropriateText: {
+      fontSize: 16,
+      fontFamily: 'DMSans',
+      color: colors.incorrectRed,
     },
     textBox: {
       borderWidth: 1,

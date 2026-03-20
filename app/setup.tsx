@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import i18n from '@/locales/i18n';
 import * as Localization from 'expo-localization';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Profanity } from '@2toad/profanity';
 
 import { APP_NAME, LANGUAGES, SUPPORTED_LANGUAGES } from '@/constants/common';
 import persistUserSettings from '@/util/persistState/persistUserSettings';
@@ -15,7 +16,6 @@ import ThemeToggle from '@/components/settings/themeToggle';
 import DropdownSelector from '@/components/settings/dropdown';
 
 // TODO - refactor continue button into reusable component
-// TODO - add profanity filter to username
 
 const locales = Localization.getLocales();
 const locale = locales[0]?.languageCode;
@@ -36,6 +36,10 @@ const SetupScreen = () => {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(
     userSettings.isDarkTheme
   );
+
+  const profanity = new Profanity({
+    languages: ['en', 'de', 'es', 'fr', 'zh', 'ru', 'it'],
+  });
 
   useEffect(() => {
     setDisplayName(userDefaultPlatformName);
@@ -58,7 +62,9 @@ const SetupScreen = () => {
     new Date().getFullYear() - parseInt(year);
 
   const isContinueDisabled =
-    displayName && userSettings.isPremiumUser ? false : !isValidYear;
+    profanity.exists(displayName) ||
+    !displayName ||
+    (userSettings.isPremiumUser ? false : !isValidYear);
 
   return (
     <SafeAreaProvider style={styles.rootContainer}>
@@ -93,6 +99,11 @@ const SetupScreen = () => {
             value={displayName}
             onChangeText={(text: string) => setDisplayName(text)}
           />
+          {profanity.exists(displayName) && (
+            <Text style={styles.inappropriateText}>
+              {t('displayNameInappropriate')}
+            </Text>
+          )}
         </View>
 
         {!userSettings.isPremiumUser && (

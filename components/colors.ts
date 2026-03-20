@@ -1,5 +1,3 @@
-// TODO - update high constrast colours
-
 export const colors = {
   // Whites
   white: '#ffffff',

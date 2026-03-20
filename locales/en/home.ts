@@ -21,4 +21,5 @@ export default {
   flagOfTheWeek: 'Flag of the Week',
   leaderboard: 'Leaderboard',
   leaderboardHint: "Opens Google's leaderboards",
+  noticeBoardEmpty: 'There are currently no notices. Check back later!',
 };

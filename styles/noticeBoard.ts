@@ -71,5 +71,10 @@ export const getNoticeBoardStyles = (theme: ThemeColors) => {
       alignItems: 'center',
       gap: 20,
     },
+    noticeBoardEmpty: {
+      color: theme.text,
+      fontSize: 16,
+      fontFamily: 'DMSans',
+    },
   });
 };

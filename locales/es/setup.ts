@@ -6,5 +6,7 @@ export default {
     'Introduce el año de nacimiento con 4 dígitos. Debe ser un año válido.',
   displayName: 'Nombre visible',
   displayNameAccessibilityLabel: 'Campo de nombre visible',
+  displayNameInappropriate:
+    'El nombre que elegiste no es apropiado. Cámbialo para continuar.',
   continue: 'Continuar',
 };

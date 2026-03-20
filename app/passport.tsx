@@ -15,7 +15,10 @@ import {
   BottomSheetModalProvider,
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import { NavigationProps } from '@/types/navigation';
 import stateStore from '@/state/store';
@@ -25,7 +28,11 @@ import { BANNER_PASSPORT_ID, BANNER_TEST_ID } from '@/constants/adId';
 import { Passport } from '@/types/secureStore';
 import { getPassportStyles } from '@/styles/passport';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
-import { GAME_DIFFICULTIES, VALID_REGIONS } from '@/constants/common';
+import {
+  BOTTOM_SPACING,
+  GAME_DIFFICULTIES,
+  VALID_REGIONS,
+} from '@/constants/common';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { levelKeyByDifficultyId } from '@/constants/lookups';
 import countriesData from '@/assets/data/countries.json';
@@ -46,6 +53,7 @@ const PassportScreen = () => {
   const { theme } = useTheme();
   const { width } = useWindowDimensions();
   const styles = useMemo(() => getPassportStyles(theme), [theme]);
+  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userProgression = stateStore((s) => s.userProgress);
   const userSettings = stateStore((s) => s.userSettings);
@@ -172,7 +180,10 @@ const PassportScreen = () => {
                 )}
                 numColumns={passportCardAllowance}
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.flatlistContainer}
+                contentContainerStyle={[
+                  styles.flatlistContainer,
+                  { paddingBottom: insets.bottom + BOTTOM_SPACING },
+                ]}
                 columnWrapperStyle={{ gap: 10 }}
                 ListHeaderComponent={
                   <InformationButton

@@ -36,7 +36,14 @@ import { PassportEntry } from '@/types/secureStore';
 import countries from '@/types/countries';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 
-// TODO - add insets only when user is not premium so ads aren't below navigation bar
+// TODO - improve flag of the week scaling on smallest screens
+
+/* 
+Last TODO bits to change:
+- remove insets when ads are not showing
+- Decide if leaderboard should use 2 decimal places
+- screen tabs overlap with device navigation bar
+*/
 
 interface IFeedbackButtonProps {
   elevation: number;

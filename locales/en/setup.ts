@@ -3,8 +3,10 @@ export default {
   yearOfBirth: 'Year of Birth',
   yearOfBirthAccessibilityLabel: 'Year of birth input',
   yearOfBirthAccessibilityHint:
-    'Enter the 4-digit year you were born. Must be a valid year.',
+    'Enter the 4-digit year you were born. Must be a valid year',
   displayName: 'Display Name',
   displayNameAccessibilityLabel: 'Display name input',
+  displayNameInappropriate:
+    'Your chosen display name is inappropriate. Change it to continue.',
   continue: 'Continue',
 };

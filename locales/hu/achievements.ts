@@ -1,5 +1,9 @@
 export default {
   title: 'Feloldott Teljesítmények',
+  unlocked: 'Feloldva',
+  locked: 'Zárolva',
+  dateUnlocked: 'Feloldva: {{date}}',
+  page: '{{page}} / {{maximumPage}}',
 
   // Quiz Achievements
   totalCorrect: {

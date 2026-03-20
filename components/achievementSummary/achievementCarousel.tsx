@@ -1,56 +1,51 @@
-import { useState } from 'react';
-import { View, Text, Dimensions, Pressable } from 'react-native';
+import { Text, Dimensions, Pressable, FlatList } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
-import Carousel from 'react-native-reanimated-carousel';
 
 import { useTheme } from '@/context/ThemeContext';
 import { AchievementId } from '@/data/achievements/achievements.config';
-import { getSummarySharedStyles } from '@/styles/summary/summaryShared';
 import { ProgressionStructure } from '@/types/secureStore';
 import achievementIconsById from '@/data/achievements/achievements.lookup';
-import { SCREEN_MAX_WIDTH } from '@/constants/common';
 import { getAchievementCarouselStyles } from './achievementCarousel.styles';
-
-// TODO - add accessibility for carousel
+import { useNavigation } from 'expo-router';
+import { NavigationProps } from '@/types/navigation';
 
 interface IAchievementCarousel {
   achievements: AchievementId[];
   userProgression: ProgressionStructure;
-  showTitle?: boolean;
-  onPress?: () => void;
+  navigate?: boolean;
 }
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const CONTAINER_WIDTH = SCREEN_WIDTH;
+const SPACING = 20;
+const ITEM_WIDTH = CONTAINER_WIDTH * 0.75;
+const SIDE_PADDING = (CONTAINER_WIDTH - ITEM_WIDTH) / 2;
 
 const AchievementCarousel = ({
   achievements,
   userProgression,
-  showTitle = true,
-  onPress,
+  navigate,
 }: IAchievementCarousel) => {
+  const navigation = useNavigation<NavigationProps>();
   const { t } = useTranslation('achievements');
   const { theme } = useTheme();
-  const sharedSummaryStyles = getSummarySharedStyles(theme);
   const styles = getAchievementCarouselStyles(theme);
-  const [carouselHeight, setCarouselHeight] = useState(0);
 
   const renderItem = ({ item }: { item: AchievementId }) => {
     const stepIndex = userProgression.achievements[item].stepIndex;
 
     return (
       <Pressable
-        onLayout={(e) => {
-          const height = e.nativeEvent.layout.height;
-          setCarouselHeight((prev) => Math.max(prev, height));
-        }}
-        disabled={!onPress}
-        onPress={onPress}
+        disabled={!navigate}
+        onPress={() =>
+          navigation.navigate('achievementDetail', { achievementId: item })
+        }
         style={({ pressed }) => [
           styles.carouselCard,
           {
             opacity: pressed ? 0.7 : 1,
-            width: SCREEN_WIDTH,
+            width: ITEM_WIDTH,
           },
         ]}
       >
@@ -69,26 +64,19 @@ const AchievementCarousel = ({
   };
 
   return (
-    <View
-      style={{
-        ...styles.container,
-        maxWidth: SCREEN_MAX_WIDTH,
+    <FlatList
+      horizontal
+      data={achievements}
+      keyExtractor={(achievement) => achievement}
+      renderItem={renderItem}
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{
+        gap: SPACING,
+        paddingHorizontal: SIDE_PADDING,
       }}
-    >
-      {showTitle && (
-        <Text style={sharedSummaryStyles.valueText}>{t('title')}</Text>
-      )}
-
-      <Carousel
-        width={SCREEN_WIDTH}
-        height={carouselHeight || 1}
-        data={achievements}
-        renderItem={renderItem}
-        loop={false}
-        mode="parallax"
-        pagingEnabled
-      />
-    </View>
+      snapToInterval={ITEM_WIDTH + SPACING}
+      decelerationRate="fast"
+    />
   );
 };
 
