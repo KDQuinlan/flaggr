@@ -254,7 +254,9 @@ import ZaFlag from './resources/za.png';
 import ZmFlag from './resources/zm.png';
 import ZwFlag from './resources/zw.png';
 
-type FlagMap = Record<string, ImageSourcePropType>;
+// TODO - remove type any for Expo SDK 55-compatible type
+
+type FlagMap = Record<string, any>;
 
 const flags: FlagMap = {
   ad: AdFlag,

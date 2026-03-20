@@ -8,13 +8,19 @@ Currently in development for the Play Store, with iOS coming later.
 
 ## Get started
 
-1. Install dependencies
+1. Add android/local.properties with NDK path
+
+   ```bash
+   e.g. ndk.dir=C:\\ndk\\27.1.12297006
+   ```
+
+2. Install dependencies
 
    ```bash
    npm install --legacy-peer-deps
    ```
 
-2. Start the app
+3. Start the app
 
    ```bash
     npm run android
@@ -25,7 +31,7 @@ Currently in development for the Play Store, with iOS coming later.
 All new dependencies MUST be installed with
 
    ```bash
-   npx expo install [packagename]
+   npx expo install [packagename] '--' --legacy-peer-deps
    ```
 
 As it lets Expo figure out which version to install it with. We require Expo@52 for our PGS integration.
