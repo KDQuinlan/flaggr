@@ -11,22 +11,17 @@ import {
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Dropdown } from 'react-native-element-dropdown';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { NavigationProps } from '@/types/navigation';
 import { useTheme } from '@/context/ThemeContext';
 import { getFeedbackStyles } from '@/styles/feedback';
-import { BOTTOM_SPACING } from '@/constants/common';
 
 const FeedbackScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const { t } = useTranslation('feedback');
   const { theme } = useTheme();
   const styles = useMemo(() => getFeedbackStyles(theme), [theme]);
-  const insets = useSafeAreaInsets();
   const [type, setType] = useState<string | null>(null);
   const [message, setMessage] = useState<string>('');
 
@@ -71,10 +66,7 @@ const FeedbackScreen = () => {
   return (
     <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
-        contentContainerStyle={[
-          styles.scrollContainer,
-          { paddingBottom: insets.bottom + BOTTOM_SPACING },
-        ]}
+        contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
       >
         <View style={{ marginTop: 20 }}>

@@ -1,10 +1,7 @@
 import { useMemo } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { Image } from 'expo-image';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { getNoticeBoardStyles } from '@/styles/noticeBoard';
 import { useTheme } from '@/context/ThemeContext';
@@ -20,7 +17,6 @@ import {
   NoticeBoardUpdateTypes,
 } from '@/types/noticeBoard';
 import { useTranslation } from 'react-i18next';
-import { BOTTOM_SPACING } from '@/constants/common';
 
 const NoticeBoardEntry = ({
   title,
@@ -98,7 +94,6 @@ const NoticeBoard = () => {
   const { theme } = useTheme();
   const styles = useMemo(() => getNoticeBoardStyles(theme), [theme]);
   const { t } = useTranslation('home');
-  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser } = stateStore((s) => s.userSettings);
   const showAds = !isPremiumUser && isInternetAvailable;
@@ -111,10 +106,7 @@ const NoticeBoard = () => {
   return (
     <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
-        contentContainerStyle={[
-          styles.scrollContainer,
-          { paddingBottom: insets.bottom + BOTTOM_SPACING },
-        ]}
+        contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
       >
         {dateAdjustedNoticeBoardData.length === 0 ? (

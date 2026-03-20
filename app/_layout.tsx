@@ -47,15 +47,14 @@ function RootLayoutContent() {
   });
 
   useLayoutEffect(() => {
+    NavigationBar.setVisibilityAsync('hidden');
+
     if (isInitialised) {
       SystemUI.setBackgroundColorAsync(
         isDarkTheme ? colors.black : colors.offWhite
       );
 
-      NavigationBar.setBackgroundColorAsync(
-        isDarkTheme ? colors.black : colors.offWhite
-      );
-      NavigationBar.setButtonStyleAsync(isDarkTheme ? 'light' : 'dark');
+      NavigationBar.setStyle(isDarkTheme ? 'light' : 'dark');
     }
   }, [isDarkTheme, isInitialised]);
 
