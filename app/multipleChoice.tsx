@@ -45,6 +45,7 @@ import emitAchievementEvent from '@/data/achievements/emitAchievementEvent';
 
 // TODO - investigate race condition that makes passport achievement not show as unlocked on summary screen
 // TODO - investigate achievements appearing twice like best streak on 30
+// TODO - improve screen scaling such as large font size with ads on tablet
 
 interface IStatsRowProps {
   gameMode: PlayableGameModes;

@@ -10,7 +10,7 @@ android {
   namespace "com.kquinlan.playgames"
   defaultConfig {
     versionCode 1
-    versionName "0.7.9"
+    versionName "0.0.1"
   }
   lintOptions {
     abortOnError false
