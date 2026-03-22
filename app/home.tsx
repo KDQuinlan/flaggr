@@ -37,7 +37,6 @@ import countries from '@/types/countries';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 
 // TODO - improve flag of the week scaling on smallest screens
-// TODO - review ScrollView props for consistency
 
 interface IFeedbackButtonProps {
   elevation: number;
