@@ -1,10 +1,7 @@
 import { useMemo } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { Image } from 'expo-image';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { useTheme } from '@/context/ThemeContext';
 import { BANNER_HOME_AND_SETTINGS_ID, BANNER_TEST_ID } from '@/constants/adId';
@@ -14,7 +11,6 @@ import { getNoticeBoardEntryStyles } from '@/styles/noticeBoardEntry';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '@/types/navigation';
 import { NoticeBoardContentSection } from '@/types/noticeBoard';
-import { BOTTOM_SPACING } from '@/constants/common';
 
 const ContentSection = (section: NoticeBoardContentSection) => {
   const { theme } = useTheme();
@@ -32,7 +28,6 @@ const NoticeBoardEntry = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'noticeBoardEntry'>>();
   const { theme } = useTheme();
   const styles = useMemo(() => getNoticeBoardEntryStyles(theme), [theme]);
-  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser } = stateStore((s) => s.userSettings);
   const showAds = !isPremiumUser && isInternetAvailable;
@@ -46,11 +41,11 @@ const NoticeBoardEntry = () => {
   return (
     <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
-        contentContainerStyle={[
-          styles.scrollContainer,
-          { paddingBottom: insets.bottom + BOTTOM_SPACING },
-        ]}
+        contentContainerStyle={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentInsetAdjustmentBehavior="automatic"
       >
         <View
           style={{ justifyContent: 'center', alignItems: 'center', gap: 10 }}

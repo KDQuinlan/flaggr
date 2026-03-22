@@ -48,7 +48,7 @@ export default {
   },
   customScore: {
     title: 'Punteggio in Custom',
-    description: 'Raggiungi {{number}} punti in Custom',
+    description: 'Raggiungi un punteggio di {{number}} in Custom',
   },
 
   // Practice Achievements

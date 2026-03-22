@@ -3,10 +3,7 @@ import { useNavigation } from 'expo-router';
 import { Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { RouteProp, useRoute } from '@react-navigation/native';
 
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
@@ -20,13 +17,11 @@ import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { getStatsStyles } from '@/styles/stats';
-import { BOTTOM_SPACING } from '@/constants/common';
 
 // TODO - add 2 per row on tablet
 
 const StatsScreen = () => {
   const navigation = useNavigation<NavigationProps>();
-  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const { isPremiumUser } = userSettings;
@@ -53,7 +48,7 @@ const StatsScreen = () => {
             keyExtractor={(item) => item.countryName}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{
-              paddingBottom: insets.bottom + BOTTOM_SPACING,
+              paddingBottom: 20,
             }}
             renderItem={({ item }) => {
               const answeredTotal = item.correctTotal + item.incorrectTotal;

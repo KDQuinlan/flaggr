@@ -3,10 +3,7 @@ import { RouteProp, useFocusEffect, useRoute } from '@react-navigation/native';
 import { BackHandler, Pressable, ScrollView, Text, View } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import stateStore from '@/state/store';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
@@ -36,7 +33,6 @@ import AnimatedXpProgressBar from '@/components/animatedXpProgressBar/animatedXp
 import { AchievementId } from '@/data/achievements/achievements.config';
 import emitAchievementEvent from '@/data/achievements/emitAchievementEvent';
 import AchievementCarousel from '@/components/achievementSummary/achievementCarousel';
-import { BOTTOM_SPACING } from '@/constants/common';
 
 const CustomSummary = () => {
   useFocusEffect(
@@ -59,7 +55,6 @@ const CustomSummary = () => {
   const { t } = useTranslation('customSummary');
   const { theme } = useTheme();
   const styles = getCustomSummaryStyles();
-  const insets = useSafeAreaInsets();
   const sharedSummaryStyles = useMemo(
     () => getSummarySharedStyles(theme),
     [theme]
@@ -181,10 +176,10 @@ const CustomSummary = () => {
   return (
     <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
       <ScrollView
-        contentContainerStyle={{
-          paddingBottom: insets.bottom + BOTTOM_SPACING,
-        }}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentInsetAdjustmentBehavior="automatic"
       >
         <View style={sharedSummaryStyles.sectionContainer}>
           <Text style={sharedSummaryStyles.title}>{t('completed')}</Text>

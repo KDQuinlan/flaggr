@@ -37,13 +37,7 @@ import countries from '@/types/countries';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 
 // TODO - improve flag of the week scaling on smallest screens
-
-/* 
-Last TODO bits to change:
-- remove insets when ads are not showing
-- Decide if leaderboard should use 2 decimal places
-- screen tabs overlap with device navigation bar
-*/
+// TODO - review ScrollView props for consistency
 
 interface IFeedbackButtonProps {
   elevation: number;
@@ -185,7 +179,10 @@ const HomeScreen = () => {
     <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentInsetAdjustmentBehavior="automatic"
       >
         <View style={styles.headerContainer}>
           <View style={styles.iconsContainer}>

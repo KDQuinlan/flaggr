@@ -3,10 +3,7 @@ import { ScrollView, View, Text } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import stateStore from '@/state/store';
@@ -16,7 +13,7 @@ import { BANNER_PASSPORT_ID, BANNER_TEST_ID } from '@/constants/adId';
 import { getPassportEntryStyles } from '@/styles/passportEntry';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import flags from '@/assets/images/flags';
-import { BOTTOM_SPACING, MAXIMUM_DIFFICULTY } from '@/constants/common';
+import { MAXIMUM_DIFFICULTY } from '@/constants/common';
 import formatPercent from '@/util/formatPercent/formatPercent';
 
 const PassportEntryScreen = () => {
@@ -25,7 +22,6 @@ const PassportEntryScreen = () => {
   const { t } = useTranslation('passportEntry');
   const { theme } = useTheme();
   const styles = useMemo(() => getPassportEntryStyles(theme), [theme]);
-  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const showAds = !userSettings.isPremiumUser && isInternetAvailable;
@@ -40,11 +36,11 @@ const PassportEntryScreen = () => {
   return (
     <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
-        contentContainerStyle={[
-          styles.scrollContainer,
-          { paddingBottom: insets.bottom + BOTTOM_SPACING },
-        ]}
+        contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentInsetAdjustmentBehavior="automatic"
       >
         <View style={styles.flagTitleContainer}>
           <Image

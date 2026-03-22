@@ -22,40 +22,42 @@ export const useRewardedAd = () => {
   const [isAdLoaded, setAdLoaded] = useState(false);
 
   useEffect(() => {
-    const unsubscribeLoaded = rewarded.addAdEventListener(
-      RewardedAdEventType.LOADED,
-      () => {
-        setAdLoaded(true);
-        console.log('Rewarded ad loaded');
-      }
-    );
+    if (!userSettings.isPremiumUser) {
+      const unsubscribeLoaded = rewarded.addAdEventListener(
+        RewardedAdEventType.LOADED,
+        () => {
+          setAdLoaded(true);
+          console.log('Rewarded ad loaded');
+        }
+      );
 
-    const unsubscribeEarned = rewarded.addAdEventListener(
-      RewardedAdEventType.EARNED_REWARD,
-      () => {
-        persistUserSettings({
-          ...userSettings,
-          energyAmount: MAXIMUM_ENERGY,
-          lastEnergyTimestamp: null,
-        });
-      }
-    );
+      const unsubscribeEarned = rewarded.addAdEventListener(
+        RewardedAdEventType.EARNED_REWARD,
+        () => {
+          persistUserSettings({
+            ...userSettings,
+            energyAmount: MAXIMUM_ENERGY,
+            lastEnergyTimestamp: null,
+          });
+        }
+      );
 
-    const unsubscribeClosed = rewarded.addAdEventListener(
-      AdEventType.CLOSED,
-      () => {
-        setAdLoaded(false);
-        rewarded.load();
-      }
-    );
+      const unsubscribeClosed = rewarded.addAdEventListener(
+        AdEventType.CLOSED,
+        () => {
+          setAdLoaded(false);
+          rewarded.load();
+        }
+      );
 
-    rewarded.load();
+      rewarded.load();
 
-    return () => {
-      unsubscribeLoaded();
-      unsubscribeEarned();
-      unsubscribeClosed();
-    };
+      return () => {
+        unsubscribeLoaded();
+        unsubscribeEarned();
+        unsubscribeClosed();
+      };
+    }
   }, [userSettings]);
 
   const showRewardedAd = () => {

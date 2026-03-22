@@ -48,7 +48,7 @@ export default {
   },
   customScore: {
     title: 'Custom Score',
-    description: 'Reach {{number}} score in Custom',
+    description: 'Reach a score of {{number}} in Custom',
   },
 
   // Practice Achievements

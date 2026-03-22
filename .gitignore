@@ -41,3 +41,9 @@ android/build/
 android/app/build/
 android/.gradle/
 android/local.properties
+
+# Local Expo Module Build Artifacts
+modules/*/android/build/
+modules/*/android/.cxx/
+modules/*/android/.gradle/
+modules/*/ios/build/

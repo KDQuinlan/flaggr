@@ -3,7 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
 
 import { useTheme } from '@/context/ThemeContext';
-import { AchievementId } from '@/data/achievements/achievements.config';
+import {
+  AchievementId,
+  ACHIEVEMENTS,
+} from '@/data/achievements/achievements.config';
 import { ProgressionStructure } from '@/types/secureStore';
 import achievementIconsById from '@/data/achievements/achievements.lookup';
 import { getAchievementCarouselStyles } from './achievementCarousel.styles';
@@ -35,6 +38,10 @@ const AchievementCarousel = ({
   const renderItem = ({ item }: { item: AchievementId }) => {
     const stepIndex = userProgression.achievements[item].stepIndex;
 
+    const achievementData = ACHIEVEMENTS.find(
+      (achievement) => achievement.id === item
+    )!;
+
     return (
       <Pressable
         disabled={!navigate}
@@ -56,7 +63,10 @@ const AchievementCarousel = ({
         />
         <Text style={styles.achievementText}>
           {t(`${item}.description`, {
-            number: userProgression.achievements[item].currentValue,
+            number:
+              achievementData.thresholds[
+                userProgression.achievements[item].stepIndex
+              ],
           })}
         </Text>
       </Pressable>
@@ -76,6 +86,7 @@ const AchievementCarousel = ({
       }}
       snapToInterval={ITEM_WIDTH + SPACING}
       decelerationRate="fast"
+      disableIntervalMomentum
     />
   );
 };

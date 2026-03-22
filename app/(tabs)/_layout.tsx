@@ -18,11 +18,12 @@ export default function TabLayout() {
         tabBarActiveBackgroundColor: theme.background,
         tabBarInactiveBackgroundColor: theme.background,
         tabBarStyle: {
-          borderTopWidth: 1,
+          borderTopWidth: 2,
           borderColor: theme.border,
           backgroundColor: theme.background,
           shadowColor: theme.shadow,
           elevation: 5,
+          height: 60,
         },
       }}
     >

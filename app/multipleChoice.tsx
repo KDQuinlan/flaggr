@@ -43,6 +43,9 @@ import persistProgression from '@/util/persistState/persistProgression';
 import { AchievementId } from '@/data/achievements/achievements.config';
 import emitAchievementEvent from '@/data/achievements/emitAchievementEvent';
 
+// TODO - investigate race condition that makes passport achievement not show as unlocked on summary screen
+// TODO - investigate achievements appearing twice like best streak on 30
+
 interface IStatsRowProps {
   gameMode: PlayableGameModes;
   isGameCountingUp: boolean;

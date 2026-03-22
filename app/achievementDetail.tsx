@@ -3,10 +3,7 @@ import { useNavigation } from 'expo-router';
 import { Dimensions, FlatList, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import AdBanner from '@/components/AdBanner/AdBanner';
@@ -29,7 +26,6 @@ const SIDE_PADDING = (CONTAINER_WIDTH - ITEM_WIDTH) / 2;
 const AchievementDetail = () => {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'achievementDetail'>>();
-  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const userProgression = stateStore((s) => s.userProgress);
@@ -130,7 +126,6 @@ const AchievementDetail = () => {
         contentContainerStyle={{
           gap: SPACING,
           paddingHorizontal: SIDE_PADDING,
-          paddingBottom: insets.bottom,
         }}
         snapToInterval={ITEM_WIDTH + SPACING}
         decelerationRate="fast"

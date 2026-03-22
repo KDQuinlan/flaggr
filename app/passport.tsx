@@ -17,7 +17,6 @@ import {
 } from '@gorhom/bottom-sheet';
 import {
   SafeAreaProvider,
-  useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
 import { NavigationProps } from '@/types/navigation';
@@ -29,7 +28,6 @@ import { Passport } from '@/types/secureStore';
 import { getPassportStyles } from '@/styles/passport';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
 import {
-  BOTTOM_SPACING,
   GAME_DIFFICULTIES,
   VALID_REGIONS,
 } from '@/constants/common';
@@ -53,7 +51,6 @@ const PassportScreen = () => {
   const { theme } = useTheme();
   const { width } = useWindowDimensions();
   const styles = useMemo(() => getPassportStyles(theme), [theme]);
-  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userProgression = stateStore((s) => s.userProgress);
   const userSettings = stateStore((s) => s.userSettings);
@@ -180,10 +177,8 @@ const PassportScreen = () => {
                 )}
                 numColumns={passportCardAllowance}
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={[
-                  styles.flatlistContainer,
-                  { paddingBottom: insets.bottom + BOTTOM_SPACING },
-                ]}
+                contentContainerStyle={
+                  styles.flatlistContainer}
                 columnWrapperStyle={{ gap: 10 }}
                 ListHeaderComponent={
                   <InformationButton
