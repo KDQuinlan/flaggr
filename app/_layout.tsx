@@ -61,9 +61,6 @@ function RootLayoutContent() {
   useEffect(() => {
     const loadData = async () => {
       await hydrateStore();
-      setUserDefaultPlatformName(
-        (await PlayGames.getCurrentPlayer()).displayName
-      );
       setHasStoreHydrated(true);
     };
 
@@ -74,11 +71,29 @@ function RootLayoutContent() {
     if (hasStoreHydrated) {
       restoreEnergyOnLoad();
 
+      const loadPlayer = async () => {
+        await PlayGames.getCurrentPlayer().catch(
+          async () =>
+            await persistUserSettings({
+              ...userSettings,
+              isGoogleConnected: false,
+            })
+        );
+      };
+
+      userSettings.isGoogleConnected && loadPlayer();
+
       if (!userSettings.isGoogleConnected) {
         (async () => {
           try {
             await PlayGames.signIn();
-            persistUserSettings({ ...userSettings, isGoogleConnected: true });
+            try {
+              const currentPlayer = await PlayGames.getCurrentPlayer();
+              setUserDefaultPlatformName(currentPlayer.displayName);
+              persistUserSettings({ ...userSettings, isGoogleConnected: true });
+            } catch (e) {
+              console.error('getCurrentPlayer error:', e);
+            }
           } catch (e) {
             console.error('Sign-in error:', e);
           }

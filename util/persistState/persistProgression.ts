@@ -5,7 +5,7 @@ import { mmkvStorage } from '@/state/mmkv';
 import stateStore from '@/state/store';
 
 const persistProgression = (updatedProgression: ProgressionStructure) => {
-  const { setProgression } = stateStore.getState();
+  const { setProgression, userSettings } = stateStore.getState();
 
   try {
     mmkvStorage.set(
@@ -13,10 +13,11 @@ const persistProgression = (updatedProgression: ProgressionStructure) => {
       JSON.stringify(updatedProgression)
     );
     setProgression(updatedProgression);
-    PlayGames.saveGame(
-      STORAGE_KEY_PROGRESSION,
-      JSON.stringify(updatedProgression)
-    );
+    userSettings.isGoogleConnected &&
+      PlayGames.saveGame(
+        STORAGE_KEY_PROGRESSION,
+        JSON.stringify(updatedProgression)
+      );
   } catch (e) {
     console.error('Error persisting progression:', e);
   }

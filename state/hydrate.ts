@@ -34,9 +34,10 @@ export const hydrateStore = async () => {
     await SecureStore.getItemAsync(STORAGE_KEY_SETTINGS);
 
   const localSavedProgression = mmkvStorage.getString(STORAGE_KEY_PROGRESSION);
-  const googleSavedProgression = await PlayGames.loadGame(
-    STORAGE_KEY_PROGRESSION
-  );
+
+  const googleSavedProgression =
+    (await PlayGames.loadGame(STORAGE_KEY_PROGRESSION).catch(() => null)) ??
+    null;
 
   const cachedUserSettings = userSettingsSecure
     ? JSON.parse(userSettingsSecure)
