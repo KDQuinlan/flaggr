@@ -247,9 +247,11 @@ const CustomScreen = () => {
   return (
     <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
-        contentContainerStyle={
-          styles.scrollContainer}
+        contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentInsetAdjustmentBehavior="automatic"
       >
         {!!score && <HighScoreAccordion />}
 

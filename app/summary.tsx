@@ -325,7 +325,12 @@ const Summary = () => {
 
   return (
     <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentInsetAdjustmentBehavior="automatic"
+      >
         <View style={sharedSummaryStyles.sectionContainer}>
           <View style={styles.titleContainer}>
             <Text style={sharedSummaryStyles.title}>

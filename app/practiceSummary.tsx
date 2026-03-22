@@ -136,8 +136,6 @@ const PracticeSummary = () => {
     (entry) => entry.previousPercentage === entry.newPercentage
   ).length;
 
-  console.log(unchangedCount, history.length);
-
   const getSubtitle = () => {
     if (improvedCount === 1) return t('improvedSingular');
     if (improvedCount > 1)
@@ -207,7 +205,12 @@ const PracticeSummary = () => {
 
   return (
     <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentInsetAdjustmentBehavior="automatic"
+      >
         <View style={sharedSummaryStyles.sectionContainer}>
           <Text style={sharedSummaryStyles.title}>{t('completed')}</Text>
 

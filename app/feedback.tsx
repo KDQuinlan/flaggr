@@ -68,6 +68,9 @@ const FeedbackScreen = () => {
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentInsetAdjustmentBehavior="automatic"
       >
         <View style={{ marginTop: 20 }}>
           <Text style={styles.label}>{t('reason')}</Text>

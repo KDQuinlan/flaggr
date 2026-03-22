@@ -28,7 +28,6 @@ const NoticeBoardEntry = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'noticeBoardEntry'>>();
   const { theme } = useTheme();
   const styles = useMemo(() => getNoticeBoardEntryStyles(theme), [theme]);
-  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser } = stateStore((s) => s.userSettings);
   const showAds = !isPremiumUser && isInternetAvailable;
@@ -43,7 +42,10 @@ const NoticeBoardEntry = () => {
     <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentInsetAdjustmentBehavior="automatic"
       >
         <View
           style={{ justifyContent: 'center', alignItems: 'center', gap: 10 }}

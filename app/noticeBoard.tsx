@@ -107,7 +107,10 @@ const NoticeBoard = () => {
     <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentInsetAdjustmentBehavior="automatic"
       >
         {dateAdjustedNoticeBoardData.length === 0 ? (
           <Text style={styles.noticeBoardEmpty}>{t('noticeBoardEmpty')}</Text>

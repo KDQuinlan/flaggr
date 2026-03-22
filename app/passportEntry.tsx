@@ -38,6 +38,9 @@ const PassportEntryScreen = () => {
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentInsetAdjustmentBehavior="automatic"
       >
         <View style={styles.flagTitleContainer}>
           <Image

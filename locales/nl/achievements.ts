@@ -48,7 +48,7 @@ export default {
   },
   customScore: {
     title: 'Custom Score',
-    description: 'Behaal {{number}} punten in Custom',
+    description: 'Behaal een score van {{number}} in Custom',
   },
 
   // Practice Achievements

@@ -3,9 +3,7 @@ import { useNavigation } from 'expo-router';
 import { Dimensions, FlatList, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
-import {
-  SafeAreaProvider,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import AdBanner from '@/components/AdBanner/AdBanner';

@@ -207,7 +207,10 @@ const ProfileScreen = () => {
     <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentInsetAdjustmentBehavior="automatic"
       >
         {userDisplayName && (
           <Text style={styles.usernameText}>{userDisplayName}</Text>

@@ -179,7 +179,10 @@ const HomeScreen = () => {
     <SafeAreaProvider style={styles.rootContainer}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentInsetAdjustmentBehavior="automatic"
       >
         <View style={styles.headerContainer}>
           <View style={styles.iconsContainer}>

@@ -175,7 +175,12 @@ const CustomSummary = () => {
 
   return (
     <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentInsetAdjustmentBehavior="automatic"
+      >
         <View style={sharedSummaryStyles.sectionContainer}>
           <Text style={sharedSummaryStyles.title}>{t('completed')}</Text>
 

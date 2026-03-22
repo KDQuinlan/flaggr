@@ -307,6 +307,9 @@ const SettingsScreen = () => {
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentInsetAdjustmentBehavior="automatic"
       >
         {!userSettings.isPremiumUser && <PurchasePremiumButton />}
         <DropdownSelector
