@@ -74,7 +74,8 @@ const PracticeSummary = () => {
   const userProgression = stateStore((s) => s.userProgress);
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
-  const { isPremiumUser, userLevel } = userSettings;
+  const { isPremiumUser } = userSettings;
+  const { userLevel } = userProgression;
   const { passportBeforeQuiz, gameResult, multipleChoiceAchievementsUnlocked } =
     route.params;
   const { correct, incorrect, history } = gameResult;
@@ -190,9 +191,9 @@ const PracticeSummary = () => {
         practiceFlagsImproved:
           practiceFlagsImprovedAchievementEvent.updatedAchievementProgress,
       },
+      userLevel: newUserLevelData,
     });
 
-    persistUserSettings({ ...userSettings, userLevel: newUserLevelData });
     PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
     PlayGames.submitScore(
       ACCURACY_ID,

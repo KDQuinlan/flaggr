@@ -28,7 +28,6 @@ import SummaryHistory from '@/components/summary/summaryHistory';
 import { getSummarySharedStyles } from '@/styles/summary/summaryShared';
 import calculateExperienceGain from '@/util/leveling/calculateExperienceGain';
 import calculateUserLevelData from '@/util/leveling/calculateUserLevelData';
-import persistUserSettings from '@/util/persistState/persistUserSettings';
 import AnimatedXpProgressBar from '@/components/animatedXpProgressBar/animatedXpProgressBar';
 import { AchievementId } from '@/data/achievements/achievements.config';
 import emitAchievementEvent from '@/data/achievements/emitAchievementEvent';
@@ -62,7 +61,8 @@ const CustomSummary = () => {
   const userProgression = stateStore((s) => s.userProgress);
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
-  const { isPremiumUser, userLevel } = userSettings;
+  const { isPremiumUser } = userSettings;
+  const { userLevel } = userProgression;
   const { gameResult, finalScore, multipleChoiceAchievementsUnlocked } =
     route.params;
   const { correct, incorrect, highestStreak, history, timeTaken } = gameResult;
@@ -159,9 +159,8 @@ const CustomSummary = () => {
           customMatchesPlayedAchievementEvent.updatedAchievementProgress,
         customScore: customScoreAchievementEvent.updatedAchievementProgress,
       },
+      userLevel: newUserLevelData,
     });
-
-    persistUserSettings({ ...userSettings, userLevel: newUserLevelData });
 
     PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
     PlayGames.submitScore(HIGH_SCORE_ID, finalScore);

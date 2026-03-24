@@ -1,4 +1,4 @@
-import { UserSettingStructure } from '@/types/secureStore';
+import { ProgressionStructure } from '@/types/secureStore';
 
 const getExperienceMultiplierForLevel = (level: number): number => {
   if (level < 10) return 1.01;
@@ -10,9 +10,9 @@ const getExperienceMultiplierForLevel = (level: number): number => {
 };
 
 interface IUpdatedLevelProps {
-  level: UserSettingStructure['userLevel']['level'];
-  currentLevelExperienceRequired: UserSettingStructure['userLevel']['currentLevelExperienceRequired'];
-  experienceUntilNextLevelUp: UserSettingStructure['userLevel']['experienceUntilNextLevelUp'];
+  level: ProgressionStructure['userLevel']['level'];
+  currentLevelExperienceRequired: ProgressionStructure['userLevel']['currentLevelExperienceRequired'];
+  experienceUntilNextLevelUp: ProgressionStructure['userLevel']['experienceUntilNextLevelUp'];
   experienceGained: number;
 }
 
@@ -48,14 +48,14 @@ const updatedLevel = ({
 };
 
 interface ICalculateUserLevelDataProps {
-  userLevel: UserSettingStructure['userLevel'];
+  userLevel: ProgressionStructure['userLevel'];
   experienceGained: number;
 }
 
 const calculateUserLevelData = ({
   userLevel,
   experienceGained,
-}: ICalculateUserLevelDataProps): UserSettingStructure['userLevel'] => {
+}: ICalculateUserLevelDataProps): ProgressionStructure['userLevel'] => {
   const {
     totalExperience,
     level,
