@@ -23,13 +23,6 @@ export const defaultUserSettings: UserSettingStructure = {
   lastEnergyTimestamp: null,
   noticeBoardLastVisitedDate: null,
   displayAnswerTimerMs: ANSWERS_SHOWN_DURATION_DEFAULT_MS,
-  userLevel: {
-    totalExperience: 0,
-    level: 1,
-    currentLevelExperienceRequired: 200,
-    experienceUntilNextLevelUp: 200,
-    lastExperienceGainedDate: null,
-  },
 };
 
 export const defaultProgressionStructure: ProgressionStructure = {
@@ -43,6 +36,13 @@ export const defaultProgressionStructure: ProgressionStructure = {
   },
   passport: [],
   achievements: getAchievementDefaults(),
+  userLevel: {
+    totalExperience: 0,
+    level: 1,
+    currentLevelExperienceRequired: 200,
+    experienceUntilNextLevelUp: 200,
+    lastExperienceGainedDate: null,
+  },
 };
 
 export const examplePassportEntry: PassportEntry = {

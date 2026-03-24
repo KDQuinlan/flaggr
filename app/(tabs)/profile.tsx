@@ -151,7 +151,8 @@ const ProfileScreen = () => {
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const userProgression = stateStore((s) => s.userProgress);
-  const { isPremiumUser, userLevel, userDisplayName } = userSettings;
+  const { userLevel } = userProgression;
+  const { isPremiumUser, userDisplayName } = userSettings;
   const { level, currentLevelExperienceRequired, experienceUntilNextLevelUp } =
     userLevel;
   const { t } = useTranslation('profile');

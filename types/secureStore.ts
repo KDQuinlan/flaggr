@@ -125,6 +125,13 @@ export type ProgressionStructure = {
   };
   passport: Passport;
   achievements: AchievementProgressionStructure;
+  userLevel: {
+    totalExperience: number;
+    level: number;
+    currentLevelExperienceRequired: number;
+    experienceUntilNextLevelUp: number;
+    lastExperienceGainedDate: number | null;
+  };
 };
 
 export type UserSettingStructure = {
@@ -140,11 +147,4 @@ export type UserSettingStructure = {
   lastEnergyTimestamp: number | null;
   noticeBoardLastVisitedDate: number | null;
   displayAnswerTimerMs: number;
-  userLevel: {
-    totalExperience: number;
-    level: number;
-    currentLevelExperienceRequired: number;
-    experienceUntilNextLevelUp: number;
-    lastExperienceGainedDate: number | null;
-  };
 };

@@ -320,6 +320,13 @@ export const mockGoodProgressionData = {
     },
   ],
   achievements: getAchievementDefaults(),
+  userLevel: {
+    totalExperience: 0,
+    level: 1,
+    currentLevelExperienceRequired: 200,
+    experienceUntilNextLevelUp: 200,
+    lastExperienceGainedDate: null,
+  },
 };
 
 export const mockCorruptUserSettingsData = {
@@ -346,11 +353,4 @@ export const mockGoodUserSettingsData = {
   lastEnergyTimestamp: null,
   noticeBoardLastVisitedDate: null,
   displayAnswerTimerMs: 500,
-  userLevel: {
-    totalExperience: 0,
-    level: 1,
-    currentLevelExperienceRequired: 200,
-    experienceUntilNextLevelUp: 200,
-    lastExperienceGainedDate: null,
-  },
 };

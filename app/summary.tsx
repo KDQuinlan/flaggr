@@ -34,7 +34,6 @@ import SummaryHistory from '@/components/summary/summaryHistory';
 import { getSummarySharedStyles } from '@/styles/summary/summaryShared';
 import calculateProgressionExperienceGain from '@/util/leveling/calculateProgressionExperienceGain';
 import calculateUserLevelData from '@/util/leveling/calculateUserLevelData';
-import persistUserSettings from '@/util/persistState/persistUserSettings';
 import AnimatedXpProgressBar from '@/components/animatedXpProgressBar/animatedXpProgressBar';
 import formatPercent from '@/util/formatPercent/formatPercent';
 import { AchievementId } from '@/data/achievements/achievements.config';
@@ -69,7 +68,8 @@ const Summary = () => {
   const userProgression = stateStore((s) => s.userProgress);
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
-  const { isPremiumUser, userLevel } = userSettings;
+  const { isPremiumUser } = userSettings;
+  const { userLevel } = userProgression;
   const {
     difficulty,
     gameMode,
@@ -261,9 +261,9 @@ const Summary = () => {
         [achievementPerfectionId]:
           perfectionAchievementEvent.updatedAchievementProgress,
       },
+      userLevel: newUserLevelData,
     });
 
-    persistUserSettings({ ...userSettings, userLevel: newUserLevelData });
     PlayGames.submitScore(MATCHES_PLAYED_ID, newMatchesPlayed);
     PlayGames.submitScore(
       ACCURACY_ID,

@@ -13,11 +13,11 @@ import { useTranslation } from 'react-i18next';
 
 import { getAnimatedXpProgressBarStyles } from './animatedXpProgressBar.styles';
 import { useTheme } from '@/context/ThemeContext';
-import { UserSettingStructure } from '@/types/secureStore';
+import { ProgressionStructure } from '@/types/secureStore';
 
 interface IAnimatedXpProgress {
-  initialUserLevelData: UserSettingStructure['userLevel'];
-  newUserLevelData: UserSettingStructure['userLevel'];
+  initialUserLevelData: ProgressionStructure['userLevel'];
+  newUserLevelData: ProgressionStructure['userLevel'];
   experienceGained: number;
 }
 
