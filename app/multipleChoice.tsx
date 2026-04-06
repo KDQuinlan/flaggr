@@ -12,7 +12,7 @@ import { Image } from 'expo-image';
 import { ProgressBar } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { Feather } from '@expo/vector-icons';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ANSWER_LETTERS } from '@/constants/common';
 import {
@@ -102,6 +102,7 @@ const StatsRow = React.memo(
 );
 
 const MultipleChoice = () => {
+  const insets = useSafeAreaInsets();
   const { height } = useWindowDimensions();
   const isSmallScreen = height < 700;
   const dynamicSpacing = isSmallScreen ? 5 : 20;
@@ -406,7 +407,7 @@ const MultipleChoice = () => {
   };
 
   return (
-    <SafeAreaProvider style={styles.rootContainer}>
+    <View style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}>
       <ProgressBar
         progress={questionNumberIndex / questions.length}
         color={colors.bluePrimary}
@@ -479,7 +480,7 @@ const MultipleChoice = () => {
           />
         </View>
       )}
-    </SafeAreaProvider>
+    </View>
   );
 };
 

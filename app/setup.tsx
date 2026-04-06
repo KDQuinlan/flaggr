@@ -12,8 +12,8 @@ import persistUserSettings from '@/util/persistState/persistUserSettings';
 import stateStore from '@/state/store';
 import { getSetupStyles } from '@/styles/setup';
 import { useTheme } from '@/context/ThemeContext';
-import ThemeToggle from '@/components/settings/themeToggle';
 import DropdownSelector from '@/components/settings/dropdown';
+import SwitchSetting from '@/components/settings/switchSetting';
 
 // TODO - refactor continue button into reusable component
 
@@ -131,9 +131,9 @@ const SetupScreen = () => {
           </View>
         )}
 
-        <ThemeToggle
-          isDarkTheme={isDarkTheme}
-          setIsDarkTheme={setIsDarkTheme}
+        <SwitchSetting
+          userSetting="isDarkTheme"
+          label={t('darkTheme', { ns: 'settings' })}
         />
 
         <Pressable

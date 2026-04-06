@@ -10,6 +10,7 @@ import MobileAds, {
   AdsConsentStatus,
 } from 'react-native-google-mobile-ads';
 import Purchases, { LOG_LEVEL } from 'react-native-purchases';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import '@/locales/i18n';
 import EnergyModal from '@/components/energyDisplay/energyModal';
@@ -34,7 +35,9 @@ function RootLayoutContent() {
   const userSettings = stateStore((s) => s.userSettings);
   const { setCanShowAds, setUserDefaultPlatformName } = stateStore.getState();
   const [hasStoreHydrated, setHasStoreHydrated] = useState<boolean>(false);
-  const { isPremiumUser, isDarkTheme } = stateStore((s) => s.userSettings);
+  const { isPremiumUser, isDarkTheme, isImmersiveMode } = stateStore(
+    (s) => s.userSettings
+  );
   const isInitialised = stateStore((s) => s.isInitialised);
 
   useNetworkStatus();
@@ -47,16 +50,16 @@ function RootLayoutContent() {
   });
 
   useLayoutEffect(() => {
-    NavigationBar.setVisibilityAsync('hidden');
-
     if (isInitialised) {
       SystemUI.setBackgroundColorAsync(
         isDarkTheme ? colors.black : colors.offWhite
       );
 
-      NavigationBar.setStyle(isDarkTheme ? 'light' : 'dark');
+      // TODO - investigate colouring
+      NavigationBar.setStyle(isDarkTheme ? 'dark' : 'light');
+      NavigationBar.setVisibilityAsync(isImmersiveMode ? 'hidden' : 'visible');
     }
-  }, [isDarkTheme, isInitialised]);
+  }, [isDarkTheme, isInitialised, isImmersiveMode]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -164,11 +167,8 @@ function RootLayoutContent() {
   if (!isInitialised || !fontsLoaded) return <Loading />;
 
   return (
-    <View style={{ flex: 1 }}>
-      <StatusBar
-        style={isDarkTheme ? 'light' : 'dark'}
-        backgroundColor={theme.background}
-      />
+    <SafeAreaProvider>
+      <StatusBar style={isDarkTheme ? 'light' : 'dark'} />
 
       <EnergyModal />
 
@@ -273,7 +273,7 @@ function RootLayoutContent() {
           }}
         />
       </Stack>
-    </View>
+    </SafeAreaProvider>
   );
 }
 

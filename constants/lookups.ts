@@ -86,7 +86,6 @@ export const elevationByLevelName: Record<Levels, number> = {
 };
 
 export const scoreMultiplierByTimeLimit: Record<TimeLimits, number> = {
-  0: 1.0,
   15: 15.0,
   30: 12.0,
   45: 10.0,
@@ -103,6 +102,7 @@ export const scoreMultiplierByTimeLimit: Record<TimeLimits, number> = {
   210: 3.5,
   225: 3.2,
   240: 3.0,
+  255: 1,
 };
 
 export const scoreByDifficultyId: Record<Difficulties, DifficultiesScores> = {

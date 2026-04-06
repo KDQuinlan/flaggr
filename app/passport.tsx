@@ -15,9 +15,7 @@ import {
   BottomSheetModalProvider,
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
-import {
-  SafeAreaProvider,
-} from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { NavigationProps } from '@/types/navigation';
 import stateStore from '@/state/store';
@@ -27,10 +25,7 @@ import { BANNER_PASSPORT_ID, BANNER_TEST_ID } from '@/constants/adId';
 import { Passport } from '@/types/secureStore';
 import { getPassportStyles } from '@/styles/passport';
 import toJsonKeyFormat from '@/util/toJsonKeyFormat/toJsonKeyFormat';
-import {
-  GAME_DIFFICULTIES,
-  VALID_REGIONS,
-} from '@/constants/common';
+import { GAME_DIFFICULTIES, VALID_REGIONS } from '@/constants/common';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { levelKeyByDifficultyId } from '@/constants/lookups';
 import countriesData from '@/assets/data/countries.json';
@@ -46,6 +41,7 @@ interface BasicEntry {
 }
 
 const PassportScreen = () => {
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProps>();
   const { t } = useTranslation('passport');
   const { theme } = useTheme();
@@ -135,7 +131,7 @@ const PassportScreen = () => {
   return (
     <GestureHandlerRootView>
       <BottomSheetModalProvider>
-        <SafeAreaProvider style={styles.rootContainer}>
+        <View style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}>
           {userProgression.passport.length === 0 ? (
             <View style={styles.emptyPassportContainer}>
               <Text style={styles.titleText}>{t('emptyTitle')}</Text>
@@ -177,8 +173,7 @@ const PassportScreen = () => {
                 )}
                 numColumns={passportCardAllowance}
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={
-                  styles.flatlistContainer}
+                contentContainerStyle={styles.flatlistContainer}
                 columnWrapperStyle={{ gap: 10 }}
                 ListHeaderComponent={
                   <InformationButton
@@ -331,7 +326,7 @@ const PassportScreen = () => {
           {showAds && (
             <AdBanner adId={__DEV__ ? BANNER_TEST_ID : BANNER_PASSPORT_ID} />
           )}
-        </SafeAreaProvider>
+        </View>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>
   );

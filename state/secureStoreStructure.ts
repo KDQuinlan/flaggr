@@ -19,6 +19,7 @@ export const defaultUserSettings: UserSettingStructure = {
   isPremiumUser: false,
   locale: 'en',
   isDarkTheme: false,
+  isImmersiveMode: true,
   energyAmount: MAXIMUM_ENERGY,
   lastEnergyTimestamp: null,
   noticeBoardLastVisitedDate: null,

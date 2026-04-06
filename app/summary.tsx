@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import iconsMap from '@/assets/images/icons';
 import {
@@ -56,6 +56,7 @@ const Summary = () => {
     }, [])
   );
 
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'summary'>>();
   const { t } = useTranslation('summary');
@@ -324,7 +325,12 @@ const Summary = () => {
   const achievements: AchievementId[] = achievementsUnlocked;
 
   return (
-    <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
+    <View
+      style={{
+        ...sharedSummaryStyles.rootContainer,
+        paddingBottom: insets.bottom,
+      }}
+    >
       <ScrollView
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
@@ -437,7 +443,7 @@ const Summary = () => {
       </ScrollView>
 
       {showAds && <AdBanner adId={BANNER_TEST_ID} />}
-    </SafeAreaProvider>
+    </View>
   );
 };
 

@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 
 import stateStore from '@/state/store';
@@ -30,7 +30,6 @@ import { getSummarySharedStyles } from '@/styles/summary/summaryShared';
 import { getPracticeSummaryStyles } from '@/styles/summary/practiceSummary';
 import calculateExperienceGain from '@/util/leveling/calculateExperienceGain';
 import calculateUserLevelData from '@/util/leveling/calculateUserLevelData';
-import persistUserSettings from '@/util/persistState/persistUserSettings';
 import formatPercent from '@/util/formatPercent/formatPercent';
 import AnimatedXpProgressBar from '@/components/animatedXpProgressBar/animatedXpProgressBar';
 import { AchievementId } from '@/data/achievements/achievements.config';
@@ -60,6 +59,7 @@ const PracticeSummary = () => {
     }, [])
   );
 
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'practiceSummary'>>();
   const { t } = useTranslation('practiceSummary');
@@ -205,7 +205,12 @@ const PracticeSummary = () => {
     resetToDifficultyScreen(navigation, 'difficulty');
 
   return (
-    <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
+    <View
+      style={{
+        ...sharedSummaryStyles.rootContainer,
+        paddingBottom: insets.bottom,
+      }}
+    >
       <ScrollView
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
@@ -357,7 +362,7 @@ const PracticeSummary = () => {
       </ScrollView>
 
       {showAds && <AdBanner adId={BANNER_TEST_ID} />}
-    </SafeAreaProvider>
+    </View>
   );
 };
 

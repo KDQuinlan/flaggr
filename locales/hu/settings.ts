@@ -2,6 +2,7 @@ export default {
   title: 'Beállítások',
   language: 'Nyelv',
   darkTheme: 'Sötét téma',
+  immersiveMode: 'Immersív Mód',
   answersShownDuration: 'Válaszok megjelenítési ideje',
   unlimited: 'Korlátlan',
   secondsSingular: '1 másodperc',

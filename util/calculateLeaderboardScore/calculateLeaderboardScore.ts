@@ -1,4 +1,5 @@
-// TODO - add google leaderboard *100 (to decimal) multiplier
+const TO_PERCENTAGE = 100;
+const TO_GOOGLE_DECIMAL_FORMAT = 100;
 
 const calculateLeaderboardScore = (correct: number, total: number): number => {
   const z = 1.96;
@@ -10,7 +11,13 @@ const calculateLeaderboardScore = (correct: number, total: number): number => {
   const numPart2 = z * Math.sqrt(insideSqrt);
   const denominator = 1 + (z * z) / total;
 
-  return Number((((numPart1 - numPart2) / denominator) * 100).toFixed(2));
+  return Math.floor(
+    Number(
+      ((numPart1 - numPart2) / denominator) *
+        TO_PERCENTAGE *
+        TO_GOOGLE_DECIMAL_FORMAT
+    )
+  );
 };
 
 export default calculateLeaderboardScore;

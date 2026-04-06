@@ -3,7 +3,7 @@ import { useNavigation } from 'expo-router';
 import { Dimensions, FlatList, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import AdBanner from '@/components/AdBanner/AdBanner';
@@ -24,6 +24,7 @@ const ITEM_WIDTH = CONTAINER_WIDTH * 0.75;
 const SIDE_PADDING = (CONTAINER_WIDTH - ITEM_WIDTH) / 2;
 
 const AchievementDetail = () => {
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'achievementDetail'>>();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
@@ -116,7 +117,7 @@ const AchievementDetail = () => {
   };
 
   return (
-    <SafeAreaProvider style={styles.rootContainer}>
+    <View style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}>
       <FlatList
         horizontal
         data={achievementConfig.thresholds}
@@ -143,7 +144,7 @@ const AchievementDetail = () => {
           adId={__DEV__ ? BANNER_TEST_ID : BANNER_HOME_AND_SETTINGS_ID}
         />
       )}
-    </SafeAreaProvider>
+    </View>
   );
 };
 

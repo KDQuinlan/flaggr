@@ -3,7 +3,7 @@ import { ScrollView, Pressable, Text, View } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import DifficultySelect from '@/components/difficultySelect/difficultySelect';
 import {
@@ -22,6 +22,7 @@ import AdBanner from '@/components/AdBanner/AdBanner';
 import { BANNER_DIFFICULTY_SELECT_ID, BANNER_TEST_ID } from '@/constants/adId';
 
 const Difficulty = () => {
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'difficulty'>>();
   const { t } = useTranslation('difficulty');
@@ -77,7 +78,7 @@ const Difficulty = () => {
   };
 
   return (
-    <SafeAreaProvider style={styles.rootContainer}>
+    <View style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
@@ -145,7 +146,7 @@ const Difficulty = () => {
           adId={__DEV__ ? BANNER_TEST_ID : BANNER_DIFFICULTY_SELECT_ID}
         />
       )}
-    </SafeAreaProvider>
+    </View>
   );
 };
 

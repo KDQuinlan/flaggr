@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '@/components/theme';
 
-export const getThemeToggleStyles = (theme: ThemeColors) => {
+export const getSwitchSettingStyles = (theme: ThemeColors) => {
   return StyleSheet.create({
     sectionRow: {
       alignItems: 'center',

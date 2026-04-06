@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { Image } from 'expo-image';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { getNoticeBoardStyles } from '@/styles/noticeBoard';
 import { useTheme } from '@/context/ThemeContext';
@@ -91,6 +91,7 @@ const NoticeBoardEntry = ({
 };
 
 const NoticeBoard = () => {
+  const insets = useSafeAreaInsets();
   const { theme } = useTheme();
   const styles = useMemo(() => getNoticeBoardStyles(theme), [theme]);
   const { t } = useTranslation('home');
@@ -104,7 +105,7 @@ const NoticeBoard = () => {
   );
 
   return (
-    <SafeAreaProvider style={styles.rootContainer}>
+    <View style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
@@ -126,7 +127,7 @@ const NoticeBoard = () => {
           adId={__DEV__ ? BANNER_TEST_ID : BANNER_HOME_AND_SETTINGS_ID}
         />
       )}
-    </SafeAreaProvider>
+    </View>
   );
 };
 

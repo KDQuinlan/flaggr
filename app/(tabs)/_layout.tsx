@@ -4,10 +4,12 @@ import { useTranslation } from 'react-i18next';
 
 import { useTheme } from '@/context/ThemeContext';
 import { colors } from '@/components/colors';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function TabLayout() {
   const { theme } = useTheme();
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
 
   return (
     <Tabs
@@ -23,7 +25,8 @@ export default function TabLayout() {
           backgroundColor: theme.background,
           shadowColor: theme.shadow,
           elevation: 5,
-          height: 60,
+          paddingBottom: insets.bottom,
+          height: 60 + insets.bottom,
         },
       }}
     >

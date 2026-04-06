@@ -2,6 +2,7 @@ export default {
   title: 'Налаштування',
   language: 'Мова',
   darkTheme: 'Темна тема',
+  immersiveMode: 'Імерсивний режим',
   answersShownDuration: 'Тривалість показу відповідей',
   unlimited: 'Без обмежень',
   secondsSingular: '1 секунда',

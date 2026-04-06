@@ -349,6 +349,7 @@ export const mockGoodUserSettingsData = {
   isPremiumUser: false,
   locale: 'en',
   isDarkTheme: false,
+  isImmersiveMode: true,
   energyAmount: 5,
   lastEnergyTimestamp: null,
   noticeBoardLastVisitedDate: null,
