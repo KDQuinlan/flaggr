@@ -33,7 +33,6 @@ export const getNoticeBoardEntryStyles = (theme: ThemeColors) => {
       fontSize: 18,
       fontFamily: 'DMSansBold',
       color: colors.blueSecondary,
-      textDecorationLine: 'underline',
     },
     text: { fontSize: 14, fontFamily: 'DMSans', color: theme.text },
   });
