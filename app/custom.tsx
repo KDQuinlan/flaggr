@@ -7,7 +7,7 @@ import { useNavigation } from 'expo-router';
 import { Divider, Switch } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors } from '@/components/colors';
 import ModifierMultiSelect from '@/components/modifierMultiSelect/modifierMultiSelect';
@@ -15,6 +15,7 @@ import { scoreMultiplierByTimeLimit } from '@/constants/lookups';
 import generateMultipleChoice from '@/util/generateMultipleChoiceQuestions/generateMultipleChoice';
 import { NavigationProps } from '@/types/navigation';
 import {
+  DEFAULT_CUSTOM_TIME_LIMIT_SECONDS,
   DEFAULT_GAME_LENGTH,
   DEFAULT_SCORE_MULTIPLIER,
   GAME_DIFFICULTIES,
@@ -42,6 +43,7 @@ interface IStatsAccordionRow {
 }
 
 const CustomScreen = () => {
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProps>();
   const { t } = useTranslation('custom');
   const { theme } = useTheme();
@@ -52,6 +54,7 @@ const CustomScreen = () => {
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const { energyAmount, isPremiumUser } = userSettings;
+  const UNLIMITED = 0;
 
   const showAds = !isPremiumUser && isInternetAvailable;
 
@@ -62,7 +65,7 @@ const CustomScreen = () => {
   const [gameLengthSlider, setGameLengthSlider] =
     useState<number>(DEFAULT_GAME_LENGTH);
   const [timeLimitSlider, setTimeLimitSlider] = useState<TimeLimits>(
-    MINIMUM_CUSTOM_TIME_LIMIT_SECONDS
+    DEFAULT_CUSTOM_TIME_LIMIT_SECONDS
   );
 
   useEffect(() => {
@@ -92,7 +95,7 @@ const CustomScreen = () => {
     setSelectedRegions([]);
     setIsIndependentOnly(false);
     setGameLengthSlider(DEFAULT_GAME_LENGTH);
-    setTimeLimitSlider(MINIMUM_CUSTOM_TIME_LIMIT_SECONDS);
+    setTimeLimitSlider(DEFAULT_CUSTOM_TIME_LIMIT_SECONDS);
   };
 
   const handleUseSetup = () => {
@@ -108,7 +111,7 @@ const CustomScreen = () => {
   const finalScoreMultiplier = parseFloat(
     (
       DEFAULT_SCORE_MULTIPLIER *
-      (timeLimitSlider !== 0
+      (timeLimitSlider !== MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS
         ? scoreMultiplierByTimeLimit[timeLimitSlider]
         : 1) *
       (isIndependentOnly ? INDEPENDENT_COUNTRIES_PENALTY : 1)
@@ -124,11 +127,16 @@ const CustomScreen = () => {
         gameMode: 'custom',
         questions: generateMultipleChoice(
           GAME_DIFFICULTIES,
-          gameLengthSlider,
+          gameLengthSlider === MAXIMUM_GAME_LENGTH
+            ? UNLIMITED
+            : gameLengthSlider,
           selectedRegions,
           isIndependentOnly
         ),
-        timeLimit: timeLimitSlider,
+        timeLimit:
+          timeLimitSlider === MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS
+            ? UNLIMITED
+            : timeLimitSlider,
       });
 
       setProgression(
@@ -219,7 +227,11 @@ const CustomScreen = () => {
             />
             <StatsAccordionRow
               title={t('highScoreAccordion.timeLimit')}
-              value={timeLimit === 0 ? t('gameRules.unlimited') : timeLimit}
+              value={
+                timeLimit === MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS
+                  ? t('gameRules.unlimited')
+                  : timeLimit
+              }
             />
             <StatsAccordionRow
               title={t('highScoreAccordion.gameLength')}
@@ -245,7 +257,7 @@ const CustomScreen = () => {
   );
 
   return (
-    <SafeAreaProvider style={styles.rootContainer}>
+    <View style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
@@ -332,7 +344,7 @@ const CustomScreen = () => {
 
               <View style={styles.sliderQuantityContainer}>
                 <Text style={styles.sliderQuantityText}>
-                  {timeLimitSlider === 0
+                  {timeLimitSlider === MAXIMUM_CUSTOM_TIME_LIMIT_SECONDS
                     ? t('gameRules.unlimited')
                     : t('gameRules.timeLimitQuantity', {
                         timeLimit: timeLimitSlider,
@@ -373,7 +385,7 @@ const CustomScreen = () => {
               <Text style={styles.ruleLabel}>{t('gameRules.gameLength')}</Text>
 
               <Text style={styles.sliderQuantityText}>
-                {gameLengthSlider === 0
+                {gameLengthSlider === MAXIMUM_GAME_LENGTH
                   ? t('gameRules.unlimited')
                   : t('gameRules.gameLengthQuantity', {
                       gameLength: gameLengthSlider,
@@ -398,7 +410,7 @@ const CustomScreen = () => {
               </Text>
               <Text style={styles.sliderLabelText}>{MAXIMUM_GAME_LENGTH}</Text>
             </View>
-            {gameLengthSlider === 0 && (
+            {gameLengthSlider === MAXIMUM_GAME_LENGTH && (
               <Text style={styles.helperText}>
                 {t('gameRules.gameLengthWarning')}
               </Text>
@@ -430,7 +442,7 @@ const CustomScreen = () => {
       </ScrollView>
 
       {showAds && <AdBanner adId={BANNER_TEST_ID} />}
-    </SafeAreaProvider>
+    </View>
   );
 };
 

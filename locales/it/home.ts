@@ -21,5 +21,6 @@ export default {
   flagOfTheWeek: 'Bandiera della settimana',
   leaderboard: 'Classifica',
   leaderboardHint: 'Apre le classifiche di Google',
+  noticeBoardTitle: 'Bacheca',
   noticeBoardEmpty: 'Al momento non ci sono avvisi. Torna più tardi!',
 };

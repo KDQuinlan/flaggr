@@ -1,8 +1,8 @@
 import { AchievementId } from './achievements.config';
-import LevelOne from '@/assets/images/icons/resources/levels/level-one.png';
-import LevelTwo from '@/assets/images/icons/resources/levels/level-two.png';
-import LevelThree from '@/assets/images/icons/resources/levels/level-three.png';
-import LevelFour from '@/assets/images/icons/resources/levels/level-four.png';
+import LevelOne from '@/assets/images/icons/resources/achievements/tier1.png';
+import LevelTwo from '@/assets/images/icons/resources/achievements/tier2.png';
+import LevelThree from '@/assets/images/icons/resources/achievements/tier3.png';
+import LevelFour from '@/assets/images/icons/resources/achievements/tier4.png';
 
 const achievementIconsById: Record<AchievementId, any[]> = {
   // Quiz Achievements

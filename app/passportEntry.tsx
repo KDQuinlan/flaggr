@@ -3,7 +3,7 @@ import { ScrollView, View, Text } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import stateStore from '@/state/store';
@@ -17,6 +17,7 @@ import { MAXIMUM_DIFFICULTY } from '@/constants/common';
 import formatPercent from '@/util/formatPercent/formatPercent';
 
 const PassportEntryScreen = () => {
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'passportEntry'>>();
   const { t } = useTranslation('passportEntry');
@@ -34,7 +35,7 @@ const PassportEntryScreen = () => {
   }, [navigation]);
 
   return (
-    <SafeAreaProvider style={styles.rootContainer}>
+    <View style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
@@ -95,7 +96,7 @@ const PassportEntryScreen = () => {
       {showAds && (
         <AdBanner adId={__DEV__ ? BANNER_TEST_ID : BANNER_PASSPORT_ID} />
       )}
-    </SafeAreaProvider>
+    </View>
   );
 };
 

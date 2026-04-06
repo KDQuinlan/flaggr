@@ -41,7 +41,6 @@ export type StreakTiers = 0 | 1 | 2 | 3 | 4 | 5;
 export type StreakMultipliers = 1 | 1.15 | 1.18 | 1.23 | 1.27 | 1.3;
 
 export type TimeLimits =
-  | 0
   | 15
   | 30
   | 45
@@ -57,7 +56,8 @@ export type TimeLimits =
   | 195
   | 210
   | 225
-  | 240;
+  | 240
+  | 255;
 
 export type LevelData = {
   id: Difficulties;
@@ -143,6 +143,7 @@ export type UserSettingStructure = {
   isPremiumUser: boolean;
   locale: string;
   isDarkTheme: boolean;
+  isImmersiveMode: boolean;
   energyAmount: number;
   lastEnergyTimestamp: number | null;
   noticeBoardLastVisitedDate: number | null;

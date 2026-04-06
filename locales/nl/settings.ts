@@ -2,6 +2,7 @@ export default {
   title: 'Instellingen',
   language: 'Taal',
   darkTheme: 'Donker thema',
+  immersiveMode: 'Immersieve Modus',
   answersShownDuration: 'Weergaveduur van antwoorden',
   unlimited: 'Onbeperkt',
   secondsSingular: '1 seconde',

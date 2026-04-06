@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import i18n from '@/locales/i18n';
 import { Feather } from '@expo/vector-icons';
 import { AdsConsent } from 'react-native-google-mobile-ads';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors } from '@/components/colors';
 import { NavigationProps } from '@/types/navigation';
@@ -32,8 +32,8 @@ import {
   ANSWERS_SHOWN_DURATION_MAXIMUM_MS,
   ANSWERS_SHOWN_DURATION_STEP,
 } from '@/constants/settings';
-import ThemeToggle from '@/components/settings/themeToggle';
 import DropdownSelector from '@/components/settings/dropdown';
+import SwitchSetting from '@/components/settings/switchSetting';
 
 interface IAnswersShownDurationSliderProps {
   value: number;
@@ -252,6 +252,7 @@ const ContinueButton = () => {
 
 const SettingsScreen = () => {
   const navigation = useNavigation<NavigationProps>();
+  const insets = useSafeAreaInsets();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
   const { t } = useTranslation('settings');
@@ -261,9 +262,6 @@ const SettingsScreen = () => {
   const [language, setLanguage] = useState<string>(userSettings.locale);
   const { theme } = useTheme();
   const styles = useMemo(() => getSettingsStyles(theme), [theme]);
-  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(
-    userSettings.isDarkTheme
-  );
   const [answerShownDuration, setAnswerShownDuration] = useState<number>(
     userSettings.displayAnswerTimerMs
   );
@@ -271,27 +269,21 @@ const SettingsScreen = () => {
   const isUserAMinor = userSettings.userAgeForPersonalisation !== 18;
 
   useEffect(() => {
-    i18n.changeLanguage(language);
-  }, [language]);
-
-  useEffect(() => {
-    if (
-      isDarkTheme !== userSettings.isDarkTheme ||
-      language !== userSettings.locale
-    ) {
+    if (language !== userSettings.locale) {
       persistUserSettings({
         ...userSettings,
         locale: language,
-        isDarkTheme,
       });
     }
-  }, [language, isDarkTheme]);
+
+    i18n.changeLanguage(language);
+  }, [language]);
 
   useEffect(() => {
     navigation.setOptions({
       title: t('title'),
     });
-  }, [navigation, language]);
+  }, [t]);
 
   useEffect(() => {
     if (hasResetProgress) {
@@ -303,7 +295,7 @@ const SettingsScreen = () => {
   }, [hasResetProgress]);
 
   return (
-    <SafeAreaProvider style={styles.rootContainer}>
+    <View style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
@@ -312,6 +304,7 @@ const SettingsScreen = () => {
         contentInsetAdjustmentBehavior="automatic"
       >
         {!userSettings.isPremiumUser && <PurchasePremiumButton />}
+
         <DropdownSelector
           value={language}
           setValue={setLanguage}
@@ -321,22 +314,30 @@ const SettingsScreen = () => {
             label: 'language',
           }}
         />
-        <ThemeToggle
-          isDarkTheme={isDarkTheme}
-          setIsDarkTheme={setIsDarkTheme}
+
+        <SwitchSetting userSetting="isDarkTheme" label={t('darkTheme')} />
+
+        <SwitchSetting
+          userSetting="isImmersiveMode"
+          label={t('immersiveMode')}
         />
+
         <AnswersShownDurationSlider
           value={answerShownDuration}
           onValueChange={setAnswerShownDuration}
         />
+
         <ResetProgress
           isResetAccordionOpen={isResetAccordionOpen}
           setIsResetAccordionOpen={setIsResetAccordionOpen}
           hasResetProgress={hasResetProgress}
           setHasResetProgress={setHasResetProgress}
         />
+
         <PrivacyPolicy />
+
         {!isUserAMinor && !userSettings.isPremiumUser && <PrivacyConsent />}
+
         <ContinueButton />
       </ScrollView>
 
@@ -345,7 +346,7 @@ const SettingsScreen = () => {
           adId={__DEV__ ? BANNER_TEST_ID : BANNER_HOME_AND_SETTINGS_ID}
         />
       )}
-    </SafeAreaProvider>
+    </View>
   );
 };
 

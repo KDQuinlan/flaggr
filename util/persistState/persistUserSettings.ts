@@ -7,11 +7,11 @@ import { UserSettingStructure } from '@/types/secureStore';
 const persistUserSettings = async (updatedSettings: UserSettingStructure) => {
   const { setUserSettings } = stateStore.getState();
   try {
+    setUserSettings(updatedSettings);
     await SecureStore.setItemAsync(
       STORAGE_KEY_SETTINGS,
       JSON.stringify(updatedSettings)
     );
-    setUserSettings(updatedSettings);
     console.log('Persisted to SecureStore:', updatedSettings);
   } catch (error) {
     console.error('Error persisting locale to SecureStore:', error);

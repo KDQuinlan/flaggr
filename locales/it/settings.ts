@@ -2,6 +2,7 @@ export default {
   title: 'Impostazioni',
   language: 'Lingua',
   darkTheme: 'Tema Scuro',
+  immersiveMode: 'Modalità Immersiva',
   answersShownDuration: 'Durata visualizzazione risposte',
   unlimited: 'Illimitato',
   secondsSingular: '1 secondo',

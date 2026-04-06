@@ -3,7 +3,7 @@ import { RouteProp, useFocusEffect, useRoute } from '@react-navigation/native';
 import { BackHandler, Pressable, ScrollView, Text, View } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import stateStore from '@/state/store';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
@@ -49,6 +49,7 @@ const CustomSummary = () => {
     }, [])
   );
 
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProp<RootStackParamList, 'customSummary'>>();
   const { t } = useTranslation('customSummary');
@@ -173,7 +174,12 @@ const CustomSummary = () => {
   const handleContinue = () => resetToDifficultyScreen(navigation, 'custom');
 
   return (
-    <SafeAreaProvider style={sharedSummaryStyles.rootContainer}>
+    <View
+      style={{
+        ...sharedSummaryStyles.rootContainer,
+        paddingBottom: insets.bottom,
+      }}
+    >
       <ScrollView
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
@@ -282,7 +288,7 @@ const CustomSummary = () => {
       </ScrollView>
 
       {showAds && <AdBanner adId={BANNER_TEST_ID} />}
-    </SafeAreaProvider>
+    </View>
   );
 };
 

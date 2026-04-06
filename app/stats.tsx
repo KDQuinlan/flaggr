@@ -3,7 +3,7 @@ import { useNavigation } from 'expo-router';
 import { Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RouteProp, useRoute } from '@react-navigation/native';
 
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
@@ -21,6 +21,7 @@ import { getStatsStyles } from '@/styles/stats';
 // TODO - add 2 per row on tablet
 
 const StatsScreen = () => {
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProps>();
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const userSettings = stateStore((s) => s.userSettings);
@@ -42,7 +43,7 @@ const StatsScreen = () => {
   return (
     <GestureHandlerRootView>
       <BottomSheetModalProvider>
-        <SafeAreaProvider style={styles.rootContainer}>
+        <View style={{ ...styles.rootContainer, paddingBottom: insets.bottom }}>
           <FlatList
             data={sortedPassport}
             keyExtractor={(item) => item.countryName}
@@ -91,7 +92,7 @@ const StatsScreen = () => {
               adId={__DEV__ ? BANNER_TEST_ID : BANNER_HOME_AND_SETTINGS_ID}
             />
           )}
-        </SafeAreaProvider>
+        </View>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>
   );

@@ -10,7 +10,6 @@ import {
   View,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import GameSelect from '@/components/gameSelect/gameSelect';
 import { NavigationProps } from '@/types/navigation';
@@ -175,7 +174,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <SafeAreaProvider style={styles.rootContainer}>
+    <View style={styles.rootContainer}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
@@ -208,7 +207,7 @@ const HomeScreen = () => {
                   });
               }}
               accessibilityRole="button"
-              accessibilityLabel={t('title', { ns: 'settings' })}
+              accessibilityLabel={t('noticeBoardTitle')}
               hitSlop={5}
               style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
             >
@@ -349,7 +348,7 @@ const HomeScreen = () => {
           adId={__DEV__ ? BANNER_TEST_ID : BANNER_HOME_AND_SETTINGS_ID}
         />
       )}
-    </SafeAreaProvider>
+    </View>
   );
 };
 
