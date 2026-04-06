@@ -15,8 +15,6 @@ import { useTheme } from '@/context/ThemeContext';
 import DropdownSelector from '@/components/settings/dropdown';
 import SwitchSetting from '@/components/settings/switchSetting';
 
-// TODO - refactor continue button into reusable component
-
 const locales = Localization.getLocales();
 const locale = locales[0]?.languageCode;
 
@@ -29,17 +27,25 @@ const SetupScreen = () => {
   const [language, setLanguage] = useState<string>(
     locale && SUPPORTED_LANGUAGES.includes(locale) ? locale : 'en'
   );
+  const [audioMode, setAudioMode] = useState<string>(userSettings.audioMode);
   const [displayName, setDisplayName] = useState<string>(
     userDefaultPlatformName
   );
   const [year, setYear] = useState<string>('');
-  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(
-    userSettings.isDarkTheme
-  );
 
   const profanity = new Profanity({
     languages: ['en', 'de', 'es', 'fr', 'zh', 'ru', 'it'],
   });
+
+  const localisedAudioMode = useMemo(
+    () => [
+      { label: t('feedback.off', { ns: 'settings' }), value: '0' },
+      { label: t('feedback.hapticOnly', { ns: 'settings' }), value: '1' },
+      { label: t('feedback.audioOnly', { ns: 'settings' }), value: '2' },
+      { label: t('feedback.audioHaptic', { ns: 'settings' }), value: '3' },
+    ],
+    [t, language]
+  );
 
   useEffect(() => {
     setDisplayName(userDefaultPlatformName);
@@ -48,10 +54,6 @@ const SetupScreen = () => {
   useEffect(() => {
     i18n.changeLanguage(language);
   }, [language]);
-
-  useEffect(() => {
-    persistUserSettings({ ...userSettings, isDarkTheme });
-  }, [isDarkTheme]);
 
   const isValidYear =
     year.length === 4 &&
@@ -131,6 +133,16 @@ const SetupScreen = () => {
           </View>
         )}
 
+        <DropdownSelector
+          value={audioMode}
+          setValue={setAudioMode}
+          data={localisedAudioMode}
+          text={{
+            namespace: 'settings',
+            label: 'feedback.title',
+          }}
+        />
+
         <SwitchSetting
           userSetting="isDarkTheme"
           label={t('darkTheme', { ns: 'settings' })}
@@ -144,7 +156,6 @@ const SetupScreen = () => {
               isSetUp: true,
               userAgeForPersonalisation: handleContinueAgeCalculation(),
               locale: language,
-              isDarkTheme,
             });
             router.replace('/(tabs)');
           }}

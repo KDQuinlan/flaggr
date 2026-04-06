@@ -1,6 +1,13 @@
 export default {
   title: 'Налаштування',
   language: 'Мова',
+  feedback: {
+    title: 'Відгук',
+    off: 'Вимкнено',
+    hapticOnly: 'Тільки тактильний',
+    audioOnly: 'Тільки звук',
+    audioHaptic: 'Звук + тактильний',
+  },
   darkTheme: 'Темна тема',
   immersiveMode: 'Імерсивний режим',
   answersShownDuration: 'Тривалість показу відповідей',

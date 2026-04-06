@@ -17,7 +17,11 @@ import { Feather } from '@expo/vector-icons';
 import stateStore from '@/state/store';
 import { NavigationProps, RootStackParamList } from '@/types/navigation';
 import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
-import { ACCURACY_ID, MATCHES_PLAYED_ID } from '@/constants/leaderboard';
+import {
+  ACCURACY_ID,
+  MATCHES_PLAYED_ID,
+  USER_LEVEL_ID,
+} from '@/constants/leaderboard';
 import PlayGames from '@/PlayGames';
 import { useTheme } from '@/context/ThemeContext';
 import { BANNER_TEST_ID } from '@/constants/adId';
@@ -199,6 +203,9 @@ const PracticeSummary = () => {
       ACCURACY_ID,
       calculateLeaderboardScore(totalCorrect, totalCorrect + totalIncorrect)
     );
+    if (newUserLevelData.level > initialUserLevelRef.current.level) {
+      PlayGames.submitScore(USER_LEVEL_ID, newUserLevelData.level);
+    }
   }, [navigation]);
 
   const handleContinue = () =>

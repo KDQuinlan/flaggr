@@ -18,8 +18,6 @@ import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { getStatsStyles } from '@/styles/stats';
 
-// TODO - add 2 per row on tablet
-
 const StatsScreen = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProps>();

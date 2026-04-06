@@ -20,6 +20,7 @@ export const defaultUserSettings: UserSettingStructure = {
   locale: 'en',
   isDarkTheme: false,
   isImmersiveMode: true,
+  audioMode: '0',
   energyAmount: MAXIMUM_ENERGY,
   lastEnergyTimestamp: null,
   noticeBoardLastVisitedDate: null,

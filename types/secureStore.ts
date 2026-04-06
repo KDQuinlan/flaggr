@@ -144,6 +144,7 @@ export type UserSettingStructure = {
   locale: string;
   isDarkTheme: boolean;
   isImmersiveMode: boolean;
+  audioMode: '0' | '1' | '2' | '3';
   energyAmount: number;
   lastEnergyTimestamp: number | null;
   noticeBoardLastVisitedDate: number | null;

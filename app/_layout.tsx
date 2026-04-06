@@ -55,8 +55,9 @@ function RootLayoutContent() {
         isDarkTheme ? colors.black : colors.offWhite
       );
 
-      // TODO - investigate colouring
-      NavigationBar.setStyle(isDarkTheme ? 'dark' : 'light');
+      NavigationBar.setStyle(
+        isImmersiveMode ? 'dark' : isDarkTheme ? 'dark' : 'light'
+      );
       NavigationBar.setVisibilityAsync(isImmersiveMode ? 'hidden' : 'visible');
     }
   }, [isDarkTheme, isInitialised, isImmersiveMode]);

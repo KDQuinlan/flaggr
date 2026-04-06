@@ -18,7 +18,7 @@ export default {
   },
   socialMediaPreface: 'I nostri social media',
   socialMedia: 'Visita il nostro profilo su {{media}}',
-  flagOfTheWeek: 'Bandiera della settimana',
+  flagOfTheWeek: 'Bandiera settimanale',
   leaderboard: 'Classifica',
   leaderboardHint: 'Apre le classifiche di Google',
   noticeBoardTitle: 'Bacheca',

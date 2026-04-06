@@ -34,6 +34,7 @@ import {
 } from '@/constants/settings';
 import DropdownSelector from '@/components/settings/dropdown';
 import SwitchSetting from '@/components/settings/switchSetting';
+import { UserSettingStructure } from '@/types/secureStore';
 
 interface IAnswersShownDurationSliderProps {
   value: number;
@@ -260,6 +261,7 @@ const SettingsScreen = () => {
   const [isResetAccordionOpen, setIsResetAccordionOpen] =
     useState<boolean>(false);
   const [language, setLanguage] = useState<string>(userSettings.locale);
+  const [audioMode, setAudioMode] = useState<string>(userSettings.audioMode);
   const { theme } = useTheme();
   const styles = useMemo(() => getSettingsStyles(theme), [theme]);
   const [answerShownDuration, setAnswerShownDuration] = useState<number>(
@@ -268,16 +270,33 @@ const SettingsScreen = () => {
   const showAds = !userSettings.isPremiumUser && isInternetAvailable;
   const isUserAMinor = userSettings.userAgeForPersonalisation !== 18;
 
+  const localisedAudioMode = useMemo(
+    () => [
+      { label: t('feedback.off'), value: '0' },
+      { label: t('feedback.hapticOnly'), value: '1' },
+      { label: t('feedback.audioOnly'), value: '2' },
+      { label: t('feedback.audioHaptic'), value: '3' },
+    ],
+    [t, language]
+  );
+
   useEffect(() => {
     if (language !== userSettings.locale) {
       persistUserSettings({
         ...userSettings,
         locale: language,
       });
+
+      i18n.changeLanguage(language);
     }
 
-    i18n.changeLanguage(language);
-  }, [language]);
+    if (audioMode !== userSettings.audioMode) {
+      persistUserSettings({
+        ...userSettings,
+        audioMode: audioMode as UserSettingStructure['audioMode'],
+      });
+    }
+  }, [language, audioMode]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -312,6 +331,16 @@ const SettingsScreen = () => {
           text={{
             namespace: 'settings',
             label: 'language',
+          }}
+        />
+
+        <DropdownSelector
+          value={audioMode}
+          setValue={setAudioMode}
+          data={localisedAudioMode}
+          text={{
+            namespace: 'settings',
+            label: 'feedback.title',
           }}
         />
 

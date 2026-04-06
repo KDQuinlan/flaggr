@@ -16,6 +16,7 @@ import {
   ACCURACY_ID,
   HIGH_SCORE_ID,
   MATCHES_PLAYED_ID,
+  USER_LEVEL_ID,
 } from '@/constants/leaderboard';
 import PlayGames from '@/PlayGames';
 import { useTheme } from '@/context/ThemeContext';
@@ -169,6 +170,9 @@ const CustomSummary = () => {
       ACCURACY_ID,
       calculateLeaderboardScore(totalCorrect, totalCorrect + totalIncorrect)
     );
+    if (newUserLevelData.level > initialUserLevelRef.current.level) {
+      PlayGames.submitScore(USER_LEVEL_ID, newUserLevelData.level);
+    }
   }, [navigation, gameResult, finalScore]);
 
   const handleContinue = () => resetToDifficultyScreen(navigation, 'custom');

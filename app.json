@@ -30,7 +30,8 @@
         {
           "androidAppId": "ca-app-pub-5099106810383341~4229137271"
         }
-      ]
+      ],
+      "expo-audio"
     ],
     "experiments": {
       "typedRoutes": true
