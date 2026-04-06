@@ -18,7 +18,7 @@ export default {
   },
   socialMediaPreface: 'Nuestras redes sociales',
   socialMedia: 'Visítanos en {{media}}',
-  flagOfTheWeek: 'Bandera de la semana',
+  flagOfTheWeek: 'Bandera semanal',
   leaderboard: 'Clasificación',
   leaderboardHint: 'Abre las clasificaciones de Google',
   noticeBoardTitle: 'Tablón de Avisos',

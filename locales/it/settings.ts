@@ -1,6 +1,13 @@
 export default {
   title: 'Impostazioni',
   language: 'Lingua',
+  feedback: {
+    title: 'Feedback',
+    off: 'Disattivato',
+    hapticOnly: 'Solo aptico',
+    audioOnly: 'Solo audio',
+    audioHaptic: 'Audio + aptico',
+  },
   darkTheme: 'Tema Scuro',
   immersiveMode: 'Modalità Immersiva',
   answersShownDuration: 'Durata visualizzazione risposte',

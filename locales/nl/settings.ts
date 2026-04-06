@@ -1,6 +1,13 @@
 export default {
   title: 'Instellingen',
   language: 'Taal',
+  feedback: {
+    title: 'Feedback',
+    off: 'Uit',
+    hapticOnly: 'Alleen haptisch',
+    audioOnly: 'Alleen audio',
+    audioHaptic: 'Audio + haptisch',
+  },
   darkTheme: 'Donker thema',
   immersiveMode: 'Immersieve Modus',
   answersShownDuration: 'Weergaveduur van antwoorden',

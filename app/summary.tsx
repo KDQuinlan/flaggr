@@ -21,7 +21,11 @@ import getNextLevelKey from '@/util/getNextLevelKey/getNextLevelKey';
 import persistProgression from '@/util/persistState/persistProgression';
 import resetToDifficultyScreen from '@/util/resetToDifficultyScreen/resetToDifficultyScreen';
 import { ProgressionStructure } from '@/types/secureStore';
-import { ACCURACY_ID, MATCHES_PLAYED_ID } from '@/constants/leaderboard';
+import {
+  ACCURACY_ID,
+  MATCHES_PLAYED_ID,
+  USER_LEVEL_ID,
+} from '@/constants/leaderboard';
 import PlayGames from '@/PlayGames';
 import determineSummaryIcons from '@/util/determineSummaryIcons';
 import { getSummaryStyles } from '@/styles/summary/summary';
@@ -270,6 +274,9 @@ const Summary = () => {
       ACCURACY_ID,
       calculateLeaderboardScore(totalCorrect, totalCorrect + totalIncorrect)
     );
+    if (newUserLevelData.level > initialUserLevelRef.current.level) {
+      PlayGames.submitScore(USER_LEVEL_ID, newUserLevelData.level);
+    }
   }, [
     navigation,
     gameResult,

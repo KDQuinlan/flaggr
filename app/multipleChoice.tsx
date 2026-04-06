@@ -13,6 +13,7 @@ import { ProgressBar } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { Feather } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import * as Haptics from 'expo-haptics';
 
 import { ANSWER_LETTERS } from '@/constants/common';
 import {
@@ -42,6 +43,7 @@ import updatePassport from '@/util/updatePassport/updatePassport';
 import persistProgression from '@/util/persistState/persistProgression';
 import { AchievementId } from '@/data/achievements/achievements.config';
 import emitAchievementEvent from '@/data/achievements/emitAchievementEvent';
+import useQuizSounds from '@/util/useQuizSounds/useQuizSounds';
 
 // TODO - investigate race condition that makes passport achievement not show as unlocked on summary screen
 // TODO - investigate achievements appearing twice like best streak on 30
@@ -104,6 +106,7 @@ const StatsRow = React.memo(
 const MultipleChoice = () => {
   const insets = useSafeAreaInsets();
   const { height } = useWindowDimensions();
+  const { playCorrect, playIncorrect } = useQuizSounds();
   const isSmallScreen = height < 700;
   const dynamicSpacing = isSmallScreen ? 5 : 20;
   const dynamicPadding = isSmallScreen ? 5 : 20;
@@ -114,6 +117,7 @@ const MultipleChoice = () => {
   const { theme } = useTheme();
   const styles = useMemo(() => getMultipleChoiceStyles(theme), [theme]);
   const userProgression = stateStore((s) => s.userProgress);
+  const userSettings = stateStore((s) => s.userSettings);
   const isInternetAvailable = stateStore((s) => s.isInternetAvailable);
   const { isPremiumUser, displayAnswerTimerMs } = stateStore(
     (s) => s.userSettings
@@ -270,6 +274,16 @@ const MultipleChoice = () => {
       const newStreakTotal = isCorrect ? streak + 1 : 0;
       const newHighestStreakTotal = Math.max(highestStreak, newStreakTotal);
       answerHistoryRef.current.push(isCorrect ? 'Correct' : 'Incorrect');
+
+      if (userSettings.audioMode === '1' || userSettings.audioMode === '3') {
+        isCorrect
+          ? Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+          : Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+      }
+
+      if (userSettings.audioMode === '2' || userSettings.audioMode === '3') {
+        isCorrect ? playCorrect() : playIncorrect();
+      }
 
       const newPassport = updatePassport(
         countryCode,

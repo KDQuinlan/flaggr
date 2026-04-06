@@ -1,6 +1,13 @@
 export default {
   title: 'Beállítások',
   language: 'Nyelv',
+  feedback: {
+    title: 'Visszajelzés',
+    off: 'Kikapcsolva',
+    hapticOnly: 'Csak haptikus',
+    audioOnly: 'Csak hang',
+    audioHaptic: 'Hang + haptikus',
+  },
   darkTheme: 'Sötét téma',
   immersiveMode: 'Immersív Mód',
   answersShownDuration: 'Válaszok megjelenítési ideje',

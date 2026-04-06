@@ -1,13 +1,13 @@
 export default {
   af: {
     adoptionTitle: 'Adoption',
-    adoption: '2013 (Original 1928)',
+    adoption: '2004 (Original 1928)',
     symbolismTitle: 'Symbolism',
     symbolism:
-      'The black represents the dark past, red the blood shed for independence, and green for Islam and prosperity. The central emblem features a mosque with a mihrab facing Mecca, flanked by flags and sheaves of wheat.',
+      "Black represents the nation's troubled 19th-century history, red stands for the blood shed for independence, and green symbolizes hope, prosperity, and Islam. The central white emblem features a mosque with a mihrab facing Mecca, flanked by national flags and framed by sheaves of wheat.",
     historyTitle: 'History',
     history:
-      "King Amanullah Khan first introduced the black-red-green tricolour in 1928, inspired by his visit to Europe. It symbolized a break from tradition and a move towards modernization. Although the flag has changed numerous times during Afghanistan's turbulent history, this tricolour remains the internationally recognized symbol of the nation, officially reinstated in 2004.",
+      'The black-red-green tricolour was first introduced by King Amanullah Khan in 1928, inspired by a tour of Europe. While Afghanistan has changed its flag over 25 times in the last century, this tricolour design has been the most enduring. Although a white banner was reinstated de facto within the country in 2021, this tricolour remains the internationally recognized symbol of Afghanistan. It continues to be flown at the United Nations and represents the country globally, reflecting its recognition as the Islamic Republic.',
   },
   ax: {
     adoptionTitle: 'Adoption',
@@ -2100,13 +2100,13 @@ export default {
   },
   sy: {
     adoptionTitle: 'Adoption',
-    adoption: '30 May 1980 (Original 1958)',
+    adoption: '1932 (Readopted by opposition in 2011)',
     symbolismTitle: 'Symbolism',
     symbolism:
-      'Red stands for the Hashemite dynasty and the struggle for independence. White represents the Umayyad dynasty and a bright future. Black represents the Abbasid dynasty and oppression. The two green stars represent the union of Syria and Egypt.',
+      'Green represents the Rashidun Caliphate, white represents the Umayyad dynasty, and black represents the Abbasid dynasty. The three red stars originally represented the main districts of Syria (Aleppo, Damascus, and Deir ez-Zor) and the blood shed for freedom.',
     historyTitle: 'History',
     history:
-      "This flag was originally the flag of the United Arab Republic (the union between Egypt and Syria, 1958–1961). The two stars symbolized the two states. It was readopted in 1980 to show Syria's commitment to Arab unity.",
+      'Often referred to as the "Independence flag," this was the official flag of the Syrian Republic when it gained independence from the French Mandate in 1946. It was replaced in 1958 by the current government\'s two-star flag. During the outbreak of the Syrian civil war in 2011, opposition forces and the Syrian National Council readopted this historical three-star flag as a symbol of the revolution and democratic independence.',
   },
   tw: {
     adoptionTitle: 'Adoption',

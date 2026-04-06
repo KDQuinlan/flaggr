@@ -61,8 +61,8 @@ const DifficultySelect: React.FC<DifficultySelectProps> = ({
       onPress={onPress}
       disabled={isLocked}
       accessibilityRole="button"
-      accessibilityLabel={t(`levels.${levelKeyByLevelName[title]}`, {
-        level: t('title', { ns: 'data' }),
+      accessibilityLabel={t('startLevel', {
+        level: t(`levels.${levelKeyByLevelName[title]}`, { ns: 'data' }),
       })}
     >
       <Image
