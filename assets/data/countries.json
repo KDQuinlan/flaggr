@@ -57,7 +57,7 @@
     "countryCode": "AR",
     "countryName": "Argentina",
     "continent": "South America",
-    "difficulty": 1
+    "difficulty": 2
   },
   {
     "countryCode": "AM",
@@ -81,7 +81,7 @@
     "countryCode": "AT",
     "countryName": "Austria",
     "continent": "Europe",
-    "difficulty": 1
+    "difficulty": 2
   },
   {
     "countryCode": "AZ",
@@ -351,7 +351,7 @@
     "countryCode": "DK",
     "countryName": "Denmark",
     "continent": "Europe",
-    "difficulty": 1
+    "difficulty": 2
   },
   {
     "countryCode": "DJ",
@@ -1095,7 +1095,7 @@
     "countryCode": "RU",
     "countryName": "Russia",
     "continent": "Europe",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "countryCode": "RW",

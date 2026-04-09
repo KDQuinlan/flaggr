@@ -55,8 +55,8 @@ export const MONTHS_FOR_LOCALISATION = [
   'december',
 ];
 
-export const LEVEL_ONE_FLAGS_AMOUNT = 19;
-export const LEVEL_TWO_FLAGS_AMOUNT = 18;
+export const LEVEL_ONE_FLAGS_AMOUNT = 17;
+export const LEVEL_TWO_FLAGS_AMOUNT = 20;
 export const LEVEL_THREE_FLAGS_AMOUNT = 23;
 export const LEVEL_FOUR_FLAGS_AMOUNT = 30;
 export const LEVEL_FIVE_FLAGS_AMOUNT = 42;

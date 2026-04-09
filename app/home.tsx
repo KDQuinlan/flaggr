@@ -148,7 +148,7 @@ const HomeScreen = () => {
     let entryData: PassportEntry;
 
     const existingEntryData = userProgression.passport.find(
-      (entry) => entry.countryCode === flagOfTheWeekCode
+      (entry) => entry.countryCode === flagOfTheWeekCode.toUpperCase()
     );
 
     if (!existingEntryData) {
