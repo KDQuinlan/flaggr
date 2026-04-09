@@ -47,7 +47,7 @@ export const getSettingsStyles = (theme: ThemeColors) => {
       color: theme.buttonText,
       fontFamily: 'DMSansBold',
     },
-    privacyPolicyText: {
+    navLink: {
       fontFamily: 'DMSans',
       textDecorationLine: 'underline',
       color: theme.linkText,

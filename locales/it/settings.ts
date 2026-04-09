@@ -2,7 +2,7 @@ export default {
   title: 'Impostazioni',
   language: 'Lingua',
   feedback: {
-    title: 'Feedback',
+    title: 'Audio e aptica',
     off: 'Disattivato',
     hapticOnly: 'Solo aptico',
     audioOnly: 'Solo audio',
@@ -15,6 +15,7 @@ export default {
   secondsSingular: '1 secondo',
   secondsPlural: '{{value}} secondi',
   privacy: 'Vedi l’informativa sulla privacy',
+  credits: 'Visualizza i crediti di Flaggr (solo in inglese)',
   managePrivacySettings: 'Gestisci le impostazioni sulla privacy',
   unavailable: 'Non disponibile',
   unavailableReason:

@@ -45,7 +45,7 @@ export default {
   // Custom Achievements
   customMatchesPlayed: {
     title: 'Custom Meccsek',
-    description: 'Játssz {{number}} meccset Custom módban',
+    description: 'Játssz {{number}} alkalommal Custom módban',
   },
   customScore: {
     title: 'Custom Pontszám',
@@ -55,7 +55,7 @@ export default {
   // Practice Achievements
   practiceMatchesPlayed: {
     title: 'Practice Meccsek',
-    description: 'Játssz {{number}} meccset Practice módban',
+    description: 'Játssz {{number}} alkalommal Practice módban',
   },
   practiceFlagsImproved: {
     title: 'Fejlesztett Zászlók Practice-ben',

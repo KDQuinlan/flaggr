@@ -14,6 +14,7 @@ import { getSetupStyles } from '@/styles/setup';
 import { useTheme } from '@/context/ThemeContext';
 import DropdownSelector from '@/components/settings/dropdown';
 import SwitchSetting from '@/components/settings/switchSetting';
+import { UserSettingStructure } from '@/types/secureStore';
 
 const locales = Localization.getLocales();
 const locale = locales[0]?.languageCode;
@@ -156,6 +157,7 @@ const SetupScreen = () => {
               isSetUp: true,
               userAgeForPersonalisation: handleContinueAgeCalculation(),
               locale: language,
+              audioMode: audioMode as UserSettingStructure['audioMode'],
             });
             router.replace('/(tabs)');
           }}

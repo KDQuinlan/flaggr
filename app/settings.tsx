@@ -200,7 +200,7 @@ const PrivacyPolicy = () => {
         },
       ]}
     >
-      <Text style={styles.privacyPolicyText}>{t('privacy')}</Text>
+      <Text style={styles.navLink}>{t('privacy')}</Text>
     </Pressable>
   );
 };
@@ -228,7 +228,28 @@ const PrivacyConsent = () => {
         },
       ]}
     >
-      <Text style={styles.privacyPolicyText}>{t('managePrivacySettings')}</Text>
+      <Text style={styles.navLink}>{t('managePrivacySettings')}</Text>
+    </Pressable>
+  );
+};
+
+const Credits = () => {
+  const { t } = useTranslation('settings');
+  const { theme } = useTheme();
+  const styles = useMemo(() => getSettingsStyles(theme), [theme]);
+  const navigation = useNavigation<NavigationProps>();
+
+  return (
+    <Pressable
+      onPress={() => navigation.navigate('credits')}
+      style={({ pressed }) => [
+        styles.sectionRow,
+        {
+          opacity: pressed ? 0.7 : 1,
+        },
+      ]}
+    >
+      <Text style={styles.navLink}>{t('credits')}</Text>
     </Pressable>
   );
 };
@@ -363,9 +384,11 @@ const SettingsScreen = () => {
           setHasResetProgress={setHasResetProgress}
         />
 
-        <PrivacyPolicy />
-
-        {!isUserAMinor && !userSettings.isPremiumUser && <PrivacyConsent />}
+        <View>
+          {!isUserAMinor && !userSettings.isPremiumUser && <PrivacyConsent />}
+          <PrivacyPolicy />
+          <Credits />
+        </View>
 
         <ContinueButton />
       </ScrollView>

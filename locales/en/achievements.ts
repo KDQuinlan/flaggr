@@ -44,7 +44,7 @@ export default {
   // Custom Achievements
   customMatchesPlayed: {
     title: 'Custom Matches Played',
-    description: 'Play {{number}} games in Custom',
+    description: 'Play Custom {{number}} times',
   },
   customScore: {
     title: 'Custom Score',
@@ -54,7 +54,7 @@ export default {
   // Practice Achievements
   practiceMatchesPlayed: {
     title: 'Practice Matches Played',
-    description: 'Play {{number}} games in Practice',
+    description: 'Play Practice {{number}} times',
   },
   practiceFlagsImproved: {
     title: 'Practice Flags Improved',

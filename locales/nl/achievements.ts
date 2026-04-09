@@ -44,7 +44,7 @@ export default {
   // Custom Achievements
   customMatchesPlayed: {
     title: 'Custom Wedstrijden',
-    description: 'Speel {{number}} wedstrijden in Custom',
+    description: 'Speel {{number}} keer Custom',
   },
   customScore: {
     title: 'Custom Score',
@@ -54,7 +54,7 @@ export default {
   // Practice Achievements
   practiceMatchesPlayed: {
     title: 'Practice Wedstrijden',
-    description: 'Speel {{number}} wedstrijden in Practice',
+    description: 'Speel {{number}} keer Practice',
   },
   practiceFlagsImproved: {
     title: 'Verbeterde Vlaggen in Practice',

@@ -16,6 +16,8 @@ interface ICalculateProgressionExperienceGainProps {
   allPerfectedFirstTimeBonus: boolean;
 }
 
+// TODO - update to resolve potential XP exploit from resetting progress
+
 const calculateProgressionExperienceGain = ({
   difficultyLevel,
   correct,

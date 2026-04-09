@@ -21,6 +21,6 @@ export default {
   flagOfTheWeek: 'Bandera semanal',
   leaderboard: 'Clasificación',
   leaderboardHint: 'Abre las clasificaciones de Google',
-  noticeBoardTitle: 'Tablón de Avisos',
+  noticeBoardTitle: 'Tablón de avisos (solo en inglés)',
   noticeBoardEmpty: 'Actualmente no hay avisos. ¡Vuelve más tarde!',
 };

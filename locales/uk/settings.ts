@@ -2,7 +2,7 @@ export default {
   title: 'Налаштування',
   language: 'Мова',
   feedback: {
-    title: 'Відгук',
+    title: 'Звук і тактильний відгук',
     off: 'Вимкнено',
     hapticOnly: 'Тільки тактильний',
     audioOnly: 'Тільки звук',
@@ -15,6 +15,7 @@ export default {
   secondsSingular: '1 секунда',
   secondsPlural: '{{value}} секунд',
   privacy: 'Переглянути нашу політику конфіденційності',
+  credits: 'Переглянути титри Flaggr (лише англійською)',
   managePrivacySettings: 'Керування налаштуваннями конфіденційності',
   unavailable: 'Недоступно',
   unavailableReason:
