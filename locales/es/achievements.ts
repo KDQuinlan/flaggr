@@ -44,7 +44,7 @@ export default {
   // Custom Achievements
   customMatchesPlayed: {
     title: 'Partidas en Custom',
-    description: 'Juega {{number}} partidas en Custom',
+    description: 'Juega Custom {{number}} veces',
   },
   customScore: {
     title: 'Puntuación en Custom',
@@ -54,7 +54,7 @@ export default {
   // Practice Achievements
   practiceMatchesPlayed: {
     title: 'Partidas en Practice',
-    description: 'Juega {{number}} partidas en Practice',
+    description: 'Juega Practice {{number}} veces',
   },
   practiceFlagsImproved: {
     title: 'Banderas Mejoradas en Practice',

@@ -44,7 +44,7 @@ export default {
   // Custom Achievements
   customMatchesPlayed: {
     title: 'Матчі в Custom',
-    description: 'Зігай {{number}} матчів у Custom',
+    description: 'Зігай {{number}} разів у Custom',
   },
   customScore: {
     title: 'Рахунок у Custom',
@@ -54,7 +54,7 @@ export default {
   // Practice Achievements
   practiceMatchesPlayed: {
     title: 'Матчі в Practice',
-    description: 'Зігай {{number}} матчів у Practice',
+    description: 'Зігай {{number}} разів у Practice',
   },
   practiceFlagsImproved: {
     title: 'Покращені Прапори в Practice',

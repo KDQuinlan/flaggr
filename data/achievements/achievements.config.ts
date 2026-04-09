@@ -48,7 +48,7 @@ export const ACHIEVEMENTS = [
   // Practice Achievements
   {
     id: 'practiceMatchesPlayed',
-    thresholds: [1, 5, 15, 30],
+    thresholds: [2, 5, 15, 30],
   },
   {
     id: 'practiceFlagsImproved',

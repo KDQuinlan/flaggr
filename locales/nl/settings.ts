@@ -2,7 +2,7 @@ export default {
   title: 'Instellingen',
   language: 'Taal',
   feedback: {
-    title: 'Feedback',
+    title: 'Audio en haptiek',
     off: 'Uit',
     hapticOnly: 'Alleen haptisch',
     audioOnly: 'Alleen audio',
@@ -15,6 +15,7 @@ export default {
   secondsSingular: '1 seconde',
   secondsPlural: '{{value}} seconden',
   privacy: 'Bekijk ons privacybeleid',
+  credits: 'Bekijk de credits van Flaggr (alleen in het Engels)',
   managePrivacySettings: 'Privacy-instellingen beheren',
   unavailable: 'Niet beschikbaar',
   unavailableReason: 'Privacy-instellingen zijn niet beschikbaar in jouw regio',

@@ -273,6 +273,13 @@ function RootLayoutContent() {
             headerShown: true,
           }}
         />
+        <Stack.Screen
+          name="credits"
+          options={{
+            headerShown: true,
+            title: 'Credits',
+          }}
+        />
       </Stack>
     </SafeAreaProvider>
   );

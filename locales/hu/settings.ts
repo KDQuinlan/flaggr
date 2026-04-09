@@ -2,7 +2,7 @@ export default {
   title: 'Beállítások',
   language: 'Nyelv',
   feedback: {
-    title: 'Visszajelzés',
+    title: 'Hang és haptika',
     off: 'Kikapcsolva',
     hapticOnly: 'Csak haptikus',
     audioOnly: 'Csak hang',
@@ -15,6 +15,7 @@ export default {
   secondsSingular: '1 másodperc',
   secondsPlural: '{{value}} másodperc',
   privacy: 'Adatvédelmi szabályzat megtekintése',
+  credits: 'Flaggr stáblista megtekintése (csak angolul)',
   managePrivacySettings: 'Adatvédelmi beállítások kezelése',
   unavailable: 'Nem elérhető',
   unavailableReason: 'Az adatvédelmi beállítások nem érhetők el a régiójában',

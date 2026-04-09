@@ -21,6 +21,6 @@ export default {
   flagOfTheWeek: 'Vlag van de week',
   leaderboard: 'Ranglijst',
   leaderboardHint: 'Opent de ranglijsten van Google',
-  noticeBoardTitle: 'Mededelingenbord',
+  noticeBoardTitle: 'Mededelingenbord (alleen in het Engels)',
   noticeBoardEmpty: 'Er zijn momenteel geen meldingen. Kom later terug!',
 };

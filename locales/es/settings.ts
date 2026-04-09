@@ -2,7 +2,7 @@ export default {
   title: 'Configuración',
   language: 'Idioma',
   feedback: {
-    title: 'Respuesta',
+    title: 'Audio y vibración',
     off: 'Desactivado',
     hapticOnly: 'Solo háptico',
     audioOnly: 'Solo audio',
@@ -15,6 +15,7 @@ export default {
   secondsSingular: '1 segundo',
   secondsPlural: '{{value}} segundos',
   privacy: 'Ver nuestra política de privacidad',
+  credits: 'Ver los créditos de Flaggr (solo en inglés)',
   managePrivacySettings: 'Administrar configuración de privacidad',
   unavailable: 'No disponible',
   unavailableReason:

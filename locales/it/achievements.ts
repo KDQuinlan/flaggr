@@ -44,7 +44,7 @@ export default {
   // Custom Achievements
   customMatchesPlayed: {
     title: 'Partite in Custom',
-    description: 'Gioca {{number}} partite in Custom',
+    description: 'Gioca a Custom {{number}} volte',
   },
   customScore: {
     title: 'Punteggio in Custom',
@@ -54,7 +54,7 @@ export default {
   // Practice Achievements
   practiceMatchesPlayed: {
     title: 'Partite in Practice',
-    description: 'Gioca {{number}} partite in Practice',
+    description: 'Gioca a Practice {{number}} volte',
   },
   practiceFlagsImproved: {
     title: 'Bandiere Migliorate in Practice',

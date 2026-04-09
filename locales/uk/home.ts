@@ -21,6 +21,6 @@ export default {
   flagOfTheWeek: 'Прапор тижня',
   leaderboard: 'Таблиця лідерів',
   leaderboardHint: 'Відкриває таблиці лідерів Google',
-  noticeBoardTitle: 'Дошка Оголошень',
+  noticeBoardTitle: 'Дошка оголошень (лише англійською)',
   noticeBoardEmpty: 'Наразі немає оголошень. Завітайте пізніше!',
 };

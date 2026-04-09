@@ -66,6 +66,7 @@ export type RootStackParamList = {
   achievementDetail: {
     achievementId: AchievementId;
   };
+  credits: undefined;
 };
 
 export type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
