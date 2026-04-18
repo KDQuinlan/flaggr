@@ -2,7 +2,7 @@
   "expo": {
     "name": "Flaggr",
     "slug": "flaggr",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "flaggr",
@@ -11,7 +11,7 @@
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 23,
+      "versionCode": 24,
       "backgroundColor": "#121212",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
