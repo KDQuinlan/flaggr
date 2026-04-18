@@ -23,7 +23,7 @@ const flagOfTheWeekDataSet = [
   // APRIL
   [
     ['kh', 'la', 'mm', 'th', 'vn'],
-    ['il', 'ps', 'eg', 'ma', 'tn'],
+    ['li', 'gy', 'eg', 'ma', 'tn'],
     ['et', 'er', 'dj', 'so', 'ke'],
   ],
 

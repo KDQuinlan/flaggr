@@ -289,7 +289,11 @@ const SettingsScreen = () => {
     userSettings.displayAnswerTimerMs
   );
   const showAds = !userSettings.isPremiumUser && isInternetAvailable;
-  const isUserAMinor = userSettings.userAgeForPersonalisation !== 18;
+  const isUserAMinor = userSettings.userAgeForPersonalisation
+    ? userSettings.userAgeForPersonalisation < 18
+      ? true
+      : false
+    : true;
 
   const localisedAudioMode = useMemo(
     () => [
